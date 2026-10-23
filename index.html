@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a1c2c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Amt für Bewegung aller Art</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="game">
+    <header class="hud">
+      <div class="hud-title">Amt für Bewegung <span>aller Art</span></div>
+      <div class="hud-right">
+        <span class="hud-tickets">Aufträge 0/0</span>
+        <span class="hud-money">0 €</span>
+        <button class="hud-btn hud-full" title="Vollbild">⛶</button>
+        <button class="hud-btn hud-reset" title="Spielstand löschen">↺</button>
+      </div>
+    </header>
+    <div class="map-wrap"><canvas id="map" aria-label="Stadtkarte"></canvas></div>
+
+    <section id="task" class="hidden" aria-modal="true" role="dialog">
+      <header class="task-head">
+        <button class="btn t-back">← Karte</button>
+        <div class="t-info"><strong class="t-title"></strong><span class="t-from"></span></div>
+        <span class="t-reward"></span>
+      </header>
+      <div class="task-root"></div>
+    </section>
+
+    <div id="dialog" class="hidden" role="dialog" aria-live="polite">
+      <div class="d-pic"></div>
+      <div class="d-body">
+        <div class="d-name"></div>
+        <div class="d-text"></div>
+        <div class="d-more">▼</div>
+      </div>
+    </div>
+
+    <div id="loading">Lade Stadt …</div>
+    <div id="rotate">
+      <div>
+        <div class="rot-icon">⟲</div>
+        Bitte das Gerät quer halten.
+      </div>
+    </div>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

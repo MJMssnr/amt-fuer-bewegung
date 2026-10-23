@@ -1,0 +1,8 @@
+{
+  "id": "hund-brezel",
+  "title": "Brezels Morgenrunde",
+  "actors": [
+    { "id": "dog", "name": "Brezel", "sprite": "dog", "x0": 0,
+      "segments": [ { "dt": 4, "v": 3 }, { "dt": 3, "v": -2 }, { "dt": 2, "v": 0 } ] }
+  ]
+}

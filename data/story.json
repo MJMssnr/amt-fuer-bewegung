@@ -1,0 +1,31 @@
+{
+  "characters": {
+    "erz":      { "name": "",                         "sprite": null },
+    "florian":  { "name": "Florian",                  "sprite": "florian" },
+    "kranz":    { "name": "Bürgermeisterin Kranz",    "sprite": "kranz" },
+    "broesel":  { "name": "Frau Brösel",              "sprite": "broesel" },
+    "kevin":    { "name": "Kevin, Fahrradkurier",     "sprite": "kevin" },
+    "oetzi":    { "name": "Busfahrer Ötzi",           "sprite": "oetzi" },
+    "baecker":  { "name": "Bäckermeister Huber",      "sprite": "oetzi" }
+  },
+  "intro": [
+    ["erz", "Montag, 7:58 Uhr. Florian steht im Rathaus. Eigentlich wollte er sich nur für den Ferienjob beim Bauhof bewerben."],
+    ["kranz", "Ah, Herr Doktor Florian Brandl! Endlich! Unser neuer Experte für Bewegung aller Art!"],
+    ["florian", "Äh … ich bin Florian Brandl. Aber Doktor? Ich schreib nächste Woche Physik-Schulaufgabe."],
+    ["kranz", "Und bescheiden ist er auch! Wunderbar. Ihr Büro ist im Keller: das Amt für Bewegung aller Art. Die Stelle war seit 1987 unbesetzt."],
+    ["florian", "(Bezahlung: gut. Büro: hat eine Kaffeemaschine. Qualifikation: … noch nicht.)"],
+    ["kranz", "Die Bürgerinnen und Bürger haben schon Anfragen geschickt. Die Leute werden SO dankbar sein!"],
+    ["erz", "Tippe auf ein gelbes Ausrufezeichen auf der Karte. Florian läuft hin und nimmt den Auftrag an."]
+  ],
+  "nothingHere": [
+    ["florian", "Hier gibt's gerade nichts zu tun."]
+  ],
+  "office": [
+    ["florian", "Mein Büro. Die Kaffeemaschine blubbert verdächtig. Lieber schnell wieder raus zu den Leuten."]
+  ],
+  "outro": [
+    ["kranz", "Herr Doktor Brandl! Alle Anfragen erledigt! Die Stadt liebt Sie!"],
+    ["florian", "(Ich glaub, ich sag ihr das mit dem Doktor einfach nie.)"],
+    ["erz", "Ende der Demo. Weitere Aufträge folgen bald, das Amt schläft nie."]
+  ]
+}

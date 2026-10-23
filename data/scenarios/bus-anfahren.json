@@ -1,0 +1,8 @@
+{
+  "id": "bus-anfahren",
+  "title": "Linie 3 zwischen zwei Haltestellen",
+  "actors": [
+    { "id": "bus", "name": "Stadtbus", "sprite": "bus", "x0": 0,
+      "segments": [ { "dt": 6, "a": 1.5 }, { "dt": 10, "v": 9 }, { "until": "rest", "a": -3 } ] }
+  ]
+}

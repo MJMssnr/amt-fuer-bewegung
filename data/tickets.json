@@ -1,0 +1,96 @@
+[
+  {
+    "id": "t01-sportwagen",
+    "title": "Der rote Blitz",
+    "from": "broesel",
+    "node": "lindenstrasse",
+    "reward": 50,
+    "scenario": "sportwagen-tempo50",
+    "intro": [
+      ["broesel", "Junger Mann! Sind Sie das neue Amt? Dieser ROTE SPORTWAGEN rast hier jeden Morgen durch! Hier gilt Tempo 50!!!"],
+      ["florian", "Ich hab ihn gefilmt und daraus das t-x-Diagramm gemacht. Jetzt brauch ich das passende t-vₓ-Diagramm."]
+    ],
+    "task": {
+      "type": "match",
+      "actor": "car",
+      "given": ["anim", "xt"],
+      "ask": "vt",
+      "paper": "Lies im t-x-Diagramm zwei Punkte ab, berechne die Steigung und rechne sie in km/h um."
+    },
+    "success": [
+      ["florian", "Konstante Steigung im t-x-Diagramm heißt konstante Geschwindigkeit: 12,5 m/s. Mal 3,6 macht das 45 km/h."],
+      ["broesel", "Fünfundvierzig? Dann ist er eben zu LEISE schnell! … Na gut. Danke, junger Mann."]
+    ]
+  },
+  {
+    "id": "t02-kevin",
+    "title": "Bremsen durch?",
+    "from": "kevin",
+    "node": "fahrradladen",
+    "requires": ["t01-sportwagen"],
+    "reward": 60,
+    "scenario": "kevin-bremsen",
+    "intro": [
+      ["kevin", "Servus, Amt! Meine Bremsen fühlen sich weich an. Der Radl-Tacho hat mitgeschrieben: erst eine Schrecksekunde, dann Vollbremsung."],
+      ["florian", "Das t-vₓ-Diagramm hab ich. Welches t-x-Diagramm gehört dazu?"]
+    ],
+    "task": {
+      "type": "match",
+      "actor": "kevin",
+      "given": ["anim", "vt"],
+      "ask": "xt",
+      "paper": "Berechne Reaktionsweg und Bremsweg als Flächen unter der t-vₓ-Kurve."
+    },
+    "success": [
+      ["florian", "Erst gleichförmig, also eine Gerade. Dann gleichmäßig verzögert, also eine Parabel, die flach ausläuft. Anhalteweg: 8 m Reaktionsweg plus 16 m Bremsweg."],
+      ["kevin", "24 Meter?! Bei nur 2 m/s² Bremsverzögerung? Ich bring's sofort zum Radl-Eck. Danke, Chef!"]
+    ]
+  },
+  {
+    "id": "t03-bus",
+    "title": "Ruckelt der Bus?",
+    "from": "oetzi",
+    "node": "bushof",
+    "requires": ["t02-kevin"],
+    "reward": 70,
+    "scenario": "bus-anfahren",
+    "intro": [
+      ["oetzi", "Griaß di! Die Fahrgäste beschweren sich übers Ruckeln. Ich sag: Ich fahr wie a Feder!"],
+      ["florian", "Im t-vₓ-Diagramm ist die Beschleunigung die Steigung. Welches t-aₓ-Diagramm passt?"]
+    ],
+    "task": {
+      "type": "match",
+      "actor": "bus",
+      "given": ["anim", "vt"],
+      "ask": "at",
+      "paper": "Berechne für jeden Abschnitt die Steigung Δvₓ/Δt im t-vₓ-Diagramm."
+    },
+    "success": [
+      ["florian", "Anfahren mit 1,5 m/s², dann gleichförmig, dann Bremsen mit −3 m/s². Das Bremsen ist doppelt so heftig wie das Anfahren."],
+      ["oetzi", "Ah geh. Also doch ich. Ab morgen brems ich früher."]
+    ]
+  },
+  {
+    "id": "t04-brezel",
+    "title": "Der Hund, der zurückläuft",
+    "from": "baecker",
+    "node": "baeckerei",
+    "requires": ["t01-sportwagen"],
+    "reward": 60,
+    "scenario": "hund-brezel",
+    "intro": [
+      ["baecker", "Herr Amt! Mein Hund Brezel rennt jeden Morgen zum Laternenpfahl, dann ein Stück zurück, und dann bleibt er stehen und schaut blöd. Ist das normal?"],
+      ["florian", "Ob das normal ist, weiß ich nicht. Aber ich kann es als t-x-Diagramm aufschreiben."]
+    ],
+    "task": {
+      "type": "match",
+      "actor": "dog",
+      "given": ["anim"],
+      "ask": "xt"
+    },
+    "success": [
+      ["florian", "4 s mit 3 m/s nach vorn, 3 s mit 2 m/s zurück, dann 2 s Stillstand. Er endet 6 m vom Start, ist aber 18 m gelaufen."],
+      ["baecker", "18 Meter für nix. Wie mein Lehrling."]
+    ]
+  }
+]

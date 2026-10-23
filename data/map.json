@@ -1,0 +1,63 @@
+{
+  "size": [480, 270],
+  "start": "rathaus",
+  "nodes": {
+    "rathaus": {
+      "x": 240,
+      "y": 168,
+      "name": "Rathaus",
+      "building": "rathaus"
+    },
+    "lindenstrasse": {
+      "x": 96,
+      "y": 84,
+      "name": "Lindenstraße",
+      "building": "house",
+      "color": "#e4c9b6"
+    },
+    "fahrradladen": {
+      "x": 384,
+      "y": 84,
+      "name": "Radl-Eck",
+      "building": "shop",
+      "color": "#b13e53"
+    },
+    "bushof": {
+      "x": 384,
+      "y": 232,
+      "name": "Busbahnhof",
+      "building": "busstop",
+      "side": "right"
+    },
+    "baeckerei": {
+      "x": 96,
+      "y": 232,
+      "name": "Bäckerei",
+      "building": "shop",
+      "color": "#c58b5e",
+      "side": "left"
+    }
+  },
+  "roads": [
+    ["rathaus", "lindenstrasse"],
+    ["rathaus", "fahrradladen"],
+    ["rathaus", "bushof"],
+    ["rathaus", "baeckerei"],
+    ["lindenstrasse", "baeckerei"],
+    ["fahrradladen", "bushof"]
+  ],
+  "trees": [
+    [30, 40],
+    [180, 40],
+    [300, 36],
+    [450, 40],
+    [30, 150],
+    [160, 120],
+    [330, 128],
+    [455, 160],
+    [200, 252],
+    [300, 256],
+    [470, 262],
+    [160, 262]
+  ]
+}

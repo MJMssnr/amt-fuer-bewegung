@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Szenario (Bewegung eines oder mehrerer Akteure)",
+  "type": "object",
+  "required": ["id", "actors"],
+  "$defs": {
+    "vec": { "oneOf": [{ "type": "number" }, { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 }],
+             "description": "Zahl = x-Komponente (1D) oder [x, y]" },
+    "segment": {
+      "type": "object",
+      "description": "Abschnitt mit konstanter Beschleunigung. Entweder v (konstant) oder a. Dauer über dt ODER until.",
+      "properties": {
+        "dt": { "type": "number", "exclusiveMinimum": 0, "description": "Dauer in s" },
+        "until": { "description": "Ereignis statt Dauer: \"rest\", \"landing\", {\"x\":..}, {\"y\":..}, {\"vx\":..}, {\"vy\":..}" },
+        "v": { "$ref": "#/$defs/vec", "description": "konstante Geschwindigkeit in m/s" },
+        "a": { "$ref": "#/$defs/vec", "description": "Beschleunigung in m/s²" },
+        "v0": { "$ref": "#/$defs/vec", "description": "Geschwindigkeit springt zu Beginn auf diesen Wert" }
+      }
+    }
+  },
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "frame": { "description": "reserviert: Bezugssystem/Strömung für Vektoraddition (noch nicht implementiert)" },
+    "actors": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "required": ["id", "segments"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "sprite": { "type": "string", "description": "Name aus assets/sprites.json" },
+          "x0": { "type": "number", "description": "Startort (1D), alternativ r0" },
+          "r0": { "$ref": "#/$defs/vec" },
+          "v0": { "$ref": "#/$defs/vec", "description": "Startgeschwindigkeit (für a-Abschnitte am Anfang)" },
+          "segments": { "type": "array", "items": { "$ref": "#/$defs/segment" }, "minItems": 1 }
+        }
+      }
+    }
+  }
+}

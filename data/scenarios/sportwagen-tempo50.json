@@ -1,0 +1,8 @@
+{
+  "id": "sportwagen-tempo50",
+  "title": "Der rote Sportwagen in der Lindenstraße",
+  "actors": [
+    { "id": "car", "name": "Roter Sportwagen", "sprite": "car_red", "x0": 0,
+      "segments": [ { "dt": 8, "v": 12.5 } ] }
+  ]
+}

@@ -1,0 +1,265 @@
+{
+ "palette": {
+  "k": "#1a1c2c",
+      "w": "#f4f4f4",
+      "r": "#b13e53",
+      "R": "#ef7d57",
+      "y": "#ffcd75",
+      "g": "#38b764",
+      "G": "#257179",
+      "b": "#3b5dc9",
+      "B": "#41a6f6",
+      "c": "#73eff7",
+      "s": "#f2c9a0",
+      "S": "#c58b5e",
+      "h": "#5d3a1a",
+      "n": "#566c86",
+      "N": "#94b0c2",
+      "p": "#8b3d8f",
+      "d": "#333c57",
+      "o": "#a7f070"
+ },
+ "sprites": {
+  "florian": {
+   "w": 10,
+   "h": 16,
+   "turns": true,
+   "fps": 6,
+   "frames": [
+    [ "...hhhh...",
+      "..hhhhhhh.",
+      "..hhsssh..",
+      "..hsssks..",
+      "...ssssS..",
+      "....ss....",
+      "...gggg...",
+      "..gggggg..",
+      "..gggggg..",
+      "..gGgggs..",
+      "...bbbb...",
+      "...bbbb...",
+      "...bb.bb..",
+      "...b...b..",
+      "...b...b..",
+      "..ww..ww.."
+    ],
+    [ "...hhhh...",
+      "..hhhhhhh.",
+      "..hhsssh..",
+      "..hsssks..",
+      "...ssssS..",
+      "....ss....",
+      "...gggg...",
+      "..gggggg..",
+      "..gggggg..",
+      "..gGgggs..",
+      "...bbbb...",
+      "...bbbb...",
+      "...bbbbb..",
+      "..bb...bb.",
+      "..b.....b.",
+      ".ww.....ww"
+    ]
+   ]
+  },
+  "car_red": {
+   "w": 24,
+   "h": 9,
+   "turns": false,
+   "frames": [
+    [ "........kkkkkkkk........",
+      ".......kBBBBBBBBrk......",
+      "......kBBBBBBBBBrrk.....",
+      "..kkkkrrrrrrrrrrrrrkkk..",
+      ".krrrrrrrrrrrrrrrrrrrryk",
+      "krrrrrrrrrrrrrrrrrrrrrrk",
+      "krrkkkrrrrrrrrrrrkkkrrrk",
+      ".kkknNnkkkkkkkkkknNnkkk.",
+      "....kkk..........kkk...."
+    ]
+   ]
+  },
+  "cyclist": {
+   "w": 16,
+   "h": 14,
+   "turns": true,
+   "fps": 8,
+   "frames": [
+    [ "......kkk.......",
+      ".....kBBBk......",
+      "......ssks......",
+      "......sss.......",
+      ".....RRRR.......",
+      ".....RRRRsss....",
+      ".....RRRR...k...",
+      ".....dddd...k...",
+      "......dd....k...",
+      ".kkk..dd...kkk..",
+      "k...kdddddk...k.",
+      "k.n.k..d..k.n.k.",
+      "k...k.....k...k.",
+      ".kkk.......kkk.."
+    ],
+    [ "......kkk.......",
+      ".....kBBBk......",
+      "......ssks......",
+      "......sss.......",
+      ".....RRRR.......",
+      ".....RRRRsss....",
+      ".....RRRR...k...",
+      ".....dddd...k...",
+      ".....d..d...k...",
+      ".kkk.d..d..kkk..",
+      "k...kdddddk...k.",
+      "k.n.k...dk.n.k..",
+      "k...k.....k...k.",
+      ".kkk.......kkk.."
+    ]
+   ]
+  },
+  "kevin": {
+   "w": 16,
+   "h": 14,
+   "turns": true,
+   "fps": 8,
+   "frames": [
+    [ "......kkk.......",
+      ".....kBBBk......",
+      "......ssks......",
+      "......sss.......",
+      ".....RRRR.......",
+      ".....RRRRsss....",
+      ".....RRRR...k...",
+      ".....dddd...k...",
+      "......dd....k...",
+      ".kkk..dd...kkk..",
+      "k...kdddddk...k.",
+      "k.n.k..d..k.n.k.",
+      "k...k.....k...k.",
+      ".kkk.......kkk.."
+    ]
+   ]
+  },
+  "broesel": {
+   "w": 10,
+   "h": 16,
+   "turns": true,
+   "fps": 4,
+   "frames": [
+    [ "...NNN....",
+      "..NNNNN...",
+      "..NNsss...",
+      "..Nssks...",
+      "...ssss...",
+      "...pppp...",
+      "..pppppp..",
+      "..ppppps.n",
+      "..pppppp.n",
+      "..pppppp.n",
+      "..pppppp.n",
+      "...pppp..n",
+      "...s..s..n",
+      "...s..s..n",
+      "..kk.kk..n",
+      ".........."
+    ]
+   ]
+  },
+  "dog": {
+   "w": 12,
+   "h": 8,
+   "turns": true,
+   "fps": 10,
+   "frames": [
+    [ ".........hh.",
+      "h.......SSSS",
+      ".h......SSkS",
+      "..SSSSSSSSSk",
+      "..SSSSSSSS..",
+      "..SSSSSSS...",
+      "..S.S...S.S.",
+      "..k.k...k.k."
+    ],
+    [ ".........hh.",
+      "h.......SSSS",
+      ".h......SSkS",
+      "..SSSSSSSSSk",
+      "..SSSSSSSS..",
+      "..SSSSSSS...",
+      "...SS...SS..",
+      "...kk...kk.."
+    ]
+   ]
+  },
+  "bus": {
+   "w": 32,
+   "h": 14,
+   "turns": false,
+   "frames": [
+    [ ".kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.",
+      "kyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyk",
+      "kyBBBByBBBByBBBByBBBByBBBByBBBBk",
+      "kyBBBByBBBByBBBByBBBByBBBByBBBBk",
+      "kyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyk",
+      "kggggggggggggggggggggggggggggggk",
+      "kyyyyyyyyyyyyyyyyyyyyyyyyyyyyyRk",
+      "kyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyk",
+      "kyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyk",
+      "kyyy.kkk.yyyyyyyyyyyyyy.kkk.yyyk",
+      "kkkkk...kkkkkkkkkkkkkkkk...kkkkk",
+      "....k.n.k..............k.n.k....",
+      "....k...k..............k...k....",
+      ".....kkk................kkk....."
+    ]
+   ]
+  },
+  "oetzi": {
+   "w": 10,
+   "h": 16,
+   "turns": true,
+   "frames": [
+    [ "..bbbbbb..",
+      "..kkkkkkk.",
+      "..hsssss..",
+      "..sssks...",
+      "...ssSs...",
+      "....ss....",
+      "...BBBB...",
+      "..BBBBBB..",
+      "..BBBBBB..",
+      "..BBBBBs..",
+      "...dddd...",
+      "...dddd...",
+      "...dd.dd..",
+      "...d...d..",
+      "...d...d..",
+      "..kk..kk.."
+    ]
+   ]
+  },
+  "kranz": {
+   "w": 10,
+   "h": 16,
+   "turns": true,
+   "frames": [
+    [ "...rrrr...",
+      "..rrrrrr..",
+      "..rrssss..",
+      "..rssks...",
+      "..r.ssss..",
+      "....ss....",
+      "...yyyy...",
+      "..pyyyyp..",
+      "..pppppp..",
+      "..ppppps..",
+      "...pppp...",
+      "...pppp...",
+      "...pppp...",
+      "...s..s...",
+      "...s..s...",
+      "..kk..kk.."
+    ]
+   ]
+  }
+ }
+}

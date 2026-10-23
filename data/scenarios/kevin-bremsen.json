@@ -1,0 +1,8 @@
+{
+  "id": "kevin-bremsen",
+  "title": "Kevins Anhalteweg",
+  "actors": [
+    { "id": "kevin", "name": "Kevin", "sprite": "kevin", "x0": 0,
+      "segments": [ { "dt": 1, "v": 8 }, { "until": "rest", "a": -2 } ] }
+  ]
+}
