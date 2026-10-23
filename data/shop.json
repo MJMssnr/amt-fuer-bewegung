@@ -3,80 +3,80 @@
     {
       "id": "teppich",
       "name": "Flauschiger Teppich",
-      "price": 30,
+      "price": 35,
       "text": "Weich wie eine Wolke. Perfekt, um auf dem Boden Diagramme zu zeichnen."
     },
     {
       "id": "lavalampe",
       "name": "Lavalampe",
-      "price": 35,
+      "price": 40,
       "text": "Die Blasen steigen, sinken, steigen … Gleichmäßig beschleunigt ist das nicht. Aber hypnotisch."
     },
     {
       "id": "sessel",
       "name": "Bequemer Sessel",
-      "price": 60,
+      "price": 70,
       "text": "Der Denksessel. Hier entstehen die besten Rechenwege."
     },
     {
       "id": "neon",
       "name": "Neonschild „AMT“",
-      "price": 50,
+      "price": 60,
       "text": "Summt leise. Jetzt sieht das Baumhaus richtig offiziell aus."
     },
     {
       "id": "haengematte",
       "name": "Hängematte",
-      "price": 60,
+      "price": 70,
       "text": "Schaukelt hin und her. Eine Schwingung! Aber das ist Stoff für ein anderes Spiel."
     },
     {
       "id": "aquarium",
       "name": "Aquarium",
-      "price": 80,
+      "price": 95,
       "text": "Der Goldfisch heißt Newton. Er schwimmt gleichförmig im Kreis. Oder doch nicht? Richtung!"
     },
     {
       "id": "fernseher",
       "name": "Fernseher",
-      "price": 100,
+      "price": 120,
       "text": "Es läuft eine Doku über Schnecken. Gleichförmige Bewegung in Reinform. Spannend!"
     },
     {
       "id": "konsole",
       "name": "Spielekonsole",
-      "price": 80,
+      "price": 95,
       "requires": "fernseher",
       "text": "Die Konsole startet nicht. Wahrscheinlich will sie erst die Hausaufgaben sehen."
     },
     {
       "id": "musik",
       "name": "Musikanlage",
-      "price": 90,
+      "price": 110,
       "text": "Bass an! Die Membran schwingt so schnell hin und her, dass man es nur hört."
     },
     {
       "id": "rennrad",
       "name": "Rennrad an der Wand",
-      "price": 100,
+      "price": 120,
       "text": "Leicht, schnell, rot. Kevin wird neidisch sein."
     },
     {
       "id": "teleskop",
       "name": "Teleskop",
-      "price": 80,
+      "price": 95,
       "text": "Durch das Fenster sieht man den Mond. Und irgendwo da oben … warten neue Bewegungen?"
     },
     {
       "id": "bar",
       "name": "Kühlschrank mit Bar",
-      "price": 110,
+      "price": 130,
       "text": "Gekühlte Apfelschorle und eine Schale Brezeln vom Bäcker Huber. Für Kundschaft natürlich."
     },
     {
       "id": "whirlpool",
       "name": "Kleiner Whirlpool",
-      "price": 150,
+      "price": 180,
       "text": "Blubb. Die Blasen steigen, Florian entspannt. Rechnen kann man auch später noch."
     }
   ],

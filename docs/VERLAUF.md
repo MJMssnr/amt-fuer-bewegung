@@ -20,5 +20,4 @@ Hinweis: Sitzung 1 wurde nachträglich aus einer Zusammenfassung des Chats rekon
 | W12 | Sounddesign: Sprechlaute pro Buchstabe nach Vokal, Pausen nach Satzzeichen; unterscheidbare Stimmen (Florian + 3 Modelle zum Test); keine Musik in Aufgaben; Vogelzwitschern auf der Karte, leise; Lautstärke-Menü | 7ae1a69 |
 | W13 | Gelb gekleideter Postbote bringt Bestellungen mit Paket ins Baumhaus, freundlicher Dialog, erst dann erscheint der Gegenstand | d2d3fb4 |
 | W14 | Sorge wegen Qualitätsverlust durch Chat-Komprimierung → alles Relevante im Repo ablegen | dieses Dokument, `ENTSCHEIDUNGEN.md`, `ROADMAP.md` |
-
-**Offene Rückfrage an Herrn Messner (aus W13):** Lieferung dauert ca. 8–10 s; ab der 4. Lieferung Kurzfassung ohne Dialog?
+| W15 | Shop-Preise um ca. 20 % erhöhen; Postbote behält seinen Flavour-Text (keine Kurzfassung) | siehe Commit „Balancing +20 %“ |

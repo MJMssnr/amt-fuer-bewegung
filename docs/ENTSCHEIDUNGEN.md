@@ -61,13 +61,14 @@ Jeder neue Typ: mindestens 3 konkrete Aufträge [W8].
 - Rechnen/Ablesen (H, C), Live (F), Konstrukteur, Reaktionstest: erster Versuch voll; nach Hinweisen selbst gelöst halb; **„Lösung zeigen“ → 0 €** [W8].
 - Verpatzt → **Nachfrage**: kommt nach 2 weiteren Aufträgen mit **neuer Zufallsvariante** zurück [W10].
 - **Zufallsvarianten** pro Spieler (Seed), damit Schüler nicht abschreiben [W10].
-- Balancing: 1730 € verdienbar, Shop 1225 €. Vorschlag (noch nicht entschieden): Preise +30 %, falls das Baumhaus ein echtes Ziel bleiben soll.
+- Balancing [W15]: Einrichtung um **20 %** teurer (gerundet auf 5 €) → 1220 €; Raketenteile bleiben bei 40 € (5 × 40 = 200 €), damit niemand vor der Prüfung hängen bleibt. Gesamt 1420 € von 1730 € verdienbar (≈ 82 %).
 
 ## 6. Bedienung
 
 - **Touch zuerst**: kein WASD. Tutorial-Hinweis „Hier tippen!“ mit großem Ausrufezeichen und tippendem Finger beim ersten Auftrag [W10].
 - Baumhaus: Shop-Menü einklappbar; jeder Gegenstand hat einen **festen Platz**, genug Platz lassen [W8].
 - Bestellungen bringt **Postbote Paul** (gelb) durch die Luke; Gegenstand erscheint erst nach dem Auspacken [W13].
+- Paul behält **immer** seinen vollen Dialog – keine Kurzfassung. Herr Messner mag den Postboten sehr [W15].
 
 ## 7. Klang [W12]
 

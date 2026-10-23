@@ -3,8 +3,7 @@
 Stand: 23.10.2026. Reihenfolge offen, Herr Messner entscheidet.
 
 ## Offene Entscheidungen (bitte nicht eigenmächtig festlegen)
-- Shop-Preise +30 %? (1730 € verdienbar vs. 1225 € Shop – Baumhaus ist zu leicht voll)
-- Postbote: ab der 4. Lieferung Kurzfassung ohne Dialog?
+- derzeit keine
 
 ## Geplant
 - **Teil 2 (2D):** waagrechter und schiefer Wurf, grafische Vektoraddition. Engine kann 2D schon (`until: landing`, Vektoren `[x, y]`, Diagrammarten `yt`, `vyt`, `ayt`).
