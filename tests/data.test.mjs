@@ -11,11 +11,14 @@ const tickets = read('data/tickets.json');
 const map = read('data/map.json');
 const story = read('data/story.json');
 const sprites = read('assets/sprites.json').sprites;
+const STROBE = ['strobecalc', 'strobedescribe', 'strobebuild'];
 
 for (const tk of tickets) {
   test(`Ticket ${tk.id}`, () => {
-    if (!tk.scenario) { // Stroboskop: Bewegung im Ticket
-      assert.ok(tk.task.motion && tk.task.flash, `${tk.id}: ohne Szenario braucht es task.motion und task.flash`);
+    if (!tk.scenario) { // Stroboskop: Bewegung im Ticket; P/Q/R kommen ohne Szenario aus [W30]
+      if (STROBE.includes(tk.task.type)) assert.ok(tk.task.motion && tk.task.flash, `${tk.id}: ohne Szenario braucht es task.motion und task.flash`);
+      for (const r of tk.requires || []) assert.ok(tickets.some((t) => t.id === r), `requires "${r}" unbekannt`);
+      for (const [who] of [...(tk.intro || []), ...(tk.success || [])]) assert.ok(story.characters[who], `Sprecher "${who}" fehlt`);
       assert.ok(map.nodes[tk.node] && story.characters[tk.from]);
       return;
     }
@@ -51,7 +54,7 @@ function checkTask(task, world, label) {
 
 for (const tk0 of tickets) {
   test(`Aufgabe ${tk0.id} (${tk0.task.type}), alle Varianten`, async () => {
-    if (!tk0.scenario) return checkStrobeTask(tk0);
+    if (!tk0.scenario) return STROBE.includes(tk0.task.type) ? checkStrobeTask(tk0) : checkPlainTask(tk0);
     for (const params of tk0.vary?.options ?? [{}]) {
       const tk = resolveTicket(tk0, params);
       const sc0 = typeof tk0.scenario === 'object' ? tk0.scenario : read(`data/scenarios/${tk0.scenario}.json`);
@@ -113,4 +116,23 @@ async function checkStrobeTask(tk) {
       if (q.range) assert.ok(truth >= q.range[0] && truth <= q.range[1], `${tk.id}: ${q.label} ${truth} außerhalb von range`);
     }
   }
+}
+
+// P Fehlerbalken, Q Formel, R Verbinden [W30]
+async function checkPlainTask(tk) {
+  const t = tk.task;
+  if (t.type === 'errorbar') {
+    const { extremes } = await import('../js/engine/errors.js');
+    const ex = extremes(t.result.expr, t.measures);
+    const [lo, hi] = t.result.axis;
+    assert.ok(ex.min > lo && ex.max < hi, `${tk.id}: Fehlerbalken ${ex.min}…${ex.max} passt nicht auf die Achse`);
+  } else if (t.type === 'formula') {
+    const { evalExpr } = await import('../js/engine/variants.js');
+    const params = Object.fromEntries(t.known.map((k) => [k.name, k.value]));
+    assert.ok(Number.isFinite(evalExpr(t.expr, params)), `${tk.id}: Formel nicht auswertbar`);
+    assert.equal(t.choices.filter((c) => c.correct).length, 1, `${tk.id}: genau eine richtige Umstellung`);
+  } else if (t.type === 'pairs') {
+    assert.equal(t.items.length, 3);
+    for (const it of t.items) assert.ok(buildWorld({ actors: [{ id: 'a', x0: it.x0 ?? 0, segments: it.segments }] }).actors.get('a'), `${tk.id}: Bewegung ungültig`);
+  } else assert.fail(`${tk.id}: Typ ${t.type} ohne Szenario nicht vorgesehen`);
 }

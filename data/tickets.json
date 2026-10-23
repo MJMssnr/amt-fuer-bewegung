@@ -2104,5 +2104,122 @@
       ["slavi", "Wachsend, dann schrumpfend. Ein Bild wie ein Atemzug. Florian, du bist ein Künstler."],
       ["florian", "Und ein Physiker. Das schließt sich zum Glück nicht aus."]
     ]
+  },
+  {
+    "id": "t54-fehler-route",
+    "title": "Wie lang ist meine Route?",
+    "from": "kevin",
+    "node": "fahrradladen",
+    "requires": ["t05-radeln"],
+    "reward": 80,
+    "difficulty": "leicht",
+    "intro": [
+      ["kevin", "Amtsmensch! Meine Kurier-App will wissen, wie lang meine Standardroute ist. Ich hab sie in drei Stücken gemessen."],
+      ["kevin", "Die Lindenstraße mit dem Messrad: 412 m, auf 1 m genau. Den Parkweg in Schritten: 250 m, aber nur auf 10 m genau. Die Brücke vom Stadtplan: 85 m, auf 2 m genau."],
+      ["florian", "Dann ist auch die Gesamtlänge nicht genau. Ich rechne aus, wie lang die Route höchstens und mindestens ist."]
+    ],
+    "task": {
+      "type": "errorbar",
+      "context": "Kevin hat seine Route in drei Stücken gemessen. Jedes Stück hat eine andere Messunsicherheit.",
+      "prompt": "Wie lang ist die Route höchstens, wie lang mindestens? Zieh die Enden des Fehlerbalkens dorthin.",
+      "paper": "Gesamtlänge = s₁ + s₂ + s₃. Im ungünstigsten Fall sind alle drei Stücke gleichzeitig zu lang (größter Wert) oder alle zu kurz (kleinster Wert). Gültige Ziffern spielen hier keine Rolle.",
+      "measures": [
+        {
+          "name": "a",
+          "label": "s_1 (Lindenstraße)",
+          "value": 412,
+          "err": 1,
+          "unit": "m",
+          "dec": 0
+        },
+        {
+          "name": "b",
+          "label": "s_2 (Parkweg)",
+          "value": 250,
+          "err": 10,
+          "unit": "m",
+          "dec": 0
+        },
+        {
+          "name": "c",
+          "label": "s_3 (Brücke)",
+          "value": 85,
+          "err": 2,
+          "unit": "m",
+          "dec": 0
+        }
+      ],
+      "result": {
+        "expr": "a + b + c",
+        "label": "s",
+        "unit": "m",
+        "axis": [720, 775],
+        "step": 1,
+        "tol": 0.5,
+        "help": {
+          "max": "Zähle zu jedem Messwert seine Unsicherheit dazu und addiere.",
+          "min": "Zieh von jedem Messwert seine Unsicherheit ab und addiere."
+        }
+      }
+    },
+    "success": [
+      ["florian", "Die Route ist 747 m lang, aber genauer kann ich nur sagen: zwischen 734 m und 760 m. Die Unsicherheiten addieren sich."],
+      ["kevin", "Und das meiste davon kommt vom Parkweg. Nächstes Mal nehm ich da auch das Messrad!"]
+    ]
+  },
+  {
+    "id": "t55-fehler-blitz",
+    "title": "Wie genau ist mein Blitz?",
+    "from": "slavi",
+    "node": "fotolabor",
+    "requires": ["t54-fehler-route", "t32-strobo-kevin"],
+    "reward": 100,
+    "difficulty": "mittel",
+    "intro": [
+      ["slavi", "Meine alte Blitzlampe ist launisch. Sie blitzt alle 0,20 s, aber auf 0,02 s genau kann ich das nicht versprechen."],
+      ["slavi", "Und auf dem Foto ist die Kugel verwischt. Zwischen zwei Abbildern liegt 1,0 m, plus minus 0,2 m."],
+      ["florian", "Also v = 1,0 m / 0,20 s = 5,0 m/s. Aber wie schnell könnte die Kugel höchstens und mindestens gewesen sein?"]
+    ],
+    "task": {
+      "type": "errorbar",
+      "context": "Slavis Stroboskopfoto: Abstand zweier Abbilder und Blitzabstand sind nur ungenau bekannt.",
+      "prompt": "Zieh die Enden des Fehlerbalkens auf die größte und die kleinste mögliche Geschwindigkeit.",
+      "paper": "v = Δx / Δt. Für v_max brauchst du einen möglichst großen Weg und eine möglichst kleine Zeit, für v_min umgekehrt. Gültige Ziffern spielen hier keine Rolle.",
+      "measures": [
+        {
+          "name": "x",
+          "label": "Δx",
+          "value": 1.0,
+          "err": 0.2,
+          "unit": "m",
+          "dec": 1
+        },
+        {
+          "name": "t",
+          "label": "Δt",
+          "value": 0.2,
+          "err": 0.02,
+          "unit": "s",
+          "dec": 2
+        }
+      ],
+      "result": {
+        "expr": "x / t",
+        "label": "v",
+        "unit": "m/s",
+        "axis": [2, 8],
+        "step": 0.05,
+        "tol": 0.1,
+        "bestDec": 1,
+        "help": {
+          "max": "v_max = (1,0 m + 0,2 m) / (0,20 s − 0,02 s)",
+          "min": "v_min = (1,0 m − 0,2 m) / (0,20 s + 0,02 s)"
+        }
+      }
+    },
+    "success": [
+      ["florian", "Größter Weg durch kleinste Zeit: 1,2 m / 0,18 s ≈ 6,7 m/s. Kleinster Weg durch größte Zeit: 0,8 m / 0,22 s ≈ 3,6 m/s."],
+      ["slavi", "Zwischen 3,6 und 6,7 m/s. Das ist ehrlich – und es heißt: Ich brauche eine neue Blitzlampe."]
+    ]
   }
 ]

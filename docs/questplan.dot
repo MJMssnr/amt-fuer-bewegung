@@ -55,6 +55,8 @@ digraph Q {
   t51_schwer_strobo_beschreiben [fillcolor="#c8d8f0" label=<<b>N</b>  Der Wurf nach oben<br/><font point-size="9">Slavi · Fotolabor · 120 €</font>>];
   t52_schwer_strobo_rechnen [fillcolor="#e0c8a8" label=<<b>M</b>  Die schräge Rinne<br/><font point-size="9">Slavi · Fotolabor · 130 €</font>>];
   t53_schwer_strobo_bauen [fillcolor="#f0d0a0" label=<<b>O</b>  Gas und Bremse<br/><font point-size="9">Slavi · Fotolabor · 140 €</font>>];
+  t54_fehler_route [fillcolor="#dddddd" label=<<b>P</b>  Wie lang ist meine Route?<br/><font point-size="9">Kevin · Radl-Eck · 80 €</font>>];
+  t55_fehler_blitz [fillcolor="#dddddd" label=<<b>P</b>  Wie genau ist mein Blitz?<br/><font point-size="9">Slavi · Fotolabor · 100 €</font>>];
   t01_sportwagen -> t02_kevin;
   t02_kevin -> t03_bus;
   t01_sportwagen -> t04_brezel;
@@ -112,4 +114,7 @@ digraph Q {
   t38_strobo_pendel -> t51_schwer_strobo_beschreiben;
   t51_schwer_strobo_beschreiben -> t52_schwer_strobo_rechnen;
   t52_schwer_strobo_rechnen -> t53_schwer_strobo_bauen;
+  t05_radeln -> t54_fehler_route;
+  t54_fehler_route -> t55_fehler_blitz;
+  t32_strobo_kevin -> t55_fehler_blitz;
 }

@@ -18,6 +18,9 @@ export const TYPES = {
   strobecalc:     { letter: 'M', name: 'Stroboskop: rechnen' },
   strobedescribe: { letter: 'N', name: 'Stroboskop: beschreiben' },
   strobebuild:    { letter: 'O', name: 'Stroboskop: bauen' },
+  errorbar:  { letter: 'P', name: 'Fehlerbalken' },
+  formula:   { letter: 'Q', name: 'Bewegungsformel' },
+  pairs:     { letter: 'R', name: 'Verbinden' },
 };
 
 export const typeOf = (type) => TYPES[type] ?? { letter: '?', name: type };

@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 52, verdienbar: 4880 €.
+Anzahl Aufträge: 54, verdienbar: 5060 €.
 
 ```mermaid
 flowchart LR
@@ -61,6 +61,8 @@ flowchart LR
   t51_schwer_strobo_beschreiben["<b>N</b> Der Wurf nach oben<br/><small>Slavi · Fotolabor · 120 €</small>"]:::tN
   t52_schwer_strobo_rechnen["<b>M</b> Die schräge Rinne<br/><small>Slavi · Fotolabor · 130 €</small>"]:::tM
   t53_schwer_strobo_bauen["<b>O</b> Gas und Bremse<br/><small>Slavi · Fotolabor · 140 €</small>"]:::tO
+  t54_fehler_route["<b>P</b> Wie lang ist meine Route?<br/><small>Kevin · Radl-Eck · 80 €</small>"]:::tP
+  t55_fehler_blitz["<b>P</b> Wie genau ist mein Blitz?<br/><small>Slavi · Fotolabor · 100 €</small>"]:::tP
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -118,6 +120,9 @@ flowchart LR
   t38_strobo_pendel --> t51_schwer_strobo_beschreiben
   t51_schwer_strobo_beschreiben --> t52_schwer_strobo_rechnen
   t52_schwer_strobo_rechnen --> t53_schwer_strobo_bauen
+  t05_radeln --> t54_fehler_route
+  t54_fehler_route --> t55_fehler_blitz
+  t32_strobo_kevin --> t55_fehler_blitz
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -153,6 +158,9 @@ flowchart LR
 | M | Stroboskop: rechnen | 3 |
 | N | Stroboskop: beschreiben | 3 |
 | O | Stroboskop: bauen | 5 |
+| P | Fehlerbalken | 2 |
+| Q | Bewegungsformel | 0 |
+| R | Verbinden | 0 |
 
 ## Liste
 | Auftrag | Typ | von | Ort | Lohn | braucht |
@@ -209,3 +217,5 @@ flowchart LR
 | Der Wurf nach oben | N | Slavi | Fotolabor | 120 € | Das Pendel |
 | Die schräge Rinne | M | Slavi | Fotolabor | 130 € | Der Wurf nach oben |
 | Gas und Bremse | O | Slavi | Fotolabor | 140 € | Die schräge Rinne |
+| Wie lang ist meine Route? | P | Kevin | Radl-Eck | 80 € | Partnerschafts-Radeln |
+| Wie genau ist mein Blitz? | P | Slavi | Fotolabor | 100 € | Wie lang ist meine Route?, Kevin im Blitzlicht |

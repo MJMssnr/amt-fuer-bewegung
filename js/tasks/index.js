@@ -17,6 +17,9 @@ const LOADERS = {
   strobecalc: () => import('./strobecalc.js'), // M: Stroboskop – rechnen
   strobedescribe: () => import('./strobedescribe.js'), // N: Stroboskop – beschreiben
   strobebuild: () => import('./strobebuild.js'), // O: Stroboskop – bauen
+  errorbar: () => import('./errorbar.js'),     // P: Fehlerbalken (Größt-/Kleinstwert)
+  formula: () => import('./formula.js'),       // Q: Bewegungsformel umstellen und ausrechnen
+  pairs: () => import('./pairs.js'),           // R: t-x und t-vₓ verbinden
 };
 
 export async function loadTask(type) {
