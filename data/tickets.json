@@ -487,13 +487,13 @@
     "id": "t12-ralf-brezel",
     "title": "Ralfs erstes Diagramm",
     "from": "ralf",
-    "node": "rathaus",
+    "node": "baeckerei",
     "requires": ["t04-brezel"],
     "reward": 70,
     "difficulty": "leicht",
     "scenario": "hund-brezel",
     "intro": [
-      ["ralf", "Hallo! Ich bin Ralf, der neue Praktikant. Ich hab Brezels Morgenrunde als t-x-Diagramm gezeichnet."],
+      ["ralf", "Hallo! Ich bin Ralf, der neue Praktikant im Rathaus. Ich bin extra zur Bäckerei gekommen: Ich hab Brezels Morgenrunde als t-x-Diagramm gezeichnet."],
       ["ralf", "Die Bürgermeisterin sagt, ein Abschnitt ist falsch. Ich finde ihn nicht. Kannst du mal schauen?"]
     ],
     "task": {
@@ -516,13 +516,13 @@
     "id": "t13-ralf-kevin",
     "title": "Ralf und die Bremse",
     "from": "ralf",
-    "node": "rathaus",
+    "node": "werkstatt",
     "requires": ["t12-ralf-brezel", "t02-kevin"],
     "reward": 80,
     "difficulty": "leicht",
     "scenario": "kevin-bremsen",
     "intro": [
-      ["ralf", "Ich hab Kevins Vollbremsung als t-vₓ-Diagramm gezeichnet. Diesmal bin ich mir ganz sicher!"],
+      ["ralf", "Hilde lässt mich hier in der Werkstatt am großen Zeichentisch arbeiten! Ich hab Kevins Vollbremsung als t-vₓ-Diagramm gezeichnet. Diesmal bin ich mir ganz sicher!"],
       ["florian", "Ganz sicher? Dann schauen wir mal genau hin."]
     ],
     "task": {
@@ -546,13 +546,13 @@
     "id": "t14-ralf-bus",
     "title": "Ralfs Busfahrt",
     "from": "ralf",
-    "node": "rathaus",
+    "node": "bushof",
     "requires": ["t13-ralf-kevin", "t03-bus"],
     "reward": 90,
     "difficulty": "leicht",
     "scenario": "bus-anfahren",
     "intro": [
-      ["ralf", "Letzter Versuch für heute: das t-x-Diagramm von Ötzis Bus. Mit Lineal gezeichnet, ganz ordentlich!"],
+      ["ralf", "Letzter Versuch für heute, extra hier am Busbahnhof gezeichnet: das t-x-Diagramm von Ötzis Bus. Mit Lineal, ganz ordentlich!"],
       ["florian", "Mit Lineal? Hm. Das macht mich misstrauisch."]
     ],
     "task": {
@@ -878,13 +878,13 @@
     "id": "t28-steigung-ralf",
     "title": "Ralfs positive Rückwärtsrechnung",
     "from": "ralf",
-    "node": "rathaus",
+    "node": "park",
     "requires": ["t12-ralf-brezel"],
     "reward": 80,
     "difficulty": "leicht",
     "scenario": "hund-brezel",
     "intro": [
-      ["ralf", "Chef, ich hab bei Brezels Rückweg ein Steigungsdreieck gezeichnet. Da kommt bei mir eine positive Geschwindigkeit raus."],
+      ["ralf", "Chef, ich sitz hier im Park und hab bei Brezels Rückweg ein Steigungsdreieck gezeichnet. Da kommt bei mir eine positive Geschwindigkeit raus."],
       ["ralf", "Aber Brezel läuft doch zurück?! Ich glaub, mein Lineal ist kaputt."],
       ["florian", "Das Lineal ist es bestimmt nicht. Zeig mal her, ich mach es nochmal sauber."]
     ],
@@ -1050,11 +1050,11 @@
     "id": "t32-strobo-kevin",
     "title": "Kevin im Blitzlicht",
     "from": "slavi",
-    "node": "fotolabor",
+    "node": "park",
     "requires": ["t31-strobo-erstes"],
     "reward": 70,
     "intro": [
-      ["slavi", "Kevin, der Fahrradkurier, will Werbefotos. Ich hab ihn im Park mit dem Stroboskop erwischt."],
+      ["slavi", "Ich teste hier im Park meine neue Blitzlampe. Und wer radelt mir genau vors Objektiv? Kevin, der Fahrradkurier!"],
       ["slavi", "Er will wissen, wie schnell er war. Auf dem Boden lag ein Maßband – du musst nur noch rechnen."]
     ],
     "task": {
@@ -1127,12 +1127,12 @@
     "id": "t33-strobo-fallschirm",
     "title": "Der schwebende Springer",
     "from": "slavi",
-    "node": "fotolabor",
+    "node": "lindenstrasse",
     "requires": ["t32-strobo-kevin"],
     "reward": 70,
     "difficulty": "leicht",
     "intro": [
-      ["slavi", "Beim Stadtfest ist ein Fallschirmspringer über dem Marktplatz gelandet. Ich hab ihn im Blitzlicht erwischt!"],
+      ["slavi", "Ich bin noch ganz aufgeregt! Beim Stadtfest ist hier ein Fallschirmspringer gelandet, und ich stand mit der Kamera genau richtig."],
       ["slavi", "Die Zeitung will eine Bildunterschrift. Aber bitte fachlich richtig, sonst schimpft wieder irgendein Physiklehrer."]
     ],
     "task": {
@@ -1157,7 +1157,7 @@
         "vertical": true,
         "ruler": "none"
       },
-      "context": "Ein Fallschirmspringer mit geöffnetem Schirm schwebt über dem Marktplatz nach unten.",
+      "context": "Ein Fallschirmspringer mit geöffnetem Schirm schwebt über der Lindenstraße nach unten.",
       "prompt": "Welche Bildunterschrift ist fachlich richtig?",
       "choices": [
         {
@@ -1229,12 +1229,12 @@
     "id": "t35-strobo-auto",
     "title": "Blitz in der 30er-Zone",
     "from": "slavi",
-    "node": "fotolabor",
+    "node": "polizei",
     "requires": ["t34-strobo-rinne"],
     "reward": 90,
     "difficulty": "mittel",
     "intro": [
-      ["slavi", "Ich habe vor der Schule ein Auto im Blitzlicht erwischt. Da gilt Tempo 30!"],
+      ["slavi", "Ich bin hier im Revier, die Polizei will mein Foto sehen: Vor der Schule hab ich ein Auto im Blitzlicht erwischt. Da gilt Tempo 30!"],
       ["slavi", "Diesmal lag kein Maßband am Boden, nur mein Maßstab mit Feldern von je 1,0 m. Rechnest du nach, ob der zu schnell war?"]
     ],
     "task": {
@@ -1297,19 +1297,19 @@
     },
     "success": [
       ["florian", "3,0 m in 0,20 s, also 15 m/s. Mal 3,6 sind das 54 km/h – viel zu schnell für eine 30er-Zone!"],
-      ["slavi", "Das Foto geht an die Bürgermeisterin. Kunst kann auch Verkehrssicherheit."]
+      ["slavi", "Das Foto bleibt gleich hier im Revier. Kunst kann auch Verkehrssicherheit."]
     ]
   },
   {
     "id": "t36-strobo-jo",
     "title": "Jo im Doppelbild",
     "from": "slavi",
-    "node": "fotolabor",
+    "node": "skatepark",
     "requires": ["t35-strobo-auto"],
     "reward": 80,
     "difficulty": "leicht",
     "intro": [
-      ["slavi", "Jo, die Skaterin, will ein Poster. Ich hab sie im Park geblitzt."],
+      ["slavi", "Ich prüfe hier am Skatepark, ob meine Kamera schnell genug blitzt. Jo will ein Poster, also hab ich sie gleich geblitzt."],
       ["slavi", "Aber jetzt streiten wir: Ich sage, sie bremst. Sie sagt, sie wird schneller. Wer hat recht?"],
       ["florian", "Das Foto allein kann das gar nicht entscheiden. Wir brauchen die Richtung."]
     ],
@@ -1367,12 +1367,12 @@
     "id": "t37-strobo-bremsen",
     "title": "Kevin bremst",
     "from": "slavi",
-    "node": "fotolabor",
+    "node": "supermarkt",
     "requires": ["t36-strobo-jo"],
     "reward": 90,
     "difficulty": "mittel",
     "intro": [
-      ["slavi", "Kevin will noch ein Foto: eine Vollbremsung vor meinem Laden. Und – du ahnst es – die Kamera …"],
+      ["slavi", "Kevin wollte noch ein Foto: eine Vollbremsung hier vor dem Supermarkt. Und – du ahnst es – die Kamera …"],
       ["florian", "… hat gestreikt. Slavi, du brauchst eine neue Kamera."],
       ["slavi", "Ich brauche vor allem dich. Bau es mir bitte nach!"]
     ],
@@ -1409,12 +1409,12 @@
     "id": "t38-strobo-pendel",
     "title": "Das Pendel",
     "from": "slavi",
-    "node": "fotolabor",
+    "node": "werkstatt",
     "requires": ["t37-strobo-bremsen"],
     "reward": 100,
     "difficulty": "schwer",
     "intro": [
-      ["slavi", "Mein Meisterstück für die Ausstellung: ein Pendel, das einmal von links nach rechts durchschwingt."],
+      ["slavi", "Hilde hat mir hier in der Werkstatt ein Pendel gebaut – mein Meisterstück für die Ausstellung! Es schwingt einmal von links nach rechts durch."],
       ["slavi", "Dafür braucht es ein Genie. Oder dich. Meine Kamera hat übrigens gekündigt."],
       ["florian", "Am Rand ist das Pendel kurz in Ruhe, in der Mitte am schnellsten. Das muss man im Bild sehen."]
     ],
@@ -1621,13 +1621,13 @@
     "id": "t43-schwer-fehlerjagd",
     "title": "Ralfs krumme Kurve",
     "from": "ralf",
-    "node": "rathaus",
+    "node": "werkstatt",
     "requires": ["t14-ralf-bus"],
     "reward": 120,
     "difficulty": "schwer",
     "scenario": "kevin-wende",
     "intro": [
-      ["ralf", "Chef! Mein Meisterwerk: Kevins Wende als t-x-Diagramm. Diesmal ist bestimmt alles richtig."],
+      ["ralf", "Chef! Mein Meisterwerk, gezeichnet an Hildes Werkbank: Kevins Wende als t-x-Diagramm. Diesmal ist bestimmt alles richtig."],
       ["florian", "Ralf, das sagst du jedes Mal."],
       ["ralf", "Diesmal hab ich alles mit dem Lineal gezeichnet. Wirklich ALLES! Schön gerade, oder?"]
     ],
@@ -2488,12 +2488,12 @@
     "id": "t60-schwer-fehlerbalken",
     "title": "Kevins Sprint-Messung",
     "from": "kevin",
-    "node": "fahrradladen",
+    "node": "skatepark",
     "requires": ["t55-fehler-blitz"],
     "reward": 130,
     "difficulty": "schwer",
     "intro": [
-      ["kevin", "Ich will wissen, wie stark ich aus dem Stand beschleunige. Jo hat gestoppt: 20,0 m in 4,0 s."],
+      ["kevin", "Ich bin hier am Skatepark gesprintet und will wissen, wie stark ich aus dem Stand beschleunige. Jo hat gestoppt: 20,0 m in 4,0 s."],
       ["kevin", "Aber Jo hat mit dem Handy gestoppt, das ist höchstens auf 0,2 s genau. Und die Strecke hab ich abgeschritten, auf einen halben Meter genau."],
       ["florian", "Aus der Ruhe gleichmäßig beschleunigt: a = 2·s / t². Und die Zeit steht im Quadrat – da wird jede Ungenauigkeit doppelt teuer."]
     ],
