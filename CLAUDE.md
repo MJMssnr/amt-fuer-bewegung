@@ -3,6 +3,12 @@
 Lernspiel (FOS 11/12) zu Bewegungsdiagrammen: t-x, t-vₓ, t-aₓ, später 2D (Würfe, Vektoraddition).
 Spieler ist Florian, der per Namensverwechslung das „Amt für Bewegung aller Art“ leitet und Bürgeranfragen (Tickets) löst.
 
+## Zuerst lesen (Projektgedächtnis)
+- **`docs/ENTSCHEIDUNGEN.md`** – alle Entscheidungen mit Begründung. Vor jeder Arbeit lesen; nicht stillschweigend davon abweichen.
+- `docs/ROADMAP.md` – Geplantes, offene Entscheidungen, bekannte Schwächen.
+- `docs/VERLAUF.md` – Wünsche von Herrn Messner und in welchem Commit sie umgesetzt wurden.
+- **Pflege:** Neue Wünsche/Entscheidungen am Ende jeder Arbeitsrunde dort eintragen (im selben Commit wie der Code).
+
 ## Regeln für die Arbeit an diesem Repo
 - **Kein Build, kein npm-Framework.** Vanilla JS, ES-Module, läuft direkt auf GitHub Pages.
 - **Sprache:** UI-Texte und Kommentare auf Deutsch. Zahlen mit Dezimalkomma (`js/render/format.js`).
@@ -76,5 +82,5 @@ schema/                    Formatbeschreibung der JSON-Dateien
 - **Neues Goal:** in `goals.js` `registerGoal('name', (goal, world) => ({ wert: … }))`.
 - **Neue Fehlvorstellung:** Eintrag in `CATALOG` und `PRIORITY` in `distractors.js`.
 
-## Geplant (Reihenfolge offen)
-D Regie, Flächen-Puzzle, Steigungsdreieck, Druck-Arbeitsblatt, weitere Stimme (frau_jung), 2D-Szenen (Wurf) = Teil 2, Vektoraddition, PWA/offline, Schrift lokal einbinden.
+## Geplant
+Siehe `docs/ROADMAP.md`.

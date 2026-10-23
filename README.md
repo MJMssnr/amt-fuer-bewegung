@@ -94,3 +94,8 @@ Nach dem Bearbeiten: `node --test tests/*.test.mjs` prüft, ob alle Verweise sti
 - Abschlussprüfung: `data/exam.json`.
 
 Formatbeschreibungen: siehe `schema/`.
+
+## Projektdokumentation
+- `docs/ENTSCHEIDUNGEN.md` – Konzept, Didaktik, Regeln und ihre Begründung
+- `docs/ROADMAP.md` – was als Nächstes kommt
+- `docs/VERLAUF.md` – Wünsche und Umsetzung, chronologisch
