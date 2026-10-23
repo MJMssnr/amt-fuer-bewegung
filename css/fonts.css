@@ -1,0 +1,8 @@
+/* Lokale Schriften (keine Google-Fonts-Abhängigkeit mehr) [W16/W17]
+   AmtTitel = Silkscreen: Titel, HUD, Knöpfe, Namen, Auftragsbuch – nur Großbuchstaben-Optik, daher NICHT für Einheiten.
+   AmtPixel = VT323: Aufgabentexte, Zahlen, Einheiten, Canvas-Beschriftungen – echte Kleinbuchstaben, klare 5 und 2.
+   Lizenz: SIL Open Font License, siehe assets/fonts/OFL-*.txt */
+@font-face { font-family: "AmtTitel"; src: url("../assets/fonts/Silkscreen-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "AmtTitel"; src: url("../assets/fonts/Silkscreen-Bold.ttf") format("truetype"); font-weight: 600 700; font-display: swap; }
+/* VT323 wirkt bei gleicher Pixelgröße deutlich kleiner → size-adjust */
+@font-face { font-family: "AmtPixel"; src: url("../assets/fonts/VT323-Regular.ttf") format("truetype"); size-adjust: 128%; font-display: swap; }

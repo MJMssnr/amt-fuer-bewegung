@@ -64,6 +64,15 @@ export class TitleScene {
   }
   stop() { this.running = false; this.ro.disconnect(); }
 
+  /** Trifft ein Klick (Bildschirmkoordinaten) Oma Gerda? Für den versteckten Testmodus. */
+  hitOma(cx, cy) {
+    const r = this.c.getBoundingClientRect();
+    const wx = ((cx - r.left) * this.dpr - this.ox) / this.s;
+    const wy = ((cy - r.top) * this.dpr - this.oy) / this.s;
+    const sp = getSprite('oma_rollator');
+    return Math.abs(wx - (this.oma.x + 18)) <= sp.w + 4 && wy <= SIDEWALK + 4 && wy >= SIDEWALK - sp.h * 2 - 6;
+  }
+
   // ---------- Zustände ----------
   carX() { return ((this.t * 70) % 720) - 120; }
   carCol() { return CAR_COLS[Math.floor((this.t * 70) / 720) % CAR_COLS.length]; }

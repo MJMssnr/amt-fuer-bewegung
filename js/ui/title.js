@@ -1,6 +1,8 @@
 // Demo-Hinweis und Startbildschirm.
 
 import { TitleScene } from './title-scene.js';
+import { isTestMode, setTestMode } from './testmode.js';
+import { toast } from './dialog.js';
 
 /** Hinweis vor dem Start. Löst sich beim Klick auf "Los geht's". */
 export function showNotice() {
@@ -24,13 +26,25 @@ export function showTitle(hasSave) {
   }
   const scene = new TitleScene(el.querySelector('canvas'));
   scene.start();
+  // Versteckter Testmodus: 20× auf Oma Gerda tippen [W17]
+  let omaTaps = 0;
+  const onTap = (e) => {
+    if (!scene.hitOma(e.clientX, e.clientY)) return;
+    omaTaps++;
+    if (omaTaps === 20) {
+      omaTaps = 0;
+      setTestMode(!isTestMode());
+      toast(isTestMode() ? '🧪 Testmodus an' : 'Testmodus aus', 'money');
+    }
+  };
+  el.addEventListener('pointerdown', onTap);
   const btnNew = el.querySelector('.title-new');
   const btnCont = el.querySelector('.title-continue');
   btnCont.classList.toggle('hidden', !hasSave);
   btnNew.textContent = hasSave ? 'Neu beginnen' : 'Dienst antreten ▶';
   btnNew.classList.toggle('secondary', hasSave);
   return new Promise((resolve) => {
-    const done = (v) => { scene.stop(); el.classList.add('hidden'); resolve(v); };
+    const done = (v) => { scene.stop(); el.removeEventListener('pointerdown', onTap); el.classList.add('hidden'); resolve(v); };
     btnCont.onclick = () => done('continue');
     btnNew.onclick = () => {
       if (hasSave && !confirm('Wirklich neu beginnen? Der bisherige Spielstand wird gelöscht.')) return;

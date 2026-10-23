@@ -40,7 +40,7 @@ export class Painter {
   /** Breite eines Textes in Welt-Einheiten (gleiche Parameter wie text()). */
   measure(str, size, { bold = false, minPx = 0, dpr = 1 } = {}) {
     const fs = Math.max(size * this.s, minPx * dpr);
-    this.ctx.font = `${bold ? 600 : 400} ${fs}px "Pixelify Sans", ui-monospace, monospace`;
+    this.ctx.font = `${bold ? 600 : 400} ${fs}px "AmtPixel", ui-monospace, monospace`;
     return { w: this.ctx.measureText(str).width / this.s, h: fs / this.s };
   }
 
@@ -48,7 +48,7 @@ export class Painter {
   text(str, x, y, size, { color = '#1a1c2c', align = 'center', bold = false, bg = null, pad = 2, minPx = 0, dpr = 1 } = {}) {
     const ctx = this.ctx;
     const fs = Math.max(size * this.s, minPx * dpr);
-    ctx.font = `${bold ? 600 : 400} ${fs}px "Pixelify Sans", ui-monospace, monospace`;
+    ctx.font = `${bold ? 600 : 400} ${fs}px "AmtPixel", ui-monospace, monospace`;
     ctx.textAlign = align;
     ctx.textBaseline = 'middle';
     const tx = this.ox + x * this.s, ty = this.oy + y * this.s;

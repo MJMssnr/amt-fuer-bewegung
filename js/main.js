@@ -102,6 +102,10 @@ async function runTicket(ticket, raw, params) {
   const reward = grade === 'perfect' ? ticket.reward : grade === 'partial' ? Math.ceil(ticket.reward / 2) : 0;
   state.money += reward;
   state.done[ticket.id] = true;
+  // Auftragsbuch: Reihenfolge der Annahme und tatsächlich verdientes Geld
+  state.order ??= [];
+  if (!state.order.includes(ticket.id)) state.order.push(ticket.id);
+  state.earned = { ...(state.earned || {}), [ticket.id]: (state.earned?.[ticket.id] ?? 0) + reward };
   state.grades = { ...(state.grades || {}), [ticket.id]: grade };
   state.retry ??= {};
   if (grade === 'fail') state.retry[ticket.id] = { after: doneCount() + 2, n: (state.retry[ticket.id]?.n ?? 0) + 1 };
@@ -171,10 +175,16 @@ async function showQuestlog() {
         play: (t) => { toPlay = t; },
         money: (n) => { state.money += n; save(); },
         testOff: () => setTestMode(false),
-        reset: (t) => { delete state.done[t.id]; delete state.grades?.[t.id]; delete state.retry?.[t.id]; save(); },
+        reset: (t) => {
+          delete state.done[t.id]; delete state.grades?.[t.id]; delete state.retry?.[t.id]; delete state.earned?.[t.id];
+          state.order = (state.order || []).filter((x) => x !== t.id);
+          save();
+        },
         setGrade: (t, g) => {
           state.done[t.id] = true;
           state.grades = { ...(state.grades || {}), [t.id]: g };
+          state.order ??= [];
+          if (!state.order.includes(t.id)) state.order.push(t.id);
           state.retry ??= {};
           if (g === 'fail') state.retry[t.id] = { after: doneCount() + 2, n: (state.retry[t.id]?.n ?? 0) + 1 };
           else delete state.retry[t.id];
@@ -220,7 +230,9 @@ async function onArrive(nodeId) {
 }
 
 async function boot() {
-  [map] = await Promise.all([getJSON('data/map.json'), loadSprites(), document.fonts?.ready]);
+  [map] = await Promise.all([getJSON('data/map.json'), loadSprites(),
+    // lokale Schriften aktiv laden, sonst zeichnet das Canvas anfangs mit Ersatzschrift
+    ...['16px AmtPixel', '16px AmtTitel', '600 16px AmtTitel'].map((f) => document.fonts?.load(f).catch(() => {}))]);
   [tickets, story, shop, exam] = await Promise.all(['tickets', 'story', 'shop', 'exam'].map((n) => getJSON(`data/${n}.json`)));
   setCharacters(story.characters);
   document.getElementById('loading').classList.add('hidden');
@@ -243,7 +255,7 @@ async function boot() {
   });
   initSoundMenu(document.querySelector('.hud-sound'));
   document.querySelector('.hud-log').addEventListener('click', showQuestlog);
-  initTestMode(document.querySelector('.hud-title'), (on) => toast(on ? '🧪 Testmodus an – siehe Auftragsbuch 📖' : 'Testmodus aus'));
+  initTestMode((on) => toast(on ? '🧪 Testmodus an – siehe Auftragsbuch 📖' : 'Testmodus aus'));
   document.querySelector('.hud-full').addEventListener('click', () => {
     const d = document.documentElement;
     if (!document.fullscreenElement) d.requestFullscreen?.().catch(() => {});

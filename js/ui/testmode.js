@@ -1,7 +1,7 @@
 // Testmodus für Herrn Messner [W16]. Einschalten auf drei Wegen:
-// - URL mit ?test=1 (aus: ?test=0)
+// - URL mit ?amtstest=1 (aus: ?amtstest=0)
 // - am Notebook einfach „amtstest“ tippen (kein Eingabefeld aktiv)
-// - am iPad/Handy 5× schnell auf den Titel „Amt für Bewegung“ oben links tippen
+// - im Startbildschirm 20× auf Oma Gerda mit dem Rollator tippen (js/ui/title.js) [W17]
 // Wirkung: im Auftragsbuch 📖 gesperrte Aufträge sehen, starten, abhaken, zurücksetzen, Geld.
 
 const KEY = 'amt-fuer-bewegung.test';
@@ -20,8 +20,8 @@ export function setTestMode(v) {
   notify(on);
 }
 
-export function initTestMode(titleEl, onChange) {
-  const p = new URLSearchParams(location.search).get('test');
+export function initTestMode(onChange) {
+  const p = new URLSearchParams(location.search).get('amtstest');
   if (p !== null) setTestMode(p === '1');
   document.body.classList.toggle('test-mode', on);
   notify = onChange;
@@ -32,12 +32,5 @@ export function initTestMode(titleEl, onChange) {
     if (e.key.length !== 1) return;
     typed = (typed + e.key.toLowerCase()).slice(-CODE.length);
     if (typed === CODE) { typed = ''; setTestMode(!on); }
-  });
-
-  let taps = [];
-  titleEl?.addEventListener('pointerdown', () => {
-    const now = performance.now();
-    taps = [...taps.filter((t) => now - t < 1500), now];
-    if (taps.length >= 5) { taps = []; setTestMode(!on); }
   });
 }

@@ -6,9 +6,7 @@
   <meta name="theme-color" content="#1a1c2c">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Amt für Bewegung aller Art</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/questlog.css">
   <link rel="stylesheet" href="css/tasks-neu.css">
@@ -54,9 +52,12 @@
     </section>
 
     <section id="questlog" class="hidden" role="dialog" aria-label="Auftragsbuch">
-      <div class="ql-card">
-        <header class="ql-head"><strong>📖 Auftragsbuch</strong><button class="btn ql-close">Schließen ✕</button></header>
-        <div class="ql-body"></div>
+      <div class="ql-book">
+        <div class="ql-card">
+          <header class="ql-head"><strong>Aufträge</strong><button class="btn ql-close">Schließen ✕</button></header>
+          <div class="ql-body"></div>
+        </div>
+        <div class="ql-cover" aria-hidden="true"><span class="ql-cover-title">Aufträge</span><span class="ql-cover-sub">Amt für Bewegung aller Art</span></div>
       </div>
     </section>
 

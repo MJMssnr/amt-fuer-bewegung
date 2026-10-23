@@ -105,7 +105,7 @@ export class Scene {
     // Maßband
     const step = niceStep(this.xr[1] - this.xr[0], 6);
     ctx.fillStyle = '#ffcd75';
-    ctx.font = '13px "Pixelify Sans", monospace';
+    ctx.font = '13px "AmtPixel", monospace';
     ctx.textAlign = 'center';
     for (let x = Math.ceil(this.xr[0] / step) * step; x <= this.xr[1] + 1e-9; x += step) {
       const px = Math.round(this.X(x));
@@ -144,7 +144,7 @@ export class Scene {
     ctx.fillRect(8, 8, this.rate !== 1 ? 156 : 118, 22);
     ctx.fillStyle = '#f4f4f4';
     ctx.textAlign = 'left';
-    ctx.font = '15px "Pixelify Sans", monospace';
+    ctx.font = '15px "AmtPixel", monospace';
     ctx.fillText(`t = ${fmt(this.t, 1)} s`, 16, 24);
     if (this.rate !== 1) {
       ctx.fillStyle = '#ffcd75';

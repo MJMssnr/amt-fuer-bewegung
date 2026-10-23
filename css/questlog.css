@@ -2,20 +2,42 @@
 .type-badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 4px; font-family: var(--pixel); font-size: 15px; line-height: 1; background: var(--gold); color: var(--ink); box-shadow: 0 0 0 2px var(--ink); }
 .task-head .t-type { flex: none; }
 
-#questlog { position: absolute; inset: 0; z-index: 40; display: grid; place-items: center; padding: 10px; background: rgba(26, 28, 44, .72); }
-.ql-card { width: min(980px, 100%); max-height: calc(100dvh - 20px); display: flex; flex-direction: column; background: var(--panel); box-shadow: 0 0 0 3px var(--ink), 0 0 0 6px #f4f4f4, 0 0 0 9px var(--ink); animation: pop .25s ease-out; }
-.ql-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 10px; background: var(--navy); color: #f4f4f4; font-family: var(--pixel); font-size: 18px; }
+#questlog { position: absolute; inset: 0; z-index: 40; display: grid; place-items: center; padding: 10px; background: rgba(26, 28, 44, .72); perspective: 1400px; }
+.ql-book { position: relative; width: min(980px, 100%); max-height: calc(100dvh - 20px); display: flex; transform-style: preserve-3d; }
+/* Seite: liniertes Papier mit blauem Einband links */
+.ql-card { flex: 1; min-width: 0; max-height: calc(100dvh - 20px); display: flex; flex-direction: column;
+  background: repeating-linear-gradient(#fffdf6 0 23px, #dbe7f3 23px 24px);
+  border-left: 14px solid #29366f; box-shadow: 0 0 0 3px var(--ink), 8px 8px 0 3px rgba(0,0,0,.35); }
+.ql-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 10px; background: #3b5dc9; color: #f4f4f4; font-family: var(--title, var(--pixel)); font-size: 18px; letter-spacing: 1px; }
+/* Buchdeckel: nur während der Öffnungs-Animation sichtbar */
+.ql-cover { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  background: #29366f; color: #ffcd75; box-shadow: inset 0 0 0 6px #3b5dc9, inset 0 0 0 9px #1a1c2c, 0 0 0 3px var(--ink);
+  background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 4px, transparent 4px 8px);
+  transform-origin: left center; backface-visibility: hidden; opacity: 0; pointer-events: none; }
+.ql-cover-title { font-family: var(--title, var(--pixel)); font-size: clamp(28px, 7vw, 56px); text-shadow: 4px 4px 0 #1a1c2c; padding: 8px 20px; border: 4px solid #ffcd75; }
+.ql-cover-sub { font-family: var(--title, var(--pixel)); font-size: 13px; color: #f4f4f4; opacity: .85; }
+#questlog.opening { animation: ql-dim .9s ease-out both; }
+#questlog.opening .ql-book { animation: ql-fly .9s cubic-bezier(.2, .8, .3, 1) both; }
+#questlog.opening .ql-cover { animation: ql-open 1s ease-in both; }
+@keyframes ql-dim { from { background: rgba(26, 28, 44, 0); } }
+@keyframes ql-fly { from { transform: translate(34vw, -42vh) scale(.08) rotate(-8deg); } 55% { transform: scale(1.03); } to { transform: none; } }
+@keyframes ql-open { 0%, 50% { opacity: 1; transform: rotateY(0); } 95% { opacity: 1; } 100% { opacity: 0; transform: rotateY(-175deg); } }
+@media (prefers-reduced-motion: reduce) { #questlog.opening, #questlog.opening .ql-book, #questlog.opening .ql-cover { animation: none; } }
 .ql-body { overflow: auto; padding: 8px 10px 10px; }
 .ql-table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .ql-table th { text-align: left; font-family: var(--pixel); font-weight: 400; color: var(--navy); border-bottom: 2px solid var(--ink); padding: 3px 6px; position: sticky; top: -8px; background: var(--panel); }
 .ql-table td { padding: 4px 6px; border-bottom: 1px dashed var(--grid-major); vertical-align: middle; }
 .ql-table td small { display: block; font-size: 11px; opacity: .7; }
 .ql-table .num { text-align: right; white-space: nowrap; }
-.ql-st { font-size: 17px; text-align: center; width: 26px; }
-.st-perfect .ql-st { color: var(--ok); }
-.st-partial .ql-st { color: #c98a1b; }
-.st-fail .ql-st, .st-retry .ql-st { color: var(--bad); }
-.st-open .ql-st { color: var(--accent); }
+.ql-st { text-align: center; width: 30px; }
+.ql-n { width: 22px; text-align: right; font-family: var(--pixel); opacity: .6; }
+.st-ico { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; font: bold 13px/1 system-ui, sans-serif; color: #fff; vertical-align: middle;
+  background: transparent; box-shadow: inset 0 0 0 2px var(--grid-major); }
+.st-perfect .st-ico { background: var(--ok); box-shadow: 0 0 0 2px var(--ink); }
+.st-partial .st-ico { background: #f2b52c; box-shadow: 0 0 0 2px var(--ink); font-size: 17px; }
+.st-fail .st-ico, .st-retry .st-ico { background: #d63b3b; box-shadow: 0 0 0 2px var(--ink); }
+.st-locked .st-ico { box-shadow: none; }
+.ql-empty { margin: 10px 4px; font-style: italic; }
 .st-locked { opacity: .55; }
 .ql-sum { margin: 8px 0 4px; }
 .ql-legend summary { cursor: pointer; font-family: var(--pixel); color: var(--navy); }
