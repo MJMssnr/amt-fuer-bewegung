@@ -16,6 +16,7 @@ import { unlockAudio } from './audio/sound.js';
 import { initSoundMenu } from './ui/sound-menu.js';
 import { openQuestlog } from './ui/questlog.js';
 import { resetPatrol } from './ui/police.js';
+import { addSignButtons } from './ui/signbtn.js';
 import { typeOf } from './tasks/types.js';
 import { initTestMode, isTestMode, setTestMode } from './ui/testmode.js';
 
@@ -113,6 +114,7 @@ async function runTaskScreen({ title, fromName, rewardText, ticket, world }) {
         document.addEventListener('keydown', onKey, true);
       }, 250);
     } });
+    addSignButtons(root); // „±“ vor jedem Zahlenfeld [W28]
     screen.querySelector('.t-back').onclick = () => { if (solved) finish(); else { inst.destroy(); resolve(null); } };
   });
   screen.classList.add('hidden');

@@ -21,8 +21,8 @@ export function mount(root, { ticket, world, onSolved }) {
   const truth = series(actor, K.q);
   const [lo, hi] = rangeOf(truth);
   const span = Math.max(1, hi - lo);
-  const tolY = task.tolY ?? 0.08 * span;
-  const tolT = task.tolT ?? 0.3;
+  let tolY = task.tolY ?? 0.08 * span;
+  let tolT = task.tolT ?? 0.3;
   const tEnd = world.tEnd;
   const truthAt = (t) => quantityAt(actor, K.q, Math.min(t, tEnd));
 
@@ -49,6 +49,12 @@ export function mount(root, { ticket, world, onSolved }) {
   // Pixel pro Einheit (für die Begradigung in Bildschirm-Maßstab)
   const [x0, y0] = g.toPx([0, 0]), [x1, y1] = g.toPx([1, 1]);
   const sx = Math.abs(x1 - x0), sy = Math.abs(y1 - y0);
+  // Fingerbreite statt Millimeter [W28]: mindestens ~30 Bildschirmpixel Spielraum (eine Fingerkuppe ist ~1,5 cm breit),
+  // außerdem mindestens 15 % der Spannweite senkrecht und 0,6 s waagrecht an den Knicken.
+  const pxPerUnit = () => { const k = svg.getBoundingClientRect().width / svg.viewBox.baseVal.width || 1; return [sx * k, sy * k]; };
+  const finger = () => { const [kx, ky] = pxPerUnit(); return { y: 30 / ky, t: 22 / kx }; };
+  tolY = Math.max(tolY, 0.15 * span, finger().y);
+  tolT = Math.max(tolT, 0.6, finger().t);
 
   const add = (e) => {
     const [t, y] = g.toData(e.clientX, e.clientY);
@@ -72,7 +78,7 @@ export function mount(root, { ticket, world, onSolved }) {
   const up = () => {
     if (!drawing) return;
     drawing = false;
-    line = straighten(raw, { sx, sy, eps: task.eps ?? 7 });
+    line = straighten(raw, { sx, sy, eps: task.eps ?? 9 });
     g.trace(line);
     svg.classList.toggle('fh-has', line.length > 1);
   };

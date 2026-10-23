@@ -86,3 +86,9 @@
 
 /* Finale: Dialoge über der Finale-Szene [W24] */
 body.finale-on #dialog { z-index: 80; }
+
+/* Minus-Knopf vor Zahlenfeldern [W28] */
+.sign-btn { flex: none; width: 34px; height: 34px; padding: 0; font: 700 20px/1 var(--text); background: #fff; border: 2px solid var(--ink); color: var(--ink); touch-action: manipulation; }
+.sign-btn:active { background: var(--gold); }
+.c-val { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+@media (max-height: 500px) { .sign-btn { width: 30px; height: 30px; font-size: 18px; } }

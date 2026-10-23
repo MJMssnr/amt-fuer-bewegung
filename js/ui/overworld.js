@@ -115,7 +115,7 @@ export class Overworld {
   }
 
   #tap(e) {
-    if (this.path.length || this.locked?.()) return;
+    if (this.locked?.()) return;
     const r = this.c.getBoundingClientRect();
     const x = ((e.clientX - r.left) * this.dpr - this.ox) / this.s;
     const y = ((e.clientY - r.top) * this.dpr - this.oy) / this.s;
@@ -127,6 +127,15 @@ export class Overworld {
       if (d < bd) { bd = d; best = id; }
     }
     if (!best) return;
+    // Unterwegs umentscheiden [W28]: vom nächsten Wegpunkt aus neu planen, Fahrt läuft ohne Halt weiter
+    if (this.path.length) {
+      const next = this.path[0], N = this.map.nodes, prev = { ...N[this.node], id: this.node };
+      const len = (from, pts) => pts.reduce((s, p, i) => s + Math.hypot(p.x - (i ? pts[i - 1].x : from.x), p.y - (i ? pts[i - 1].y : from.y)), 0);
+      const via = (n) => [n, ...(n.id === best ? [] : this.#route(n.id, best))];
+      const a = via(next), b = via(prev); // weiter oder umdrehen – was ist kürzer?
+      this.path = len(this.pos, a) <= len(this.pos, b) ? a : b;
+      return;
+    }
     if (best === this.node) { this.onArrive?.(best); return; }
     this.path = this.#route(this.node, best);
     if (this.path.length) this.#depart();
