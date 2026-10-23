@@ -18,7 +18,7 @@ Spieler ist Florian, der per Namensverwechslung das „Amt für Bewegung aller A
 ## Struktur
 ```
 index.html, css/style.css
-js/main.js                 Einstieg: lädt Daten, verbindet Karte ↔ Tickets ↔ Aufgaben
+js/main.js                 Einstieg: Demo-Hinweis → Startbildschirm → Karte; Aufträge, Geld-Regeln, Prüfung
 js/engine/kinematics.js    2D-Kinematik, stückweise konstantes a, Ereignisse ("until")
 js/engine/goals.js         Auswertbare Fragen, erweiterbar per registerGoal()
 js/engine/answer.js        Antwortprüfung: Toleranz = 1 Einheit in der 2. signifikanten Stelle
@@ -27,23 +27,40 @@ js/render/scene.js         Pixel-Animation der Akteure mit Maßband
 js/render/pixel.js         Sprites aus assets/sprites.json oder PNG
 js/render/painter.js       Welt->Bildschirm, kantenscharf; Text in nativer Auflösung (scharf)
 js/render/town.js          Stadtboden, Bäume (round/pine/birch/fruit/blossom), Büsche, Blumen, Möbel
-js/render/buildings.js     Gebäude, Schilder (wachsen mit dem Text), Skatepark-Rampen, Parkplatz
+js/render/buildings.js     Gebäude, Schilder (wachsen mit dem Text), Kuckucks-Stadtuhr, Skatepark, Parkplatz
+js/render/treehouse.js     Florians Baumhaus auf der Karte
+js/render/room-art.js      Baumhaus-Zimmer: Hintergrund, feste Plätze (SLOTS), Gegenstände (DRAW)
+js/render/vehicles.js      Auto, Sportmotorrad, Rakete, Partikel (Startbildschirm, Finale)
 js/render/format.js        Zahlenformat, schöne Achsenteilung
 js/tasks/index.js          Register der Aufgabentypen
 js/tasks/common.js         Linke Spalte für alle Typen (Animation, Diagramme, Datenblatt, Notizzettel)
 js/tasks/match.js          Typ A: Zuordnen
 js/tasks/calc.js           Typ H: Berechnen (Goals -> Eingabe, Hinweise für typische Fehler)
 js/tasks/describe.js       Typ G: Beschreiben; Textgenerator in describe-text.js
+js/tasks/axes.js           Typ C: Achsen-Detektiv (Diagramm ohne Zahlen, markierte Linien)
+js/tasks/errorhunt.js      Typ E: Fehlerjagd (Ralfs Diagramm, ein falscher Abschnitt)
+js/tasks/live.js           Typ F: Live-Steuerung (vₓ per Regler, Spur gegen Soll)
+js/tasks/questions.js      Gemeinsamer Eingabe-/Prüfblock für H und C
 js/tasks/distractors.js    Distraktoren aus Fehlvorstellungen (CATALOG)
 js/ui/overworld.js         Stadtkarte (data/map.json)
 js/ui/dialog.js, state.js  Dialoge, Spielstand (localStorage)
+js/ui/title.js, title-scene.js  Demo-Hinweis, animierter Startbildschirm
+js/ui/room.js              Baumhaus-Zimmer mit Shop und Kiste
+js/ui/finale.js            Raketenstart nach bestandener Prüfung
 data/tickets.json          Aufträge (Level)
 data/scenarios/*.json      Bewegungen
 data/story.json            Figuren, Intro, Outro
 data/map.json              Orte, Straßen, Bäume
+data/shop.json             Gegenstände, Preise, Klicktexte, Raketenteile (Balancing hier)
+data/exam.json             Abschlussprüfung (Teile, Bestehensgrenze, Dialoge)
 assets/sprites.json        Pixel-Sprites (erzeugt von tools/gensprites.mjs); assets/img/ für eigene PNGs
 schema/                    Formatbeschreibung der JSON-Dateien
 ```
+
+## Geld-Regeln
+- Auswahl-Aufgaben (A, G, E): nur beim ersten Versuch richtig → voller Lohn, sonst 0 €.
+- Rechen-/Ablese-Aufgaben (H, C) und Live (F): erster Versuch → voll; selbst gelöst nach Hinweisen → halb; „Lösung zeigen“ → 0 €.
+- Module melden onSolved({ attempts, grade: 'perfect' | 'partial' | 'fail' }).
 
 ## Erweitern
 - **Neuer Aufgabentyp:** `js/tasks/<typ>.js` mit `export function mount(root, { ticket, world, onSolved })` → `{ destroy() }`, dann in `js/tasks/index.js` eintragen.
@@ -51,5 +68,4 @@ schema/                    Formatbeschreibung der JSON-Dateien
 - **Neue Fehlvorstellung:** Eintrag in `CATALOG` und `PRIORITY` in `distractors.js`.
 
 ## Geplant (Reihenfolge offen)
-C Achsen-Detektiv,
-D Regie, E Fehlerjagd, F Live-Steuerung, 2D-Szenen (Wurf), Vektoraddition, PWA/offline, Geld ausgeben (Messgeräte).
+D Regie, Freihandzeichnen, 2D-Szenen (Wurf) = Teil 2, Vektoraddition, PWA/offline, Schrift lokal einbinden.

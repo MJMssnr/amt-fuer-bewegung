@@ -5,7 +5,9 @@ const LOADERS = {
   match: () => import('./match.js'),
   describe: () => import('./describe.js'),     // G: Bewegung beschreiben
   calc: () => import('./calc.js'),             // H: Berechnen
-  // axes:     () => import('./axes.js'),       // C: Achsen-Detektiv
+  axes: () => import('./axes.js'),             // C: Achsen-Detektiv
+  errorhunt: () => import('./errorhunt.js'),   // E: Fehlerjagd
+  live: () => import('./live.js'),             // F: Live-Steuerung
 };
 
 export async function loadTask(type) {

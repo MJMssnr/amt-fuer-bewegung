@@ -33,6 +33,19 @@
       <div class="task-root"></div>
     </section>
 
+    <section id="room" class="hidden" aria-label="Florians Baumhaus">
+      <header class="task-head">
+        <button class="btn r-back">← Karte</button>
+        <div class="t-info"><strong class="t-title">Florians Baumhaus</strong><span class="t-from r-progress"></span></div>
+        <span class="t-reward r-money"></span>
+        <button class="btn r-shop-btn">Bestellen ▾</button>
+      </header>
+      <div class="room-body">
+        <canvas class="room-canvas" aria-label="Zimmer im Baumhaus"></canvas>
+        <aside class="shop hidden"><div class="shop-list"></div></aside>
+      </div>
+    </section>
+
     <div id="dialog" class="hidden" role="dialog" aria-live="polite">
       <div class="d-pic"></div>
       <div class="d-body">
@@ -41,6 +54,37 @@
         <div class="d-more">▼</div>
       </div>
     </div>
+
+    <section id="notice" class="hidden" role="dialog" aria-labelledby="notice-h">
+      <div class="notice-card">
+        <div class="notice-stamp">DEMO</div>
+        <h2 id="notice-h">Willkommen im Amt!</h2>
+        <p>Du spielst eine <b>Demoversion</b> vom <i>Amt für Bewegung</i>. Wenn dir ein Fehler oder ein Bug begegnet: Sag bitte <b>Herrn Messner</b> Bescheid. Danke, du bist eine große Hilfe!</p>
+        <p>Im Mittelpunkt stehen schöne Visualisierungen und interaktive Aufgaben. Manche Feinheiten sind technisch noch nicht umgesetzt, zum Beispiel <b>gültige Ziffern</b> in Dialogen, Aufgaben und Lösungen. In deinem Heft achtest du darauf natürlich trotzdem.</p>
+        <button class="btn notice-ok">Los geht's ▶</button>
+      </div>
+    </section>
+
+    <section id="title" class="hidden">
+      <canvas aria-label="Animierte Straßenszene"></canvas>
+      <div class="title-ui">
+        <h1 class="logo"><span class="logo-main">Amt für Bewegung</span><span class="logo-sub">– aller Art –</span></h1>
+        <div class="title-buttons">
+          <button class="btn title-continue hidden">Weiter ▶</button>
+          <button class="btn title-new">Dienst antreten ▶</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="finale" class="hidden" aria-label="Raketenstart">
+      <canvas></canvas>
+      <div class="finale-text hidden">
+        <h2>Die Rakete ist unterwegs!</h2>
+        <p>Prüfung bestanden, Rakete gestartet: Florian hat das Amt für Bewegung aller Art jetzt wirklich im Griff. Offene Aufträge und freie Plätze im Baumhaus warten weiterhin in der Stadt.</p>
+        <p class="finale-next">Fortsetzung folgt:<br><b>Amt für Bewegung – Teil 2: Bewegung in zwei Dimensionen</b><br>Würfe, Flugbahnen und Vektoren warten schon.</p>
+        <button class="btn finale-ok">Zurück in die Stadt</button>
+      </div>
+    </section>
 
     <div id="loading">Lade Stadt …</div>
     <div id="rotate">

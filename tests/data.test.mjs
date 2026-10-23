@@ -27,3 +27,41 @@ for (const tk of tickets) {
     }
   });
 }
+
+import { faultySeries } from '../js/tasks/errorhunt.js';
+
+function checkTask(task, world, label) {
+  const actorId = task.actor ?? [...world.actors.keys()][0];
+  const actor = world.actors.get(actorId);
+  assert.ok(actor, `${label}: Akteur "${actorId}" fehlt`);
+  if (task.type === 'errorhunt') {
+    assert.ok(task.error && task.error.segment < actor.pieces.length, `${label}: error.segment ungültig`);
+    const bad = faultySeries(actor, task.graph ?? 'xt', task.error);
+    assert.ok(bad.length === actor.pieces.length, `${label}: fehlerhafte Serie unvollständig`);
+  }
+  if (task.type === 'live') assert.ok(actor.pieces.every((p) => Math.abs(p.a[0]) < 1e-9), `${label}: Live-Aufgaben nur mit gleichförmigen Abschnitten`);
+  for (const q of task.questions || []) assert.ok(Number.isFinite(evaluateGoal(q.goal, world).value), `${label}: "${q.label}" ohne Wert`);
+}
+
+for (const tk of tickets) {
+  test(`Aufgabe ${tk.id} (${tk.task.type})`, () => {
+    const sc = typeof tk.scenario === 'object' ? tk.scenario : read(`data/scenarios/${tk.scenario}.json`);
+    checkTask(tk.task, buildWorld(sc), tk.id);
+  });
+}
+
+test('Abschlussprüfung', () => {
+  const exam = read('data/exam.json');
+  const world = buildWorld(read(`data/scenarios/${exam.scenario}.json`));
+  exam.parts.forEach((p, i) => checkTask(p.task, world, `Prüfung ${i + 1}`));
+  assert.ok(exam.passNeeded <= exam.parts.length);
+});
+
+test('Shop: jeder Gegenstand hat einen Platz im Zimmer', async () => {
+  const { SLOTS } = await import('../js/render/room-art.js');
+  const shop = read('data/shop.json');
+  for (const it of shop.items) assert.ok(SLOTS[it.id], `Kein Platz für "${it.id}"`);
+  const earn = tickets.reduce((a, t) => a + t.reward, 0);
+  const cost = [...shop.items, ...shop.rocketParts].reduce((a, i) => a + i.price, 0);
+  assert.ok(cost <= earn, `Shop (${cost} €) teurer als alle Aufträge zusammen (${earn} €)`);
+});

@@ -46,6 +46,48 @@ const florian_side = { w: 14, h: 22, fps: 10, turns: true, frames: [side(sideSta
 // "florian" = Seitenansicht (Szenen, Porträt); Stand-Frame zuerst
 const florian = { ...florian_side, frames: [side(sideStand), side(sideStride), side(sidePass), side(sideStride)] };
 
+// Florian notiert (Block vor der Brust, Stift wackelt) und fotografiert (Kamera vor dem Gesicht)
+const noteTorso = (pen) => ['....kgggggk...', pen, '...kgGggsswwk.', '...kgGgggwwwk.', '...kGGGGGGGk..', '....kbbbbbk...', '....kbbbbbk...'];
+const florian_note = {
+  w: 14, h: 22, fps: 4, turns: true,
+  frames: [
+    [...fSideHead, ...noteTorso('...kggggggyk..'), ...sideStand],
+    [...fSideHead, ...noteTorso('...kgggggggyk.'), ...sideStand],
+  ],
+};
+const photoHead = [...fSideHead.slice(0, 5), '...khhhsskkkk.', '...khSsskNNk..', '....kSsskkkk..', ...fSideHead.slice(8)];
+const florian_photo = {
+  w: 14, h: 22, turns: true,
+  frames: [[...photoHead, '....kgggggsk..', ...fSideTorso.slice(1), ...sideStand]],
+};
+
+// Praktikant Ralf (Farbvariante) und Raketenschlitten für die Abschlussprüfung
+const sled = {
+  w: 24, h: 10, turns: false, fps: 12,
+  frames: [
+    ['....kkkkkkkkkkkkkk......', '...kwwwwwwwwwwwwwwkk....', '..kwwwwwBBwwwwwwwwwrrk..', 'rrkwwwwwBBwwwwwwwwwwrrrk',
+     'yrkwwwwwwwwwwwwwwwwwrrk.', '..kwwwwwwwwwwwwwwwwrk...', '...krrkkkkkkkkkkkrrk....', '....kNk.......kNk.......',
+     'nnnnnnnnnnnnnnnnnnnnnnnn', '........................'],
+    ['....kkkkkkkkkkkkkk......', '...kwwwwwwwwwwwwwwkk....', '..kwwwwwBBwwwwwwwwwrrk..', 'yrkwwwwwBBwwwwwwwwwwrrrk',
+     'Rykwwwwwwwwwwwwwwwwwrrk.', '..kwwwwwwwwwwwwwwwwrk...', '...krrkkkkkkkkkkkrrk....', '....kNk.......kNk.......',
+     'nnnnnnnnnnnnnnnnnnnnnnnn', '........................'],
+  ],
+};
+
+// Oma Gerda mit Rollator (18×16)
+const omaTop = [
+  '...NNN............', '..NNNNN...........', '..NNsss...........', '..Nssks...........', '...ssss...........',
+  '...PPPP...........', '..PPPPPPss.nnn....', '..PPPPPP..n..n....', '..pppppp..n..n....', '..pppppp..nwwn....',
+  '..pppppp..nnnn....', '...pppp...n..n....',
+];
+const oma_rollator = {
+  w: 18, h: 16, turns: true, fps: 3,
+  frames: [
+    [...omaTop, '...s..s...n..n....', '...s..s...n..n....', '..kk.kk..kNk.kNk..', '..........k...k...'],
+    [...omaTop, '...s.s....n..n....', '...s.s....n..n....', '..kkkk...kNk.kNk..', '..........k...k...'],
+  ],
+};
+
 // ---------- weitere Figuren und Fahrzeuge (Seitenansicht) ----------
 const car = {
   w: 24, h: 9, turns: false,
@@ -131,7 +173,7 @@ const sprites = {
   palette,
   sprites: {
     florian, florian_down, florian_up, florian_side, car_red: car, cyclist, cyclist_b, kevin, broesel, dog,
-    bus, oetzi, kranz, baecker, filiale, skater, jo, cart,
+    bus, oetzi, kranz, baecker, filiale, skater, jo, cart, florian_note, florian_photo, oma_rollator, sled, ralf: { ...oetzi, palette: { b: '#e43b44', B: '#ffcd75', d: '#3b5dc9' } },
   },
 };
 for (const [name, sp] of Object.entries(sprites.sprites))

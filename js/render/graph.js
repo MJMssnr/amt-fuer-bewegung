@@ -71,18 +71,38 @@ export function drawGraph(kind, pieces, opts = {}) {
   txt(X(0) + 6, M.t - 6, `${K.axis} in ${K.unit}`, 'start', 'g-title');
   txt(W - 4, y0 - 6, 't in s', 'end', 'g-title');
 
-  if (!opts.hideScale) {
-    for (let t = tR.step; t <= tR.hi + 1e-9; t += tR.step) {
-      el('line', { x1: X(t), x2: X(t), y1: y0 - 3, y2: y0 + 3 }, axes);
-      txt(X(t), Math.min(y0 + 13, H - 4), fmt(t));
-    }
-    for (let y = yR.lo; y <= yR.hi + 1e-9; y += yR.step) {
-      if (Math.abs(y) < 1e-9) continue;
-      el('line', { x1: X(0) - 3, x2: X(0) + 3, y1: Y(y), y2: Y(y) }, axes);
-      txt(X(0) - 5, Y(y) + 3.5, fmt(y), 'end');
-    }
-    txt(X(0) - 5, y0 + 12, '0', 'end');
+  // Teilstriche immer, Zahlen nur ohne hideScale. Markierte Teilstriche (opts.mark) bekommen ein "?".
+  const mark = opts.mark ?? {};
+  const markT = mark.t !== undefined ? mark.t : null;
+  const markY = mark.y !== undefined ? mark.y : null;
+  const isMark = (v, m, step) => m !== null && Math.abs(v - m * step) < step * 1e-6;
+  for (let t = tR.step; t <= tR.hi + 1e-9; t += tR.step) {
+    el('line', { x1: X(t), x2: X(t), y1: y0 - 3, y2: y0 + 3 }, axes);
+    if (isMark(t, markT, tR.step)) markLabel(X(t), Math.min(y0 + 14, H - 6), 'v', X(t), y0);
+    else if (!opts.hideScale) txt(X(t), Math.min(y0 + 13, H - 4), fmt(t));
   }
+  for (let y = yR.lo; y <= yR.hi + 1e-9; y += yR.step) {
+    if (Math.abs(y) < 1e-9) continue;
+    el('line', { x1: X(0) - 3, x2: X(0) + 3, y1: Y(y), y2: Y(y) }, axes);
+    if (isMark(y, markY, yR.step)) markLabel(X(0) - 14, Y(y), 'h', X(0), Y(y));
+    else if (!opts.hideScale) txt(X(0) - 5, Y(y) + 3.5, fmt(y), 'end');
+  }
+  txt(X(0) - 5, y0 + 12, '0', 'end');
+
+  function markLabel(x, y, dir, ax, ay) {
+    const g = el('g', { class: 'g-mark' }, svg);
+    if (dir === 'v') el('line', { x1: ax, x2: ax, y1: Y(yR.lo), y2: Y(yR.hi) }, g);
+    else el('line', { x1: X(tR.lo), x2: X(tR.hi), y1: ay, y2: ay }, g);
+    el('rect', { x: x - 9, y: y - 8, width: 18, height: 15, rx: 3 }, g);
+    const tt = el('text', { x, y: y + 4, 'text-anchor': 'middle' }, g);
+    tt.textContent = '?';
+  }
+
+  // Anklickbare Abschnitte (Fehlerjagd): opts.bands = [[t0,t1], ...]
+  const bands = (opts.bands || []).map(([a, b], i) => {
+    const r = el('rect', { x: X(a), y: Y(yR.hi), width: X(b) - X(a), height: Y(yR.lo) - Y(yR.hi), class: 'g-band', 'data-i': i }, svg);
+    return r;
+  });
 
   // Kurve
   const curve = el('g', { class: 'g-curve' }, svg);
@@ -107,8 +127,22 @@ export function drawGraph(kind, pieces, opts = {}) {
     return null;
   };
 
+  const toPts = (pc) => pc.map(([t, y]) => `${X(t).toFixed(1)},${Y(y).toFixed(1)}`).join(' ');
+  let traceLine = null;
   return {
     el: svg,
+    tR, yR, bands,
+    /** Zusätzliche Kurve (z. B. Lösung) mit eigener CSS-Klasse */
+    overlay(more, cls = 'g-overlay') {
+      const g = el('g', { class: cls }, svg);
+      for (const pc of more) el('polyline', { points: toPts(pc) }, g);
+      return g;
+    },
+    /** Live-Spur (Live-Steuerung): Punkte [[t,y], ...] */
+    trace(pts) {
+      if (!traceLine) traceLine = el('polyline', { class: 'g-trace' }, svg);
+      traceLine.setAttribute('points', toPts(pts.map(([t, y]) => [t, Math.max(yR.lo, Math.min(yR.hi, y))])));
+    },
     setCursor(t) {
       if (t === null || t === undefined) return cur.setAttribute('visibility', 'hidden');
       const v = valueAt(t);

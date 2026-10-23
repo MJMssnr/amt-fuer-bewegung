@@ -305,5 +305,267 @@
       ["florian", "Am Anfang war aₓ negativ, trotzdem wurde der Wagen schneller, weil er in −x-Richtung gerollt ist. Als ich ihn gestoppt habe, war aₓ positiv, und er wurde langsamer."],
       ["filiale", "Ich verstehe kein Wort. Aber die Versicherung wird begeistert sein."]
     ]
+  },
+  {
+    "id": "t09-tacho",
+    "title": "Der verschmierte Ausdruck",
+    "from": "kevin",
+    "node": "fahrradladen",
+    "requires": ["t02-kevin"],
+    "reward": 80,
+    "scenario": "kevin-lieferung",
+    "intro": [
+      ["kevin", "Chef! Mein Radl-Tacho hat das Diagramm meiner Lieferfahrt ausgedruckt. Dann ist mein Kaffee drübergekippt."],
+      ["kevin", "Die Kurve sieht man noch, aber die Zahlen an den Achsen sind weg. Und die Versicherung will sie haben."],
+      ["florian", "Ich kenne ja deine Fahrdaten. Den Rest rechne ich aus."]
+    ],
+    "task": {
+      "type": "axes",
+      "actor": "kevin",
+      "given": ["anim", "data"],
+      "graph": "vt",
+      "prompt": "Welche Werte gehören an die markierten Linien?",
+      "paper": "Berechne, wann Kevin stillsteht (Δt = Δv / a). Suche dann einen Wert, den du kennst (z. B. die konstante Geschwindigkeit), zähle die Kästchen und rechne bis zur markierten Linie hoch.",
+      "hints": {
+        "t": [
+          {
+            "value": 4,
+            "text": "Nach 4 s beginnt erst das Bremsen. Wie lange dauert es bis zum Stillstand?"
+          }
+        ],
+        "y": [
+          {
+            "value": 9,
+            "text": "9 m/s ist die waagrechte Linie der Kurve. Die markierte Linie liegt etwas höher."
+          }
+        ]
+      }
+    },
+    "success": [
+      ["florian", "Gebremst wird 9 m/s ÷ 2,25 m/s² = 4 s lang, die Fahrt endet also bei 8 s. Die 9 m/s liegen viereinhalb große Kästchen hoch, ein Kästchen sind also 2 m/s, und die markierte Linie liegt bei 10 m/s."],
+      ["kevin", "Du bist ein Genie. Die Versicherung zahlt!"]
+    ]
+  },
+  {
+    "id": "t10-ampelkamera",
+    "title": "Die nasse Ampelkamera",
+    "from": "oetzi",
+    "node": "bushof",
+    "requires": ["t03-bus"],
+    "reward": 80,
+    "scenario": "bus-anfahren",
+    "intro": [
+      ["oetzi", "Servus! Die Ampelkamera am Busbahnhof hat Wasser abbekommen. Das t-x-Diagramm von meiner Linie 3 ist noch da, aber ohne Zahlen."],
+      ["florian", "Die Fahrdaten hab ich noch vom letzten Mal. Damit krieg ich die Achsen wieder beschriftet."]
+    ],
+    "task": {
+      "type": "axes",
+      "actor": "bus",
+      "given": ["anim", "data"],
+      "graph": "xt",
+      "paper": "Berechne den Weg in jedem Abschnitt (Anfahren: ½·a·t², gleichförmig: v·t, Bremsen: v²/(2a)). Wo endet die Kurve? Vergleiche mit dem Raster.",
+      "hints": {
+        "y": [
+          {
+            "value": 130.5,
+            "tol": 3,
+            "text": "130,5 m ist genau der Endpunkt der Kurve. Die markierte Linie liegt etwas darüber."
+          }
+        ]
+      }
+    },
+    "success": [
+      ["florian", "27 m Anfahren, 90 m gleichförmig, 13,5 m Bremsen: zusammen 130,5 m. Das Ende liegt knapp über der fünften Hilfslinie, jede Hilfslinie sind 25 m, die markierte Linie also 150 m. Und die Zeitachse endet bei 20 s."],
+      ["oetzi", "Ah geh, a richtiger Ingenieur!"]
+    ]
+  },
+  {
+    "id": "t11-stadtlauf",
+    "title": "Der Stadtlauf",
+    "from": "kranz",
+    "node": "rathaus",
+    "requires": ["t05-radeln"],
+    "reward": 90,
+    "scenario": "kranz-stadtlauf",
+    "intro": [
+      ["kranz", "Herr Doktor Brandl, ich bin beim Stadtlauf mitgelaufen! Die Lokalzeitung druckt mein t-x-Diagramm."],
+      ["kranz", "Nur leider hat die Grafikabteilung die Zahlen an den Achsen vergessen. Können Sie die nachtragen? Bitte bis Redaktionsschluss!"]
+    ],
+    "task": {
+      "type": "axes",
+      "actor": "kranz",
+      "given": ["anim", "data"],
+      "graph": "xt",
+      "paper": "Rechne die Strecke jedes Abschnitts aus und addiere. Achtung: Beim Bremsen von 3 m/s mit 1 m/s² dauert es 3 s."
+    },
+    "success": [
+      ["florian", "9 m beim Anlaufen, 60 m gleichförmig, 4,5 m beim Auslaufen: 73,5 m nach 29 s. Die markierten Linien liegen bei 80 m und 30 s."],
+      ["kranz", "Wunderbar! Und ich dachte, ich wäre einen Marathon gelaufen."]
+    ]
+  },
+  {
+    "id": "t12-ralf-brezel",
+    "title": "Ralfs erstes Diagramm",
+    "from": "ralf",
+    "node": "rathaus",
+    "requires": ["t04-brezel"],
+    "reward": 70,
+    "scenario": "hund-brezel",
+    "intro": [
+      ["ralf", "Hallo! Ich bin Ralf, der neue Praktikant. Ich hab Brezels Morgenrunde als t-x-Diagramm gezeichnet."],
+      ["ralf", "Die Bürgermeisterin sagt, ein Abschnitt ist falsch. Ich finde ihn nicht. Kannst du mal schauen?"]
+    ],
+    "task": {
+      "type": "errorhunt",
+      "actor": "dog",
+      "given": ["anim", "data"],
+      "graph": "xt",
+      "error": {
+        "segment": 1,
+        "kind": "sign"
+      },
+      "paper": "Berechne für jeden Abschnitt Δx = vₓ·Δt und prüfe, ob das Diagramm dazu passt.",
+      "explain": "Im 2. Abschnitt läuft Brezel mit −2 m/s zurück. Ralf hat ihn aber weiter nach vorne laufen lassen."
+    },
+    "success": [
+      ["ralf", "Ach so, das Minus! Ich dachte, Minus heißt nur „langsamer“. Danke!"]
+    ]
+  },
+  {
+    "id": "t13-ralf-kevin",
+    "title": "Ralf und die Bremse",
+    "from": "ralf",
+    "node": "rathaus",
+    "requires": ["t12-ralf-brezel", "t02-kevin"],
+    "reward": 80,
+    "scenario": "kevin-bremsen",
+    "intro": [
+      ["ralf", "Ich hab Kevins Vollbremsung als t-vₓ-Diagramm gezeichnet. Diesmal bin ich mir ganz sicher!"],
+      ["florian", "Ganz sicher? Dann schauen wir mal genau hin."]
+    ],
+    "task": {
+      "type": "errorhunt",
+      "actor": "kevin",
+      "given": ["anim", "data"],
+      "graph": "vt",
+      "error": {
+        "segment": 1,
+        "kind": "value",
+        "factor": 0.5
+      },
+      "paper": "Berechne die Steigung jedes Abschnitts im t-vₓ-Diagramm und vergleiche mit der Beschleunigung aus den Daten.",
+      "explain": "Beim Bremsen ist aₓ = −2 m/s². Ralf hat die Steigung nur halb so groß gezeichnet, deshalb steht Kevin am Ende nicht."
+    },
+    "success": [
+      ["ralf", "Oh. Bei meiner Zeichnung wäre Kevin einfach weitergerollt. Gut, dass das nur auf Papier war!"]
+    ]
+  },
+  {
+    "id": "t14-ralf-bus",
+    "title": "Ralfs Busfahrt",
+    "from": "ralf",
+    "node": "rathaus",
+    "requires": ["t13-ralf-kevin", "t03-bus"],
+    "reward": 90,
+    "scenario": "bus-anfahren",
+    "intro": [
+      ["ralf", "Letzter Versuch für heute: das t-x-Diagramm von Ötzis Bus. Mit Lineal gezeichnet, ganz ordentlich!"],
+      ["florian", "Mit Lineal? Hm. Das macht mich misstrauisch."]
+    ],
+    "task": {
+      "type": "errorhunt",
+      "actor": "bus",
+      "given": ["anim", "data"],
+      "graph": "xt",
+      "error": {
+        "segment": 0,
+        "kind": "shape"
+      },
+      "paper": "Überlege für jeden Abschnitt: Ist die Bewegung gleichförmig (Gerade) oder beschleunigt (Parabel)?",
+      "explain": "Beim Anfahren ist der Bus gleichmäßig beschleunigt. Im t-x-Diagramm ist das eine Parabel, keine Gerade."
+    },
+    "success": [
+      ["ralf", "Man kann also nicht alles mit dem Lineal zeichnen. Das schreib ich mir auf."]
+    ]
+  },
+  {
+    "id": "t15-live-brezel",
+    "title": "Brezels Ersatzrunde",
+    "from": "baecker",
+    "node": "baeckerei",
+    "requires": ["t04-brezel"],
+    "reward": 70,
+    "scenario": "hund-brezel",
+    "intro": [
+      ["baecker", "Herr Amt, Brezel hat Schnupfen. Aber die Touristen kommen jeden Morgen, um seine berühmte Runde zu sehen!"],
+      ["baecker", "Könnten Sie die Runde nachlaufen? Genau nach Plan. Brezel schaut vom Fenster aus zu und wedelt."],
+      ["florian", "Ich laufe also ein t-x-Diagramm nach. Das hätte mir in der Schule auch keiner geglaubt."]
+    ],
+    "task": {
+      "type": "live",
+      "actor": "dog",
+      "player": "florian",
+      "vmax": 4,
+      "ghost": true,
+      "prompt": "Lauf Brezels Runde genau nach! Brezel läuft blass als Vorbild mit.",
+      "paper": "Lies aus dem Plan für jeden Abschnitt Δx und Δt ab und berechne vₓ = Δx/Δt. Stell die erste Geschwindigkeit schon vor dem Start ein!"
+    },
+    "success": [
+      ["baecker", "Bravo! Die Touristen haben gar nicht gemerkt, dass Sie kein Hund sind."],
+      ["florian", "Ich nehme das als Kompliment."]
+    ]
+  },
+  {
+    "id": "t16-live-gerda",
+    "title": "Oma Gerda am Zebrastreifen",
+    "from": "gerda",
+    "node": "lindenstrasse",
+    "requires": ["t15-live-brezel"],
+    "reward": 80,
+    "scenario": "gerda-zebra",
+    "intro": [
+      ["gerda", "Junger Mann, Sie sind doch vom Amt? Ich möchte über die Straße, aber die Ampel ist so kurz."],
+      ["gerda", "Mein Enkel hat mir einen Plan gemacht: losgehen, auf der Verkehrsinsel kurz verschnaufen, weitergehen. Helfen Sie mir, das Tempo zu halten?"],
+      ["florian", "Sie gehen, ich gebe das Tempo vor. Diesmal ohne Vorbild, nur nach dem Plan."]
+    ],
+    "task": {
+      "type": "live",
+      "actor": "gerda",
+      "player": "oma_rollator",
+      "vmax": 1.5,
+      "ghost": false,
+      "prompt": "Steuere Oma Gerdas Tempo genau nach dem Plan im t-x-Diagramm.",
+      "paper": "Berechne die Geschwindigkeiten aus dem Plan. Tipp: Ein waagrechtes Stück im t-x-Diagramm heißt vₓ = 0."
+    },
+    "success": [
+      ["gerda", "Das war ja wie auf Schienen! Sie bekommen nächste Woche einen Kuchen."],
+      ["florian", "(Ich mag diesen Job.)"]
+    ]
+  },
+  {
+    "id": "t17-live-kevin",
+    "title": "Kevins Express-Lieferung",
+    "from": "kevin",
+    "node": "fahrradladen",
+    "requires": ["t16-live-gerda"],
+    "reward": 90,
+    "scenario": "kevin-express",
+    "intro": [
+      ["kevin", "Chef, ich hab mir den Fuß verknackst. Kannst du meine Express-Tour fahren? Hin, kurz warten, ein Stück zurück. Der Plan ist exakt getaktet!"],
+      ["florian", "Rückwärts heißt negative Geschwindigkeit. Ich bin vorbereitet."]
+    ],
+    "task": {
+      "type": "live",
+      "actor": "kevin",
+      "player": "kevin",
+      "vmax": 6,
+      "ghost": false,
+      "prompt": "Fahre Kevins Tour genau nach Plan. Achtung, am Ende geht es zurück!",
+      "paper": "Berechne vₓ für alle drei Abschnitte. Fällt die Kurve im t-x-Diagramm, ist vₓ negativ."
+    },
+    "success": [
+      ["kevin", "Auf die Sekunde genau! Ich glaube, du bist der bessere Kurier."],
+      ["florian", "Ich bleib lieber beim Amt."]
+    ]
   }
 ]

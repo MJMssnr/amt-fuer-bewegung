@@ -1,0 +1,3 @@
+{ "id": "kevin-lieferung", "title": "Kevins Lieferfahrt mit Rückenwind",
+  "actors": [ { "id": "kevin", "name": "Kevin", "sprite": "kevin", "x0": 0,
+    "segments": [ { "dt": 4, "v": 9 }, { "until": "rest", "a": -2.25 } ] } ] }

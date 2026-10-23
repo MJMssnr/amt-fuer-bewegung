@@ -2,77 +2,596 @@
   "size": [640, 360],
   "start": "rathaus",
   "nodes": {
-    "lindenstrasse": { "x": 110, "y": 104, "name": "Lindenstraße", "building": "house", "at": [110, 91], "color": "#f0d9b5", "sign": "Lindenstr. 12", "markerH": 74, "label": [150, 122] },
-    "park":          { "x": 230, "y": 104, "name": "Stadtpark", "building": "park", "at": [244, 93], "markerH": 34, "label": [230, 122] },
-    "skatepark":     { "x": 420, "y": 104, "name": "Skatepark", "building": "skatepark", "at": [420, 96], "markerH": 30, "label": [420, 122] },
-    "fahrradladen":  { "x": 560, "y": 104, "name": "Radl-Eck", "building": "shop", "at": [560, 91], "color": "#e43b44", "sign": "RADL-ECK", "wares": "bikes", "markerH": 58, "label": [520, 122] },
-    "jw":            { "x": 110, "y": 220, "junction": true },
-    "rathaus":       { "x": 330, "y": 220, "name": "Rathaus", "building": "rathaus", "at": [330, 207], "markerH": 112, "label": [330, 238] },
-    "je":            { "x": 560, "y": 220, "junction": true },
-    "baeckerei":     { "x": 110, "y": 316, "name": "Bäckerei", "building": "shop", "at": [52, 330], "color": "#a0622d", "sign": "BÄCKEREI", "wares": "bread", "markerH": 58, "label": [70, 345] },
-    "js":            { "x": 330, "y": 316, "junction": true },
-    "supermarkt":    { "x": 450, "y": 316, "name": "Supermarkt", "building": "supermarket", "at": [450, 302], "markerH": 70, "label": [450, 334] },
-    "bushof":        { "x": 560, "y": 316, "name": "Busbahnhof", "building": "busstop", "at": [607, 330], "markerH": 52, "label": [600, 345] }
+    "lindenstrasse": {
+      "x": 110,
+      "y": 104,
+      "name": "Lindenstraße",
+      "building": "house",
+      "at": [110, 91],
+      "color": "#f0d9b5",
+      "sign": "Lindenstr. 12",
+      "markerH": 74,
+      "label": [150, 122]
+    },
+    "park": {
+      "x": 230,
+      "y": 104,
+      "name": "Stadtpark",
+      "building": "park",
+      "at": [244, 93],
+      "markerH": 34,
+      "label": [230, 122]
+    },
+    "skatepark": {
+      "x": 420,
+      "y": 104,
+      "name": "Skatepark",
+      "building": "skatepark",
+      "at": [420, 96],
+      "markerH": 30,
+      "label": [420, 122]
+    },
+    "fahrradladen": {
+      "x": 560,
+      "y": 104,
+      "name": "Radl-Eck",
+      "building": "shop",
+      "at": [560, 91],
+      "color": "#e43b44",
+      "sign": "RADL-ECK",
+      "wares": "bikes",
+      "markerH": 58,
+      "label": [520, 122]
+    },
+    "jw": {
+      "x": 110,
+      "y": 220,
+      "junction": true
+    },
+    "rathaus": {
+      "x": 330,
+      "y": 220,
+      "name": "Rathaus",
+      "building": "rathaus",
+      "at": [330, 207],
+      "markerH": 112,
+      "label": [330, 238]
+    },
+    "baumhaus": {
+      "x": 450,
+      "y": 220,
+      "name": "Florians Baumhaus",
+      "building": "treehouse",
+      "at": [450, 207],
+      "markerH": 100,
+      "label": [450, 238]
+    },
+    "je": {
+      "x": 560,
+      "y": 220,
+      "junction": true
+    },
+    "baeckerei": {
+      "x": 110,
+      "y": 316,
+      "name": "Bäckerei",
+      "building": "shop",
+      "at": [52, 330],
+      "color": "#a0622d",
+      "sign": "BÄCKEREI",
+      "wares": "bread",
+      "markerH": 58,
+      "label": [70, 345]
+    },
+    "js": {
+      "x": 330,
+      "y": 316,
+      "junction": true
+    },
+    "supermarkt": {
+      "x": 450,
+      "y": 316,
+      "name": "Supermarkt",
+      "building": "supermarket",
+      "at": [450, 302],
+      "markerH": 70,
+      "label": [450, 334]
+    },
+    "bushof": {
+      "x": 560,
+      "y": 316,
+      "name": "Busbahnhof",
+      "building": "busstop",
+      "at": [607, 330],
+      "markerH": 52,
+      "label": [600, 345]
+    }
   },
   "roads": [
-    ["lindenstrasse", "park"], ["park", "skatepark"], ["skatepark", "fahrradladen"],
-    ["lindenstrasse", "jw"], ["jw", "baeckerei"], ["fahrradladen", "je"], ["je", "bushof"],
-    ["jw", "rathaus"], ["rathaus", "je"], ["rathaus", "js"],
-    ["baeckerei", "js"], ["js", "supermarkt"], ["supermarkt", "bushof"]
+    ["lindenstrasse", "park"],
+    ["park", "skatepark"],
+    ["skatepark", "fahrradladen"],
+    ["lindenstrasse", "jw"],
+    ["jw", "baeckerei"],
+    ["fahrradladen", "je"],
+    ["je", "bushof"],
+    ["jw", "rathaus"],
+    ["rathaus", "js"],
+    ["baeckerei", "js"],
+    ["js", "supermarkt"],
+    ["supermarkt", "bushof"],
+    ["rathaus", "baumhaus"],
+    ["baumhaus", "je"]
   ],
-  "crosswalks": [[290, 220, "h"], [330, 260, "v"], [110, 160, "v"]],
+  "crosswalks": [
+    [
+      290,
+      220,
+      "h"
+    ],
+    [
+      330,
+      260,
+      "v"
+    ],
+    [
+      110,
+      160,
+      "v"
+    ]
+  ],
   "areas": [
-    { "kind": "gravel", "x": 226, "y": 40, "w": 9, "h": 52 },
-    { "kind": "gravel", "x": 204, "y": 24, "w": 52, "h": 30 },
-    { "kind": "gravel", "x": 170, "y": 56, "w": 120, "h": 8 },
-    { "kind": "pond", "x": 158, "y": 22, "w": 40, "h": 28 },
-    { "kind": "flowerbed", "x": 262, "y": 16, "w": 36, "h": 10 },
-    { "kind": "flowerbed", "x": 262, "y": 70, "w": 36, "h": 10, "color": "#ef476f" },
-    { "kind": "flowerbed", "x": 160, "y": 70, "w": 36, "h": 10, "color": "#ffd166" },
-    { "kind": "concrete", "x": 338, "y": 10, "w": 164, "h": 80 },
-    { "kind": "paving", "x": 300, "y": 207, "w": 60, "h": 4 },
-    { "kind": "parking", "x": 346, "y": 252, "w": 28, "h": 52 },
-    { "kind": "flowerbed", "x": 140, "y": 140, "w": 44, "h": 10 },
-    { "kind": "flowerbed", "x": 200, "y": 180, "w": 50, "h": 10, "color": "#b78cff" },
-    { "kind": "flowerbed", "x": 420, "y": 186, "w": 60, "h": 10, "color": "#ffd166" },
-    { "kind": "gravel", "x": 140, "y": 250, "w": 150, "h": 6 }
+    {
+      "kind": "gravel",
+      "x": 226,
+      "y": 40,
+      "w": 9,
+      "h": 52
+    },
+    {
+      "kind": "gravel",
+      "x": 204,
+      "y": 24,
+      "w": 52,
+      "h": 30
+    },
+    {
+      "kind": "gravel",
+      "x": 170,
+      "y": 56,
+      "w": 120,
+      "h": 8
+    },
+    {
+      "kind": "pond",
+      "x": 158,
+      "y": 22,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "kind": "flowerbed",
+      "x": 262,
+      "y": 16,
+      "w": 36,
+      "h": 10
+    },
+    {
+      "kind": "flowerbed",
+      "x": 262,
+      "y": 70,
+      "w": 36,
+      "h": 10,
+      "color": "#ef476f"
+    },
+    {
+      "kind": "flowerbed",
+      "x": 160,
+      "y": 70,
+      "w": 36,
+      "h": 10,
+      "color": "#ffd166"
+    },
+    {
+      "kind": "concrete",
+      "x": 338,
+      "y": 10,
+      "w": 164,
+      "h": 80
+    },
+    {
+      "kind": "paving",
+      "x": 300,
+      "y": 207,
+      "w": 60,
+      "h": 4
+    },
+    {
+      "kind": "parking",
+      "x": 346,
+      "y": 252,
+      "w": 28,
+      "h": 52
+    },
+    {
+      "kind": "flowerbed",
+      "x": 140,
+      "y": 140,
+      "w": 44,
+      "h": 10
+    },
+    {
+      "kind": "flowerbed",
+      "x": 200,
+      "y": 180,
+      "w": 50,
+      "h": 10,
+      "color": "#b78cff"
+    },
+    {
+      "kind": "gravel",
+      "x": 140,
+      "y": 250,
+      "w": 150,
+      "h": 6
+    }
   ],
   "decor": [
-    { "type": "hedge", "x": 150, "y": 92, "w": 72 }, { "type": "hedge", "x": 252, "y": 92, "w": 56 },
-    { "type": "fountain", "x": 230, "y": 42 },
-    { "type": "bench", "x": 214, "y": 66 }, { "type": "bench", "x": 250, "y": 66 },
-    { "type": "lamp", "x": 204, "y": 28 }, { "type": "lamp", "x": 258, "y": 28 },
-    { "type": "tree", "kind": "blossom", "x": 290, "y": 52 }, { "type": "tree", "kind": "round", "x": 165, "y": 88 },
-    { "type": "tree", "kind": "birch", "x": 200, "y": 86 }, { "type": "tree", "kind": "pine", "x": 302, "y": 30 },
-    { "type": "tree", "kind": "fruit", "x": 155, "y": 60 },
-    { "type": "bush", "x": 274, "y": 86, "color": "#f78ad1" }, { "type": "bush", "x": 185, "y": 50 },
-    { "type": "flowers", "x": 212, "y": 80, "w": 14, "n": 6 }, { "type": "flowers", "x": 250, "y": 80, "w": 14, "n": 6 },
-
-    { "type": "halfpipe", "x": 350, "y": 56, "w": 62 }, { "type": "halfpipe", "x": 432, "y": 52, "w": 56 },
-    { "type": "funbox", "x": 440, "y": 84 }, { "type": "rail", "x": 352, "y": 80, "w": 40 },
-    { "type": "tree", "kind": "pine", "x": 508, "y": 40 }, { "type": "tree", "kind": "pine", "x": 520, "y": 70 },
-
-    { "type": "tree", "kind": "round", "x": 30, "y": 40 }, { "type": "tree", "kind": "pine", "x": 50, "y": 70 },
-    { "type": "tree", "kind": "birch", "x": 618, "y": 40 }, { "type": "tree", "kind": "round", "x": 612, "y": 80 },
-    { "type": "bush", "x": 72, "y": 92, "color": "#ffd166" }, { "type": "bush", "x": 146, "y": 92 },
-
-    { "type": "tree", "kind": "round", "x": 150, "y": 172 }, { "type": "tree", "kind": "blossom", "x": 270, "y": 150 },
-    { "type": "tree", "kind": "birch", "x": 212, "y": 146 }, { "type": "bench", "x": 240, "y": 170 },
-    { "type": "flowers", "x": 180, "y": 202, "w": 30, "n": 9 }, { "type": "flowers", "x": 260, "y": 204, "w": 24, "n": 7 },
-    { "type": "lamp", "x": 290, "y": 200 }, { "type": "lamp", "x": 370, "y": 200 },
-    { "type": "tree", "kind": "round", "x": 410, "y": 150 }, { "type": "tree", "kind": "fruit", "x": 470, "y": 140 },
-    { "type": "tree", "kind": "pine", "x": 520, "y": 170 }, { "type": "hedge", "x": 400, "y": 206, "w": 100 },
-    { "type": "bush", "x": 390, "y": 180, "color": "#ef476f" }, { "type": "bench", "x": 450, "y": 176 },
-    { "type": "tree", "kind": "round", "x": 40, "y": 170 }, { "type": "tree", "kind": "pine", "x": 70, "y": 210 },
-    { "type": "tree", "kind": "birch", "x": 610, "y": 180 }, { "type": "bush", "x": 600, "y": 220 },
-
-    { "type": "tree", "kind": "fruit", "x": 160, "y": 290 }, { "type": "tree", "kind": "fruit", "x": 200, "y": 284 },
-    { "type": "tree", "kind": "fruit", "x": 240, "y": 292 }, { "type": "tree", "kind": "blossom", "x": 282, "y": 284 },
-    { "type": "flowers", "x": 180, "y": 268, "w": 40, "n": 10 }, { "type": "flowers", "x": 260, "y": 266, "w": 30, "n": 8 },
-    { "type": "car", "x": 350, "y": 256, "color": "#41a6f6" }, { "type": "car", "x": 364, "y": 286, "color": "#ffcd75" },
-    { "type": "tree", "kind": "round", "x": 530, "y": 266 }, { "type": "bush", "x": 380, "y": 240 },
-    { "type": "hedge", "x": 140, "y": 352, "w": 170 }, { "type": "tree", "kind": "pine", "x": 352, "y": 352 },
-    { "type": "tree", "kind": "round", "x": 420, "y": 356 }, { "type": "tree", "kind": "birch", "x": 480, "y": 354 },
-    { "type": "flowers", "x": 520, "y": 350, "w": 20, "n": 6 }
+    {
+      "type": "hedge",
+      "x": 150,
+      "y": 92,
+      "w": 72
+    },
+    {
+      "type": "hedge",
+      "x": 252,
+      "y": 92,
+      "w": 56
+    },
+    {
+      "type": "fountain",
+      "x": 230,
+      "y": 42
+    },
+    {
+      "type": "bench",
+      "x": 214,
+      "y": 66
+    },
+    {
+      "type": "bench",
+      "x": 250,
+      "y": 66
+    },
+    {
+      "type": "lamp",
+      "x": 204,
+      "y": 28
+    },
+    {
+      "type": "lamp",
+      "x": 258,
+      "y": 28
+    },
+    {
+      "type": "tree",
+      "kind": "blossom",
+      "x": 290,
+      "y": 52
+    },
+    {
+      "type": "tree",
+      "kind": "round",
+      "x": 165,
+      "y": 88
+    },
+    {
+      "type": "tree",
+      "kind": "birch",
+      "x": 200,
+      "y": 86
+    },
+    {
+      "type": "tree",
+      "kind": "pine",
+      "x": 302,
+      "y": 30
+    },
+    {
+      "type": "tree",
+      "kind": "fruit",
+      "x": 155,
+      "y": 60
+    },
+    {
+      "type": "bush",
+      "x": 274,
+      "y": 86,
+      "color": "#f78ad1"
+    },
+    {
+      "type": "bush",
+      "x": 185,
+      "y": 50
+    },
+    {
+      "type": "flowers",
+      "x": 212,
+      "y": 80,
+      "w": 14,
+      "n": 6
+    },
+    {
+      "type": "flowers",
+      "x": 250,
+      "y": 80,
+      "w": 14,
+      "n": 6
+    },
+    {
+      "type": "halfpipe",
+      "x": 350,
+      "y": 56,
+      "w": 62
+    },
+    {
+      "type": "halfpipe",
+      "x": 432,
+      "y": 52,
+      "w": 56
+    },
+    {
+      "type": "funbox",
+      "x": 440,
+      "y": 84
+    },
+    {
+      "type": "rail",
+      "x": 352,
+      "y": 80,
+      "w": 40
+    },
+    {
+      "type": "tree",
+      "kind": "pine",
+      "x": 508,
+      "y": 40
+    },
+    {
+      "type": "tree",
+      "kind": "pine",
+      "x": 520,
+      "y": 70
+    },
+    {
+      "type": "tree",
+      "kind": "round",
+      "x": 30,
+      "y": 40
+    },
+    {
+      "type": "tree",
+      "kind": "pine",
+      "x": 50,
+      "y": 70
+    },
+    {
+      "type": "tree",
+      "kind": "birch",
+      "x": 618,
+      "y": 40
+    },
+    {
+      "type": "tree",
+      "kind": "round",
+      "x": 612,
+      "y": 80
+    },
+    {
+      "type": "bush",
+      "x": 72,
+      "y": 92,
+      "color": "#ffd166"
+    },
+    {
+      "type": "bush",
+      "x": 146,
+      "y": 92
+    },
+    {
+      "type": "tree",
+      "kind": "round",
+      "x": 150,
+      "y": 172
+    },
+    {
+      "type": "tree",
+      "kind": "blossom",
+      "x": 270,
+      "y": 150
+    },
+    {
+      "type": "tree",
+      "kind": "birch",
+      "x": 212,
+      "y": 146
+    },
+    {
+      "type": "bench",
+      "x": 240,
+      "y": 170
+    },
+    {
+      "type": "flowers",
+      "x": 180,
+      "y": 202,
+      "w": 30,
+      "n": 9
+    },
+    {
+      "type": "flowers",
+      "x": 260,
+      "y": 204,
+      "w": 24,
+      "n": 7
+    },
+    {
+      "type": "lamp",
+      "x": 290,
+      "y": 200
+    },
+    {
+      "type": "lamp",
+      "x": 370,
+      "y": 200
+    },
+    {
+      "type": "tree",
+      "kind": "pine",
+      "x": 520,
+      "y": 170
+    },
+    {
+      "type": "tree",
+      "kind": "round",
+      "x": 40,
+      "y": 170
+    },
+    {
+      "type": "tree",
+      "kind": "pine",
+      "x": 70,
+      "y": 210
+    },
+    {
+      "type": "tree",
+      "kind": "birch",
+      "x": 610,
+      "y": 180
+    },
+    {
+      "type": "bush",
+      "x": 600,
+      "y": 220
+    },
+    {
+      "type": "tree",
+      "kind": "fruit",
+      "x": 160,
+      "y": 290
+    },
+    {
+      "type": "tree",
+      "kind": "fruit",
+      "x": 200,
+      "y": 284
+    },
+    {
+      "type": "tree",
+      "kind": "fruit",
+      "x": 240,
+      "y": 292
+    },
+    {
+      "type": "tree",
+      "kind": "blossom",
+      "x": 282,
+      "y": 284
+    },
+    {
+      "type": "flowers",
+      "x": 180,
+      "y": 268,
+      "w": 40,
+      "n": 10
+    },
+    {
+      "type": "flowers",
+      "x": 260,
+      "y": 266,
+      "w": 30,
+      "n": 8
+    },
+    {
+      "type": "car",
+      "x": 350,
+      "y": 256,
+      "color": "#41a6f6"
+    },
+    {
+      "type": "car",
+      "x": 364,
+      "y": 286,
+      "color": "#ffcd75"
+    },
+    {
+      "type": "tree",
+      "kind": "round",
+      "x": 530,
+      "y": 266
+    },
+    {
+      "type": "bush",
+      "x": 380,
+      "y": 240
+    },
+    {
+      "type": "hedge",
+      "x": 140,
+      "y": 352,
+      "w": 170
+    },
+    {
+      "type": "tree",
+      "kind": "pine",
+      "x": 352,
+      "y": 352
+    },
+    {
+      "type": "tree",
+      "kind": "round",
+      "x": 420,
+      "y": 356
+    },
+    {
+      "type": "tree",
+      "kind": "birch",
+      "x": 480,
+      "y": 354
+    },
+    {
+      "type": "flowers",
+      "x": 520,
+      "y": 350,
+      "w": 20,
+      "n": 6
+    },
+    {
+      "type": "bush",
+      "x": 396,
+      "y": 204,
+      "color": "#ffd166"
+    },
+    {
+      "type": "bush",
+      "x": 506,
+      "y": 204,
+      "color": "#f78ad1"
+    },
+    {
+      "type": "flowers",
+      "x": 420,
+      "y": 210,
+      "w": 14,
+      "n": 5
+    },
+    {
+      "type": "flowers",
+      "x": 486,
+      "y": 210,
+      "w": 14,
+      "n": 5
+    }
   ]
 }

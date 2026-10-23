@@ -35,6 +35,14 @@
     "filiale": {
       "name": "Filialleiterin Yıldız",
       "sprite": "filiale"
+    },
+    "ralf": {
+      "name": "Ralf, Praktikant im Rathaus",
+      "sprite": "ralf"
+    },
+    "gerda": {
+      "name": "Oma Gerda",
+      "sprite": "oma_rollator"
     }
   },
   "intro": [
@@ -56,5 +64,31 @@
     ["kranz", "Herr Doktor Brandl! Alle Anfragen erledigt! Die Stadt liebt Sie!"],
     ["florian", "(Ich glaub, ich sag ihr das mit dem Doktor einfach nie.)"],
     ["erz", "Ende der Demo. Weitere Aufträge folgen bald, das Amt schläft nie."]
-  ]
+  ],
+  "fail": [
+    [
+      ["$from", "Hm. Ich bin ja kein Profi, aber das kommt mir nicht ganz richtig vor."],
+      ["$from", "Aber gut, Sie sind ja ganz frisch im Amt. Fehler machen wir alle. Nächstes Mal bitte etwas sorgfältiger, ja?"],
+      ["florian", "(Kein Geld diesmal. Aber verstanden hab ich es jetzt.)"]
+    ],
+    [
+      ["$from", "Moment … das passt doch nicht zusammen, oder?"],
+      ["$from", "Schon gut, schon gut. Aller Anfang ist schwer. Aber beim nächsten Mal will ich ein ordentliches Ergebnis sehen!"],
+      ["florian", "(Ohne Ergebnis keine Bezahlung. Fair ist fair.)"]
+    ],
+    [
+      ["$from", "Ich glaube, da hat sich das Amt vertan."],
+      ["$from", "Kein Drama, Sie lernen ja noch. Aber geben Sie sich nächstes Mal ein bisschen mehr Mühe, versprochen?"],
+      ["florian", "(Versprochen. Und diesmal gibt es eben kein Geld.)"]
+    ]
+  ],
+  "partial": [
+    [
+      ["$from", "Hat ein bisschen gedauert, aber am Ende stimmt es. Die Hälfte haben Sie sich verdient."]
+    ],
+    [
+      ["$from", "Na also, geht doch! Beim nächsten Mal bitte gleich beim ersten Versuch. Ich zahle erst mal die Hälfte."]
+    ]
+  ],
+  "failExplain": ["florian", "(Nochmal in Ruhe nachgedacht:)"]
 }

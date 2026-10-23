@@ -1,0 +1,3 @@
+{ "id": "gerda-zebra", "title": "Oma Gerda am Zebrastreifen",
+  "actors": [ { "id": "gerda", "name": "Oma Gerda (Plan)", "sprite": "oma_rollator", "x0": 0,
+    "segments": [ { "dt": 5, "v": 0.8 }, { "dt": 2, "v": 0 }, { "dt": 4, "v": 0.8 } ] } ] }

@@ -60,10 +60,30 @@ export function rathaus(P, cx, by, n, t, dpr) {
   const tx = cx - 13, ty = y - 34;
   P.rect(tx - 1, ty - 1, 28, 27, ink); P.rect(tx, ty, 26, 25, '#e9e2cf'); P.rect(tx, ty + 22, 26, 3, '#cfc6ad');
   P.rect(tx - 3, ty - 9, 32, 9, ink); P.rect(tx - 2, ty - 8, 30, 7, '#c0473b'); P.rect(tx - 2, ty - 8, 30, 2, '#de6b55');
-  P.blob(cx, ty + 11, 8, ink, 8); P.blob(cx, ty + 11, 7, '#fbf6e6', 7);
-  const ang = t * 0.3, ang2 = t * 0.025;
-  for (let i = 1; i < 6; i++) P.px(cx + Math.round(Math.sin(ang) * i), ty + 11 - Math.round(Math.cos(ang) * i), ink);
-  for (let i = 1; i < 4; i++) P.px(cx + Math.round(Math.sin(ang2) * i), ty + 11 - Math.round(Math.cos(ang2) * i), '#b13e53');
+  // Stadtuhr mit Kuckuck: alle 14 s "volle Stunde" – Zeiger drehen, Türchen auf, Vogel ruft
+  const cyc = t % 14, cuckoo = cyc < 3;
+  const pop = cuckoo ? Math.min(1, cyc * 3, (3 - cyc) * 3) : 0;
+  const hop = cuckoo ? Math.round(Math.abs(Math.sin(cyc * 9)) * 1) : 0;
+  P.blob(cx, ty + 15 - hop, 7, ink, 7); P.blob(cx, ty + 15 - hop, 6, '#fbf6e6', 6);
+  for (const [dx, dy] of [[0, -5], [5, 0], [0, 5], [-5, 0]]) P.px(cx + dx, ty + 15 - hop + dy, '#94b0c2');
+  const ang = t * 0.3 + (cuckoo ? cyc * 6 : 0), ang2 = t * 0.025;
+  for (let i = 1; i < 5; i++) P.px(cx + Math.round(Math.sin(ang) * i), ty + 15 - hop - Math.round(Math.cos(ang) * i), ink);
+  for (let i = 1; i < 3; i++) P.px(cx + Math.round(Math.sin(ang2) * i), ty + 15 - hop - Math.round(Math.cos(ang2) * i), '#b13e53');
+  // Türchen über der Uhr
+  P.rect(cx - 3, ty + 1 - hop, 6, 6, ink);
+  P.rect(cx - 2, ty + 2 - hop, 4, 5, pop > 0.2 ? '#1a1c2c' : '#a0622d');
+  if (pop > 0.2) {
+    const bx = cx - 1, by2 = ty + 3 - hop - Math.round(pop * 6);
+    P.rect(bx - 1, by2, 4, 3, '#ffcd75'); P.px(bx + 3, by2 + 1, '#ef7d57'); P.px(bx + 1, by2, ink);
+    P.rect(bx + 1, by2 + 3, 1, Math.round(pop * 5), '#5d3a1a');
+    // Noten steigen auf
+    for (let k = 0; k < 3; k++) {
+      const ph = ((cyc + k * 0.7) % 2.1) / 2.1;
+      const nx = cx + 6 + k * 4 + Math.round(Math.sin(ph * 6 + k) * 2), ny = ty - 2 - Math.round(ph * 16);
+      P.rect(nx, ny, 2, 2, '#ffffff'); P.rect(nx + 1, ny - 4, 1, 4, '#ffffff');
+    }
+    if (cyc > 0.4 && cyc < 2.6) P.text('Kuckuck!', cx + 22, ty - 6, 4, { color: ink, bg: '#ffffff', minPx: 9, dpr });
+  }
   // Fahne
   P.rect(cx, ty - 26, 1, 18, ink);
   for (let i = 0; i < 12; i++) {

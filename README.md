@@ -57,6 +57,9 @@ und `"data"` (Datenblatt der Bewegung) enthalten.
 **Aufgabentypen** (`task.type`):
 - `match` – passendes Diagramm wählen (`ask`: gesuchte Diagrammart)
 - `describe` – fachsprachlich korrekte Beschreibung wählen (Texte werden automatisch erzeugt)
+- `axes` – Achsen-Detektiv: `"graph": "vt"`, `"marks": ["t","y"]`, optional `"hints": {"t":[…], "y":[…]}`
+- `errorhunt` – Fehlerjagd: `"graph": "xt"`, `"error": {"segment": 1, "kind": "sign" | "value" | "shape", "factor": 0.5}`
+- `live` – Live-Steuerung: `"player": "florian"`, `"vmax": 4`, `"ghost": false`, optional `"tol"` (nur gleichförmige Abschnitte)
 - `calc` – Werte berechnen und eintippen:
 ```json
 "task": { "type": "calc", "given": ["anim", "data"], "paper": "…",
@@ -77,5 +80,9 @@ Nach dem Bearbeiten: `node --test tests/*.test.mjs` prüft, ob alle Verweise sti
 - Orte und Straßen: `data/map.json`
 - Sprites: `assets/sprites.json`. Eigene PNGs: Datei nach `assets/img/` legen und z. B.
   `"wappen": { "png": "assets/img/wappen.png", "w": 32, "h": 32 }` eintragen.
+
+### 4. Baumhaus-Shop und Prüfung
+- Gegenstände, Preise und Texte: `data/shop.json` (neue Gegenstände brauchen einen Platz in `js/render/room-art.js`).
+- Abschlussprüfung: `data/exam.json`.
 
 Formatbeschreibungen: siehe `schema/`.

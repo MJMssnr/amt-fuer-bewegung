@@ -8,7 +8,10 @@ import { fmt, niceStep } from './format.js';
 const W = 640, H = 160, SCALE = 3, GROUND = 118;
 
 export class Scene {
-  constructor(canvas, world, { onTime, rate } = {}) {
+  constructor(canvas, world, { onTime, rate, ghost, extras, xRange } = {}) {
+    this.ghost = ghost;
+    this.extras = extras;
+    this.xRangeExtra = xRange;
     this.c = canvas;
     canvas.width = W; canvas.height = H;
     this.ctx = canvas.getContext('2d');
@@ -30,6 +33,7 @@ export class Scene {
       for (const pc of series(a, 'x')) for (const [, x] of pc) { lo = Math.min(lo, x); hi = Math.max(hi, x); }
       if (this.world.is2D) for (const pc of trajectory(a)) for (const [, y] of pc) { ylo = Math.min(ylo, y); yhi = Math.max(yhi, y); }
     }
+    if (this.xRangeExtra) { lo = Math.min(lo, this.xRangeExtra[0]); hi = Math.max(hi, this.xRangeExtra[1]); }
     if (hi - lo < 1) { lo -= 5; hi += 5; }
     const padPx = 56;
     this.mx = (W - 2 * padPx) / (hi - lo);
@@ -119,10 +123,20 @@ export class Scene {
       const flip = sp.turns && (this.facing.get(id) ?? false);
       const moving = Math.hypot(s.v[0], s.v[1]) > 0.05 && this.t < a.tEnd;
       const bottom = this.world.is2D ? this.Y(s.r[1]) : GROUND - 2;
-      drawSprite(ctx, spName, this.X(s.r[0]), bottom, SCALE, { flip, moving, time: this.wall + this.t });
+      const ghost = this.ghost?.has(id);
+      if (ghost) ctx.globalAlpha = this.ghostAlpha ?? 0.35;
+      if (!ghost || ctx.globalAlpha > 0) drawSprite(ctx, spName, this.X(s.r[0]), bottom, SCALE, { flip, moving, time: this.wall + this.t });
+      ctx.globalAlpha = 1;
       // Markierung des Bezugspunkts
-      ctx.fillStyle = '#ef7d57';
+      ctx.fillStyle = ghost ? `rgba(239,125,87,${(this.ghostAlpha ?? 0.35) > 0 ? 0.4 : 0})` : '#ef7d57';
       ctx.fillRect(Math.round(this.X(s.r[0])) - 1, GROUND + 2, 3, 4);
+    }
+    // Zusätzliche, frei gesteuerte Figuren (Live-Steuerung): [{ sprite, x, flip, moving }]
+    for (const e of this.extras?.() ?? []) {
+      const px = Math.max(8, Math.min(W - 8, this.X(e.x)));
+      drawSprite(ctx, e.sprite, px, GROUND - 2, SCALE, { flip: e.flip, moving: e.moving, time: this.wall + this.t });
+      ctx.fillStyle = '#ffcd75';
+      ctx.fillRect(Math.round(px) - 1, GROUND + 2, 3, 4);
     }
 
     // Zeitanzeige

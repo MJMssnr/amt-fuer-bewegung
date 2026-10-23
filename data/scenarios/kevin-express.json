@@ -1,0 +1,3 @@
+{ "id": "kevin-express", "title": "Kevins Express-Lieferung",
+  "actors": [ { "id": "kevin", "name": "Kevin (Plan)", "sprite": "kevin", "x0": 0,
+    "segments": [ { "dt": 4, "v": 5 }, { "dt": 2, "v": 0 }, { "dt": 3, "v": -3 } ] } ] }

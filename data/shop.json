@@ -1,0 +1,38 @@
+{
+  "items": [
+    { "id": "teppich",     "name": "Flauschiger Teppich",  "price": 30,  "text": "Weich wie eine Wolke. Perfekt, um auf dem Boden Diagramme zu zeichnen." },
+    { "id": "lavalampe",   "name": "Lavalampe",            "price": 35,  "text": "Die Blasen steigen, sinken, steigen … Gleichmäßig beschleunigt ist das nicht. Aber hypnotisch." },
+    { "id": "sessel",      "name": "Bequemer Sessel",      "price": 60,  "text": "Der Denksessel. Hier entstehen die besten Rechenwege." },
+    { "id": "neon",        "name": "Neonschild „AMT“",     "price": 50,  "text": "Summt leise. Jetzt sieht das Baumhaus richtig offiziell aus." },
+    { "id": "haengematte", "name": "Hängematte",           "price": 60,  "text": "Schaukelt hin und her. Eine Schwingung! Aber das ist Stoff für ein anderes Spiel." },
+    { "id": "aquarium",    "name": "Aquarium",             "price": 80,  "text": "Der Goldfisch heißt Newton. Er schwimmt gleichförmig im Kreis. Oder doch nicht? Richtung!" },
+    { "id": "fernseher",   "name": "Fernseher",            "price": 100, "text": "Es läuft eine Doku über Schnecken. Gleichförmige Bewegung in Reinform. Spannend!" },
+    { "id": "konsole",     "name": "Spielekonsole",        "price": 80,  "requires": "fernseher", "text": "Die Konsole startet nicht. Wahrscheinlich will sie erst die Hausaufgaben sehen." },
+    { "id": "musik",       "name": "Musikanlage",          "price": 90,  "text": "Bass an! Die Membran schwingt so schnell hin und her, dass man es nur hört." },
+    { "id": "rennrad",     "name": "Rennrad an der Wand",  "price": 100, "text": "Leicht, schnell, rot. Kevin wird neidisch sein." },
+    { "id": "teleskop",    "name": "Teleskop",             "price": 80,  "text": "Durch das Fenster sieht man den Mond. Und irgendwo da oben … warten neue Bewegungen?" },
+    { "id": "bar",         "name": "Kühlschrank mit Bar",  "price": 110, "text": "Gekühlte Apfelschorle und eine Schale Brezeln vom Bäcker Huber. Für Kundschaft natürlich." },
+    { "id": "whirlpool",   "name": "Kleiner Whirlpool",    "price": 150, "text": "Blubb. Die Blasen steigen, Florian entspannt. Rechnen kann man auch später noch." }
+  ],
+  "rocketParts": [
+    { "id": "rt_duese",   "name": "Düse, gebraucht",      "price": 40 },
+    { "id": "rt_roehre",  "name": "Alu-Röhre, 2 m",       "price": 40 },
+    { "id": "rt_bleche",  "name": "Drei rote Bleche",     "price": 40 },
+    { "id": "rt_hut",     "name": "Spitzer Blechhut",     "price": 40 },
+    { "id": "rt_platine", "name": "Blinkende Platine",    "price": 40 }
+  ],
+  "partBought": [
+    ["florian", "Hm. Was soll ich damit eigentlich? Egal, das kommt erst mal in die Kiste."],
+    ["florian", "Noch ein komisches Teil. Ab in die Kiste damit. Irgendwann ergibt das bestimmt Sinn."],
+    ["florian", "Die Kiste wird langsam voll. Moment … kommt mir das bekannt vor?"],
+    ["florian", "Düse, Röhre, Bleche, ein spitzer Hut … Nein. Oder doch? Ab in die Kiste."],
+    ["florian", "Das war das letzte Teil! Ich glaube, ich weiß jetzt, was das wird …"]
+  ],
+  "crate": {
+    "empty": "Florians Aufbewahrungskiste. Noch leer.",
+    "some": "In der Kiste liegen merkwürdige Teile. Es fehlen wohl noch welche.",
+    "full": "Alle Teile sind da! Zeit, herauszufinden, was man daraus bauen kann."
+  },
+  "emptySlot": "Hier ist noch Platz. Vielleicht findet sich im Shop etwas Passendes?",
+  "florianTalk": ["Mein Reich. Mein Amt. Mein Baumhaus.", "Wer hätte gedacht, dass Physik so gut bezahlt wird?", "Noch ein paar Aufträge, dann wird es hier richtig gemütlich."]
+}

@@ -5,6 +5,9 @@ import { Painter } from '../render/painter.js';
 import { getSprite } from '../render/pixel.js';
 import { drawGround, decor, shadow } from '../render/town.js';
 import { BUILDINGS, halfpipe, rail, funbox, parkedCar } from '../render/buildings.js';
+import { treehouse } from '../render/treehouse.js';
+
+BUILDINGS.treehouse = treehouse;
 
 const SPEED = 140; // Welt-Pixel pro Sekunde
 

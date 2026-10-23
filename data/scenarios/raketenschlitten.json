@@ -1,0 +1,3 @@
+{ "id": "raketenschlitten", "title": "Testfahrt des Raketenschlittens",
+  "actors": [ { "id": "sled", "name": "Raketenschlitten", "sprite": "sled", "x0": 0,
+    "segments": [ { "dt": 5, "a": 4 }, { "dt": 3, "v": 20 }, { "until": "rest", "a": -5 } ] } ] }

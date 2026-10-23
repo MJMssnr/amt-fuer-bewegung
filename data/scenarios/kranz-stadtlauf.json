@@ -1,0 +1,3 @@
+{ "id": "kranz-stadtlauf", "title": "Die Bürgermeisterin beim Stadtlauf",
+  "actors": [ { "id": "kranz", "name": "Bürgermeisterin Kranz", "sprite": "kranz", "x0": 0,
+    "segments": [ { "dt": 6, "a": 0.5 }, { "dt": 20, "v": 3 }, { "until": "rest", "a": -1 } ] } ] }

@@ -841,6 +841,199 @@
      ".....k....k....."
     ]
    ]
+  },
+  "florian_note": {
+   "w": 14,
+   "h": 22,
+   "fps": 4,
+   "turns": true,
+   "frames": [
+    [
+     ".....kkkkk....",
+     "....kHHhhhk...",
+     "...khhhhhhhk..",
+     "...khhhhhhhhk.",
+     "...khhhhssssk.",
+     "...khhhsssssk.",
+     "...khSssssksk.",
+     "....kSssssssk.",
+     "....kSssmmsk..",
+     ".....kkkkkk...",
+     "....kgggggk...",
+     "...kggggggyk..",
+     "...kgGggsswwk.",
+     "...kgGgggwwwk.",
+     "...kGGGGGGGk..",
+     "....kbbbbbk...",
+     "....kbbbbbk...",
+     "....kbbBbbk...",
+     "....kbBkbBk...",
+     "....kbBkbBk...",
+     "....kwwkwwwk..",
+     ".....kk.kkk..."
+    ],
+    [
+     ".....kkkkk....",
+     "....kHHhhhk...",
+     "...khhhhhhhk..",
+     "...khhhhhhhhk.",
+     "...khhhhssssk.",
+     "...khhhsssssk.",
+     "...khSssssksk.",
+     "....kSssssssk.",
+     "....kSssmmsk..",
+     ".....kkkkkk...",
+     "....kgggggk...",
+     "...kgggggggyk.",
+     "...kgGggsswwk.",
+     "...kgGgggwwwk.",
+     "...kGGGGGGGk..",
+     "....kbbbbbk...",
+     "....kbbbbbk...",
+     "....kbbBbbk...",
+     "....kbBkbBk...",
+     "....kbBkbBk...",
+     "....kwwkwwwk..",
+     ".....kk.kkk..."
+    ]
+   ]
+  },
+  "florian_photo": {
+   "w": 14,
+   "h": 22,
+   "turns": true,
+   "frames": [
+    [
+     ".....kkkkk....",
+     "....kHHhhhk...",
+     "...khhhhhhhk..",
+     "...khhhhhhhhk.",
+     "...khhhhssssk.",
+     "...khhhsskkkk.",
+     "...khSsskNNk..",
+     "....kSsskkkk..",
+     "....kSssmmsk..",
+     ".....kkkkkk...",
+     "....kgggggsk..",
+     "...kgggggggk..",
+     "...kgGggggggk.",
+     "...kgGgggggk..",
+     "...kGGGGGGGk..",
+     "....kbbbbbk...",
+     "....kbbbbbk...",
+     "....kbbBbbk...",
+     "....kbBkbBk...",
+     "....kbBkbBk...",
+     "....kwwkwwwk..",
+     ".....kk.kkk..."
+    ]
+   ]
+  },
+  "oma_rollator": {
+   "w": 18,
+   "h": 16,
+   "turns": true,
+   "fps": 3,
+   "frames": [
+    [
+     "...NNN............",
+     "..NNNNN...........",
+     "..NNsss...........",
+     "..Nssks...........",
+     "...ssss...........",
+     "...PPPP...........",
+     "..PPPPPPss.nnn....",
+     "..PPPPPP..n..n....",
+     "..pppppp..n..n....",
+     "..pppppp..nwwn....",
+     "..pppppp..nnnn....",
+     "...pppp...n..n....",
+     "...s..s...n..n....",
+     "...s..s...n..n....",
+     "..kk.kk..kNk.kNk..",
+     "..........k...k..."
+    ],
+    [
+     "...NNN............",
+     "..NNNNN...........",
+     "..NNsss...........",
+     "..Nssks...........",
+     "...ssss...........",
+     "...PPPP...........",
+     "..PPPPPPss.nnn....",
+     "..PPPPPP..n..n....",
+     "..pppppp..n..n....",
+     "..pppppp..nwwn....",
+     "..pppppp..nnnn....",
+     "...pppp...n..n....",
+     "...s.s....n..n....",
+     "...s.s....n..n....",
+     "..kkkk...kNk.kNk..",
+     "..........k...k..."
+    ]
+   ]
+  },
+  "sled": {
+   "w": 24,
+   "h": 10,
+   "turns": false,
+   "fps": 12,
+   "frames": [
+    [
+     "....kkkkkkkkkkkkkk......",
+     "...kwwwwwwwwwwwwwwkk....",
+     "..kwwwwwBBwwwwwwwwwrrk..",
+     "rrkwwwwwBBwwwwwwwwwwrrrk",
+     "yrkwwwwwwwwwwwwwwwwwrrk.",
+     "..kwwwwwwwwwwwwwwwwrk...",
+     "...krrkkkkkkkkkkkrrk....",
+     "....kNk.......kNk.......",
+     "nnnnnnnnnnnnnnnnnnnnnnnn",
+     "........................"
+    ],
+    [
+     "....kkkkkkkkkkkkkk......",
+     "...kwwwwwwwwwwwwwwkk....",
+     "..kwwwwwBBwwwwwwwwwrrk..",
+     "yrkwwwwwBBwwwwwwwwwwrrrk",
+     "Rykwwwwwwwwwwwwwwwwwrrk.",
+     "..kwwwwwwwwwwwwwwwwrk...",
+     "...krrkkkkkkkkkkkrrk....",
+     "....kNk.......kNk.......",
+     "nnnnnnnnnnnnnnnnnnnnnnnn",
+     "........................"
+    ]
+   ]
+  },
+  "ralf": {
+   "w": 10,
+   "h": 16,
+   "turns": true,
+   "frames": [
+    [
+     "..bbbbbb..",
+     "..kkkkkkk.",
+     "..hsssss..",
+     "..sssks...",
+     "...ssSs...",
+     "....ss....",
+     "...BBBB...",
+     "..BBBBBB..",
+     "..BBBBBB..",
+     "..BBBBBs..",
+     "...dddd...",
+     "...dddd...",
+     "...dd.dd..",
+     "...d...d..",
+     "...d...d..",
+     "..kk..kk.."
+    ]
+   ],
+   "palette": {
+    "b": "#e43b44",
+    "B": "#ffcd75",
+    "d": "#3b5dc9"
+   }
   }
  }
 }

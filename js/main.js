@@ -1,10 +1,13 @@
-// Einstieg: lädt Daten, startet Stadtkarte, verbindet Tickets mit Aufgaben.
+// Einstieg: Demo-Hinweis -> Startbildschirm -> Stadtkarte. Verbindet Karte, Aufträge, Baumhaus und Prüfung.
 
 import { loadSprites } from './render/pixel.js';
 import { buildWorld } from './engine/kinematics.js';
 import { Overworld } from './ui/overworld.js';
 import { showDialog, setCharacters, toast } from './ui/dialog.js';
 import { loadState, saveState, resetState } from './ui/state.js';
+import { showNotice, showTitle } from './ui/title.js';
+import { Room } from './ui/room.js';
+import { playFinale } from './ui/finale.js';
 import { loadTask } from './tasks/index.js';
 
 const getJSON = async (url) => {
@@ -13,17 +16,18 @@ const getJSON = async (url) => {
   return r.json();
 };
 
-const state = loadState();
-let tickets = [], story = {}, overworld = null, busy = false;
+let state = loadState();
+let tickets = [], story = {}, shop = {}, exam = {}, overworld = null, room = null, busy = false;
 const scenarioCache = new Map();
 
-async function scenarioOf(ticket) {
-  if (typeof ticket.scenario === 'object') return ticket.scenario;
-  if (!scenarioCache.has(ticket.scenario)) scenarioCache.set(ticket.scenario, await getJSON(`data/scenarios/${ticket.scenario}.json`));
-  return scenarioCache.get(ticket.scenario);
+async function scenarioOf(ref) {
+  if (typeof ref === 'object') return ref;
+  if (!scenarioCache.has(ref)) scenarioCache.set(ref, await getJSON(`data/scenarios/${ref}.json`));
+  return scenarioCache.get(ref);
 }
 
 const isOpen = (t) => !state.done[t.id] && (t.requires || []).every((r) => state.done[r]);
+const crateFull = () => shop.rocketParts.every((p) => state.items[p.id]);
 
 function markers() {
   const m = {};
@@ -31,6 +35,7 @@ function markers() {
     if (isOpen(t)) m[t.node] = 'open';
     else if (state.done[t.id] && m[t.node] !== 'open') m[t.node] = 'done';
   }
+  if (crateFull() && !state.examPassed) m.baumhaus = 'open';
   return m;
 }
 
@@ -39,6 +44,83 @@ function updateHud() {
   const n = tickets.filter((t) => state.done[t.id]).length;
   document.querySelector('.hud-tickets').textContent = `Aufträge ${n}/${tickets.length}`;
 }
+const save = () => { saveState(state); updateHud(); };
+
+/** Zeigt den Aufgabenbildschirm und liefert { grade, attempts } oder null (abgebrochen). */
+async function runTaskScreen({ title, fromName, rewardText, ticket, world }) {
+  const screen = document.getElementById('task');
+  const mod = await loadTask(ticket.task.type);
+  screen.querySelector('.t-title').textContent = title;
+  screen.querySelector('.t-from').textContent = fromName ?? '';
+  screen.querySelector('.t-reward').textContent = rewardText ?? '';
+  screen.querySelector('.t-reward').classList.toggle('hidden', !rewardText);
+  const root = screen.querySelector('.task-root');
+  screen.classList.remove('hidden');
+  overworld.stop();
+  const result = await new Promise((resolve) => {
+    const inst = mod.mount(root, { ticket, world, onSolved: (r) => { inst.destroy(); resolve(r); } });
+    screen.querySelector('.t-back').onclick = () => { inst.destroy(); resolve(null); };
+  });
+  screen.classList.add('hidden');
+  root.innerHTML = '';
+  overworld.start();
+  return result;
+}
+
+/** Story-Zeilen mit Platzhalter $from für die Auftraggeberin/den Auftraggeber */
+const pick = (variants, key) => variants[[...key].reduce((h, ch) => h + ch.charCodeAt(0), 0) % variants.length];
+const withFrom = (lines, from) => lines.map(([who, txt]) => [who === '$from' ? from : who, txt]);
+
+async function runTicket(ticket) {
+  const world = buildWorld(await scenarioOf(ticket.scenario));
+  const result = await runTaskScreen({
+    title: ticket.title, fromName: story.characters[ticket.from]?.name, rewardText: `${ticket.reward} €`, ticket, world,
+  });
+  if (!result) return;
+  const grade = result.grade ?? (result.attempts <= 1 ? 'perfect' : 'fail');
+  const reward = grade === 'perfect' ? ticket.reward : grade === 'partial' ? Math.ceil(ticket.reward / 2) : 0;
+  state.money += reward;
+  state.done[ticket.id] = true;
+  state.grades = { ...(state.grades || {}), [ticket.id]: grade };
+  save();
+  if (grade === 'fail') {
+    const florianLines = (ticket.success || []).filter(([who]) => who === 'florian');
+    await showDialog([...withFrom(pick(story.fail, ticket.id), ticket.from), ...(florianLines.length ? [story.failExplain, ...florianLines] : [])]);
+    toast('0 € – diesmal leider nichts', 'bad');
+  } else {
+    if (grade === 'partial') await showDialog(withFrom(pick(story.partial, ticket.id), ticket.from));
+    await showDialog(ticket.success || []);
+    toast(`+${reward} €${grade === 'partial' ? '  (halber Lohn)' : ''}`, 'money');
+  }
+  if (tickets.every((t) => state.done[t.id])) await showDialog(story.outro);
+}
+
+async function runExam() {
+  const roomEl = document.getElementById('room');
+  await showDialog(state.examTried ? exam.intro : [...exam.discover, ...exam.intro]);
+  state.examTried = true;
+  save();
+  const world = buildWorld(await scenarioOf(exam.scenario));
+  roomEl.classList.add('hidden');
+  let passed = 0;
+  for (const [i, part] of exam.parts.entries()) {
+    const ticket = { id: `exam-${i}`, title: part.title, task: part.task };
+    const r = await runTaskScreen({ title: part.title, fromName: 'Raketenschlitten', ticket, world });
+    if (!r) { roomEl.classList.remove('hidden'); await showDialog([['kranz', 'Prüfung abgebrochen. Sie können jederzeit wieder an die Kiste.']]); return; }
+    if (r.grade === 'perfect' || r.grade === 'partial') passed++;
+    toast(`Prüfungsteil ${i + 1}: ${r.grade === 'fail' ? 'nicht bestanden' : 'bestanden'}`, r.grade === 'fail' ? 'bad' : 'money');
+  }
+  roomEl.classList.remove('hidden');
+  await showDialog([['erz', `Ergebnis: ${passed} von ${exam.parts.length} Prüfungsteilen bestanden.`]]);
+  if (passed < exam.passNeeded) { await showDialog(exam.fail); return; }
+  await showDialog(exam.pass);
+  state.examPassed = true;
+  save();
+  room.close();
+  overworld.stop();
+  await playFinale();
+  overworld.start();
+}
 
 async function onArrive(nodeId) {
   if (busy) return;
@@ -46,6 +128,12 @@ async function onArrive(nodeId) {
   state.node = nodeId;
   saveState(state);
   try {
+    if (nodeId === 'baumhaus') {
+      overworld.stop();
+      await room.open();
+      overworld.start();
+      return;
+    }
     const ticket = tickets.find((t) => t.node === nodeId && isOpen(t));
     if (ticket) {
       await showDialog(ticket.intro || []);
@@ -58,55 +146,26 @@ async function onArrive(nodeId) {
   } catch (e) {
     console.error(e);
     toast(`Fehler: ${e.message}`, 'bad');
+  } finally {
+    busy = false;
   }
-  busy = false;
-}
-
-async function runTicket(ticket) {
-  const screen = document.getElementById('task');
-  const world = buildWorld(await scenarioOf(ticket));
-  const mod = await loadTask(ticket.task.type);
-  screen.querySelector('.t-title').textContent = ticket.title;
-  screen.querySelector('.t-from').textContent = story.characters[ticket.from]?.name ?? '';
-  screen.querySelector('.t-reward').textContent = `${ticket.reward} €`;
-  const root = screen.querySelector('.task-root');
-  screen.classList.remove('hidden');
-  overworld.stop();
-
-  const result = await new Promise((resolve) => {
-    const inst = mod.mount(root, {
-      ticket,
-      world,
-      onSolved: (r) => { inst.destroy(); resolve(r); },
-    });
-    screen.querySelector('.t-back').onclick = () => { inst.destroy(); resolve(null); };
-  });
-
-  screen.classList.add('hidden');
-  root.innerHTML = '';
-  overworld.start();
-  if (!result) return;
-
-  const reward = result.attempts <= 1 ? ticket.reward : Math.ceil(ticket.reward / 2);
-  state.money += reward;
-  state.done[ticket.id] = true;
-  saveState(state);
-  updateHud();
-  await showDialog(ticket.success || []);
-  toast(`+${reward} €${result.attempts > 1 ? '  (mit Umweg)' : ''}`, 'money');
-  if (tickets.every((t) => state.done[t.id])) await showDialog(story.outro);
 }
 
 async function boot() {
   const [map] = await Promise.all([getJSON('data/map.json'), loadSprites(), document.fonts?.ready]);
-  tickets = await getJSON('data/tickets.json');
-  story = await getJSON('data/story.json');
+  [tickets, story, shop, exam] = await Promise.all(['tickets', 'story', 'shop', 'exam'].map((n) => getJSON(`data/${n}.json`)));
   setCharacters(story.characters);
+  document.getElementById('loading').classList.add('hidden');
+
+  await showNotice();
+  const choice = await showTitle(Boolean(state.introSeen));
+  if (choice === 'new') { resetState(); state = loadState(); }
 
   overworld = new Overworld(document.getElementById('map'), map, { onArrive, markers });
   overworld.locked = () => busy;
   if (state.node) overworld.setNode(state.node);
   overworld.start();
+  room = new Room(document.getElementById('room'), { shop, state, save: () => save(), onChange: updateHud, onCrateFull: runExam });
   updateHud();
 
   document.querySelector('.hud-reset').addEventListener('click', () => {
@@ -118,7 +177,6 @@ async function boot() {
     else document.exitFullscreen?.();
   });
 
-  document.getElementById('loading').classList.add('hidden');
   if (!state.introSeen) {
     busy = true;
     await showDialog(story.intro);
@@ -130,6 +188,7 @@ async function boot() {
 
 boot().catch((e) => {
   console.error(e);
+  document.getElementById('loading').classList.remove('hidden');
   document.getElementById('loading').textContent =
     `Laden fehlgeschlagen: ${e.message}. (Lokal bitte über einen Webserver öffnen, nicht per Doppelklick.)`;
 });

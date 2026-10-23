@@ -51,7 +51,7 @@ export function mount(root, { ticket, world, onSolved }) {
         fb.className = 'feedback ok';
         fb.textContent = 'Passt! Genau so sieht die Bewegung aus.';
         right.querySelectorAll('.choice').forEach((b) => (b.disabled = true));
-        setTimeout(() => onSolved({ attempts }), 900);
+        setTimeout(() => onSolved({ attempts, grade: attempts === 1 ? 'perfect' : 'fail' }), 900);
       } else {
         btn.classList.add('wrong');
         btn.disabled = true;

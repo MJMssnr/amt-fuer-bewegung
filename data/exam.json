@@ -1,0 +1,42 @@
+{
+  "title": "Abschlussprüfung",
+  "from": "kranz",
+  "scenario": "raketenschlitten",
+  "passNeeded": 3,
+  "discover": [
+    ["florian", "Düse, Röhre, rote Flossen, ein spitzer Hut und eine blinkende Steuerplatine … Das ist eine RAKETE!"],
+    ["erz", "Ganz unten in der Kiste liegt ein vergilbter Brief."],
+    ["erz", "„Wer diese Rakete starten will, muss Bewegungen wirklich verstehen. Erst die Prüfung, dann der Start. Gez. Dr. Florian Brandl, Raumfahrtingenieur.“"],
+    ["florian", "Moment. DER Dr. Florian Brandl? Der, für den mich alle halten?!"],
+    ["erz", "„P.S.: Ich habe es leider nie ins Amt geschafft. Danke, dass du übernommen hast.“"],
+    ["kranz", "Herr Doktor … äh, Florian! Ich hab alles gehört. Bevor hier irgendetwas abhebt: Prüfung! Wir testen zuerst den Raketenschlitten auf der Teststrecke."]
+  ],
+  "intro": [
+    ["kranz", "Vier Aufgaben zur Testfahrt des Raketenschlittens. Mindestens drei müssen beim ersten Versuch sitzen. Viel Erfolg!"]
+  ],
+  "parts": [
+    { "title": "Prüfung 1/4: Zuordnen", "task": { "type": "match", "actor": "sled", "given": ["anim", "vt"], "ask": "xt",
+      "paper": "Bestimme aus dem t-vₓ-Diagramm die Art jedes Abschnitts: gleichförmig oder beschleunigt?" } },
+    { "title": "Prüfung 2/4: Beschreiben", "task": { "type": "describe", "actor": "sled", "given": ["anim", "vt"],
+      "paper": "Steigung im t-vₓ-Diagramm = Beschleunigung. Achte auf die Vorzeichen." } },
+    { "title": "Prüfung 3/4: Berechnen", "task": { "type": "calc", "given": ["anim", "vt"],
+      "paper": "Höchstgeschwindigkeit ablesen und umrechnen. Gesamtweg = Fläche unter der t-vₓ-Kurve.",
+      "questions": [
+        { "label": "Höchstgeschwindigkeit", "symbol": "v_max", "unit": "km/h", "goal": { "type": "max", "actor": "sled", "q": "speed" },
+          "hints": [ { "value": 20, "text": "Das ist der Wert in m/s. Gefragt ist km/h." } ] },
+        { "label": "Gesamtweg", "symbol": "s", "unit": "m", "goal": { "type": "totalPath", "actor": "sled" },
+          "hints": [ { "value": 60, "text": "Das ist nur der gleichförmige Abschnitt. Beschleunigen und Bremsen fehlen." } ] } ] } },
+    { "title": "Prüfung 4/4: Fehlerjagd", "task": { "type": "errorhunt", "actor": "sled", "given": ["anim", "data"], "graph": "at",
+      "error": { "segment": 2, "kind": "sign" },
+      "paper": "Bestimme für jeden Abschnitt aₓ mit Vorzeichen.",
+      "explain": "Beim Bremsen ist aₓ negativ, denn der Schlitten fährt in +x-Richtung und wird langsamer." } }
+  ],
+  "pass": [
+    ["kranz", "BESTANDEN! Florian, Sie sind jetzt offiziell und ganz ohne Verwechslung der Leiter des Amts für Bewegung aller Art!"],
+    ["florian", "Dann lasst uns eine Rakete starten."]
+  ],
+  "fail": [
+    ["kranz", "Hm, das reicht leider noch nicht ganz. Aber keine Sorge: Die Kiste läuft nicht weg."],
+    ["kranz", "Üben Sie noch ein bisschen und versuchen Sie es dann nochmal. Einfach wieder die Kiste anklicken."]
+  ]
+}

@@ -112,3 +112,8 @@ test('Fachsprache: verzögert nur, wenn |v| abnimmt', () => {
   assert.match(phrase({ dt: 3, v0: 0, a: 0 }), /Stillstand/);
   assert.match(phrase({ dt: 3, v0: 2, a: -2 }), /Umkehr/);
 });
+
+test('Diagramm-Modul zeichnet eine Kurve (Regressionstest)', async () => {
+  const src = (await import('node:fs')).readFileSync(new URL('../js/render/graph.js', import.meta.url), 'utf8');
+  assert.match(src, /class: 'g-curve'/);
+});
