@@ -129,6 +129,7 @@ export function sfx(name) {
   else if (name === 'bad') { tone(220, 0, 0.16, 'square', 0.1); tone(160, 0.12, 0.22, 'square', 0.1); }
   else if (name === 'coin') { tone(988, 0, 0.08, 'square', 0.1); tone(1319, 0.07, 0.25, 'square', 0.1); }
   else if (name === 'whistle') whistle();
+  else if (name === 'bell') { tone(2100, 0, 0.12, 'sine', 0.12); tone(2100, 0.16, 0.25, 'sine', 0.1); }
 }
 
 /** Trillerpfeife (Sportunterricht) für den g.Z.-Polizisten: hoher Ton mit schnellem Triller */
@@ -180,4 +181,31 @@ export function natureOff() {
   clearTimeout(nature.timer);
   try { nature.src.stop(); nature.lfo.stop(); } catch { /* egal */ }
   nature = null;
+}
+
+// ---------- Motor (Rennmotorrad auf der Karte) [W26] ----------
+let engine = null;
+export function engineStart() {
+  if (!ctx || engine || settings.muted) return;
+  const o1 = ctx.createOscillator(), o2 = ctx.createOscillator(), lp = ctx.createBiquadFilter(), g = ctx.createGain();
+  o1.type = 'sawtooth'; o2.type = 'square'; lp.type = 'lowpass'; lp.frequency.value = 900;
+  o1.frequency.value = 55; o2.frequency.value = 27.5; g.gain.value = 0;
+  o1.connect(lp); o2.connect(lp); lp.connect(g).connect(buses.sfx);
+  o1.start(); o2.start();
+  g.gain.linearRampToValueAtTime(0.09, ctx.currentTime + 0.08);
+  engine = { o1, o2, lp, g };
+}
+/** frac 0…1 (Leerlauf bis Vollgas) */
+export function engineSet(frac) {
+  if (!engine) return;
+  const f = 55 + 150 * frac, now = ctx.currentTime;
+  engine.o1.frequency.setTargetAtTime(f, now, 0.05);
+  engine.o2.frequency.setTargetAtTime(f / 2, now, 0.05);
+  engine.lp.frequency.setTargetAtTime(700 + 2200 * frac, now, 0.05);
+}
+export function engineStop() {
+  if (!engine) return;
+  const e = engine; engine = null;
+  e.g.gain.setTargetAtTime(0, ctx.currentTime, 0.12);
+  setTimeout(() => { try { e.o1.stop(); e.o2.stop(); } catch { /* egal */ } }, 600);
 }

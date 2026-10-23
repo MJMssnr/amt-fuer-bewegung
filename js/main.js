@@ -64,6 +64,13 @@ function updateHud() {
   const n = tickets.filter((t) => state.done[t.id]).length;
   document.querySelector('.hud-tickets').textContent = `Aufträge ${n}/${tickets.length}`;
   document.querySelector('.map-hint')?.classList.toggle('hidden', n > 0);
+  // Fahrzeuge: Knopf erscheint nach dem Kauf; an = dieses Fahrzeug benutzen [W26]
+  const own = { bike: state.items.rennrad, moto: state.items.motorrad };
+  if (state.travel && !own[state.travel]) state.travel = 'walk';
+  document.querySelectorAll('.hud-ride').forEach((b) => {
+    b.classList.toggle('hidden', !own[b.dataset.mode]);
+    b.classList.toggle('on', state.travel === b.dataset.mode);
+  });
 }
 const save = () => { saveState(state); updateHud(); };
 
@@ -255,6 +262,12 @@ async function boot() {
   overworld = new Overworld(document.getElementById('map'), map, { onArrive, markers });
   overworld.locked = () => busy;
   overworld.tutorial = () => doneCount() === 0;
+  overworld.mode = () => state.travel ?? 'walk';
+  document.querySelectorAll('.hud-ride').forEach((b) => b.addEventListener('click', () => {
+    state.travel = state.travel === b.dataset.mode ? 'walk' : b.dataset.mode;
+    save();
+    toast(state.travel === 'bike' ? '🚲 Rennrad an' : state.travel === 'moto' ? '🏍️ Rennmotorrad an' : '🚶 zu Fuß');
+  }));
   if (state.node) overworld.setNode(state.node);
   overworld.start();
   room = new Room(document.getElementById('room'), { shop, state, save: () => save(), onChange: updateHud, onManual: () => { state.finaleReady = true; save(); } });
@@ -264,7 +277,7 @@ async function boot() {
     if (confirm('Spielstand wirklich löschen?')) { resetState(); location.reload(); }
   });
   initSoundMenu(document.querySelector('.hud-sound'));
-  window.amtTest = { arrive: (n) => onArrive(n), state: () => state, room: () => room }; // für automatische Tests
+  window.amtTest = { arrive: (n) => onArrive(n), state: () => state, room: () => room, ow: () => overworld }; // für automatische Tests
   document.querySelector('.hud-log').addEventListener('click', showQuestlog);
   initTestMode((on) => toast(on ? '🧪 Testmodus an – siehe Auftragsbuch 📖' : 'Testmodus aus'));
   document.querySelector('.hud-full').addEventListener('click', () => {

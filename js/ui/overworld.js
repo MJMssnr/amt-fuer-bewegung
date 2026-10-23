@@ -9,14 +9,17 @@ import { treehouse } from '../render/treehouse.js';
 import { school } from '../render/school.js';
 import { fotolabor } from '../render/fotolabor.js';
 import { bauplatz } from '../render/bauplatz.js';
-import { natureOn, natureOff } from '../audio/sound.js';
+import { natureOn, natureOff, sfx, engineStart, engineSet, engineStop } from '../audio/sound.js';
+import { bikeRide, motoRide, smoke } from '../render/ride.js';
 
 BUILDINGS.treehouse = treehouse;
 BUILDINGS.school = school;
 BUILDINGS.fotolabor = fotolabor;
 BUILDINGS.bauplatz = bauplatz;
 
-const SPEED = 140; // Welt-Pixel pro Sekunde
+const SPEED = 140; // Welt-Pixel pro Sekunde (zu Fuß)
+// Fahrzeuge [W26]: Höchstgeschwindigkeit und Beschleunigung (Welt-Pixel/s bzw. /s²)
+const RIDE = { walk: { v: SPEED, a: 1e9 }, bike: { v: 250, a: 520 }, moto: { v: 460, a: 950 } };
 
 export class Overworld {
   constructor(canvas, map, { onArrive, markers }) {
@@ -126,12 +129,32 @@ export class Overworld {
     if (!best) return;
     if (best === this.node) { this.onArrive?.(best); return; }
     this.path = this.#route(this.node, best);
+    if (this.path.length) this.#depart();
+  }
+
+  /** Abfahrt: Fahrmodus festlegen, Geräusche starten */
+  #depart() {
+    this.ride = this.mode?.() ?? 'walk';
+    this.v = this.ride === 'walk' ? SPEED : 0;
+    this.rideT = 0; this.dist ??= 0; this.puffs = []; this.lean = 0;
+    if (this.ride === 'bike') sfx('bell');
+    if (this.ride === 'moto') engineStart();
   }
 
   #walk(dt) {
     if (!this.path.length) return;
     this.walkTime += dt;
-    let budget = SPEED * dt;
+    // Geschwindigkeitsprofil: anfahren mit a, rechtzeitig bremsen (v² = 2·a·Restweg)
+    const R = RIDE[this.ride ?? 'walk'];
+    let rest = 0, px = this.pos.x, py = this.pos.y;
+    for (const p of this.path) { rest += Math.hypot(p.x - px, p.y - py); px = p.x; py = p.y; }
+    this.rideT = (this.rideT ?? 0) + dt;
+    this.rest = rest;
+    this.v = Math.min(R.v, (this.v ?? 0) + R.a * dt, Math.sqrt(2 * R.a * rest) + 25);
+    if (this.ride === 'moto') engineSet(this.v / R.v);
+    this.lean = Math.max(0, (this.lean ?? 0) - dt * 2.5);
+    let budget = this.v * dt;
+    this.dist = (this.dist ?? 0) + budget;
     while (budget > 0 && this.path.length) {
       const tgt = this.path[0];
       const dx = tgt.x - this.pos.x, dy = tgt.y - this.pos.y;
@@ -141,9 +164,20 @@ export class Overworld {
       if (d <= budget) {
         this.pos = { x: tgt.x, y: tgt.y };
         budget -= d;
+        const prevDir = this.dir;
         this.path.shift();
         this.node = tgt.id;
-        if (!this.path.length) { this.dir = 'down'; this.onArrive?.(this.node); }
+        if (this.path.length) { // Kurve? Dann Schräglage (Motorrad: Knie am Boden)
+          const nx = this.path[0].x - tgt.x, ny = this.path[0].y - tgt.y;
+          const newDir = Math.abs(nx) > Math.abs(ny) ? 'side' : 'vert';
+          if ((prevDir === 'side') !== (newDir === 'side')) this.lean = 0.6;
+        }
+        if (!this.path.length) {
+          this.dir = 'down';
+          if (this.ride === 'moto') engineStop();
+          this.ride = 'walk';
+          this.onArrive?.(this.node);
+        }
       } else {
         this.pos.x += (dx / d) * budget;
         this.pos.y += (dy / d) * budget;
@@ -189,6 +223,19 @@ export class Overworld {
 
   #florian(P) {
     const moving = this.path.length > 0;
+    if (moving && this.ride === 'bike') { shadow(P, this.pos.x, this.pos.y + 1, 16); bikeRide(P, this.pos.x, this.pos.y + 1, this.dir, this.flip, this.dist); return; }
+    if (moving && this.ride === 'moto') {
+      // Wheelie beim Anfahren, Stoppie beim Ankommen
+      let pitch = 0;
+      if (this.rideT < 0.7) pitch = 0.45 * Math.sin((Math.PI * this.rideT) / 0.7);
+      else if (this.rest < 34) pitch = -0.3 * Math.sin((Math.PI * (1 - this.rest / 34)) * 0.9);
+      if (this.dir === 'side' && Math.random() < 0.5) this.puffs.push({ x: this.pos.x - (this.flip ? -9 : 9), y: this.pos.y - 6, vx: this.flip ? -1 : 1, t0: this.time });
+      this.puffs = this.puffs.filter((p) => this.time - p.t0 < 0.9);
+      smoke(P, this.puffs, this.time);
+      shadow(P, this.pos.x, this.pos.y + 1, 18);
+      motoRide(P, this.pos.x, this.pos.y + 1, this.dir, this.flip, this.dist, { pitch, lean: this.lean, t: this.time });
+      return;
+    }
     const sp = getSprite(`florian_${this.dir}`);
     const n = sp.frames.length;
     const f = moving ? Math.floor(this.walkTime * sp.fps) % n : 0;
