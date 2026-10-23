@@ -134,5 +134,11 @@ async function checkPlainTask(tk) {
   } else if (t.type === 'pairs') {
     assert.equal(t.items.length, 3);
     for (const it of t.items) assert.ok(buildWorld({ actors: [{ id: 'a', x0: it.x0 ?? 0, segments: it.segments }] }).actors.get('a'), `${tk.id}: Bewegung ungültig`);
+  } else if (t.type === 'skid') {
+    assert.ok(['dry', 'rain', 'snow'].includes(t.surface ?? t.weather), `${tk.id}: Wetter/Straßenzustand`);
+    assert.ok(t.range[0] <= t.skid[0] && t.skid[1] <= t.range[1] && t.skid[1] > t.skid[0], `${tk.id}: Bremsspur außerhalb des Bildes`);
+    assert.ok(t.limit > 0);
+  } else if (t.type === 'puppet') {
+    assert.ok(buildWorld({ actors: [{ id: 'a', x0: t.x0 ?? 0, segments: t.segments }] }).actors.get('a'), `${tk.id}: Soll-Bewegung ungültig`);
   } else assert.fail(`${tk.id}: Typ ${t.type} ohne Szenario nicht vorgesehen`);
 }

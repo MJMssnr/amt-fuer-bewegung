@@ -64,6 +64,8 @@ digraph Q {
   t60_schwer_fehlerbalken [fillcolor="#dddddd" label=<<b>P</b>  Kevins Sprint-Messung<br/><font point-size="9">Kevin · Radl-Eck · 130 €</font>>];
   t61_schwer_formel [fillcolor="#dddddd" label=<<b>Q</b>  Ötzi gibt Gas<br/><font point-size="9">Busfahrer Ötzi · Busbahnhof · 130 €</font>>];
   t62_schwer_verbinden [fillcolor="#dddddd" label=<<b>R</b>  Klausur-Vorbereitung: Umkehrpunkte<br/><font point-size="9">Frau Dr. Ohm · Schule · 120 €</font>>];
+  t63_gutachten_trocken [fillcolor="#dddddd" label=<<b>S</b>  „Ich war nicht zu schnell!“<br/><font point-size="9">Gültige-Ziffern-Polizei · Polizeirevier · 90 €</font>>];
+  t64_gutachten_regen [fillcolor="#dddddd" label=<<b>S</b>  Regen vor der Schule<br/><font point-size="9">Gültige-Ziffern-Polizei · Polizeirevier · 110 €</font>>];
   t01_sportwagen -> t02_kevin;
   t02_kevin -> t03_bus;
   t01_sportwagen -> t04_brezel;
@@ -131,4 +133,6 @@ digraph Q {
   t55_fehler_blitz -> t60_schwer_fehlerbalken;
   t57_formel_brunnen -> t61_schwer_formel;
   t59_verbinden_kurven -> t62_schwer_verbinden;
+  t56_formel_eauto -> t63_gutachten_trocken;
+  t63_gutachten_trocken -> t64_gutachten_regen;
 }

@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 61, verdienbar: 5800 €.
+Anzahl Aufträge: 63, verdienbar: 6000 €.
 
 ```mermaid
 flowchart LR
@@ -70,6 +70,8 @@ flowchart LR
   t60_schwer_fehlerbalken["<b>P</b> Kevins Sprint-Messung<br/><small>Kevin · Radl-Eck · 130 €</small>"]:::tP
   t61_schwer_formel["<b>Q</b> Ötzi gibt Gas<br/><small>Busfahrer Ötzi · Busbahnhof · 130 €</small>"]:::tQ
   t62_schwer_verbinden["<b>R</b> Klausur-Vorbereitung: Umkehrpunkte<br/><small>Frau Dr. Ohm · Schule · 120 €</small>"]:::tR
+  t63_gutachten_trocken["<b>S</b> „Ich war nicht zu schnell!“<br/><small>Gültige-Ziffern-Polizei · Polizeirevier · 90 €</small>"]:::tS
+  t64_gutachten_regen["<b>S</b> Regen vor der Schule<br/><small>Gültige-Ziffern-Polizei · Polizeirevier · 110 €</small>"]:::tS
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -137,6 +139,8 @@ flowchart LR
   t55_fehler_blitz --> t60_schwer_fehlerbalken
   t57_formel_brunnen --> t61_schwer_formel
   t59_verbinden_kurven --> t62_schwer_verbinden
+  t56_formel_eauto --> t63_gutachten_trocken
+  t63_gutachten_trocken --> t64_gutachten_regen
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -175,6 +179,8 @@ flowchart LR
 | P | Fehlerbalken | 3 |
 | Q | Bewegungsformel | 3 |
 | R | Verbinden | 3 |
+| S | Unfallgutachten | 2 |
+| T | Puppenspieler | 0 |
 
 ## Liste
 | Auftrag | Typ | von | Ort | Lohn | braucht |
@@ -240,3 +246,5 @@ flowchart LR
 | Kevins Sprint-Messung | P | Kevin | Radl-Eck | 130 € | Wie genau ist mein Blitz? |
 | Ötzi gibt Gas | Q | Busfahrer Ötzi | Busbahnhof | 130 € | Wie tief ist der Wunschbrunnen? |
 | Klausur-Vorbereitung: Umkehrpunkte | R | Frau Dr. Ohm | Schule | 120 € | Übungsblatt: Drei Kurven |
+| „Ich war nicht zu schnell!“ | S | Gültige-Ziffern-Polizei | Polizeirevier | 90 € | Das neue E-Auto |
+| Regen vor der Schule | S | Gültige-Ziffern-Polizei | Polizeirevier | 110 € | „Ich war nicht zu schnell!“ |

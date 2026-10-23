@@ -216,3 +216,12 @@ body.finale-on #dialog { z-index: 80; }
 }
 .pairs-paper { margin: 0; font-size: 13px; color: #566c86; }
 @media (max-height: 500px) { .pairs-paper { font-size: 11px; } }
+
+/* S Unfallgutachten [W32] */
+.skid-cv { display: block; width: 100%; aspect-ratio: 2.3 / 1; image-rendering: pixelated; touch-action: none; }
+.skid-info { margin: 2px 0; font-size: 14px; }
+.sk-surf { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.sk-surf .f-choice { font-size: 14px; line-height: 1.25; }
+.sk-verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.sk-take { align-self: flex-start; background: var(--gold); }
+@media (max-height: 500px) { .skid-info { font-size: 12px; } .sk-surf .f-choice { font-size: 12px; padding: 3px 4px; } }

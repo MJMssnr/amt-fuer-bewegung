@@ -20,6 +20,8 @@ const LOADERS = {
   errorbar: () => import('./errorbar.js'),     // P: Fehlerbalken (Größt-/Kleinstwert)
   formula: () => import('./formula.js'),       // Q: Bewegungsformel umstellen und ausrechnen
   pairs: () => import('./pairs.js'),           // R: t-x und t-vₓ verbinden
+  skid: () => import('./skid.js'),             // S: Unfallgutachten (v₁² − v₀² = 2·a·Δx)
+  puppet: () => import('./puppet.js'),         // T: Puppenspieler (x direkt mit dem Finger)
 };
 
 export async function loadTask(type) {

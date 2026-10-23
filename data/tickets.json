@@ -2722,5 +2722,89 @@
       ["ohm", "Exzellent. Hochpunkt, Tiefpunkt und ein Bremsen bis zum Stillstand – und kein einziges Mal verwechselt."],
       ["florian", "Gleiche Krümmung heißt gleiches Vorzeichen von aₓ. Den Rest verrät vₓ."]
     ]
+  },
+  {
+    "id": "t63-gutachten-trocken",
+    "title": "„Ich war nicht zu schnell!“",
+    "from": "polizist",
+    "node": "polizei",
+    "requires": ["t56-formel-eauto"],
+    "reward": 90,
+    "difficulty": "leicht",
+    "intro": [
+      ["polizist", "TRRRILLL! Herr Doktor Brandl, ein Notfall für Ihr Amt! Vollbremsung in der Hauptstraße, niemand verletzt, aber eine lange Bremsspur."],
+      ["polizist", "Der Fahrer schwört: „Ich war nicht zu schnell!“ Erlaubt sind 50. Ich brauche ein Gutachten – mit gültigen Ziffern, versteht sich."],
+      ["florian", "Bremsspur messen, Bremsverzögerung bestimmen, dann v₁² − v₀² = 2·a·Δx. Ganz ohne Zeit!"]
+    ],
+    "task": {
+      "type": "skid",
+      "weather": "dry",
+      "limit": 50,
+      "range": [0, 14],
+      "skid": [2.5, 11.5],
+      "prompt": "Erstelle das Gutachten: Wie schnell war das Auto vor dem Bremsen?",
+      "paper": "v₁² − v₀² = 2 · a · Δx. Am Ende steht das Auto (v₁ = 0), und a ist beim Bremsen negativ. Daraus: v₀ = √(2 · |a| · Δx). Am Ende mal 3,6 für km/h.",
+      "hints": [
+        {
+          "value": 12,
+          "text": "Das sind m/s. Gefragt ist km/h: mal 3,6."
+        },
+        {
+          "value": 518,
+          "text": "Hast du die Wurzel vergessen? Unter der Wurzel steht 2 · |a| · Δx."
+        },
+        {
+          "value": 30.5,
+          "text": "Da fehlt die 2 unter der Wurzel: v₀² = 2 · |a| · Δx."
+        }
+      ],
+      "help": "v₀ = √(2 · 8,0 m/s² · 9,0 m) = √(144 m²/s²) = 12 m/s, dann mal 3,6."
+    },
+    "success": [
+      ["florian", "9,0 m Bremsspur auf trockenem Asphalt: v₀ = √(2 · 8,0 m/s² · 9,0 m) = 12 m/s, also etwa 43 km/h. Er hatte recht – nicht zu schnell."],
+      ["polizist", "Hmpf. Dann muss ich mich wohl entschuldigen. Aber das Gutachten ist vorbildlich: Zwei gültige Ziffern, ich bin gerührt!"]
+    ]
+  },
+  {
+    "id": "t64-gutachten-regen",
+    "title": "Regen vor der Schule",
+    "from": "polizist",
+    "node": "polizei",
+    "requires": ["t63-gutachten-trocken"],
+    "reward": 110,
+    "difficulty": "mittel",
+    "intro": [
+      ["polizist", "Schon wieder eine Bremsspur, diesmal vor der Schule. Tempo 30! Und es hat geregnet wie verrückt."],
+      ["polizist", "Die Fahrerin sagt, sie sei höchstens 30 gefahren. Die Bremsspur sagt vielleicht etwas anderes."],
+      ["florian", "Bei Regen bremst ein Auto schlechter. Dann muss ich genau hinschauen, welches a gilt."]
+    ],
+    "task": {
+      "type": "skid",
+      "weather": "rain",
+      "limit": 30,
+      "range": [0, 14],
+      "skid": [1.5, 11.5],
+      "prompt": "Erstelle das Gutachten: War die Fahrerin vor der Schule zu schnell?",
+      "paper": "Erst messen, dann den Straßenzustand am Bild erkennen. v₀ = √(2 · |a| · Δx), mal 3,6 für km/h, dann mit Tempo 30 vergleichen.",
+      "hints": [
+        {
+          "value": 10,
+          "text": "Das sind m/s. Gefragt ist km/h: mal 3,6."
+        },
+        {
+          "value": 45.5,
+          "text": "Das wäre auf trockener Straße richtig. Hier ist es nass."
+        },
+        {
+          "value": 360,
+          "text": "Hast du die Wurzel vergessen?"
+        }
+      ],
+      "help": "v₀ = √(2 · 5,0 m/s² · 10 m) = √(100 m²/s²) = 10 m/s, dann mal 3,6."
+    },
+    "success": [
+      ["florian", "10 m Bremsspur auf nasser Straße: v₀ = √(2 · 5,0 m/s² · 10 m) = 10 m/s, also 36 km/h. Das ist zu schnell für eine 30er-Zone."],
+      ["polizist", "Wusste ich's doch! Und bei Regen vor einer Schule … das wird ein ernstes Gespräch. Danke, Herr Gutachter!"]
+    ]
   }
 ]

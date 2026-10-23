@@ -21,6 +21,8 @@ export const TYPES = {
   errorbar:  { letter: 'P', name: 'Fehlerbalken' },
   formula:   { letter: 'Q', name: 'Bewegungsformel' },
   pairs:     { letter: 'R', name: 'Verbinden' },
+  skid:      { letter: 'S', name: 'Unfallgutachten' },
+  puppet:    { letter: 'T', name: 'Puppenspieler' },
 };
 
 export const typeOf = (type) => TYPES[type] ?? { letter: '?', name: type };
