@@ -93,6 +93,7 @@ export function buildLeft(left, { ticket, world, actor }) {
     const playBtn = left.querySelector('.btn-play');
     scene = new Scene(left.querySelector('.scene'), world, {
       onTime: (t) => { scrub.value = t; cursors.forEach((c) => c.setCursor(t)); },
+      ruler: task.ruler !== false,
     });
     scene.onEnd = () => (playBtn.textContent = '▶');
     playBtn.addEventListener('click', () => {

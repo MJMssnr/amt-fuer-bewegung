@@ -13,6 +13,7 @@ import { pickParams, resolveTicket, applyScenario } from './engine/variants.js';
 import { unlockAudio } from './audio/sound.js';
 import { initSoundMenu } from './ui/sound-menu.js';
 import { openQuestlog } from './ui/questlog.js';
+import { resetPatrol } from './ui/police.js';
 import { typeOf } from './tasks/types.js';
 import { initTestMode, isTestMode, setTestMode } from './ui/testmode.js';
 
@@ -76,11 +77,32 @@ async function runTaskScreen({ title, fromName, rewardText, ticket, world }) {
   badge.textContent = ty.letter;
   badge.title = `Aufgabentyp ${ty.letter}: ${ty.name}`;
   const root = screen.querySelector('.task-root');
+  resetPatrol();
   screen.classList.remove('hidden');
   overworld.stop();
   const result = await new Promise((resolve) => {
-    const inst = mod.mount(root, { ticket, world, onSolved: (r) => { inst.destroy(); resolve(r); } });
-    screen.querySelector('.t-back').onclick = () => { inst.destroy(); resolve(null); };
+    let solved = null;
+    // Nach dem Lösen bleibt der Bildschirm stehen, bis getippt wird: Lösungshinweis in Ruhe lesen und notieren [W20]
+    const finish = () => {
+      screen.removeEventListener('click', onTap, true);
+      document.removeEventListener('keydown', onKey, true);
+      screen.classList.remove('await-tap');
+      inst.destroy();
+      resolve(solved);
+    };
+    const onTap = (e) => { e.stopPropagation(); e.preventDefault(); finish(); };
+    const onKey = (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); finish(); } };
+    const inst = mod.mount(root, { ticket, world, onSolved: (r) => {
+      solved = r;
+      document.activeElement?.blur?.();
+      screen.classList.add('await-tap');
+      screen.querySelector('.t-reward').textContent = 'Weiter ▶';
+      setTimeout(() => {
+        screen.addEventListener('click', onTap, true);
+        document.addEventListener('keydown', onKey, true);
+      }, 250);
+    } });
+    screen.querySelector('.t-back').onclick = () => { if (solved) finish(); else { inst.destroy(); resolve(null); } };
   });
   screen.classList.add('hidden');
   root.innerHTML = '';

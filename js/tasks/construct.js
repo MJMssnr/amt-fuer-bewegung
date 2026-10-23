@@ -123,7 +123,8 @@ export function mount(root, { ticket, world, onSolved }) {
   async function check() {
     if (done || patrolling) return;
     patrolling = true;
-    try { await sigPatrol(inputs.map((input) => ({ input })), { enabled: task.sigCheck !== false }); } finally { patrolling = false; }
+    // I: Polizist nur auf Wunsch (sigCheck: true) [W20]
+    try { await sigPatrol(inputs.map((input) => ({ input })), { enabled: task.sigCheck === true }); } finally { patrolling = false; }
     const msgs = [];
     cols.forEach((col, i) => {
       const val = parseNum(inputs[i].value);

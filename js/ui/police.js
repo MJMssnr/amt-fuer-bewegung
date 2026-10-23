@@ -10,6 +10,9 @@ import { speakChar, voiceSpeed, sfx } from '../audio/sound.js';
 const KEY = 'amt-fuer-bewegung.gz-verwarnungen';
 const VOICE = 'mann_kraeftig';
 let texts = null;
+let shownThisTask = false;
+/** Zu Beginn jedes Auftrags aufrufen: Polizist kommt höchstens einmal pro Auftrag [W20] */
+export const resetPatrol = () => { shownThisTask = false; };
 const loadTexts = async () => (texts ??= await (await fetch('data/police.json')).json());
 
 function warnings(inc = 0) {
@@ -24,12 +27,13 @@ function warnings(inc = 0) {
  * fields: [{ input: HTMLInputElement, sig?: false }]   Rückgabe: Promise<boolean> (ob er da war)
  */
 export async function sigPatrol(fields, { enabled = true, host } = {}) {
-  if (!enabled) return false;
+  if (!enabled || shownThisTask) return false;
   for (const f of fields) {
     if (f.sig === false || f.input.disabled) continue;
     const verdict = sigVerdict(f.input.value);
     if (!verdict) continue;
     const value = parseNum(f.input.value);
+    shownThisTask = true;
     await showPolice(host ?? document.getElementById('task'), {
       kind: verdict, input: f.input.value.trim(), suggest: sigSuggest(value, verdict === 'few' ? 2 : 2),
     });

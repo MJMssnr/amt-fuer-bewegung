@@ -1,5 +1,5 @@
 // Gemeinsamer Frageblock für Rechen- und Ablese-Aufgaben (Typ H und C).
-// qs: [{ label, symbol, unit, truth, tol?, hints?, help? }]
+// qs: [{ label, symbol, unit, truth, tol?, range?: [min, max], hints?, help? }]  range ersetzt tol (z. B. Ablesen aus Diagramm)
 // Bewertung: perfect = beim ersten Prüfen alles richtig; partial = nach Hinweisen selbst gelöst;
 //            fail = "Lösung zeigen" benutzt (dann wird nicht bezahlt).
 
@@ -59,7 +59,7 @@ export function questionBlock(container, qs, { onSolved, rule = true, sig = true
       const val = parseNum(inputs[i].value);
       row.classList.remove('ok', 'bad');
       if (!Number.isFinite(val)) { allRight = false; msgs.push(`<b>${q.label}:</b> Hier fehlt noch eine Zahl.`); return; }
-      if (isClose(val, q.truth, q.tol)) { row.classList.add('ok'); inputs[i].disabled = true; return; }
+      if (q.range ? val >= q.range[0] - 1e-9 && val <= q.range[1] + 1e-9 : isClose(val, q.truth, q.tol)) { row.classList.add('ok'); inputs[i].disabled = true; return; }
       allRight = false;
       row.classList.add('bad');
       const hint = matchHint(val, q.hints);

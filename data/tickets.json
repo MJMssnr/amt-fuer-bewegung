@@ -209,7 +209,7 @@
       ]
     },
     "success": [
-      ["florian", "Nach {3000/(va+vb)} s, also {50/(va+vb)} Minuten, bei x = {3000*va/(va+vb)} m. Wer schneller fährt, legt bis zum Treffen mehr Weg zurück."],
+      ["florian", "Nach {3000/(va+vb)} s, also {50/(va+vb)} Minuten, bei x = {3*va/(va+vb)} km. Wer schneller fährt, legt bis zum Treffen mehr Weg zurück."],
       ["kranz", "{3*va/(va+vb)} Kilometer von uns! Wunderbar! Dann weiß die Blaskapelle, wohin."]
     ],
     "vary": {
@@ -244,6 +244,7 @@
     "node": "lindenstrasse",
     "requires": ["t03-bus", "t05-radeln"],
     "reward": 90,
+    "difficulty": "mittel",
     "scenario": "sportwagen-ampel",
     "intro": [
       ["broesel", "DA sind Sie ja! Der rote Sportwagen war heute wieder da! Erst hat er an der Ampel gehalten, und dann ist er wieder losgerast!"],
@@ -253,6 +254,7 @@
     "task": {
       "type": "calc",
       "given": ["anim", "vt"],
+      "ruler": false,
       "prompt": "Werte das t-vₓ-Diagramm aus.",
       "paper": "Gesamtweg = Fläche unter der t-vₓ-Kurve (Rechtecke, Dreiecke). Durchschnittsgeschwindigkeit = Gesamtweg / Gesamtzeit. Umrechnen: 1 m/s = 3,6 km/h.",
       "questions": [
@@ -264,6 +266,7 @@
             "type": "totalPath",
             "actor": "car"
           },
+          "range": [550, 650],
           "hints": [
             {
               "value": 510,
@@ -284,6 +287,7 @@
             "type": "avgSpeed",
             "actor": "car"
           },
+          "range": [28, 34],
           "hints": [
             {
               "value": 54,
@@ -310,6 +314,7 @@
             "actor": "car",
             "q": "speed"
           },
+          "tol": 0,
           "hints": [
             {
               "value": 15,
@@ -359,6 +364,7 @@
     "node": "supermarkt",
     "requires": ["t07-skater"],
     "reward": 90,
+    "difficulty": "leicht",
     "scenario": "einkaufswagen",
     "intro": [
       ["filiale", "Herr Brandl! Auf dem Parkplatz ist ein Einkaufswagen losgerollt, direkt auf das Auto der Bürgermeisterin zu!"],
@@ -370,7 +376,7 @@
       "actor": "cart",
       "given": ["anim", "vt"],
       "prompt": "Welcher Bericht an die Versicherung ist fachlich korrekt?",
-      "paper": "Vergleiche in jedem Abschnitt die Vorzeichen von vₓ und aₓ. Gleiches Vorzeichen: Der Betrag der Geschwindigkeit wächst. Verschiedene Vorzeichen: Er nimmt ab."
+      "paper": "Achte genau auf die Richtung und die Vorzeichen! Der Wagen rollt in negative x-Richtung. Vergleiche in jedem Abschnitt die Vorzeichen von vₓ und aₓ. Gleiches Vorzeichen: Der Betrag der Geschwindigkeit wächst. Verschiedene Vorzeichen: Er nimmt ab."
     },
     "success": [
       ["florian", "Am Anfang war aₓ negativ, trotzdem wurde der Wagen schneller, weil er in −x-Richtung gerollt ist. Als ich ihn gestoppt habe, war aₓ positiv, und er wurde langsamer."],
@@ -483,6 +489,7 @@
     "node": "rathaus",
     "requires": ["t04-brezel"],
     "reward": 70,
+    "difficulty": "leicht",
     "scenario": "hund-brezel",
     "intro": [
       ["ralf", "Hallo! Ich bin Ralf, der neue Praktikant. Ich hab Brezels Morgenrunde als t-x-Diagramm gezeichnet."],

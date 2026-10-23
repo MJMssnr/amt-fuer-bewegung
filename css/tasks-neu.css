@@ -48,3 +48,8 @@
 @keyframes pol-sway { 50% { transform: rotate(1.5deg) translateY(-2px); } }
 @keyframes pol-heart { 50% { transform: scale(7) translateY(-1px); } }
 @media (max-height: 500px) { .pol-bubble { font-size: 14px; margin-bottom: 8%; } .police canvas { height: 64vh; } }
+
+/* Nach dem Lösen: Bildschirm bleibt stehen, bis getippt wird; der Lohn-Kasten oben wird zu „Weiter ▶“ [W20] */
+#task.await-tap { cursor: pointer; }
+#task.await-tap .t-reward { animation: blink 1.4s steps(2) infinite; }
+#task.await-tap .t-reward.hidden { display: inline-block !important; }

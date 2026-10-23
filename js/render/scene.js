@@ -8,8 +8,9 @@ import { fmt, niceStep } from './format.js';
 const W = 640, H = 160, SCALE = 3, GROUND = 118;
 
 export class Scene {
-  constructor(canvas, world, { onTime, rate, ghost, extras, xRange } = {}) {
+  constructor(canvas, world, { onTime, rate, ghost, extras, xRange, ruler = true } = {}) {
     this.ghost = ghost;
+    this.ruler = ruler; // false: kein Maßband (Strecke soll nicht ablesbar sein) [W20]
     this.extras = extras;
     this.xRangeExtra = xRange;
     this.c = canvas;
@@ -102,21 +103,23 @@ export class Scene {
     for (let x = ((-this.x0 * this.mx) % 32) - 32; x < W; x += 32) ctx.fillRect(Math.round(x), GROUND - 6, 16, 2);
     ctx.fillStyle = '#333c57'; ctx.fillRect(0, GROUND + 6, W, H - GROUND - 6);
 
-    // Maßband
-    ctx.font = '23px "AmtPixel", monospace'; // 10 px größer, Canvas wird verkleinert angezeigt [W18]
-    // so wenige Teilstriche, dass sich die (großen) Beschriftungen nicht überlappen
-    let step = niceStep(this.xr[1] - this.xr[0], 6);
-    for (let n = 6; n >= 2; n--) {
-      step = niceStep(this.xr[1] - this.xr[0], n);
-      const wide = Math.max(...[this.xr[0], this.xr[1]].map((v) => ctx.measureText(`${fmt(Math.ceil(Math.abs(v) / step) * step)} m`).width));
-      if (step * this.mx > wide + 14) break;
-    }
-    ctx.fillStyle = '#ffcd75';
-    ctx.textAlign = 'center';
-    for (let x = Math.ceil(this.xr[0] / step) * step; x <= this.xr[1] + 1e-9; x += step) {
-      const px = Math.round(this.X(x));
-      ctx.fillRect(px, GROUND + 6, 2, 8);
-      ctx.fillText(`${fmt(x)} m`, px + 1, H - 4);
+    // Maßband (abschaltbar per Ticket: "ruler": false)
+    if (this.ruler) {
+      ctx.font = '15px "AmtPixel", monospace'; // vorher 13 px, +10 % gewünscht [W19, W20]
+      // so wenige Teilstriche, dass sich die (großen) Beschriftungen nicht überlappen
+      let step = niceStep(this.xr[1] - this.xr[0], 6);
+      for (let n = 6; n >= 2; n--) {
+        step = niceStep(this.xr[1] - this.xr[0], n);
+        const wide = Math.max(...[this.xr[0], this.xr[1]].map((v) => ctx.measureText(`${fmt(Math.ceil(Math.abs(v) / step) * step)} m`).width));
+        if (step * this.mx > wide + 14) break;
+      }
+      ctx.fillStyle = '#ffcd75';
+      ctx.textAlign = 'center';
+      for (let x = Math.ceil(this.xr[0] / step) * step; x <= this.xr[1] + 1e-9; x += step) {
+        const px = Math.round(this.X(x));
+        ctx.fillRect(px, GROUND + 6, 2, 8);
+        ctx.fillText(`${fmt(x)} m`, px + 1, GROUND + 28);
+      }
     }
 
     // Akteure
@@ -146,17 +149,17 @@ export class Scene {
     }
 
     // Zeitanzeige
-    ctx.font = '23px "AmtPixel", monospace'; // 10 px größer [W18]
+    ctx.font = '15px "AmtPixel", monospace';
     ctx.textAlign = 'left';
     const tTxt = `t = ${fmt(this.t, 1)} s`, rTxt = this.rate !== 1 ? `  ×${this.rate}` : '';
     const tw = ctx.measureText(tTxt).width, rw = ctx.measureText(rTxt).width;
     ctx.fillStyle = 'rgba(26,28,44,0.75)';
-    ctx.fillRect(8, 8, tw + rw + 18, 30);
+    ctx.fillRect(8, 8, tw + rw + 16, 22);
     ctx.fillStyle = '#f4f4f4';
-    ctx.fillText(tTxt, 17, 31);
+    ctx.fillText(tTxt, 16, 24);
     if (rTxt) {
       ctx.fillStyle = '#ffcd75';
-      ctx.fillText(rTxt, 17 + tw, 31);
+      ctx.fillText(rTxt, 16 + tw, 24);
     }
   }
 }
