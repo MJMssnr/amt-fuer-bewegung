@@ -1,12 +1,17 @@
 # Roadmap – offen, geplant, bekannte Schwächen
 
-Stand: 23.10.2026 (Sitzung 2). Reihenfolge offen, Herr Messner entscheidet.
+Stand: 23.10.2026, Ende Sitzung 2. Reihenfolge offen, Herr Messner entscheidet.
 
 ## Offene Entscheidungen (bitte nicht eigenmächtig festlegen)
 - derzeit keine
 
-## In Arbeit (Sitzung 2, Branch, noch nicht auf main)
-- **D Regie**: Testauftrag „Der Imagefilm“ fertig; 2 weitere Aufträge nach Playtest (Ideen: Einholen mit Wartezeit t₀, Begegnung dreier Akteure)
+## Nächste Schritte (Sitzung 3)
+- Playtest-Feedback einarbeiten (Liste in `docs/PLAYTEST.md`), Einstufungen als `difficulty` eintragen
+- **D Regie**: 2 weitere Aufträge, sobald „Der Imagefilm“ abgenommen ist
+- **Balancing**: Shop 2265 € vs. verdienbar 4950 € → mehr Gegenstände oder höhere Preise (Herr Messner entscheidet)
+- `difficulty` soll später Lohn und Toleranz steuern (noch ohne Wirkung)
+- Optional: Rennmotorrad sichtbar unter dem Baumhaus parken (bisher nur Helm im Zimmer)
+- Finale-Länge (~1 min) nach Playtest anpassen
 
 ## Wartet auf Playtest-Feedback
 - B Freihand („Brezels Tagebuch“), K Flächen-Puzzle, L Steigungsdreieck, Auftragsbuch, Schrift, Feinraster

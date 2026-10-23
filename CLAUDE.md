@@ -7,6 +7,8 @@ Spieler ist Florian, der per Namensverwechslung das „Amt für Bewegung aller A
 - **`docs/ENTSCHEIDUNGEN.md`** – alle Entscheidungen mit Begründung. Vor jeder Arbeit lesen; nicht stillschweigend davon abweichen.
 - `docs/ROADMAP.md` – Geplantes, offene Entscheidungen, bekannte Schwächen.
 - `docs/VERLAUF.md` – Wünsche von Herrn Messner und in welchem Commit sie umgesetzt wurden.
+- **`docs/PLAYTEST.md`** – welche Aufträge schon Feedback/Einstufung haben, was noch zu testen ist.
+- `docs/QUESTPLAN.md` + `docs/questplan.png` – Freischaltplan (automatisch erzeugt).
 - **Pflege:** Neue Wünsche/Entscheidungen am Ende jeder Arbeitsrunde dort eintragen (im selben Commit wie der Code).
 
 ## Regeln für die Arbeit an diesem Repo
@@ -75,15 +77,21 @@ js/ui/testmode.js          Testmodus: 20× Oma im Startbildschirm, „amtstest�
 js/ui/title.js, title-scene.js  Demo-Hinweis, animierter Startbildschirm
 js/ui/room.js              Baumhaus-Zimmer mit Shop und Kiste
 js/ui/delivery.js          Lieferung: Postbote Paul bringt jede Bestellung durch die Luke (Texte: shop.json → delivery)
-js/ui/finale.js            Raketenstart nach bestandener Prüfung
+js/ui/finale.js            Finale am Bauplatz (Bauen, Herr Messner, Stadt, Start), Texte data/finale.json
+js/engine/packages.js      7 rätselhafte Pakete (Schwellen, 80-%-Regel)
+js/ui/baerti.js            Waschbär Bärti im Baumhaus
+js/render/ride.js          Rennrad/Motorrad auf der Karte
+js/render/room-art2.js     Baumhaus-Anbau und neue Gegenstände
+js/render/bauplatz.js      Bauplatz neben dem Baumhaus
 js/ui/sound-menu.js        Klang-Menü im HUD (Lautstärken, stumm)
 js/audio/sound.js          WebAudio-Synthese ohne Dateien: Stimmen (Formanten je Vokal, VOICES), Natur auf der Karte, Effekte
 data/tickets.json          Aufträge (Level)
 data/scenarios/*.json      Bewegungen
 data/story.json            Figuren (mit "voice": florian | frau_mittel | frau_alt | mann_kraeftig | mann_duenn), Intro, Outro
 data/map.json              Orte, Straßen, Bäume
-data/shop.json             Gegenstände, Preise, Klicktexte, Raketenteile (Balancing hier)
-data/exam.json             Abschlussprüfung (Teile, Bestehensgrenze, Dialoge)
+data/shop.json             Gegenstände, Preise, Klicktexte; Raketenteile (nur Pakete, nicht kaufbar) und Paket-Texte
+data/finale.json           Texte des Finales
+data/police.json           Texte des g.Z.-Polizisten
 assets/sprites.json        Pixel-Sprites (erzeugt von tools/gensprites.mjs); assets/img/ für eigene PNGs
 schema/                    Formatbeschreibung der JSON-Dateien
 ```
