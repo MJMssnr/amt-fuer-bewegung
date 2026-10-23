@@ -66,7 +66,7 @@
 - **Kennbuchstaben** stehen in `js/tasks/types.js`. Geht das Alphabet aus: griechische Buchstaben [W22]. Badge in fetter Systemschrift (O vs. 0!). und werden **nie umnummeriert** (Schüler bekommen sie als PDF zum Selbstcheck) [W16]. Anzeige als gelbes Badge im Auftragskopf und im Auftragsbuch; keine Farbcodierung (bei vielen Typen verwirrend).
 - **Schwierigkeit** [W17, W19]: Feld `difficulty` (leicht/mittel/schwer) pro Ticket, eingetragen nach Playtest durch Herrn Messner. Steuert später Lohn und Toleranz (noch ohne Wirkung). Herr Messner fragt die Einstufung ab und gibt verbal Rückmeldung.
 
-Jeder neue Typ: mindestens 3 konkrete Aufträge [W8].
+Jeder neue Typ: mindestens 3 konkrete Aufträge [W8]. Jeder Typ hat zusätzlich einen **schweren Abschluss-Auftrag** (`difficulty: "schwer"`, t39–t53), freigeschaltet nach dem letzten Auftrag seines Typs [W23].
 
 ## 5. Bewertung und Geld
 

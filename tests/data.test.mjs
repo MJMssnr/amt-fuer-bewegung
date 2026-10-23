@@ -107,7 +107,7 @@ test('Freischaltplan: keine Zyklen, alles erreichbar', () => {
 
 // Stroboskop-Aufträge (M, N, O): Bewegung rechenbar, genau eine richtige Antwort, Fragen lösbar [W22]
 async function checkStrobeTask(tk) {
-  const { strobePositions, strobeSpeed } = await import('../js/engine/strobe.js');
+  const { strobePositions, strobeSpeed, strobeAccel } = await import('../js/engine/strobe.js');
   const pos = strobePositions(tk.task.motion, tk.task.flash);
   assert.equal(pos.length, tk.task.flash.n);
   assert.ok(pos.every((p) => Number.isFinite(p.x)), `${tk.id}: Orte nicht berechenbar`);
@@ -115,7 +115,7 @@ async function checkStrobeTask(tk) {
   if (tk.task.type === 'strobecalc') {
     for (const q of tk.task.questions) {
       const v = strobeSpeed(pos, q.i ?? 0, q.j ?? pos.length - 1);
-      const truth = { v, kmh: v * 3.6 }[q.ask ?? 'v'];
+      const truth = { v, kmh: v * 3.6, a: q.ask === 'a' ? strobeAccel(pos, q.i ?? 0) : NaN }[q.ask ?? 'v'];
       assert.ok(Number.isFinite(truth), `${tk.id}: ${q.label}`);
       if (q.range) assert.ok(truth >= q.range[0] && truth <= q.range[1], `${tk.id}: ${q.label} ${truth} außerhalb von range`);
     }

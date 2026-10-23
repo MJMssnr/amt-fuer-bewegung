@@ -61,3 +61,9 @@ export function checkStrobe(user, truth, { tol }) {
   }
   return { ok: order && !far.length && !pattern.length, far, order, pattern };
 }
+
+/** Beschleunigung aus drei aufeinanderfolgenden Abbildern ab i (zweite Differenz) */
+export function strobeAccel(pos, i = 0) {
+  const dt = pos[i + 1].t - pos[i].t;
+  return (pos[i + 2].x - 2 * pos[i + 1].x + pos[i].x) / (dt * dt);
+}

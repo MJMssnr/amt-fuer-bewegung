@@ -2,9 +2,10 @@
 //
 // Ticket-Feld "task": gemeinsame Felder siehe strobe-common.js, dazu
 // "questions":[ { "label":"Geschwindigkeit", "symbol":"v_x", "unit":"m/s", "ask":"v", "i":0, "j":5, "hints":[…], "help":"…" } ]
-//   ask: "v" (mittlere Geschwindigkeit zwischen Abbild i und j), "kmh" (dasselbe in km/h), "dx" (Abstand i→j), "t" (Zeit i→j)
+//   ask: "v" (mittlere Geschwindigkeit zwischen Abbild i und j), "kmh" (dasselbe in km/h), "dx" (Abstand i→j), "t" (Zeit i→j),
+//        "a" (Beschleunigung aus drei aufeinanderfolgenden Abbildern ab i: aₓ = (x₂ − 2x₁ + x₀) / Δt²)
 
-import { strobeSpeed } from '../engine/strobe.js';
+import { strobeSpeed, strobeAccel } from '../engine/strobe.js';
 import { frame } from './common.js';
 import { questionBlock } from './questions.js';
 import { strobeData, photo, flashInfo } from './strobe-common.js';
@@ -26,7 +27,8 @@ export function mount(root, { ticket, onSolved }) {
   const qs = task.questions.map((q) => {
     const i = q.i ?? 0, j = q.j ?? n - 1;
     const v = strobeSpeed(D.pos, i, j);
-    const truth = { v, kmh: v * 3.6, dx: D.pos[j].x - D.pos[i].x, t: D.pos[j].t - D.pos[i].t }[q.ask ?? 'v'];
+    const a = q.ask === 'a' ? strobeAccel(D.pos, i) : NaN;
+    const truth = { v, kmh: v * 3.6, dx: D.pos[j].x - D.pos[i].x, t: D.pos[j].t - D.pos[i].t, a }[q.ask ?? 'v'];
     return { ...q, truth };
   });
   right.innerHTML = '<p class="prompt"></p>';

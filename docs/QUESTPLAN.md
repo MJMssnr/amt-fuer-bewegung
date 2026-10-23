@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 38, verdienbar: 3050 €.
+Anzahl Aufträge: 53, verdienbar: 4950 €.
 
 ```mermaid
 flowchart LR
@@ -47,6 +47,21 @@ flowchart LR
   t36_strobo_jo["<b>N</b> Jo im Doppelbild<br/><small>Slavi · Fotolabor · 80 €</small>"]:::tN
   t37_strobo_bremsen["<b>O</b> Kevin bremst<br/><small>Slavi · Fotolabor · 90 €</small>"]:::tO
   t38_strobo_pendel["<b>O</b> Das Pendel<br/><small>Slavi · Fotolabor · 100 €</small>"]:::tO
+  t39_schwer_zuordnen["<b>A</b> Kevins Wende<br/><small>Busfahrer Ötzi · Busbahnhof · 120 €</small>"]:::tA
+  t40_schwer_rechnen["<b>H</b> Die Paket-Jagd<br/><small>Paul Paket · Lindenstraße · 130 €</small>"]:::tH
+  t41_schwer_beschreiben["<b>G</b> Jo in der Halfpipe<br/><small>Jo · Skatepark · 120 €</small>"]:::tG
+  t42_schwer_achsen["<b>C</b> Der Wende-Tacho<br/><small>Kevin · Radl-Eck · 120 €</small>"]:::tC
+  t43_schwer_fehlerjagd["<b>E</b> Ralfs krumme Kurve<br/><small>Ralf · Rathaus · 120 €</small>"]:::tE
+  t44_schwer_live["<b>F</b> Pauls Zustellrunde<br/><small>Paul Paket · Bäckerei · 130 €</small>"]:::tF
+  t45_schwer_konstrukteur["<b>I</b> Hausaufgabe: Die Wende<br/><small>Frau Dr. Ohm · Schule · 130 €</small>"]:::tI
+  t46_schwer_reaktion["<b>J</b> Landstraße bei Regen<br/><small>Frau Dr. Ohm · Schule · 120 €</small>"]:::tJ
+  t47_schwer_freihand["<b>B</b> Kevin ohne Video<br/><small>Kevin · Radl-Eck · 130 €</small>"]:::tB
+  t48_schwer_flaeche["<b>K</b> Hin, um und zurück<br/><small>Filialleiterin Yıldız · Supermarkt · 130 €</small>"]:::tK
+  t49_schwer_steigung["<b>L</b> Bremsen durch null<br/><small>Busfahrer Ötzi · Busbahnhof · 120 €</small>"]:::tL
+  t50_schwer_regie["<b>D</b> Die Verfolgungsjagd<br/><small>Bürgermeisterin Kranz · Rathaus · 140 €</small>"]:::tD
+  t51_schwer_strobo_beschreiben["<b>N</b> Der Wurf nach oben<br/><small>Slavi · Fotolabor · 120 €</small>"]:::tN
+  t52_schwer_strobo_rechnen["<b>M</b> Die schräge Rinne<br/><small>Slavi · Fotolabor · 130 €</small>"]:::tM
+  t53_schwer_strobo_bauen["<b>O</b> Gas und Bremse<br/><small>Slavi · Fotolabor · 140 €</small>"]:::tO
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -89,6 +104,22 @@ flowchart LR
   t35_strobo_auto --> t36_strobo_jo
   t36_strobo_jo --> t37_strobo_bremsen
   t37_strobo_bremsen --> t38_strobo_pendel
+  t04_brezel --> t39_schwer_zuordnen
+  t06_broesel_ampel --> t40_schwer_rechnen
+  t08_einkaufswagen --> t41_schwer_beschreiben
+  t11_stadtlauf --> t42_schwer_achsen
+  t14_ralf_bus --> t43_schwer_fehlerjagd
+  t17_live_kevin --> t44_schwer_live
+  t20_konstrukt_wagen --> t45_schwer_konstrukteur
+  t22_reaktion_auto --> t46_schwer_reaktion
+  t45_schwer_konstrukteur --> t46_schwer_reaktion
+  t23_freihand_brezel --> t47_schwer_freihand
+  t26_flaeche_wagen --> t48_schwer_flaeche
+  t29_steigung_bus --> t49_schwer_steigung
+  t30_regie_imagefilm --> t50_schwer_regie
+  t38_strobo_pendel --> t51_schwer_strobo_beschreiben
+  t51_schwer_strobo_beschreiben --> t52_schwer_strobo_rechnen
+  t52_schwer_strobo_rechnen --> t53_schwer_strobo_bauen
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -109,21 +140,21 @@ flowchart LR
 ## Legende
 | Buchstabe | Typ | Aufträge |
 |---|---|---|
-| A | Zuordnen | 4 |
-| B | Freihand zeichnen | 1 |
-| C | Achsen-Detektiv | 3 |
-| D | Regie | 1 |
-| E | Fehlerjagd | 3 |
-| F | Live-Steuerung | 3 |
-| G | Beschreiben | 2 |
-| H | Berechnen | 2 |
-| I | Konstrukteur | 3 |
-| J | Reaktionstest | 2 |
-| K | Flächen-Puzzle | 3 |
-| L | Steigungsdreieck | 3 |
-| M | Stroboskop: rechnen | 2 |
-| N | Stroboskop: beschreiben | 2 |
-| O | Stroboskop: bauen | 4 |
+| A | Zuordnen | 5 |
+| B | Freihand zeichnen | 2 |
+| C | Achsen-Detektiv | 4 |
+| D | Regie | 2 |
+| E | Fehlerjagd | 4 |
+| F | Live-Steuerung | 4 |
+| G | Beschreiben | 3 |
+| H | Berechnen | 3 |
+| I | Konstrukteur | 4 |
+| J | Reaktionstest | 3 |
+| K | Flächen-Puzzle | 4 |
+| L | Steigungsdreieck | 4 |
+| M | Stroboskop: rechnen | 3 |
+| N | Stroboskop: beschreiben | 3 |
+| O | Stroboskop: bauen | 5 |
 
 ## Liste
 | Auftrag | Typ | von | Ort | Lohn | braucht |
@@ -166,3 +197,18 @@ flowchart LR
 | Jo im Doppelbild | N | Slavi | Fotolabor | 80 € | Blitz in der 30er-Zone |
 | Kevin bremst | O | Slavi | Fotolabor | 90 € | Jo im Doppelbild |
 | Das Pendel | O | Slavi | Fotolabor | 100 € | Kevin bremst |
+| Kevins Wende | A | Busfahrer Ötzi | Busbahnhof | 120 € | Der Hund, der zurückläuft |
+| Die Paket-Jagd | H | Paul Paket | Lindenstraße | 130 € | Frau Brösels Rache |
+| Jo in der Halfpipe | G | Jo | Skatepark | 120 € | Der Einkaufswagen |
+| Der Wende-Tacho | C | Kevin | Radl-Eck | 120 € | Der Stadtlauf |
+| Ralfs krumme Kurve | E | Ralf | Rathaus | 120 € | Ralfs Busfahrt |
+| Pauls Zustellrunde | F | Paul Paket | Bäckerei | 130 € | Kevins Express-Lieferung |
+| Hausaufgabe: Die Wende | I | Frau Dr. Ohm | Schule | 130 € | Hausaufgabe: Die Falle |
+| Landstraße bei Regen | J | Frau Dr. Ohm | Schule | 120 € | Tempo 30 vor der Schule?, Hausaufgabe: Die Wende |
+| Kevin ohne Video | B | Kevin | Radl-Eck | 130 € | Brezels Tagebuch |
+| Hin, um und zurück | K | Filialleiterin Yıldız | Supermarkt | 130 € | Wie knapp war's? |
+| Bremsen durch null | L | Busfahrer Ötzi | Busbahnhof | 120 € | Bremst Ötzi zu scharf? |
+| Die Verfolgungsjagd | D | Bürgermeisterin Kranz | Rathaus | 140 € | Der Imagefilm |
+| Der Wurf nach oben | N | Slavi | Fotolabor | 120 € | Das Pendel |
+| Die schräge Rinne | M | Slavi | Fotolabor | 130 € | Der Wurf nach oben |
+| Gas und Bremse | O | Slavi | Fotolabor | 140 € | Die schräge Rinne |

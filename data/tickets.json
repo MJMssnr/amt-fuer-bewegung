@@ -1489,5 +1489,638 @@
       ["slavi", "Eng, weit, weit, eng. Das ist Physik, die man rahmen kann!"],
       ["florian", "Und keine einzige Abschnittsgleichung. Das Pendel macht es einfach."]
     ]
+  },
+  {
+    "id": "t39-schwer-zuordnen",
+    "title": "Kevins Wende",
+    "from": "oetzi",
+    "node": "bushof",
+    "requires": ["t04-brezel"],
+    "reward": 120,
+    "difficulty": "schwer",
+    "scenario": "kevin-wende",
+    "intro": [
+      ["oetzi", "Servus! Kevin hat vor meinem Bus mitten auf der Straße gewendet. Ganz ohne Anhalten, einfach so umgedreht!"],
+      ["oetzi", "Die Verkehrswacht will dazu das t-aₓ-Diagramm. Ich hab nur das t-x-Diagramm. Ein Kurven-Diagramm. Viel Glück."],
+      ["florian", "Erst gerade, dann eine Kurve mit Hochpunkt, dann wieder gerade. Das wird spannend."]
+    ],
+    "task": {
+      "type": "match",
+      "actor": "kevin",
+      "given": ["anim", "xt"],
+      "ask": "at",
+      "paper": "Gerade im t-x-Diagramm: aₓ = 0. Rechtskurve ⌢: aₓ < 0. Achtung: Auch am Hochpunkt (Umkehrpunkt) ändert sich aₓ nicht – nur vₓ wird dort null!"
+    },
+    "success": [
+      ["florian", "Zuerst aₓ = 0, dann 4,0 s lang aₓ = −2,0 m/s², auch durch den Umkehrpunkt hindurch, und am Ende wieder aₓ = 0."],
+      ["oetzi", "Durch den Umkehrpunkt hindurch dieselbe Beschleunigung. Da staunt sogar mein Bus."]
+    ]
+  },
+  {
+    "id": "t40-schwer-rechnen",
+    "title": "Die Paket-Jagd",
+    "from": "post",
+    "node": "lindenstrasse",
+    "requires": ["t06-broesel-ampel"],
+    "reward": 130,
+    "difficulty": "schwer",
+    "scenario": "einholen-paul",
+    "intro": [
+      ["post", "Hallo, Herr Doktor! Paul Paket hier. Ich hab eine Frage, die mich nicht schlafen lässt."],
+      ["post", "Ich bin mit 4,0 m/s unterwegs. Kevin sieht mich, wartet 6,0 s, dann tritt er aus dem Stand mit 1,0 m/s² in die Pedale. Er will mir ein Paket abnehmen!"],
+      ["post", "Wann holt er mich ein? Wo? Und wie schnell ist er dann? Ich will wissen, ob ich wegrennen muss."],
+      ["florian", "Einholen mit Vorsprung und Wartezeit. Das ist die Königsdisziplin."]
+    ],
+    "task": {
+      "type": "calc",
+      "given": ["anim", "data"],
+      "prompt": "Wann und wo holt Kevin Paul ein – und wie schnell ist Kevin dann?",
+      "paper": "Paul: x(t) = 4,0 m/s · t. Kevin ab t = 6,0 s: x(t) = ½ · 1,0 m/s² · (t − 6,0 s)². Gleichsetzen ergibt eine quadratische Gleichung. Tipp: Rechne mit τ = t − 6,0 s.",
+      "questions": [
+        {
+          "label": "Zeitpunkt des Einholens",
+          "symbol": "t_E",
+          "unit": "s",
+          "goal": {
+            "type": "meet",
+            "a": "paul",
+            "b": "kevin",
+            "ask": "t",
+            "after": 1
+          },
+          "hints": [
+            {
+              "value": 12,
+              "text": "Das ist Kevins Fahrzeit τ. Er startet aber erst bei t = 6,0 s."
+            },
+            {
+              "value": 8,
+              "text": "Das wäre richtig, wenn Kevin sofort losfahren würde. Er wartet aber 6,0 s."
+            }
+          ],
+          "help": "½ · τ² = 4,0 · (τ + 6,0) mit τ = t − 6,0 s. Lösen mit der Mitternachtsformel."
+        },
+        {
+          "label": "Ort des Einholens",
+          "symbol": "x_E",
+          "unit": "m",
+          "goal": {
+            "type": "meet",
+            "a": "paul",
+            "b": "kevin",
+            "ask": "x",
+            "after": 1
+          },
+          "help": "Setze t_E in Pauls Gleichung x = 4,0 m/s · t ein."
+        },
+        {
+          "label": "Kevins Geschwindigkeit dabei",
+          "symbol": "v_K",
+          "unit": "km/h",
+          "goal": {
+            "type": "valueAt",
+            "actor": "kevin",
+            "q": "vx",
+            "t": 18
+          },
+          "hints": [
+            {
+              "value": 12,
+              "text": "Das ist der Wert in m/s. Gefragt ist km/h."
+            },
+            {
+              "value": 18,
+              "text": "Kevin beschleunigt erst ab t = 6,0 s: v = a · (t − 6,0 s)."
+            }
+          ],
+          "help": "v = a · τ, dann mal 3,6."
+        }
+      ]
+    },
+    "success": [
+      ["florian", "Nach 18 s, bei 72 m. Kevin ist dann schon 12 m/s schnell, also 43 km/h."],
+      ["post", "43 km/h?! Mit einem Paket unterm Arm renne ich so schnell nie. Dann lasse ich ihm das Paket eben freiwillig da."]
+    ]
+  },
+  {
+    "id": "t41-schwer-beschreiben",
+    "title": "Jo in der Halfpipe",
+    "from": "jo",
+    "node": "skatepark",
+    "requires": ["t08-einkaufswagen"],
+    "reward": 120,
+    "difficulty": "schwer",
+    "scenario": "jo-halfpipe",
+    "intro": [
+      ["jo", "Amtsmensch! Der Stadtrat will jetzt auch noch einen Bericht über meine Halfpipe-Fahrt. Die geht vor und zurück."],
+      ["jo", "Rein, rüber, an der Wand hoch, kurz Stillstand, und rückwärts wieder runter. Beschreib das bitte so, dass keiner meckern kann."]
+    ],
+    "task": {
+      "type": "describe",
+      "actor": "jo",
+      "given": ["anim", "vt"],
+      "prompt": "Welche Beschreibung ist fachlich in allen vier Abschnitten korrekt?",
+      "paper": "Vier Abschnitte! Prüfe in jedem: Vorzeichen von vₓ (Richtung) und ob der Betrag von vₓ zu- oder abnimmt. Achtung im 4. Abschnitt: aₓ ist negativ, aber Jo wird schneller!"
+    },
+    "success": [
+      ["florian", "Erst beschleunigt, dann gleichförmig, dann verzögert bis zum Stillstand – und danach aus der Ruhe beschleunigt in negative x-Richtung. Das aₓ bleibt dabei negativ."],
+      ["jo", "Negativ beschleunigt und trotzdem schneller. Das schreib ich mir aufs Board."]
+    ]
+  },
+  {
+    "id": "t42-schwer-achsen",
+    "title": "Der Wende-Tacho",
+    "from": "kevin",
+    "node": "fahrradladen",
+    "requires": ["t11-stadtlauf"],
+    "reward": 120,
+    "difficulty": "schwer",
+    "scenario": "kevin-wende",
+    "intro": [
+      ["kevin", "Chef, mein neuer GPS-Tacho druckt t-x-Diagramme. Aber wieder ohne Zahlen. Ich glaube, ich kaufe immer die falschen Geräte."],
+      ["kevin", "Das war meine Wende-Fahrt. Die Werte im Datenblatt stimmen. Kriegst du die Achsen hin?"]
+    ],
+    "task": {
+      "type": "axes",
+      "actor": "kevin",
+      "given": ["anim", "data"],
+      "graph": "xt",
+      "paper": "Berechne den Ort an jeder Abschnittsgrenze. Achtung: Im 2. Abschnitt kehrt Kevin um – der höchste Punkt der Kurve liegt dort, wo vₓ = 0 ist, nicht am Abschnittsende!",
+      "hints": {
+        "y": [
+          {
+            "value": 8,
+            "text": "8,0 m ist der Ort nach dem ersten Abschnitt. Die Kurve steigt danach aber noch weiter an."
+          },
+          {
+            "value": 12,
+            "text": "12 m ist der höchste Punkt der Kurve. Die markierte Linie liegt darüber."
+          }
+        ]
+      }
+    },
+    "success": [
+      ["florian", "8,0 m nach 2,0 s, dann bis 12 m bei 4,0 s, zurück auf 8,0 m bei 6,0 s und am Ende wieder 0 m bei 8,0 s."],
+      ["kevin", "Ich fahre also im Kreis und lande am Start. Mein Leben in einem Diagramm."]
+    ]
+  },
+  {
+    "id": "t43-schwer-fehlerjagd",
+    "title": "Ralfs krumme Kurve",
+    "from": "ralf",
+    "node": "rathaus",
+    "requires": ["t14-ralf-bus"],
+    "reward": 120,
+    "difficulty": "schwer",
+    "scenario": "kevin-wende",
+    "intro": [
+      ["ralf", "Chef! Mein Meisterwerk: Kevins Wende als t-x-Diagramm. Diesmal ist bestimmt alles richtig."],
+      ["florian", "Ralf, das sagst du jedes Mal."],
+      ["ralf", "Diesmal hab ich alles mit dem Lineal gezeichnet. Wirklich ALLES! Schön gerade, oder?"]
+    ],
+    "task": {
+      "type": "errorhunt",
+      "actor": "kevin",
+      "given": ["anim", "data"],
+      "graph": "xt",
+      "error": {
+        "segment": 1,
+        "kind": "shape"
+      },
+      "paper": "Prüfe in jedem Abschnitt die Form: aₓ = 0 → Gerade, aₓ > 0 → Linkskurve ⌣, aₓ < 0 → Rechtskurve ⌢.",
+      "explain": "Im 2. Abschnitt ist aₓ = −2,0 m/s² < 0. Dort muss eine Rechtskurve ⌢ mit Hochpunkt bei 12 m hin. Ralf hat mit dem Lineal eine Gerade gezeichnet – als würde Kevin einfach stehen."
+    },
+    "success": [
+      ["florian", "Im 2. Abschnitt gehört eine Rechtskurve hin, weil aₓ negativ ist. Mit dem Lineal geht das nicht, Ralf."],
+      ["ralf", "Dann leg ich das Lineal mal weg. Kurven kann man nicht mit dem Lineal zeichnen. Notiert."]
+    ]
+  },
+  {
+    "id": "t44-schwer-live",
+    "title": "Pauls Zustellrunde",
+    "from": "post",
+    "node": "baeckerei",
+    "requires": ["t17-live-kevin"],
+    "reward": 130,
+    "difficulty": "schwer",
+    "scenario": "paul-runde",
+    "intro": [
+      ["post", "Herr Doktor, ich hab mir den Fuß verknackst. Können Sie meine Runde laufen? Genau nach Plan, die Kunden warten auf die Sekunde!"],
+      ["post", "Vier Abschnitte: los, Pause beim Bäcker, ein Stück zurück zur Briefkasten-Ecke, dann wieder vor. Ohne Vorbild, nur nach Plan."],
+      ["florian", "Vier Geschwindigkeiten, schnell umstellen. Das wird sportlich."]
+    ],
+    "task": {
+      "type": "live",
+      "actor": "plan",
+      "player": "postbote",
+      "vmax": 4,
+      "ghost": false,
+      "prompt": "Lauf Pauls Runde genau nach dem Plan im t-x-Diagramm. Vier Abschnitte, keine Vorlage!",
+      "paper": "Berechne alle vier Geschwindigkeiten vorher: vₓ = Δx / Δt. Ein waagrechtes Stück heißt vₓ = 0, ein fallendes Stück heißt vₓ < 0."
+    },
+    "success": [
+      ["post", "Perfekt! Alle Pakete pünktlich. Und Sie haben nicht mal geschnauft."],
+      ["florian", "3,0 m/s, Pause, −1,5 m/s und 2,0 m/s. Postbote ist auch ein Physikberuf."]
+    ]
+  },
+  {
+    "id": "t45-schwer-konstrukteur",
+    "title": "Hausaufgabe: Die Wende",
+    "from": "ohm",
+    "node": "schule",
+    "requires": ["t20-konstrukt-wagen"],
+    "reward": 130,
+    "difficulty": "schwer",
+    "scenario": "kevin-wende",
+    "intro": [
+      ["ohm", "Florian, die schwerste Hausaufgabe des Schuljahres: Kevin wendet, ohne anzuhalten."],
+      ["ohm", "Konstruiere das t-x-Diagramm. Hinweis: Wer am Umkehrpunkt die Form wechselt, hat verloren."]
+    ],
+    "task": {
+      "type": "construct",
+      "actor": "kevin",
+      "given": ["anim", "vt"],
+      "ask": "xt",
+      "paper": "Fläche unter t-vₓ: Im 2. Abschnitt ist sie erst positiv, dann negativ – zusammen null! Die Form hängt nur vom Vorzeichen von aₓ ab, und das bleibt im ganzen 2. Abschnitt negativ."
+    },
+    "success": [
+      ["florian", "Gerade bis 8,0 m, dann eine einzige Rechtskurve mit Hochpunkt bei 12 m, die bei 8,0 m endet, dann eine fallende Gerade bis 0 m."],
+      ["ohm", "Eine einzige Rechtskurve, kein Formwechsel. Florian, Sie sind bereit für die Abschlussprüfung."]
+    ]
+  },
+  {
+    "id": "t46-schwer-reaktion",
+    "title": "Landstraße bei Regen",
+    "from": "ohm",
+    "node": "schule",
+    "requires": ["t22-reaktion-auto", "t45-schwer-konstrukteur"],
+    "reward": 120,
+    "difficulty": "schwer",
+    "scenario": {
+      "actors": [
+        {
+          "id": "me",
+          "sprite": "car_red",
+          "segments": [
+            {
+              "dt": 1,
+              "v": 0
+            }
+          ]
+        }
+      ]
+    },
+    "intro": [
+      ["ohm", "Florian, der Abschlussjahrgang macht Führerschein. Ich will ihnen zeigen, was Regen auf der Landstraße bedeutet."],
+      ["ohm", "Tempo 70, nasse Straße, nur 5,0 m/s² Bremsverzögerung. Messen Sie Ihre Reaktionszeit und rechnen Sie den Anhalteweg aus."]
+    ],
+    "task": {
+      "type": "reaction",
+      "v_kmh": 70,
+      "a": 5,
+      "sprite": "car_red",
+      "vehicle": "mit dem Auto bei Tempo 70 auf nasser Straße",
+      "paper": "70 km/h in m/s umrechnen (÷ 3,6). Reaktionsweg = v · t_R, Bremsweg = v² / (2a). Achtung: Der Bremsweg wächst mit v², der Reaktionsweg nur mit v."
+    },
+    "success": [
+      ["florian", "Bei Tempo 70 auf nasser Straße ist allein der Bremsweg schon fast 38 m lang. Dazu kommt noch der Reaktionsweg."],
+      ["ohm", "Und genau deshalb fährt man bei Regen langsamer. Das zeige ich morgen jedem einzelnen."]
+    ]
+  },
+  {
+    "id": "t47-schwer-freihand",
+    "title": "Kevin ohne Video",
+    "from": "kevin",
+    "node": "fahrradladen",
+    "requires": ["t23-freihand-brezel"],
+    "reward": 130,
+    "difficulty": "schwer",
+    "scenario": "kevin-express",
+    "intro": [
+      ["kevin", "Chef, diesmal hab ich kein Video. Nur das t-vₓ-Diagramm von meiner Express-Tour."],
+      ["kevin", "Kannst du das t-x-Diagramm trotzdem zeichnen? Freihand, du Künstler?"]
+    ],
+    "task": {
+      "type": "freehand",
+      "actor": "kevin",
+      "given": ["vt"],
+      "ask": "xt",
+      "tolY": 1.5,
+      "prompt": "Zeichne Kevins t-x-Diagramm in einem Zug – ganz ohne Animation, nur aus dem t-vₓ-Diagramm.",
+      "paper": "Berechne die Orte an allen Knickstellen: Δx = vₓ · Δt. Bei vₓ = 0 bleibt x gleich (waagrecht). Bei vₓ < 0 fällt die Linie."
+    },
+    "success": [
+      ["florian", "Hoch bis 20 m bei 4,0 s, waagrecht bis 6,0 s, dann runter auf 11 m bei 9,0 s."],
+      ["kevin", "Ganz ohne Video. Du bist unheimlich, Chef."]
+    ]
+  },
+  {
+    "id": "t48-schwer-flaeche",
+    "title": "Hin, um und zurück",
+    "from": "filiale",
+    "node": "supermarkt",
+    "requires": ["t26-flaeche-wagen"],
+    "reward": 130,
+    "difficulty": "schwer",
+    "scenario": "kevin-wende",
+    "intro": [
+      ["filiale", "Herr Brandl, Kevin hat uns beliefert und ist dabei auf dem Parkplatz gewendet. Die Versicherung fragt schon wieder."],
+      ["filiale", "Wie weit ist er insgesamt gefahren? Und wo stand er am Ende? Er sagt: genau da, wo er losgefahren ist."],
+      ["florian", "Teilflächen über und unter der t-Achse. Mal sehen, ob Kevin recht hat."]
+    ],
+    "task": {
+      "type": "area",
+      "actor": "kevin",
+      "given": ["anim"],
+      "graph": "vt",
+      "ask": ["pieces", "dx", "path"],
+      "paper": "Im 2. Abschnitt schneidet die Kurve die t-Achse: Dort entstehen zwei Dreiecke, eines über, eines unter der Achse. Für Δx zählen Flächen unter der Achse negativ, für den Weg s positiv."
+    },
+    "success": [
+      ["florian", "8,0 m plus 4,0 m minus 4,0 m minus 8,0 m: Δx = 0. Kevin steht wieder am Start, ist aber 24 m gefahren."],
+      ["filiale", "Null Meter Ortsänderung und trotzdem 24 Meter gefahren. Das muss ich der Versicherung zweimal erklären."]
+    ]
+  },
+  {
+    "id": "t49-schwer-steigung",
+    "title": "Bremsen durch null",
+    "from": "oetzi",
+    "node": "bushof",
+    "requires": ["t29-steigung-bus"],
+    "reward": 120,
+    "difficulty": "schwer",
+    "scenario": "kevin-wende",
+    "intro": [
+      ["oetzi", "Sag mal, Kevin bremst und fährt gleich danach rückwärts weiter. Ist das dann noch Bremsen oder schon Beschleunigen?"],
+      ["oetzi", "Bestimm mir mal seine Beschleunigung in dem Stück. Mit Steigungsdreieck, wie bei meinem Bus."]
+    ],
+    "task": {
+      "type": "slope",
+      "actor": "kevin",
+      "given": ["anim"],
+      "graph": "vt",
+      "segment": 1,
+      "paper": "Lege das Steigungsdreieck über die t-Achse hinweg: von vₓ = +4,0 m/s bis vₓ = −4,0 m/s. Δvₓ = Endwert − Anfangswert ist dann −8,0 m/s."
+    },
+    "success": [
+      ["florian", "Von +4,0 m/s auf −4,0 m/s in 4,0 s: aₓ = −2,0 m/s². Erst bremst er, dann wird er rückwärts schneller – mit derselben Beschleunigung."],
+      ["oetzi", "Dieselbe Beschleunigung, zwei Wirkungen. Physik ist hinterhältig."]
+    ]
+  },
+  {
+    "id": "t50-schwer-regie",
+    "title": "Die Verfolgungsjagd",
+    "from": "kranz",
+    "node": "rathaus",
+    "requires": ["t30-regie-imagefilm"],
+    "reward": 140,
+    "difficulty": "schwer",
+    "scenario": "regie-einholen",
+    "intro": [
+      ["kranz", "Herr Doktor Brandl! Der Imagefilm war ein Erfolg. Jetzt drehen wir Teil 2: eine Verfolgungsjagd!"],
+      ["kranz", "Paul radelt los, Kevin wartet und jagt ihm dann hinterher. Sie bestimmen, wann Kevin startet und wie schnell er fährt."]
+    ],
+    "task": {
+      "type": "direct",
+      "tEnd": 25,
+      "controls": [
+        {
+          "actor": "kevin",
+          "fields": ["t0", "v"]
+        }
+      ],
+      "events": [
+        {
+          "type": "at",
+          "actor": "kevin",
+          "t": 15,
+          "x": 30,
+          "label": "Kamera 1: Kevin rast bei t = 15 s am Brunnen vorbei (x = 30 m)."
+        },
+        {
+          "type": "meet",
+          "a": "paul",
+          "b": "kevin",
+          "t": 20,
+          "x": 60,
+          "label": "Kamera 2: Kevin holt Paul bei t = 20 s vor dem Rathaus ein (x = 60 m)."
+        }
+      ],
+      "tolX": 2,
+      "tolT": 0.5,
+      "solution": {
+        "kevin": {
+          "t0": 10,
+          "v": 6
+        }
+      },
+      "prompt": "Kevin startet bei x₀ = 0 m. Stell ein, wann er losfährt (t₀) und wie schnell (vₓ), damit beide Kameras ihren Moment bekommen.",
+      "hints": {
+        "kevin.v": [
+          {
+            "value": 3,
+            "text": "Mit Pauls Tempo holt Kevin ihn nie ein."
+          },
+          {
+            "value": 2,
+            "text": "Zwischen den beiden Kameras fährt Kevin 30 m in 5,0 s."
+          }
+        ],
+        "kevin.t0": [
+          {
+            "value": 0,
+            "text": "Kevin wartet erst. Rechne von Kamera 1 zurück: Wann war er noch bei x = 0?"
+          }
+        ]
+      },
+      "paper": "Kevins Gerade geht durch beide Kamera-Punkte: vₓ = Δx / Δt. Verlängere sie nach links bis x = 0 – dort liegt die Startzeit t₀."
+    },
+    "success": [
+      ["florian", "Kevin wartet 10 s und fährt dann mit 6,0 m/s. Bei 15 s ist er am Brunnen, bei 20 s hat er Paul."],
+      ["kranz", "Spannung, Tempo, Physik! Dafür gibt es bestimmt einen Preis."]
+    ]
+  },
+  {
+    "id": "t51-schwer-strobo-beschreiben",
+    "title": "Der Wurf nach oben",
+    "from": "slavi",
+    "node": "fotolabor",
+    "requires": ["t38-strobo-pendel"],
+    "reward": 120,
+    "difficulty": "schwer",
+    "intro": [
+      ["slavi", "Jo hat einen Ball senkrecht nach oben geworfen. Ich habe direkt nach dem Abwurf geblitzt, bis der Ball oben kurz stillstand."],
+      ["slavi", "Das Foto ist fies: Man könnte meinen, der Ball fällt. Was schreiben wir drunter?"]
+    ],
+    "task": {
+      "type": "strobedescribe",
+      "motion": {
+        "kind": "kin",
+        "x0": 10,
+        "segments": [
+          {
+            "dt": 1,
+            "v0": -10,
+            "a": 10
+          }
+        ]
+      },
+      "flash": {
+        "n": 6,
+        "dt": 0.2
+      },
+      "photo": {
+        "bg": "city",
+        "obj": "ball",
+        "vertical": true,
+        "ruler": "none"
+      },
+      "context": "Der Ball wurde gerade nach OBEN geworfen. Das kräftigste Abbild (ganz oben) ist das neueste.",
+      "prompt": "Welche Bildunterschrift ist fachlich richtig?",
+      "choices": [
+        {
+          "text": "Der Ball wird nach oben gleichmäßig langsamer (verzögert), bis er oben kurz stillsteht.",
+          "correct": true
+        },
+        {
+          "text": "Der Ball fällt gleichmäßig beschleunigt nach unten.",
+          "feedback": "Das Foto sähe genauso aus! Aber laut Zusammenhang wurde der Ball gerade nach oben geworfen, und das neueste Abbild ist oben."
+        },
+        {
+          "text": "Der Ball wird nach oben gleichmäßig schneller.",
+          "feedback": "In Bewegungsrichtung (nach oben) werden die Abstände kleiner, nicht größer."
+        },
+        {
+          "text": "Der Ball bewegt sich gleichförmig nach oben.",
+          "feedback": "Dann wären alle Abstände gleich groß. Miss nach!"
+        }
+      ],
+      "explain": "Nach oben werden die Abstände kleiner: Der Ball wird langsamer. Das Foto allein wäre auch ein fallender Ball – erst der Zusammenhang entscheidet."
+    },
+    "success": [
+      ["florian", "Nach oben werden die Abstände immer kleiner. Der Ball wird verzögert, bis er oben kurz stillsteht."],
+      ["slavi", "„Der Ball auf dem Weg nach oben.“ Fies, aber korrekt. Das kommt in die Ausstellung."]
+    ]
+  },
+  {
+    "id": "t52-schwer-strobo-rechnen",
+    "title": "Die schräge Rinne",
+    "from": "slavi",
+    "node": "fotolabor",
+    "requires": ["t51-schwer-strobo-beschreiben"],
+    "reward": 130,
+    "difficulty": "schwer",
+    "intro": [
+      ["slavi", "Die Kugel in der Rinne, diesmal mit Maßband. Ein Physiklehrer hat gefragt, ob man daraus die Beschleunigung bestimmen kann."],
+      ["florian", "Kann man. Aus den Abständen zweier Bildpaare. Oder noch eleganter."]
+    ],
+    "task": {
+      "type": "strobecalc",
+      "motion": {
+        "kind": "kin",
+        "x0": 0.5,
+        "segments": [
+          {
+            "dt": 2,
+            "a": 2
+          }
+        ]
+      },
+      "flash": {
+        "n": 5,
+        "dt": 0.5
+      },
+      "photo": {
+        "bg": "night",
+        "obj": "ball",
+        "ruler": "band",
+        "range": [0, 5]
+      },
+      "context": "Die Kugel startet aus der Ruhe und rollt gleichmäßig beschleunigt die Rinne hinunter.",
+      "prompt": "Bestimme die Geschwindigkeiten und die Beschleunigung der Kugel.",
+      "paper": "Mittlere Geschwindigkeit zwischen zwei Abbildern: v = Δx / Δt (gilt für die Mitte des Zeitabstands). Beschleunigung: a = Δv / Δt zwischen den Mitten – oder kurz: a = (x₃ − 2x₂ + x₁) / Δt².",
+      "questions": [
+        {
+          "label": "mittlere Geschwindigkeit zwischen Abbild 1 und 2",
+          "unit": "m/s",
+          "ask": "v",
+          "i": 0,
+          "j": 1,
+          "range": [0.3, 0.7]
+        },
+        {
+          "label": "mittlere Geschwindigkeit zwischen Abbild 4 und 5",
+          "unit": "m/s",
+          "ask": "v",
+          "i": 3,
+          "j": 4,
+          "range": [3.2, 3.8]
+        },
+        {
+          "label": "Beschleunigung",
+          "symbol": "a_x",
+          "unit": "m/s²",
+          "ask": "a",
+          "i": 0,
+          "range": [1.6, 2.4],
+          "hints": [
+            {
+              "value": 1,
+              "tol": 0.15,
+              "text": "Das ist Δx/Δt² für ein einzelnes Bild-Paar. Nimm die Änderung der Geschwindigkeit pro Zeit."
+            }
+          ],
+          "help": "Zwischen den Mitten der Zeitabstände 1→2 und 4→5 liegen 3 · 0,50 s = 1,5 s. a = Δv / Δt."
+        }
+      ]
+    },
+    "success": [
+      ["florian", "Von 0,50 m/s auf 3,5 m/s in 1,5 s: a = 2,0 m/s². Das Stroboskopbild ist ein Messgerät!"],
+      ["slavi", "Mein Foto, ein Messgerät. Ich erhöhe meine Preise."]
+    ]
+  },
+  {
+    "id": "t53-schwer-strobo-bauen",
+    "title": "Gas und Bremse",
+    "from": "slavi",
+    "node": "fotolabor",
+    "requires": ["t52-schwer-strobo-rechnen"],
+    "reward": 140,
+    "difficulty": "schwer",
+    "intro": [
+      ["slavi", "Mein letztes Projekt: eine Kugel auf einer Rinne mit Hügel. Erst rollt sie bergab und wird schneller, dann bergauf und wird langsamer."],
+      ["slavi", "Die Kamera … du weißt Bescheid. Ein letztes Mal, Florian. Für die Kunst!"]
+    ],
+    "task": {
+      "type": "strobebuild",
+      "motion": {
+        "kind": "kin",
+        "x0": 0,
+        "segments": [
+          {
+            "dt": 2,
+            "a": 2
+          },
+          {
+            "dt": 2,
+            "a": -2
+          }
+        ]
+      },
+      "flash": {
+        "n": 9,
+        "dt": 0.5
+      },
+      "photo": {
+        "bg": "city",
+        "obj": "ball"
+      },
+      "explain": "Erst wachsen die Abstände (beschleunigt), dann schrumpfen sie wieder (verzögert). Der größte Abstand liegt in der Mitte.",
+      "paper": "Zwei Abschnitte: In der ersten Hälfte wachsen die Abstände wie 1 : 3 : 5 : 7, in der zweiten schrumpfen sie wie 7 : 5 : 3 : 1."
+    },
+    "success": [
+      ["slavi", "Wachsend, dann schrumpfend. Ein Bild wie ein Atemzug. Florian, du bist ein Künstler."],
+      ["florian", "Und ein Physiker. Das schließt sich zum Glück nicht aus."]
+    ]
   }
 ]

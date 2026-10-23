@@ -1,0 +1,8 @@
+{
+  "id": "kevin-wende",
+  "title": "Kevin wendet auf der Straße",
+  "actors": [
+    { "id": "kevin", "name": "Kevin", "sprite": "kevin", "x0": 0,
+      "segments": [ { "dt": 2, "v": 4 }, { "dt": 4, "a": -2 }, { "dt": 2, "v": -4 } ] }
+  ]
+}

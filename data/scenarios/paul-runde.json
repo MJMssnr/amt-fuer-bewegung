@@ -1,0 +1,8 @@
+{
+  "id": "paul-runde",
+  "title": "Pauls Zustellrunde",
+  "actors": [
+    { "id": "plan", "name": "Paul (Plan)", "sprite": "postbote", "x0": 0,
+      "segments": [ { "dt": 4, "v": 3 }, { "dt": 2, "v": 0 }, { "dt": 4, "v": -1.5 }, { "dt": 3, "v": 2 } ] }
+  ]
+}

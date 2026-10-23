@@ -1,0 +1,8 @@
+{
+  "id": "jo-halfpipe",
+  "title": "Jo in der Halfpipe",
+  "actors": [
+    { "id": "jo", "name": "Jo", "sprite": "jo", "x0": 0,
+      "segments": [ { "dt": 2, "a": 2 }, { "dt": 2, "v": 4 }, { "dt": 2, "a": -2 }, { "dt": 2, "a": -2 } ] }
+  ]
+}

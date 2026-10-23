@@ -1,0 +1,8 @@
+{
+  "id": "regie-einholen",
+  "title": "Imagefilm 2: Die Verfolgungsjagd",
+  "actors": [
+    { "id": "paul", "name": "Paul Paket", "sprite": "postbote", "x0": 0, "segments": [ { "dt": 25, "v": 3 } ] },
+    { "id": "kevin", "name": "Kevin", "sprite": "kevin", "x0": 0, "segments": [ { "dt": 25, "v": 0 } ] }
+  ]
+}
