@@ -132,7 +132,7 @@ export function sfx(name) {
   else if (name === 'bell') { tone(2100, 0, 0.12, 'sine', 0.12); tone(2100, 0.16, 0.25, 'sine', 0.1); }
 }
 
-/** Trillerpfeife (Sportunterricht) für den g.Z.-Polizisten: hoher Ton mit schnellem Triller */
+/** Trillerpfeife (Sportunterricht) für den Gültige-Ziffern-Polizisten: hoher Ton mit schnellem Triller */
 function whistle() {
   const t = ctx.currentTime;
   const o = ctx.createOscillator(), g = ctx.createGain(), lfo = ctx.createOscillator(), lg = ctx.createGain();

@@ -38,4 +38,8 @@ Hinweis: Sitzung 1 wurde nachträglich aus einer Zusammenfassung des Chats rekon
 | W26 | Shop: neue Gegenstände (Vitrine mit mechanischen Rechenmaschinen, Schachbrett, Schlafcouch, Discokugel, 3 große Pflanzen, Bild „Mitarbeiter des Monats“, Waschbär Bärti mit Animationen und Kuscheln). Rennrad und rotes Rennmotorrad als Fortbewegung auf der Karte (umschaltbar, Animation, Motorgeräusch, Wheelie/Stoppie/Knieschleifen) | 5f24f6f, 23b7289 |
 | W27 | Freischaltplan aktualisieren; Liste, zu welchen Aufträgen schon Feedback kam → `docs/PLAYTEST.md`. Alles im Repo festhalten, damit die nächste Sitzung (ab ca. 20 Uhr) nahtlos weitermacht | dieser Commit |
 
+| W28 | Sitzung 3, Playtest-Sammelpunkte: ±-Knopf an allen Zahlenfeldern; Aufgaben passen nicht aufs Handy quer (Hinweise kleiner, Diagramme/Beschriftung größer, Scroll-Pfeile); F: Geschwindigkeiten vorher ausrechnen, Knopf „halbe Geschwindigkeit“, späte F nur Eckpunkte; B viel kulanter (Finger 1,5 cm); eine Reaktions-Aufgabe streichen (t21); Karte: Bewegung umlenken; Umbenennung „Gültige-Ziffern-Polizei“; einmaliges Lob nach 2. Verwarnung | c9704c5, 761f5f9, 199ff04, (dieser Commit) |
+
 **Stand Ende Sitzung 2:** 53 Aufträge (A–O, je ein schwerer), 4950 € verdienbar, Shop 23 Gegenstände für 2265 €. Offen: siehe `ROADMAP.md` und `PLAYTEST.md`.
+
+**Stand Sitzung 3 (W28):** 52 Aufträge, 4880 € verdienbar.

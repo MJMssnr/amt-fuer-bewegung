@@ -5,11 +5,11 @@
 
 import { isClose, matchHint } from '../engine/answer.js';
 import { fmt, parseNum } from '../render/format.js';
-import { sigPatrol } from '../ui/police.js';
+import { sigPatrol, sigPraise } from '../ui/police.js';
 
 const sym = (s) => (s ? s.replace(/_(\w+)/, '<sub>$1</sub>') : '');
 
-// sig: g.Z.-Polizist aktiv (Standard ja; pro Frage abschaltbar mit q.sig = false) [W16]
+// sig: Gültige-Ziffern-Polizist aktiv (Standard ja; pro Frage abschaltbar mit q.sig = false) [W16]
 export function questionBlock(container, qs, { onSolved, rule = true, sig = true }) {
   container.insertAdjacentHTML('beforeend', `
     <form class="calc-list" autocomplete="off"></form>
@@ -71,7 +71,9 @@ export function questionBlock(container, qs, { onSolved, rule = true, sig = true
     if (allRight) {
       fb.className = 'feedback ok';
       fb.textContent = wrongChecks ? 'Jetzt stimmt alles!' : 'Alles richtig, sauber gerechnet!';
-      finish(wrongChecks ? 'partial' : 'perfect');
+      done = true;
+      sigPraise(qs.map((q, i) => ({ input: inputs[i], truth: q.truth, sig: q.sig })), { enabled: sig })
+        .finally(() => finish(wrongChecks ? 'partial' : 'perfect'));
       return;
     }
     wrongChecks++;

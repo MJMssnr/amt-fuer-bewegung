@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 53, verdienbar: 4950 €.
+Anzahl Aufträge: 52, verdienbar: 4880 €.
 
 ```mermaid
 flowchart LR
@@ -29,7 +29,6 @@ flowchart LR
   t18_konstrukt_kevin["<b>I</b> Hausaufgabe: Selbst zeichnen!<br/><small>Frau Dr. Ohm · Schule · 80 €</small>"]:::tI
   t19_konstrukt_bus["<b>I</b> Hausaufgabe: Der Bus<br/><small>Frau Dr. Ohm · Schule · 90 €</small>"]:::tI
   t20_konstrukt_wagen["<b>I</b> Hausaufgabe: Die Falle<br/><small>Frau Dr. Ohm · Schule · 100 €</small>"]:::tI
-  t21_reaktion_rad["<b>J</b> Die Schrecksekunde<br/><small>Frau Dr. Ohm · Schule · 70 €</small>"]:::tJ
   t22_reaktion_auto["<b>J</b> Tempo 30 vor der Schule?<br/><small>Bürgermeisterin Kranz · Rathaus · 90 €</small>"]:::tJ
   t23_freihand_brezel["<b>B</b> Brezels Tagebuch<br/><small>Bäckermeister Huber · Bäckerei · 80 €</small>"]:::tB
   t24_flaeche_jo["<b>K</b> Wie lang ist mein Run?<br/><small>Jo · Skatepark · 80 €</small>"]:::tK
@@ -86,8 +85,7 @@ flowchart LR
   t03_bus --> t19_konstrukt_bus
   t19_konstrukt_bus --> t20_konstrukt_wagen
   t08_einkaufswagen --> t20_konstrukt_wagen
-  t02_kevin --> t21_reaktion_rad
-  t21_reaktion_rad --> t22_reaktion_auto
+  t02_kevin --> t22_reaktion_auto
   t15_live_brezel --> t23_freihand_brezel
   t07_skater --> t24_flaeche_jo
   t09_tacho --> t25_flaeche_kevin
@@ -149,7 +147,7 @@ flowchart LR
 | G | Beschreiben | 3 |
 | H | Berechnen | 3 |
 | I | Konstrukteur | 4 |
-| J | Reaktionstest | 3 |
+| J | Reaktionstest | 2 |
 | K | Flächen-Puzzle | 4 |
 | L | Steigungsdreieck | 4 |
 | M | Stroboskop: rechnen | 3 |
@@ -179,8 +177,7 @@ flowchart LR
 | Hausaufgabe: Selbst zeichnen! | I | Frau Dr. Ohm | Schule | 80 € | Bremsen durch? |
 | Hausaufgabe: Der Bus | I | Frau Dr. Ohm | Schule | 90 € | Hausaufgabe: Selbst zeichnen!, Ruckelt der Bus? |
 | Hausaufgabe: Die Falle | I | Frau Dr. Ohm | Schule | 100 € | Hausaufgabe: Der Bus, Der Einkaufswagen |
-| Die Schrecksekunde | J | Frau Dr. Ohm | Schule | 70 € | Bremsen durch? |
-| Tempo 30 vor der Schule? | J | Bürgermeisterin Kranz | Rathaus | 90 € | Die Schrecksekunde |
+| Tempo 30 vor der Schule? | J | Bürgermeisterin Kranz | Rathaus | 90 € | Bremsen durch? |
 | Brezels Tagebuch | B | Bäckermeister Huber | Bäckerei | 80 € | Brezels Ersatzrunde |
 | Wie lang ist mein Run? | K | Jo | Skatepark | 80 € | Zu schnell im Skatepark? |
 | Hin und zurück | K | Kevin | Radl-Eck | 90 € | Der verschmierte Ausdruck |

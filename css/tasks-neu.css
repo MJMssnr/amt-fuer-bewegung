@@ -17,7 +17,7 @@
 .g-band.sl-seg { fill: rgba(255, 205, 117, .28); pointer-events: none; }
 .sl-info { margin: 4px 0; font-size: 13px; }
 
-/* g.Z.-Polizist: drängt sich groß ins Rätselfenster */
+/* Gültige-Ziffern-Polizist: drängt sich groß ins Rätselfenster */
 .police { position: absolute; inset: 0; z-index: 25; display: flex; align-items: flex-end; justify-content: center; gap: 14px; padding: 10px 16px 14px;
   background: rgba(26, 28, 44, .55); cursor: pointer; animation: pol-dim .3s ease-out both; }
 .police .pol-fig { position: relative; flex: none; animation: pol-in .45s cubic-bezier(.2, 1.4, .4, 1) both; transform-origin: bottom center; }

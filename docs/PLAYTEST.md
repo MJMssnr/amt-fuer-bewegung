@@ -29,7 +29,7 @@
 - E: Ralf und die Bremse, Ralfs Busfahrt
 - F: Brezels Ersatzrunde, Oma Gerda am Zebrastreifen, Kevins Express-Lieferung
 - I: Hausaufgabe: Selbst zeichnen!, Hausaufgabe: Die Falle
-- J: Die Schrecksekunde, Tempo 30 vor der Schule?
+- J: Tempo 30 vor der Schule? (t21 „Die Schrecksekunde“ gestrichen [W28])
 - B: Brezels Tagebuch (Herr Messner will Freihand explizit testen)
 - K: Wie lang ist mein Run?, Hin und zurück, Wie knapp war's?
 - L: Ralfs positive Rückwärtsrechnung, Bremst Ötzi zu scharf?

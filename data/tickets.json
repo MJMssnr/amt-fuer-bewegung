@@ -724,48 +724,11 @@
     ]
   },
   {
-    "id": "t21-reaktion-rad",
-    "title": "Die Schrecksekunde",
-    "from": "ohm",
-    "node": "schule",
-    "requires": ["t02-kevin"],
-    "reward": 70,
-    "scenario": {
-      "actors": [
-        {
-          "id": "me",
-          "sprite": "cyclist",
-          "segments": [
-            {
-              "dt": 1,
-              "v": 0
-            }
-          ]
-        }
-      ]
-    },
-    "intro": [
-      ["ohm", "Projekttag Verkehrssicherheit! Heute messen wir eure eigene Reaktionszeit."],
-      ["florian", "Meine eigene? Dann rechne ich gleich meinen eigenen Anhalteweg aus."]
-    ],
-    "task": {
-      "type": "reaction",
-      "v_kmh": 25,
-      "a": 4,
-      "sprite": "cyclist",
-      "vehicle": "mit dem Fahrrad"
-    },
-    "success": [
-      ["ohm", "Merke: Bei doppelter Geschwindigkeit wird der Reaktionsweg doppelt so lang, der Bremsweg aber viermal so lang!"],
-      ["florian", "Und mit dem Handy in der Hand wird die Reaktionszeit noch länger. Ich fahr ab jetzt ohne."]
-    ]
-  },
-  {
     "id": "t22-reaktion-auto",
     "title": "Tempo 30 vor der Schule?",
     "from": "kranz",
     "node": "rathaus",
-    "requires": ["t21-reaktion-rad"],
+    "requires": ["t02-kevin"],
     "reward": 90,
     "scenario": {
       "actors": [
@@ -783,7 +746,7 @@
     },
     "intro": [
       ["kranz", "Herr Doktor Brandl, der Stadtrat streitet: Tempo 30 vor der Schule oder nicht? Wir brauchen Fakten!"],
-      ["florian", "Ich messe meine Reaktionszeit nochmal und rechne den Anhalteweg bei Tempo 50 aus."]
+      ["florian", "Ich messe meine Reaktionszeit und rechne den Anhalteweg bei Tempo 50 aus."]
     ],
     "task": {
       "type": "reaction",

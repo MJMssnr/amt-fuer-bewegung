@@ -1,13 +1,14 @@
-// Der g.Z.-Polizist [W16]: drängt sich mit Trillerpfeife groß ins Rätselfenster, wenn eine Eingabe
+// Der Gültige-Ziffern-Polizist [W16]: drängt sich mit Trillerpfeife groß ins Rätselfenster, wenn eine Eingabe
 // nur 1 gültige Ziffer hat (immer zu wenig!) oder 4 und mehr (zu genau). Kein Geldabzug.
 // Texte: data/police.json. Regeln: js/engine/sigfig.js.
 
-import { sigVerdict, sigSuggest } from '../engine/sigfig.js';
+import { sigVerdict, sigSuggest, countSig } from '../engine/sigfig.js';
 import { parseNum } from '../render/format.js';
 import { getSprite } from '../render/pixel.js';
 import { speakChar, voiceSpeed, sfx } from '../audio/sound.js';
 
 const KEY = 'amt-fuer-bewegung.gz-verwarnungen';
+const KEY_PRAISE = 'amt-fuer-bewegung.gz-lob';
 const VOICE = 'mann_kraeftig';
 let texts = null;
 let shownThisTask = false;
@@ -42,9 +43,31 @@ export async function sigPatrol(fields, { enabled = true, host } = {}) {
   return false;
 }
 
+/**
+ * Lob [W28]: einmalig, nachdem schon mindestens zweimal verwarnt wurde. Kommt, wenn eine richtige Antwort
+ * „eigentlich“ nur eine Ziffer hat (z. B. 8) und der Spieler trotzdem „8,0“ getippt hat.
+ * fields: [{ input, truth, sig?: false }]
+ */
+export async function sigPraise(fields, { enabled = true, host } = {}) {
+  if (!enabled || shownThisTask || warnings() < 2) return false;
+  try { if (localStorage.getItem(KEY_PRAISE)) return false; } catch { return false; }
+  for (const f of fields) {
+    const v = f.truth;
+    if (f.sig === false || !Number.isFinite(v) || v === 0) continue;
+    if (Number(v.toPrecision(1)) !== Number(v.toPrecision(2))) continue; // hat „natürlich“ 2 Ziffern
+    if (Math.abs(v) >= 10 && Number.isInteger(v)) continue;            // 80 → schon 2 g.Z. ohne Komma
+    if (countSig(f.input.value) < 2) continue;
+    shownThisTask = true;
+    try { localStorage.setItem(KEY_PRAISE, '1'); } catch { /* egal */ }
+    await showPolice(host ?? document.getElementById('task'), { kind: 'praise', input: f.input.value.trim(), suggest: '' });
+    return true;
+  }
+  return false;
+}
+
 export async function showPolice(host, { kind, input, suggest }) {
   const T = await loadTexts();
-  const n = warnings(1);
+  const n = kind === 'praise' ? warnings() : warnings(1);
   const lines = T[kind].map((l) => ({ mood: l.mood, text: l.text[(n - 1) % l.text.length]
     .replace('{input}', input).replace('{suggest}', suggest).replace('{n}', n) }));
 

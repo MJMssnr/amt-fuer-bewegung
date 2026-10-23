@@ -1,15 +1,21 @@
 {
-  "_info": "Texte des g.Z.-Polizisten [W16]. Pro Zeile werden Varianten reihum gewählt (Verwarnungs-Nr.). Platzhalter: {input} = Eingabe, {suggest} = Vorschlag, {n} = Nr. der Verwarnung. mood: angry (roter Kopf, stampft), calm, happy (Pixelherz).",
-  "name": "g.Z.-Polizist",
+  "_info": "Texte des Gültige-Ziffern-Polizisten [W16]. Pro Zeile werden Varianten reihum gewählt (Verwarnungs-Nr.). Platzhalter: {input} = Eingabe, {suggest} = Vorschlag, {n} = Nr. der Verwarnung. mood: angry (roter Kopf, stampft), calm, happy (Pixelherz). praise: einmaliges Lob nach ≥ 2 Verwarnungen [W28].",
+  "name": "Gültige-Ziffern-Polizei",
   "few": [
-    { "mood": "angry", "text": ["TRRRILLLL! Halt! Stehen bleiben! g.Z.-Polizei!", "TRRRILLLL! Moment, Moment, MOMENT! g.Z.-Polizei!", "TRRRILLLL! Da ist es schon wieder passiert! g.Z.-Polizei!"] },
+    { "mood": "angry", "text": ["TRRRILLLL! Halt! Stehen bleiben! Gültige-Ziffern-Polizei!", "TRRRILLLL! Moment, Moment, MOMENT! Gültige-Ziffern-Polizei!", "TRRRILLLL! Da ist es schon wieder passiert! Gültige-Ziffern-Polizei!"] },
     { "mood": "angry", "text": ["„{input}“?! Nur EINE gültige Ziffer?! Eine gültige Ziffer ist IMMER zu wenig!", "„{input}“? Eine einzige gültige Ziffer? Eine gültige Ziffer ist IMMER zu wenig!"] },
     { "mood": "calm", "text": ["Schon gut, schon gut. Im Amt ist viel los, das verstehe ich. Schreiben Sie „{suggest}“ – dann sieht jeder, wie genau Sie gearbeitet haben.", "Tief durchatmen. „{suggest}“ hätte gereicht. Die Null hinten ist nicht nichts, die ist eine gültige Ziffer!"] },
     { "mood": "calm", "text": ["Das ist Verwarnung Nr. {n}. Diesmal ohne Bußgeld. Aber ich komme wieder – jedes Mal, wenn gültige Ziffern missachtet werden!", "Verwarnung Nr. {n}. Ich hab Sie im Auge. Und ich komme wieder, wieder und wieder!"] },
     { "mood": "happy", "text": ["Danke für Ihre Mitarbeit im Amt für Bewegung aller Art!", "Weitermachen! Und danke für Ihre Mitarbeit im Amt für Bewegung aller Art!"] }
   ],
+  "praise": [
+    { "mood": "angry", "text": ["TRRRILLLL! Halt! Stehen bleiben! Gültige-Ziffern-Polizei!"] },
+    { "mood": "calm", "text": ["Moment … „{input}“. Lassen Sie mich das genau ansehen …"] },
+    { "mood": "happy", "text": ["Zwei gültige Ziffern! Obwohl man so leicht nur eine geschrieben hätte! Diesmal haben Sie dran gedacht!"] },
+    { "mood": "happy", "text": ["Das ist keine Verwarnung, das ist ein LOB! Ich bin stolz auf Sie. Weiter so im Amt für Bewegung aller Art!"] }
+  ],
   "many": [
-    { "mood": "angry", "text": ["TRRRILLLL! Halt! g.Z.-Polizei! Hier wird übertrieben!", "TRRRILLLL! Langsam, langsam! g.Z.-Polizei!"] },
+    { "mood": "angry", "text": ["TRRRILLLL! Halt! Gültige-Ziffern-Polizei! Hier wird übertrieben!", "TRRRILLLL! Langsam, langsam! Gültige-Ziffern-Polizei!"] },
     { "mood": "angry", "text": ["„{input}“?! So genau kann das hier niemand messen! Zwei, höchstens drei gültige Ziffern reichen.", "„{input}“? Haben Sie ein Laser-Interferometer dabei? Zwei, höchstens drei gültige Ziffern!"] },
     { "mood": "calm", "text": ["Gut gemeint, ich weiß. Aber mehr Ziffern als die Messung hergibt, täuschen Genauigkeit nur vor. „{suggest}“ ist ehrlicher.", "Der Taschenrechner zeigt viele Ziffern, aber die Messung kennt nur wenige. Runden Sie: „{suggest}“."] },
     { "mood": "calm", "text": ["Das ist Verwarnung Nr. {n}. Ohne Bußgeld. Aber ich komme wieder – jedes Mal, wenn gültige Ziffern missachtet werden!", "Verwarnung Nr. {n}. Ich bin nie weit weg. Nie!"] },

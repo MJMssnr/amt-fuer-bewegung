@@ -66,7 +66,7 @@ js/tasks/area.js           K: Flächen-Puzzle
 js/tasks/slope.js          L: Steigungsdreieck
 js/tasks/direct.js         D: Regie (Engine: js/engine/direct.js)
 js/tasks/strobe*.js        M/N/O: Stroboskop rechnen/beschreiben/bauen (Engine js/engine/strobe.js, Bild js/render/strobe.js)
-js/ui/police.js            g.Z.-Polizist (Texte data/police.json, Regeln js/engine/sigfig.js)
+js/ui/police.js            Gültige-Ziffern-Polizist (Texte data/police.json, Regeln js/engine/sigfig.js)
 js/render/fotolabor.js     Slavis Fotolabor auf der Karte
 js/tasks/questions.js      Gemeinsamer Eingabe-/Prüfblock für H, C und Reaktionstest
 js/tasks/distractors.js    Distraktoren aus Fehlvorstellungen (CATALOG)
@@ -91,7 +91,7 @@ data/story.json            Figuren (mit "voice": florian | frau_mittel | frau_al
 data/map.json              Orte, Straßen, Bäume
 data/shop.json             Gegenstände, Preise, Klicktexte; Raketenteile (nur Pakete, nicht kaufbar) und Paket-Texte
 data/finale.json           Texte des Finales
-data/police.json           Texte des g.Z.-Polizisten
+data/police.json           Texte des Gültige-Ziffern-Polizisten
 assets/sprites.json        Pixel-Sprites (erzeugt von tools/gensprites.mjs); assets/img/ für eigene PNGs
 schema/                    Formatbeschreibung der JSON-Dateien
 ```
