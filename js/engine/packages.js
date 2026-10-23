@@ -3,8 +3,8 @@
 // (wachsende Abstände). Teil 7 (mit Anleitung) erst, wenn ALLE Aufträge probiert wurden und
 // mindestens 80 % voll oder halb gelöst sind.
 
-// Abstände wachsen (6, 7, 9, 10, 12); letztes Teilpaket bei ~73 % der Aufträge. Angepasst an 66 Aufträge [W33]
-export const THRESHOLDS = [4, 10, 17, 26, 36, 48];
+// Abstände wachsen (6, 7, 9, 11, 13); letztes Teilpaket bei ~73 % der Aufträge. Angepasst an 69 Aufträge [W33]
+export const THRESHOLDS = [4, 10, 17, 26, 37, 50];
 export const FINAL_RATE = 0.8;
 
 /** Wie viele Pakete stehen dem Spieler zu? */

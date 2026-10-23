@@ -2288,7 +2288,7 @@
     "title": "Wie tief ist der Wunschbrunnen?",
     "from": "gerda",
     "node": "park",
-    "requires": ["t56-formel-eauto"],
+    "requires": ["t71-formel-modellflieger"],
     "reward": 110,
     "intro": [
       ["gerda", "Junger Mann! Im Park steht doch der alte Wunschbrunnen. Seit siebzig Jahren frage ich mich, wie tief der ist."],
@@ -2373,10 +2373,10 @@
     "title": "Übungsblatt: Wer gehört zu wem?",
     "from": "ohm",
     "node": "schule",
-    "requires": ["t04-brezel"],
+    "requires": ["t69-verbinden-gerade"],
     "reward": 70,
     "intro": [
-      ["ohm", "Florian, kleines Übungsblatt für zwischendurch. Drei t-x-Diagramme, drei t-vₓ-Diagramme – leider ist der Kopierer durcheinandergekommen."],
+      ["ohm", "Florian, noch ein kleines Übungsblatt für zwischendurch. Drei t-x-Diagramme, drei t-vₓ-Diagramme – leider ist der Kopierer durcheinandergekommen."],
       ["florian", "Ich verbinde einfach, was zusammengehört. Steigung im t-x-Diagramm ist vₓ."]
     ],
     "task": {
@@ -2433,10 +2433,10 @@
     "title": "Übungsblatt: Drei Kurven",
     "from": "ohm",
     "node": "schule",
-    "requires": ["t58-verbinden-uebung", "t08-einkaufswagen"],
+    "requires": ["t70-verbinden-klassisch", "t08-einkaufswagen"],
     "reward": 90,
     "intro": [
-      ["ohm", "Zweites Übungsblatt. Diesmal sind alle drei Bewegungen beschleunigt, und die Kurven sehen sich ziemlich ähnlich."],
+      ["ohm", "Neues Übungsblatt. Diesmal sind alle drei Bewegungen beschleunigt, und die Kurven sehen sich ziemlich ähnlich."],
       ["florian", "Dann schau ich genau hin: Wird die Kurve steiler oder flacher? Steigt sie oder fällt sie?"]
     ],
     "task": {
@@ -2956,6 +2956,189 @@
     "success": [
       ["hilde", "Bravo! Das Publikum wird toben. Fünf Abschnitte, und man sieht in jedem, was die Physik macht."],
       ["florian", "Die Kurven im Finger zu spüren ist was ganz anderes, als sie nur zu zeichnen."]
+    ]
+  },
+  {
+    "id": "t69-verbinden-gerade",
+    "title": "Erstes Übungsblatt: Steil, flach, fallend",
+    "from": "ohm",
+    "node": "schule",
+    "requires": ["t03-bus", "t04-brezel"],
+    "reward": 60,
+    "difficulty": "leicht",
+    "intro": [
+      ["ohm", "Florian, Frau Dr. Ohm hier, Physik an der FOS. Wer ein Amt für Bewegung leitet, braucht ordentliches Handwerkszeug!"],
+      ["ohm", "Dann brauchst du das Handwerkszeug. Erstes Übungsblatt: drei t-x-Diagramme, drei t-vₓ-Diagramme. Verbinde, was zusammengehört."],
+      ["florian", "Die Steigung im t-x-Diagramm ist vₓ. Steil heißt schnell, fallend heißt rückwärts."]
+    ],
+    "task": {
+      "type": "pairs",
+      "left": "xt",
+      "right": "vt",
+      "prompt": "Verbinde jedes t-x-Diagramm (links) mit dem passenden t-vₓ-Diagramm (rechts): Linie mit dem Finger ziehen.",
+      "help": "Steigung im t-x-Diagramm = vₓ. Steile Gerade: großes vₓ, flache Gerade: kleines vₓ, fallende Gerade: vₓ negativ.",
+      "items": [
+        {
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 6,
+              "v": 3
+            }
+          ]
+        },
+        {
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 6,
+              "v": 1
+            }
+          ]
+        },
+        {
+          "x0": 12,
+          "segments": [
+            {
+              "dt": 6,
+              "v": -2
+            }
+          ]
+        }
+      ]
+    },
+    "success": [
+      ["ohm", "Sehr gut. Eine Gerade im t-x-Diagramm heißt gleichförmig – und im t-vₓ-Diagramm wird daraus eine waagrechte Linie."],
+      ["florian", "Je steiler im t-x, desto höher im t-vₓ. Und fallend landet unter der Achse."]
+    ]
+  },
+  {
+    "id": "t70-verbinden-klassisch",
+    "title": "Übungsblatt: Losfahren, fahren, bremsen",
+    "from": "ohm",
+    "node": "schule",
+    "requires": ["t58-verbinden-uebung"],
+    "reward": 80,
+    "difficulty": "leicht",
+    "intro": [
+      ["ohm", "Der Klassiker, der in jeder Schulaufgabe drankommt: Anfahren, gleichförmig fahren, Bremsen."],
+      ["florian", "Gerade im t-x heißt konstante Geschwindigkeit. Und die Kurven? Linkskurve schneller, Rechtskurve langsamer."]
+    ],
+    "task": {
+      "type": "pairs",
+      "left": "xt",
+      "right": "vt",
+      "prompt": "Anfahren, gleichförmig, bremsen: Verbinde jedes t-x-Diagramm mit dem passenden t-vₓ-Diagramm.",
+      "paper": "Gerade im t-x: vₓ bleibt gleich. Kurve, die steiler wird: vₓ wächst. Kurve, die flacher wird: vₓ nimmt ab.",
+      "help": "Wird die t-x-Kurve steiler, wächst vₓ (steigende Linie im t-vₓ). Wird sie flacher, sinkt vₓ.",
+      "items": [
+        {
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 4,
+              "v0": 0,
+              "a": 1
+            }
+          ]
+        },
+        {
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 4,
+              "v": 2
+            }
+          ]
+        },
+        {
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 4,
+              "v0": 4,
+              "a": -1
+            }
+          ]
+        }
+      ]
+    },
+    "success": [
+      ["ohm", "Genau so: Anfahren ist eine Linkskurve, Bremsen eine Rechtskurve, gleichförmig eine Gerade. Das sitzt jetzt!"],
+      ["florian", "Und im t-vₓ-Diagramm werden daraus drei Geraden: steigend, waagrecht, fallend."]
+    ]
+  },
+  {
+    "id": "t71-formel-modellflieger",
+    "title": "Hildes Modellflieger",
+    "from": "hilde",
+    "node": "werkstatt",
+    "requires": ["t56-formel-eauto", "t11-stadtlauf"],
+    "reward": 100,
+    "intro": [
+      ["hilde", "Florian, schau! Mein neuer Modellflieger. Er hebt ab, sobald er 12 m/s schnell ist."],
+      ["hilde", "Meine Startbahn auf der Wiese ist aber nur 18 m lang. Wie stark muss der Motor ihn mindestens beschleunigen?"],
+      ["florian", "Keine Zeit gegeben – also die Formel ohne t: v₁² − v₀² = 2·a·Δx. Er startet aus dem Stand."]
+    ],
+    "task": {
+      "type": "formula",
+      "prompt": "Welche Beschleunigung braucht der Modellflieger mindestens, um auf 18 m abzuheben?",
+      "paper": "Aus dem Stand heißt v₀ = 0. Dann bleibt v₁² = 2·a·Δx. Nach a umstellen, erst dann einsetzen.",
+      "formula": "v₁² − v₀² = 2 · a · Δx   (v₀ = 0)",
+      "solveFor": "a",
+      "known": [
+        {
+          "name": "v",
+          "sym": "v₁",
+          "value": 12,
+          "unit": "m/s",
+          "text": "12 m/s"
+        },
+        {
+          "name": "x",
+          "sym": "Δx",
+          "value": 18,
+          "unit": "m",
+          "text": "18 m"
+        }
+      ],
+      "choices": [
+        {
+          "text": "a = v₁² / (2·Δx)",
+          "correct": true
+        },
+        {
+          "text": "a = v₁ / (2·Δx)",
+          "feedback": "Das Quadrat fehlt: In der Formel steht v₁²."
+        },
+        {
+          "text": "a = 2·Δx / v₁²",
+          "feedback": "Der Bruch steht auf dem Kopf. Probe mit Einheiten: m / (m²/s²) = s²/m, nicht m/s²."
+        },
+        {
+          "text": "a = v₁² / Δx",
+          "feedback": "Wohin ist die 2 verschwunden? Durch 2·Δx teilen, nicht nur durch Δx."
+        }
+      ],
+      "expr": "v*v/(2*x)",
+      "label": "Mindest-Beschleunigung",
+      "symbol": "a",
+      "unit": "m/s²",
+      "hints": [
+        {
+          "value": 8,
+          "text": "Da fehlt die 2 im Nenner: a = v₁² / (2·Δx)."
+        },
+        {
+          "value": 0.33,
+          "text": "Hast du v₁ quadriert? (12 m/s)² = 144 m²/s²."
+        }
+      ],
+      "help": "a = (12 m/s)² / (2 · 18 m) = 144 m²/s² / 36 m"
+    },
+    "success": [
+      ["florian", "a = (12 m/s)² / (2 · 18 m) = 4,0 m/s². Schwächer darf der Motor nicht sein."],
+      ["hilde", "Vier Meter pro Sekundenquadrat – der Motor schafft fünf. Dann nichts wie raus auf die Wiese!"]
     ]
   }
 ]

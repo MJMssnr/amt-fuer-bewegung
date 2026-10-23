@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 64, verdienbar: 6100 €.
+Anzahl Aufträge: 69, verdienbar: 6620 €.
 
 ```mermaid
 flowchart LR
@@ -20,9 +20,9 @@ flowchart LR
   t09_tacho["<b>C</b> Der verschmierte Ausdruck<br/><small>Kevin · Radl-Eck · 80 €</small>"]:::tC
   t10_ampelkamera["<b>C</b> Die nasse Ampelkamera<br/><small>Busfahrer Ötzi · Busbahnhof · 80 €</small>"]:::tC
   t11_stadtlauf["<b>C</b> Der Stadtlauf<br/><small>Bürgermeisterin Kranz · Rathaus · 90 €</small>"]:::tC
-  t12_ralf_brezel["<b>E</b> Ralfs erstes Diagramm<br/><small>Ralf · Rathaus · 70 €</small>"]:::tE
-  t13_ralf_kevin["<b>E</b> Ralf und die Bremse<br/><small>Ralf · Rathaus · 80 €</small>"]:::tE
-  t14_ralf_bus["<b>E</b> Ralfs Busfahrt<br/><small>Ralf · Rathaus · 90 €</small>"]:::tE
+  t12_ralf_brezel["<b>E</b> Ralfs erstes Diagramm<br/><small>Ralf · Bäckerei · 70 €</small>"]:::tE
+  t13_ralf_kevin["<b>E</b> Ralf und die Bremse<br/><small>Ralf · Hobbywerkstatt · 80 €</small>"]:::tE
+  t14_ralf_bus["<b>E</b> Ralfs Busfahrt<br/><small>Ralf · Busbahnhof · 90 €</small>"]:::tE
   t15_live_brezel["<b>F</b> Brezels Ersatzrunde<br/><small>Bäckermeister Huber · Bäckerei · 70 €</small>"]:::tF
   t17_live_kevin["<b>F</b> Kevins Express-Lieferung<br/><small>Kevin · Radl-Eck · 90 €</small>"]:::tF
   t18_konstrukt_kevin["<b>I</b> Hausaufgabe: Selbst zeichnen!<br/><small>Frau Dr. Ohm · Schule · 80 €</small>"]:::tI
@@ -34,22 +34,22 @@ flowchart LR
   t25_flaeche_kevin["<b>K</b> Hin und zurück<br/><small>Kevin · Radl-Eck · 90 €</small>"]:::tK
   t26_flaeche_wagen["<b>K</b> Wie knapp war's?<br/><small>Filialleiterin Yıldız · Supermarkt · 100 €</small>"]:::tK
   t27_steigung_blitz["<b>L</b> Der rote Blitz am Abend<br/><small>Frau Brösel · Lindenstraße · 70 €</small>"]:::tL
-  t28_steigung_ralf["<b>L</b> Ralfs positive Rückwärtsrechnung<br/><small>Ralf · Rathaus · 80 €</small>"]:::tL
+  t28_steigung_ralf["<b>L</b> Ralfs positive Rückwärtsrechnung<br/><small>Ralf · Stadtpark · 80 €</small>"]:::tL
   t29_steigung_bus["<b>L</b> Bremst Ötzi zu scharf?<br/><small>Busfahrer Ötzi · Busbahnhof · 90 €</small>"]:::tL
   t30_regie_imagefilm["<b>D</b> Der Imagefilm<br/><small>Bürgermeisterin Kranz · Rathaus · 90 €</small>"]:::tD
   t31_strobo_erstes["<b>O</b> Das erste Blitzfoto<br/><small>Slavi · Fotolabor · 60 €</small>"]:::tO
-  t32_strobo_kevin["<b>M</b> Kevin im Blitzlicht<br/><small>Slavi · Fotolabor · 70 €</small>"]:::tM
-  t33_strobo_fallschirm["<b>N</b> Der schwebende Springer<br/><small>Slavi · Fotolabor · 70 €</small>"]:::tN
+  t32_strobo_kevin["<b>M</b> Kevin im Blitzlicht<br/><small>Slavi · Stadtpark · 70 €</small>"]:::tM
+  t33_strobo_fallschirm["<b>N</b> Der schwebende Springer<br/><small>Slavi · Lindenstraße · 70 €</small>"]:::tN
   t34_strobo_rinne["<b>O</b> Die Kugel in der Rinne<br/><small>Slavi · Fotolabor · 80 €</small>"]:::tO
-  t35_strobo_auto["<b>M</b> Blitz in der 30er-Zone<br/><small>Slavi · Fotolabor · 90 €</small>"]:::tM
-  t36_strobo_jo["<b>N</b> Jo im Doppelbild<br/><small>Slavi · Fotolabor · 80 €</small>"]:::tN
-  t37_strobo_bremsen["<b>O</b> Kevin bremst<br/><small>Slavi · Fotolabor · 90 €</small>"]:::tO
-  t38_strobo_pendel["<b>O</b> Das Pendel<br/><small>Slavi · Fotolabor · 100 €</small>"]:::tO
+  t35_strobo_auto["<b>M</b> Blitz in der 30er-Zone<br/><small>Slavi · Polizeirevier · 90 €</small>"]:::tM
+  t36_strobo_jo["<b>N</b> Jo im Doppelbild<br/><small>Slavi · Skatepark · 80 €</small>"]:::tN
+  t37_strobo_bremsen["<b>O</b> Kevin bremst<br/><small>Slavi · Supermarkt · 90 €</small>"]:::tO
+  t38_strobo_pendel["<b>O</b> Das Pendel<br/><small>Slavi · Hobbywerkstatt · 100 €</small>"]:::tO
   t39_schwer_zuordnen["<b>A</b> Kevins Wende<br/><small>Busfahrer Ötzi · Busbahnhof · 120 €</small>"]:::tA
   t40_schwer_rechnen["<b>H</b> Die Paket-Jagd<br/><small>Paul Paket · Lindenstraße · 130 €</small>"]:::tH
   t41_schwer_beschreiben["<b>G</b> Jo in der Halfpipe<br/><small>Jo · Skatepark · 120 €</small>"]:::tG
   t42_schwer_achsen["<b>C</b> Der Wende-Tacho<br/><small>Kevin · Radl-Eck · 120 €</small>"]:::tC
-  t43_schwer_fehlerjagd["<b>E</b> Ralfs krumme Kurve<br/><small>Ralf · Rathaus · 120 €</small>"]:::tE
+  t43_schwer_fehlerjagd["<b>E</b> Ralfs krumme Kurve<br/><small>Ralf · Hobbywerkstatt · 120 €</small>"]:::tE
   t44_schwer_live["<b>F</b> Pauls Zustellrunde<br/><small>Paul Paket · Bäckerei · 130 €</small>"]:::tF
   t45_schwer_konstrukteur["<b>I</b> Hausaufgabe: Die Wende<br/><small>Frau Dr. Ohm · Schule · 130 €</small>"]:::tI
   t46_schwer_reaktion["<b>J</b> Landstraße bei Regen<br/><small>Gültige-Ziffern-Polizei · Polizeirevier · 120 €</small>"]:::tJ
@@ -66,13 +66,18 @@ flowchart LR
   t57_formel_brunnen["<b>Q</b> Wie tief ist der Wunschbrunnen?<br/><small>Oma Gerda · Stadtpark · 110 €</small>"]:::tQ
   t58_verbinden_uebung["<b>R</b> Übungsblatt: Wer gehört zu wem?<br/><small>Frau Dr. Ohm · Schule · 70 €</small>"]:::tR
   t59_verbinden_kurven["<b>R</b> Übungsblatt: Drei Kurven<br/><small>Frau Dr. Ohm · Schule · 90 €</small>"]:::tR
-  t60_schwer_fehlerbalken["<b>P</b> Kevins Sprint-Messung<br/><small>Kevin · Radl-Eck · 130 €</small>"]:::tP
+  t60_schwer_fehlerbalken["<b>P</b> Kevins Sprint-Messung<br/><small>Kevin · Skatepark · 130 €</small>"]:::tP
   t61_schwer_formel["<b>Q</b> Ötzi gibt Gas<br/><small>Busfahrer Ötzi · Busbahnhof · 130 €</small>"]:::tQ
   t62_schwer_verbinden["<b>R</b> Klausur-Vorbereitung: Umkehrpunkte<br/><small>Frau Dr. Ohm · Schule · 120 €</small>"]:::tR
   t63_gutachten_trocken["<b>S</b> „Ich war nicht zu schnell!“<br/><small>Gültige-Ziffern-Polizei · Polizeirevier · 90 €</small>"]:::tS
   t64_gutachten_regen["<b>S</b> Regen vor der Schule<br/><small>Gültige-Ziffern-Polizei · Polizeirevier · 110 €</small>"]:::tS
   t65_puppe_gerda["<b>T</b> Die Oma-Gerda-Marionette<br/><small>Hilde · Hobbywerkstatt · 80 €</small>"]:::tT
   t66_puppe_brezel["<b>T</b> Brezel, der Marionetten-Hund<br/><small>Hilde · Hobbywerkstatt · 100 €</small>"]:::tT
+  t67_schwer_gutachten["<b>S</b> Glatteis in der Wohnstraße<br/><small>Gültige-Ziffern-Polizei · Polizeirevier · 140 €</small>"]:::tS
+  t68_schwer_puppe["<b>T</b> Jo, die Marionetten-Skaterin<br/><small>Hilde · Hobbywerkstatt · 140 €</small>"]:::tT
+  t69_verbinden_gerade["<b>R</b> Erstes Übungsblatt: Steil, flach, fallend<br/><small>Frau Dr. Ohm · Schule · 60 €</small>"]:::tR
+  t70_verbinden_klassisch["<b>R</b> Übungsblatt: Losfahren, fahren, bremsen<br/><small>Frau Dr. Ohm · Schule · 80 €</small>"]:::tR
+  t71_formel_modellflieger["<b>Q</b> Hildes Modellflieger<br/><small>Hilde · Hobbywerkstatt · 100 €</small>"]:::tQ
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -132,9 +137,9 @@ flowchart LR
   t54_fehler_route --> t55_fehler_blitz
   t32_strobo_kevin --> t55_fehler_blitz
   t06_broesel_ampel --> t56_formel_eauto
-  t56_formel_eauto --> t57_formel_brunnen
-  t04_brezel --> t58_verbinden_uebung
-  t58_verbinden_uebung --> t59_verbinden_kurven
+  t71_formel_modellflieger --> t57_formel_brunnen
+  t69_verbinden_gerade --> t58_verbinden_uebung
+  t70_verbinden_klassisch --> t59_verbinden_kurven
   t08_einkaufswagen --> t59_verbinden_kurven
   t55_fehler_blitz --> t60_schwer_fehlerbalken
   t57_formel_brunnen --> t61_schwer_formel
@@ -143,6 +148,13 @@ flowchart LR
   t63_gutachten_trocken --> t64_gutachten_regen
   t15_live_brezel --> t65_puppe_gerda
   t65_puppe_gerda --> t66_puppe_brezel
+  t64_gutachten_regen --> t67_schwer_gutachten
+  t66_puppe_brezel --> t68_schwer_puppe
+  t03_bus --> t69_verbinden_gerade
+  t04_brezel --> t69_verbinden_gerade
+  t58_verbinden_uebung --> t70_verbinden_klassisch
+  t56_formel_eauto --> t71_formel_modellflieger
+  t11_stadtlauf --> t71_formel_modellflieger
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -179,10 +191,10 @@ flowchart LR
 | N | Stroboskop: beschreiben | 3 |
 | O | Stroboskop: bauen | 5 |
 | P | Fehlerbalken | 3 |
-| Q | Bewegungsformel | 3 |
-| R | Verbinden | 3 |
-| S | Unfallgutachten | 2 |
-| T | Puppenspieler | 2 |
+| Q | Bewegungsformel | 4 |
+| R | Verbinden | 5 |
+| S | Unfallgutachten | 3 |
+| T | Puppenspieler | 3 |
 
 ## Liste
 | Auftrag | Typ | von | Ort | Lohn | braucht |
@@ -198,9 +210,9 @@ flowchart LR
 | Der verschmierte Ausdruck | C | Kevin | Radl-Eck | 80 € | Bremsen durch? |
 | Die nasse Ampelkamera | C | Busfahrer Ötzi | Busbahnhof | 80 € | Ruckelt der Bus? |
 | Der Stadtlauf | C | Bürgermeisterin Kranz | Rathaus | 90 € | Partnerschafts-Radeln |
-| Ralfs erstes Diagramm | E | Ralf | Rathaus | 70 € | Der Hund, der zurückläuft |
-| Ralf und die Bremse | E | Ralf | Rathaus | 80 € | Ralfs erstes Diagramm, Bremsen durch? |
-| Ralfs Busfahrt | E | Ralf | Rathaus | 90 € | Ralf und die Bremse, Ruckelt der Bus? |
+| Ralfs erstes Diagramm | E | Ralf | Bäckerei | 70 € | Der Hund, der zurückläuft |
+| Ralf und die Bremse | E | Ralf | Hobbywerkstatt | 80 € | Ralfs erstes Diagramm, Bremsen durch? |
+| Ralfs Busfahrt | E | Ralf | Busbahnhof | 90 € | Ralf und die Bremse, Ruckelt der Bus? |
 | Brezels Ersatzrunde | F | Bäckermeister Huber | Bäckerei | 70 € | Der Hund, der zurückläuft |
 | Kevins Express-Lieferung | F | Kevin | Radl-Eck | 90 € | Brezels Ersatzrunde |
 | Hausaufgabe: Selbst zeichnen! | I | Frau Dr. Ohm | Schule | 80 € | Bremsen durch? |
@@ -212,22 +224,22 @@ flowchart LR
 | Hin und zurück | K | Kevin | Radl-Eck | 90 € | Der verschmierte Ausdruck |
 | Wie knapp war's? | K | Filialleiterin Yıldız | Supermarkt | 100 € | Der Einkaufswagen |
 | Der rote Blitz am Abend | L | Frau Brösel | Lindenstraße | 70 € | Der rote Blitz |
-| Ralfs positive Rückwärtsrechnung | L | Ralf | Rathaus | 80 € | Ralfs erstes Diagramm |
+| Ralfs positive Rückwärtsrechnung | L | Ralf | Stadtpark | 80 € | Ralfs erstes Diagramm |
 | Bremst Ötzi zu scharf? | L | Busfahrer Ötzi | Busbahnhof | 90 € | Die nasse Ampelkamera |
 | Der Imagefilm | D | Bürgermeisterin Kranz | Rathaus | 90 € | Partnerschafts-Radeln |
 | Das erste Blitzfoto | O | Slavi | Fotolabor | 60 € | Der rote Blitz |
-| Kevin im Blitzlicht | M | Slavi | Fotolabor | 70 € | Das erste Blitzfoto |
-| Der schwebende Springer | N | Slavi | Fotolabor | 70 € | Kevin im Blitzlicht |
+| Kevin im Blitzlicht | M | Slavi | Stadtpark | 70 € | Das erste Blitzfoto |
+| Der schwebende Springer | N | Slavi | Lindenstraße | 70 € | Kevin im Blitzlicht |
 | Die Kugel in der Rinne | O | Slavi | Fotolabor | 80 € | Der schwebende Springer |
-| Blitz in der 30er-Zone | M | Slavi | Fotolabor | 90 € | Die Kugel in der Rinne |
-| Jo im Doppelbild | N | Slavi | Fotolabor | 80 € | Blitz in der 30er-Zone |
-| Kevin bremst | O | Slavi | Fotolabor | 90 € | Jo im Doppelbild |
-| Das Pendel | O | Slavi | Fotolabor | 100 € | Kevin bremst |
+| Blitz in der 30er-Zone | M | Slavi | Polizeirevier | 90 € | Die Kugel in der Rinne |
+| Jo im Doppelbild | N | Slavi | Skatepark | 80 € | Blitz in der 30er-Zone |
+| Kevin bremst | O | Slavi | Supermarkt | 90 € | Jo im Doppelbild |
+| Das Pendel | O | Slavi | Hobbywerkstatt | 100 € | Kevin bremst |
 | Kevins Wende | A | Busfahrer Ötzi | Busbahnhof | 120 € | Der Hund, der zurückläuft |
 | Die Paket-Jagd | H | Paul Paket | Lindenstraße | 130 € | Frau Brösels Rache |
 | Jo in der Halfpipe | G | Jo | Skatepark | 120 € | Der Einkaufswagen |
 | Der Wende-Tacho | C | Kevin | Radl-Eck | 120 € | Der Stadtlauf |
-| Ralfs krumme Kurve | E | Ralf | Rathaus | 120 € | Ralfs Busfahrt |
+| Ralfs krumme Kurve | E | Ralf | Hobbywerkstatt | 120 € | Ralfs Busfahrt |
 | Pauls Zustellrunde | F | Paul Paket | Bäckerei | 130 € | Kevins Express-Lieferung |
 | Hausaufgabe: Die Wende | I | Frau Dr. Ohm | Schule | 130 € | Hausaufgabe: Die Falle |
 | Landstraße bei Regen | J | Gültige-Ziffern-Polizei | Polizeirevier | 120 € | Tempo 30 vor der Schule? |
@@ -241,13 +253,18 @@ flowchart LR
 | Wie lang ist meine Route? | P | Kevin | Radl-Eck | 80 € | Partnerschafts-Radeln |
 | Wie genau ist mein Blitz? | P | Slavi | Fotolabor | 100 € | Wie lang ist meine Route?, Kevin im Blitzlicht |
 | Das neue E-Auto | Q | Bürgermeisterin Kranz | Rathaus | 90 € | Frau Brösels Rache |
-| Wie tief ist der Wunschbrunnen? | Q | Oma Gerda | Stadtpark | 110 € | Das neue E-Auto |
-| Übungsblatt: Wer gehört zu wem? | R | Frau Dr. Ohm | Schule | 70 € | Der Hund, der zurückläuft |
-| Übungsblatt: Drei Kurven | R | Frau Dr. Ohm | Schule | 90 € | Übungsblatt: Wer gehört zu wem?, Der Einkaufswagen |
-| Kevins Sprint-Messung | P | Kevin | Radl-Eck | 130 € | Wie genau ist mein Blitz? |
+| Wie tief ist der Wunschbrunnen? | Q | Oma Gerda | Stadtpark | 110 € | Hildes Modellflieger |
+| Übungsblatt: Wer gehört zu wem? | R | Frau Dr. Ohm | Schule | 70 € | Erstes Übungsblatt: Steil, flach, fallend |
+| Übungsblatt: Drei Kurven | R | Frau Dr. Ohm | Schule | 90 € | Übungsblatt: Losfahren, fahren, bremsen, Der Einkaufswagen |
+| Kevins Sprint-Messung | P | Kevin | Skatepark | 130 € | Wie genau ist mein Blitz? |
 | Ötzi gibt Gas | Q | Busfahrer Ötzi | Busbahnhof | 130 € | Wie tief ist der Wunschbrunnen? |
 | Klausur-Vorbereitung: Umkehrpunkte | R | Frau Dr. Ohm | Schule | 120 € | Übungsblatt: Drei Kurven |
 | „Ich war nicht zu schnell!“ | S | Gültige-Ziffern-Polizei | Polizeirevier | 90 € | Das neue E-Auto |
 | Regen vor der Schule | S | Gültige-Ziffern-Polizei | Polizeirevier | 110 € | „Ich war nicht zu schnell!“ |
 | Die Oma-Gerda-Marionette | T | Hilde | Hobbywerkstatt | 80 € | Brezels Ersatzrunde |
 | Brezel, der Marionetten-Hund | T | Hilde | Hobbywerkstatt | 100 € | Die Oma-Gerda-Marionette |
+| Glatteis in der Wohnstraße | S | Gültige-Ziffern-Polizei | Polizeirevier | 140 € | Regen vor der Schule |
+| Jo, die Marionetten-Skaterin | T | Hilde | Hobbywerkstatt | 140 € | Brezel, der Marionetten-Hund |
+| Erstes Übungsblatt: Steil, flach, fallend | R | Frau Dr. Ohm | Schule | 60 € | Ruckelt der Bus?, Der Hund, der zurückläuft |
+| Übungsblatt: Losfahren, fahren, bremsen | R | Frau Dr. Ohm | Schule | 80 € | Übungsblatt: Wer gehört zu wem? |
+| Hildes Modellflieger | Q | Hilde | Hobbywerkstatt | 100 € | Das neue E-Auto, Der Stadtlauf |
