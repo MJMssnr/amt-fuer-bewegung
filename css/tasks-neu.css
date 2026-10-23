@@ -21,7 +21,7 @@
 .police { position: absolute; inset: 0; z-index: 25; display: flex; align-items: flex-end; justify-content: center; gap: 14px; padding: 10px 16px 14px;
   background: rgba(26, 28, 44, .55); cursor: pointer; animation: pol-dim .3s ease-out both; }
 .police .pol-fig { position: relative; flex: none; animation: pol-in .45s cubic-bezier(.2, 1.4, .4, 1) both; transform-origin: bottom center; }
-.police canvas { display: block; height: min(62vh, 300px); width: auto; image-rendering: pixelated; filter: drop-shadow(4px 4px 0 rgba(0,0,0,.4)); }
+.police canvas { display: block; height: min(62vh, 300px); width: auto; image-rendering: pixelated; } /* kein filter: Safari zeigt Canvas mit filter + Animation teils nicht an */
 .police.angry .pol-fig { animation: pol-in .45s cubic-bezier(.2, 1.4, .4, 1) both, pol-stomp .32s .45s steps(2) infinite; }
 .police.calm .pol-fig { animation: pol-sway 1.6s ease-in-out infinite; }
 .police.leaving .pol-fig { animation: pol-out .38s ease-in both; }
@@ -82,3 +82,4 @@
 .strobe-choice.wrong { background: #f8dde2; box-shadow: 0 0 0 2px var(--bad); opacity: .8; }
 .strobe-context { background: #fffdf6; box-shadow: 0 0 0 2px var(--ink); padding: 6px 10px; margin: 6px 0; font-size: 14px; }
 .strobe-photo.vertical { aspect-ratio: 1.25 / 1; }
+.strobe-photo.pendulum, .sb-build .strobe-photo.pendulum { aspect-ratio: 1.5 / 1; }

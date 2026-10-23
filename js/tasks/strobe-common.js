@@ -25,7 +25,7 @@ export function strobeData(task) {
 /** Foto-Kasten in `box` anlegen; zeichnet neu bei Größenänderung. Rückgabe: { canvas, draw(extra), geo() } */
 export function photo(box, task, base = {}) {
   const canvas = document.createElement('canvas');
-  canvas.className = `strobe-photo${task.photo?.vertical ? ' vertical' : ''}`;
+  canvas.className = `strobe-photo${task.photo?.vertical ? ' vertical' : ''}${task.motion?.kind === 'pendulum' ? ' pendulum' : ''}`;
   box.appendChild(canvas);
   let opts = {}, geo = null;
   const draw = (o = opts) => {

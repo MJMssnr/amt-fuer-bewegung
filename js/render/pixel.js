@@ -31,7 +31,7 @@ function loadImage(src) {
 }
 
 export async function loadSprites(url = 'assets/sprites.json') {
-  const data = await (await fetch(url)).json();
+  const data = await (await fetch(url, { cache: 'no-cache' })).json();
   const palette = data.palette;
   for (const [name, sp] of Object.entries(data.sprites)) {
     try {

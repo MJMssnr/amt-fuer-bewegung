@@ -27,7 +27,8 @@ export function mount(root, { ticket, onSolved }) {
     <div class="paper-note"><strong>✎ Auf Papier</strong><span></span></div>`;
   left.querySelector('.paper-note span').textContent = task.paper
     ?? 'Schau genau hin: Wo ist der Körper bei jedem Blitz? Werden die Abstände zwischen zwei Blitzen größer, kleiner oder bleiben sie gleich?';
-  const anim = photo(left.querySelector('.sb-anim'), task, { ...base, ruler: 'none', alpha: 1 });
+  // Beide Bilder mit gleicher Skala und Hilfslinien, damit man genau übertragen kann [W24]
+  const anim = photo(left.querySelector('.sb-anim'), task, { ...base, ruler: 'band', grid: true, alpha: 1 });
   let t = 0, playing = false, flash = 0, raf = 0, last = 0;
   const scrub = left.querySelector('.scrub'), playBtn = left.querySelector('.btn-play');
   const drawAnim = () => {
@@ -73,7 +74,7 @@ export function mount(root, { ticket, onSolved }) {
     <div class="feedback" aria-live="polite"></div>`;
   right.querySelector('.prompt').textContent = task.prompt
     ?? `Bau das Stroboskopbild: Zieh die Abbilder 2 bis ${n} an die Stelle, an der der Körper beim jeweiligen Blitz war. Abbild 1 ist schon da.`;
-  const build = photo(right.querySelector('.sb-build'), task, { ...base, labels: true });
+  const build = photo(right.querySelector('.sb-build'), task, { ...base, ruler: 'band', grid: true, labels: true });
   const placed = new Array(n).fill(null);
   placed[0] = D.xs[0];
   let done = false, wrong = 0, showTruth = false;

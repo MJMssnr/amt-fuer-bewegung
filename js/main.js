@@ -24,7 +24,7 @@ document.addEventListener('pointerdown', unlockAudio, { capture: true });
 document.addEventListener('keydown', unlockAudio, { capture: true });
 
 const getJSON = async (url) => {
-  const r = await fetch(url);
+  const r = await fetch(url, { cache: 'no-cache' }); // nach Updates nie alte Daten [W24]
   if (!r.ok) throw new Error(`${url}: ${r.status}`);
   return r.json();
 };

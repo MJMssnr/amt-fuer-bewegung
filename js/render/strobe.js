@@ -15,8 +15,8 @@ export function strobeGeometry(c, o) {
   const W = c.width, H = c.height, dpr = o.dpr ?? 1, m = 34 * dpr;
   if (o.pendulum) {
     const { L, amp } = o.pendulum, A = (amp * Math.PI) / 180;
-    const sc = Math.min((W - 2 * m) / (2 * L * Math.sin(A) + 0.2), (H - 2 * m) / L);
-    const px = W / 2, py = m * 0.6;
+    const sc = Math.min((W - 2 * m) / (2 * L * Math.sin(A) + 0.2), (H - 1.9 * m) / L);
+    const px = W / 2, py = m * 0.45;
     const toPx = (x) => { const th = Math.asin(Math.max(-1, Math.min(1, x / L))); return [px + L * Math.sin(th) * sc, py + L * Math.cos(th) * sc]; };
     const fromPx = (X, Y) => { const th = Math.atan2(X - px, Y - py); const lim = A * 1.15; return L * Math.sin(Math.max(-lim, Math.min(lim, th))); };
     return { toPx, fromPx, pivot: [px, py], sc, ground: H - m * 0.4 };
@@ -123,8 +123,9 @@ function label(ctx, txt, X, Y, dpr, night) {
 }
 
 function ruler(ctx, geo, o, dpr, night) {
-  if (!o.ruler || o.ruler === 'none' || o.pendulum) return;
+  if (!o.ruler || o.ruler === 'none') return;
   const col = night ? '#ffcd75' : INK;
+  if (o.pendulum) return pendulumScale(ctx, geo, o, dpr, night, col);
   ctx.fillStyle = col; ctx.strokeStyle = col;
   ctx.font = `${12 * dpr}px "AmtPixel", monospace`; ctx.textAlign = 'center';
   if (o.ruler === 'bar') {
@@ -148,7 +149,32 @@ function ruler(ctx, geo, o, dpr, night) {
   for (let x = Math.ceil(lo / minor) * minor; x <= hi + 1e-9; x += minor) {
     const major = Math.abs(x / step - Math.round(x / step)) < 1e-6;
     const [X, Y] = geo.toPx(x);
+    if (o.grid) gridLine(ctx, X, Y, o.vertical, major, dpr, night);
     if (o.vertical) { ctx.fillRect(X + 40 * dpr, Y, (major ? 10 : 5) * dpr, 1.5 * dpr); if (major) { ctx.textAlign = 'left'; ctx.fillText(`${fmt(x)} m`, X + 54 * dpr, Y + 4 * dpr); } }
     else { ctx.fillRect(X, Y + 6 * dpr, 1.5 * dpr, (major ? 10 : 5) * dpr); if (major) ctx.fillText(`${fmt(x)} m`, X, Y + 30 * dpr); }
+  }
+}
+
+/** Feine Hilfslinie quer durchs Bild (zum genauen Platzieren beim Bauen) [W24] */
+function gridLine(ctx, X, Y, vertical, major, dpr, night) {
+  const save = ctx.fillStyle;
+  ctx.fillStyle = night ? `rgba(255,255,255,${major ? 0.16 : 0.07})` : `rgba(26,28,44,${major ? 0.18 : 0.08})`;
+  if (vertical) ctx.fillRect(0, Y, ctx.canvas.width, dpr); else ctx.fillRect(X, 0, dpr, ctx.canvas.height);
+  ctx.fillStyle = save;
+}
+
+/** Pendel: waagrechte Skala (Auslenkung x in m) unter dem Bogen, optional mit senkrechten Hilfslinien */
+function pendulumScale(ctx, geo, o, dpr, night, col) {
+  const { L, amp } = o.pendulum, A = (amp * Math.PI) / 180;
+  const [px, py] = geo.pivot, y = py + L * geo.sc + 14 * dpr;
+  const lim = L * Math.sin(A * 1.1), step = 0.4, minor = 0.1;
+  ctx.fillStyle = col; ctx.font = `${11 * dpr}px "AmtPixel", monospace`; ctx.textAlign = 'center';
+  ctx.fillRect(px - lim * geo.sc, y, 2 * lim * geo.sc, 1.5 * dpr);
+  for (let x = -Math.floor(lim / minor) * minor; x <= lim + 1e-9; x += minor) {
+    const X = px + x * geo.sc, major = Math.abs(x / step - Math.round(x / step)) < 1e-6;
+    if (o.grid) gridLine(ctx, X, 0, false, major, dpr, night);
+    ctx.fillStyle = col;
+    ctx.fillRect(X, y, 1.5 * dpr, (major ? 8 : 4) * dpr);
+    if (major) ctx.fillText(`${fmt(Math.round(x * 100) / 100)} m`, X, y + 20 * dpr);
   }
 }

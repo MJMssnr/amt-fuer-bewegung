@@ -13,7 +13,7 @@ let texts = null;
 let shownThisTask = false;
 /** Zu Beginn jedes Auftrags aufrufen: Polizist kommt höchstens einmal pro Auftrag [W20] */
 export const resetPatrol = () => { shownThisTask = false; };
-const loadTexts = async () => (texts ??= await (await fetch('data/police.json')).json());
+const loadTexts = async () => (texts ??= await (await fetch('data/police.json', { cache: 'no-cache' })).json());
 
 function warnings(inc = 0) {
   let n = 0;
@@ -60,9 +60,13 @@ export async function showPolice(host, { kind, input, suggest }) {
   const cv = el.querySelector('canvas'), cx = cv.getContext('2d');
   const sc = 8;
   let raf = 0, t0 = performance.now(), mood = 'angry';
+  // Größe nur einmal setzen (ständiges Umsetzen von width leert in Safari das Bild)
+  const sp0 = getSprite('polizist');
+  cv.width = sp0.w * sc; cv.height = sp0.h * sc;
+  cv.style.aspectRatio = `${sp0.w} / ${sp0.h}`;
   const draw = (now) => {
     const sp = getSprite(mood === 'angry' ? 'polizist_rot' : 'polizist');
-    cv.width = sp.w * sc; cv.height = sp.h * sc;
+    cx.clearRect(0, 0, cv.width, cv.height);
     cx.imageSmoothingEnabled = false;
     const f = mood === 'angry' ? Math.floor(((now - t0) / 1000) * 6) % sp.frames.length : 0;
     cx.drawImage(sp.frames[f], 0, 0, cv.width, cv.height);
