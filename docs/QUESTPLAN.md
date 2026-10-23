@@ -101,6 +101,9 @@ flowchart LR
   classDef tJ fill:#f0b0e0,stroke:#1a1c2c,color:#1a1c2c
   classDef tK fill:#d9d9a0,stroke:#1a1c2c,color:#1a1c2c
   classDef tL fill:#a0d9d0,stroke:#1a1c2c,color:#1a1c2c
+  classDef tM fill:#e0c8a8,stroke:#1a1c2c,color:#1a1c2c
+  classDef tN fill:#c8d8f0,stroke:#1a1c2c,color:#1a1c2c
+  classDef tO fill:#f0d0a0,stroke:#1a1c2c,color:#1a1c2c
 ```
 
 ## Legende

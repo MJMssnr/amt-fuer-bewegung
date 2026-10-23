@@ -15,7 +15,7 @@ const id = (s) => s.replace(/[^a-zA-Z0-9]/g, '_');
 const who = (t) => (story.characters[t.from]?.name ?? t.from).split(',')[0];
 const L = (t) => TYPES[t.task.type]?.letter ?? '?';
 const COLORS = { A: '#ffcd75', B: '#f6a6b2', C: '#a7f070', D: '#c7a6ff', E: '#ff9f7a', F: '#73eff7', G: '#ffe8a3',
-  H: '#9fc5ff', I: '#b6e3b0', J: '#f0b0e0', K: '#d9d9a0', L: '#a0d9d0' };
+  H: '#9fc5ff', I: '#b6e3b0', J: '#f0b0e0', K: '#d9d9a0', L: '#a0d9d0', M: '#e0c8a8', N: '#c8d8f0', O: '#f0d0a0' };
 
 // Mermaid
 const mm = ['flowchart LR'];
@@ -55,7 +55,7 @@ const dot = [`digraph Q {`, `  rankdir=LR; bgcolor="#fffdf6"; nodesep=0.25; rank
   `  node [shape=box style="rounded,filled" fontname="Helvetica" fontsize=11 color="#1a1c2c" penwidth=1.5];`,
   `  edge [color="#29366f" arrowsize=0.7];`,
   `  label=<<b>Amt für Bewegung – Freischaltplan</b><br/>Pfeil = wird frei nach; Buchstabe = Aufgabentyp>; labelloc=t; fontname="Helvetica"; fontsize=16;`];
-for (const t of tickets) dot.push(`  ${id(t.id)} [fillcolor="${COLORS[L(t)] ?? '#ddd'}" label=<<b>${L(t)}</b>  ${esc(t.title)}<br/><font point-size="9">${esc(who(t))} · ${esc(map.nodes[t.node]?.name ?? t.node)} · ${t.reward} €</font>>];`);
+for (const t of tickets) dot.push(`  ${id(t.id)} [fillcolor="${COLORS[L(t)] ?? '#dddddd'}" label=<<b>${L(t)}</b>  ${esc(t.title)}<br/><font point-size="9">${esc(who(t))} · ${esc(map.nodes[t.node]?.name ?? t.node)} · ${t.reward} €</font>>];`);
 for (const t of tickets) for (const r of t.requires || []) dot.push(`  ${id(r)} -> ${id(t.id)};`);
 dot.push('}');
 writeFileSync(new URL('docs/questplan.dot', root), dot.join('\n'));
