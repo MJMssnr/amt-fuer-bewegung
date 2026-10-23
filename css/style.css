@@ -298,3 +298,13 @@ button { font: inherit; cursor: pointer; }
 .r-next { align-self: flex-start; background: var(--gold); }
 @media (max-height: 500px) { .lamp { width: 30px; height: 30px; } .r-brake { font-size: 18px; padding: 6px 22px; } .r-status, .r-data { font-size: 13px; } .reaction { gap: 6px; padding: 8px; } }
 .task-right { overflow-y: auto; overflow-x: hidden; padding: 3px; margin: -3px; }
+
+/* Klang-Menü */
+.sound-panel { position: fixed; top: 44px; right: 10px; z-index: 55; background: var(--ink); color: #fff;
+  border: 2px solid var(--gold); border-radius: 6px; padding: 8px 12px; display: flex; flex-direction: column; gap: 6px;
+  font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,.4); }
+.sound-panel.hidden { display: none; }
+.sound-panel label { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.sound-panel input[type=range] { width: 120px; accent-color: var(--gold); }
+@media (max-height: 500px) { .sound-panel { top: 34px; font-size: 12px; } }
+.sound-panel .sp-mute { justify-content: flex-start; }

@@ -10,6 +10,12 @@ import { Room } from './ui/room.js';
 import { playFinale } from './ui/finale.js';
 import { loadTask } from './tasks/index.js';
 import { pickParams, resolveTicket, applyScenario } from './engine/variants.js';
+import { unlockAudio } from './audio/sound.js';
+import { initSoundMenu } from './ui/sound-menu.js';
+
+// Browser erlauben Klang erst nach einer Nutzeraktion
+document.addEventListener('pointerdown', unlockAudio, { capture: true });
+document.addEventListener('keydown', unlockAudio, { capture: true });
 
 const getJSON = async (url) => {
   const r = await fetch(url);
@@ -191,6 +197,7 @@ async function boot() {
   document.querySelector('.hud-reset').addEventListener('click', () => {
     if (confirm('Spielstand wirklich löschen?')) { resetState(); location.reload(); }
   });
+  initSoundMenu(document.querySelector('.hud-sound'));
   document.querySelector('.hud-full').addEventListener('click', () => {
     const d = document.documentElement;
     if (!document.fullscreenElement) d.requestFullscreen?.().catch(() => {});

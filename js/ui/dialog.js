@@ -2,6 +2,7 @@
 // Zeilen-Format (wie in story.json/tickets.json): [ "sprecherId", "Text" ]
 
 import { getSprite } from '../render/pixel.js';
+import { speakChar, voiceSpeed, sfx } from '../audio/sound.js';
 
 let characters = {};
 export const setCharacters = (c) => (characters = c);
@@ -39,17 +40,21 @@ export function showDialog(lines) {
       let n = 0;
       typing = true;
       textEl.textContent = '';
-      clearInterval(timer);
-      timer = setInterval(() => {
-        n += 2;
+      clearTimeout(timer);
+      // Schreibmaschine mit Stimme: jeder Buchstabe ein Laut, Pausen bei Leerzeichen/Satzzeichen
+      const speed = voiceSpeed(ch.voice);
+      const step = () => {
+        const c = full[n++];
         textEl.textContent = full.slice(0, n);
-        if (n >= full.length) { clearInterval(timer); typing = false; }
-      }, 18);
+        if (n >= full.length) { typing = false; return; }
+        timer = setTimeout(step, speakChar(c, ch.voice, n) / speed);
+      };
+      step();
     };
 
     const next = (e) => {
       e?.preventDefault();
-      if (typing) { clearInterval(timer); textEl.textContent = full; typing = false; return; }
+      if (typing) { clearTimeout(timer); textEl.textContent = full; typing = false; return; }
       i++;
       if (i >= lines.length) {
         box.classList.add('hidden');
@@ -73,5 +78,6 @@ export function toast(text, cls = '') {
   t.className = `toast ${cls}`;
   t.textContent = text;
   document.body.appendChild(t);
+  sfx(cls === 'bad' ? 'bad' : cls === 'money' ? 'coin' : 'ok');
   setTimeout(() => t.remove(), 2200);
 }

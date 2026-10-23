@@ -7,6 +7,7 @@ import { drawGround, decor, shadow } from '../render/town.js';
 import { BUILDINGS, halfpipe, rail, funbox, parkedCar } from '../render/buildings.js';
 import { treehouse } from '../render/treehouse.js';
 import { school } from '../render/school.js';
+import { natureOn, natureOff } from '../audio/sound.js';
 
 BUILDINGS.treehouse = treehouse;
 BUILDINGS.school = school;
@@ -70,6 +71,7 @@ export class Overworld {
   start() {
     if (this.running) return;
     this.running = true;
+    natureOn(); // Vogelzwitschern nur auf der Karte
     let last = performance.now();
     const loop = (now) => {
       if (!this.running) return;
@@ -82,7 +84,7 @@ export class Overworld {
     };
     requestAnimationFrame(loop);
   }
-  stop() { this.running = false; }
+  stop() { this.running = false; natureOff(); }
 
   // Kürzester Weg nach Strecke (Dijkstra; die Karte ist klein)
   #route(from, to) {

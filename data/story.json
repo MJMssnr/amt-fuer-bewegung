@@ -6,103 +6,198 @@
     },
     "florian": {
       "name": "Florian",
-      "sprite": "florian"
+      "sprite": "florian",
+      "voice": "florian"
     },
     "kranz": {
       "name": "Bürgermeisterin Kranz",
-      "sprite": "kranz"
+      "sprite": "kranz",
+      "voice": "frau_mittel"
     },
     "broesel": {
       "name": "Frau Brösel",
-      "sprite": "broesel"
+      "sprite": "broesel",
+      "voice": "frau_alt"
     },
     "kevin": {
       "name": "Kevin, Fahrradkurier",
-      "sprite": "kevin"
+      "sprite": "kevin",
+      "voice": "mann_kraeftig"
     },
     "oetzi": {
       "name": "Busfahrer Ötzi",
-      "sprite": "oetzi"
+      "sprite": "oetzi",
+      "voice": "mann_kraeftig"
     },
     "baecker": {
       "name": "Bäckermeister Huber",
-      "sprite": "baecker"
+      "sprite": "baecker",
+      "voice": "mann_kraeftig"
     },
     "jo": {
       "name": "Jo, Skaterin",
-      "sprite": "jo"
+      "sprite": "jo",
+      "voice": "frau_mittel"
     },
     "filiale": {
       "name": "Filialleiterin Yıldız",
-      "sprite": "filiale"
+      "sprite": "filiale",
+      "voice": "frau_mittel"
     },
     "ralf": {
       "name": "Ralf, Praktikant im Rathaus",
-      "sprite": "ralf"
+      "sprite": "ralf",
+      "voice": "mann_kraeftig"
     },
     "gerda": {
       "name": "Oma Gerda",
-      "sprite": "oma_rollator"
+      "sprite": "oma_rollator",
+      "voice": "frau_alt"
     },
     "ohm": {
       "name": "Frau Dr. Ohm, Physiklehrerin",
-      "sprite": "ohm"
+      "sprite": "ohm",
+      "voice": "frau_mittel"
     }
   },
   "intro": [
-    ["erz", "Montag, 7:58 Uhr. Florian steht im Rathaus. Eigentlich wollte er sich nur für den Ferienjob beim Bauhof bewerben."],
-    ["kranz", "Ah, Herr Doktor Florian Brandl! Endlich! Unser neuer Experte für Bewegung aller Art!"],
-    ["florian", "Äh … ich bin Florian Brandl. Aber Doktor? Ich schreib nächste Woche Physik-Schulaufgabe."],
-    ["kranz", "Und bescheiden ist er auch! Wunderbar. Ihr Büro ist im Keller: das Amt für Bewegung aller Art. Die Stelle war seit 1987 unbesetzt."],
-    ["florian", "(Bezahlung: gut. Büro: hat eine Kaffeemaschine. Qualifikation: … noch nicht.)"],
-    ["kranz", "Die Bürgerinnen und Bürger haben schon Anfragen geschickt. Die Leute werden SO dankbar sein!"],
-    ["erz", "Tippe auf ein gelbes Ausrufezeichen auf der Karte. Florian läuft hin und nimmt den Auftrag an."]
+    [
+      "erz",
+      "Montag, 7:58 Uhr. Florian steht im Rathaus. Eigentlich wollte er sich nur für den Ferienjob beim Bauhof bewerben."
+    ],
+    [
+      "kranz",
+      "Ah, Herr Doktor Florian Brandl! Endlich! Unser neuer Experte für Bewegung aller Art!"
+    ],
+    [
+      "florian",
+      "Äh … ich bin Florian Brandl. Aber Doktor? Ich schreib nächste Woche Physik-Schulaufgabe."
+    ],
+    [
+      "kranz",
+      "Und bescheiden ist er auch! Wunderbar. Ihr Büro ist im Keller: das Amt für Bewegung aller Art. Die Stelle war seit 1987 unbesetzt."
+    ],
+    [
+      "florian",
+      "(Bezahlung: gut. Büro: hat eine Kaffeemaschine. Qualifikation: … noch nicht.)"
+    ],
+    [
+      "kranz",
+      "Die Bürgerinnen und Bürger haben schon Anfragen geschickt. Die Leute werden SO dankbar sein!"
+    ],
+    [
+      "erz",
+      "Tippe auf ein gelbes Ausrufezeichen auf der Karte. Florian läuft hin und nimmt den Auftrag an."
+    ]
   ],
   "nothingHere": [
-    ["florian", "Hier gibt's gerade nichts zu tun."]
+    [
+      "florian",
+      "Hier gibt's gerade nichts zu tun."
+    ]
   ],
   "office": [
-    ["florian", "Mein Büro. Die Kaffeemaschine blubbert verdächtig. Lieber schnell wieder raus zu den Leuten."]
+    [
+      "florian",
+      "Mein Büro. Die Kaffeemaschine blubbert verdächtig. Lieber schnell wieder raus zu den Leuten."
+    ]
   ],
   "outro": [
-    ["kranz", "Herr Doktor Brandl! Alle Anfragen erledigt! Die Stadt liebt Sie!"],
-    ["florian", "(Ich glaub, ich sag ihr das mit dem Doktor einfach nie.)"],
-    ["erz", "Ende der Demo. Weitere Aufträge folgen bald, das Amt schläft nie."]
+    [
+      "kranz",
+      "Herr Doktor Brandl! Alle Anfragen erledigt! Die Stadt liebt Sie!"
+    ],
+    [
+      "florian",
+      "(Ich glaub, ich sag ihr das mit dem Doktor einfach nie.)"
+    ],
+    [
+      "erz",
+      "Ende der Demo. Weitere Aufträge folgen bald, das Amt schläft nie."
+    ]
   ],
   "fail": [
     [
-      ["$from", "Hm. Ich bin ja kein Profi, aber das kommt mir nicht ganz richtig vor."],
-      ["$from", "Aber gut, Sie sind ja ganz frisch im Amt. Fehler machen wir alle. Nächstes Mal bitte etwas sorgfältiger, ja?"],
-      ["florian", "(Kein Geld diesmal. Aber verstanden hab ich es jetzt.)"]
+      [
+        "$from",
+        "Hm. Ich bin ja kein Profi, aber das kommt mir nicht ganz richtig vor."
+      ],
+      [
+        "$from",
+        "Aber gut, Sie sind ja ganz frisch im Amt. Fehler machen wir alle. Nächstes Mal bitte etwas sorgfältiger, ja?"
+      ],
+      [
+        "florian",
+        "(Kein Geld diesmal. Aber verstanden hab ich es jetzt.)"
+      ]
     ],
     [
-      ["$from", "Moment … das passt doch nicht zusammen, oder?"],
-      ["$from", "Schon gut, schon gut. Aller Anfang ist schwer. Aber beim nächsten Mal will ich ein ordentliches Ergebnis sehen!"],
-      ["florian", "(Ohne Ergebnis keine Bezahlung. Fair ist fair.)"]
+      [
+        "$from",
+        "Moment … das passt doch nicht zusammen, oder?"
+      ],
+      [
+        "$from",
+        "Schon gut, schon gut. Aller Anfang ist schwer. Aber beim nächsten Mal will ich ein ordentliches Ergebnis sehen!"
+      ],
+      [
+        "florian",
+        "(Ohne Ergebnis keine Bezahlung. Fair ist fair.)"
+      ]
     ],
     [
-      ["$from", "Ich glaube, da hat sich das Amt vertan."],
-      ["$from", "Kein Drama, Sie lernen ja noch. Aber geben Sie sich nächstes Mal ein bisschen mehr Mühe, versprochen?"],
-      ["florian", "(Versprochen. Und diesmal gibt es eben kein Geld.)"]
+      [
+        "$from",
+        "Ich glaube, da hat sich das Amt vertan."
+      ],
+      [
+        "$from",
+        "Kein Drama, Sie lernen ja noch. Aber geben Sie sich nächstes Mal ein bisschen mehr Mühe, versprochen?"
+      ],
+      [
+        "florian",
+        "(Versprochen. Und diesmal gibt es eben kein Geld.)"
+      ]
     ]
   ],
   "partial": [
     [
-      ["$from", "Hat ein bisschen gedauert, aber am Ende stimmt es. Die Hälfte haben Sie sich verdient."]
+      [
+        "$from",
+        "Hat ein bisschen gedauert, aber am Ende stimmt es. Die Hälfte haben Sie sich verdient."
+      ]
     ],
     [
-      ["$from", "Na also, geht doch! Beim nächsten Mal bitte gleich beim ersten Versuch. Ich zahle erst mal die Hälfte."]
+      [
+        "$from",
+        "Na also, geht doch! Beim nächsten Mal bitte gleich beim ersten Versuch. Ich zahle erst mal die Hälfte."
+      ]
     ]
   ],
-  "failExplain": ["florian", "(Nochmal in Ruhe nachgedacht:)"],
+  "failExplain": [
+    "florian",
+    "(Nochmal in Ruhe nachgedacht:)"
+  ],
   "retry": [
     [
-      ["$from", "Herr Brandl, gut dass Sie da sind! Ich hätte da nochmal eine ganz ähnliche Frage."],
-      ["florian", "(Zweite Chance. Diesmal rechne ich sauber.)"]
+      [
+        "$from",
+        "Herr Brandl, gut dass Sie da sind! Ich hätte da nochmal eine ganz ähnliche Frage."
+      ],
+      [
+        "florian",
+        "(Zweite Chance. Diesmal rechne ich sauber.)"
+      ]
     ],
     [
-      ["$from", "Erinnern Sie sich an neulich? Es gibt eine neue Messung. Schauen Sie nochmal drüber?"],
-      ["florian", "(Diesmal klappt das. Erst Papier, dann tippen.)"]
+      [
+        "$from",
+        "Erinnern Sie sich an neulich? Es gibt eine neue Messung. Schauen Sie nochmal drüber?"
+      ],
+      [
+        "florian",
+        "(Diesmal klappt das. Erst Papier, dann tippen.)"
+      ]
     ]
   ]
 }

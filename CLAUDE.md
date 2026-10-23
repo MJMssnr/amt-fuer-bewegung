@@ -51,9 +51,11 @@ js/ui/dialog.js, state.js  Dialoge, Spielstand (localStorage)
 js/ui/title.js, title-scene.js  Demo-Hinweis, animierter Startbildschirm
 js/ui/room.js              Baumhaus-Zimmer mit Shop und Kiste
 js/ui/finale.js            Raketenstart nach bestandener Prüfung
+js/ui/sound-menu.js        Klang-Menü im HUD (Lautstärken, stumm)
+js/audio/sound.js          WebAudio-Synthese ohne Dateien: Stimmen (Formanten je Vokal, VOICES), Natur auf der Karte, Effekte
 data/tickets.json          Aufträge (Level)
 data/scenarios/*.json      Bewegungen
-data/story.json            Figuren, Intro, Outro
+data/story.json            Figuren (mit "voice": florian | frau_mittel | frau_alt | mann_kraeftig), Intro, Outro
 data/map.json              Orte, Straßen, Bäume
 data/shop.json             Gegenstände, Preise, Klicktexte, Raketenteile (Balancing hier)
 data/exam.json             Abschlussprüfung (Teile, Bestehensgrenze, Dialoge)
@@ -74,4 +76,4 @@ schema/                    Formatbeschreibung der JSON-Dateien
 - **Neue Fehlvorstellung:** Eintrag in `CATALOG` und `PRIORITY` in `distractors.js`.
 
 ## Geplant (Reihenfolge offen)
-D Regie, Flächen-Puzzle, Steigungsdreieck, Druck-Arbeitsblatt, Sounds, 2D-Szenen (Wurf) = Teil 2, Vektoraddition, PWA/offline, Schrift lokal einbinden.
+D Regie, Flächen-Puzzle, Steigungsdreieck, Druck-Arbeitsblatt, weitere Stimmen (frau_jung, mann_duenn), 2D-Szenen (Wurf) = Teil 2, Vektoraddition, PWA/offline, Schrift lokal einbinden.
