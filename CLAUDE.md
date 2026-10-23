@@ -20,15 +20,23 @@ Spieler ist Florian, der per Namensverwechslung das „Amt für Bewegung aller A
 - **Sprites ändern:** `tools/gensprites.mjs` bearbeiten, dann `node tools/gensprites.mjs`.
 - Zielgeräte: Notebook, iPad, Smartphone **quer**. Layout bei 667×375 prüfen.
 - Fachsprache korrekt: „verzögert/bremst“ nur, wenn der *Betrag* von v abnimmt.
+- **Gültige Ziffern:** Florians Zahlen in Dialogen mit mindestens 2 g.Z. („6,0 m“). Regeln in ENTSCHEIDUNGEN § 5.
+- **Arbeitsweise mit Herrn Messner:** kurze Blöcke, je Block Commit + Push + kurze Meldung; er schreibt parallel.
+- **Freischaltplan** nach Ticket-Änderungen neu erzeugen: `node tools/questplan.mjs && dot -Tpng -Gdpi=110 docs/questplan.dot -o docs/questplan.png`.
+- `data/tickets.json` nie komplett neu serialisieren (Format!), neue Tickets im Repo-Stil anhängen.
 
 ## Struktur
 ```
-index.html, css/style.css
+index.html, css/style.css (+ fonts.css, questlog.css, tasks-neu.css)
+assets/fonts/              Silkscreen (Titel) und VT323 (Text/Zahlen), OFL
+tools/questplan.mjs        Freischaltplan docs/QUESTPLAN.md + questplan.dot
 js/main.js                 Einstieg: Demo-Hinweis → Startbildschirm → Karte; Aufträge, Geld-Regeln, Prüfung
 js/engine/kinematics.js    2D-Kinematik, stückweise konstantes a, Ereignisse ("until")
 js/engine/goals.js         Auswertbare Fragen, erweiterbar per registerGoal()
 js/engine/answer.js        Antwortprüfung: Toleranz = 1 Einheit in der 2. signifikanten Stelle
 js/engine/variants.js      Zufallsvarianten: "vary" im Ticket, {Ausdrücke} in Texten, Spieler-Seed
+js/engine/freehand.js      B: Begradigung (RDP) und Vergleich mit Toleranz
+js/engine/geometry.js      K: Flächen-Zerlegung unter t-v; L: Steigung eines Abschnitts
 js/render/graph.js         SVG-Diagramme (KINDS: xt, vt, at, yt, vyt, ayt)
 js/render/scene.js         Pixel-Animation der Akteure mit Maßband
 js/render/pixel.js         Sprites aus assets/sprites.json oder PNG
@@ -41,6 +49,7 @@ js/render/room-art.js      Baumhaus-Zimmer: Hintergrund, feste Plätze (SLOTS), 
 js/render/vehicles.js      Auto, Sportmotorrad, Rakete, Partikel (Startbildschirm, Finale)
 js/render/format.js        Zahlenformat, schöne Achsenteilung
 js/tasks/index.js          Register der Aufgabentypen
+js/tasks/types.js          Kennbuchstaben A–L der Typen (nie umnummerieren!)
 js/tasks/common.js         Linke Spalte für alle Typen (Animation, Diagramme, Datenblatt, Notizzettel)
 js/tasks/match.js          Typ A: Zuordnen
 js/tasks/calc.js           Typ H: Berechnen (Goals -> Eingabe, Hinweise für typische Fehler)
@@ -48,12 +57,17 @@ js/tasks/describe.js       Typ G: Beschreiben; Textgenerator in describe-text.js
 js/tasks/axes.js           Typ C: Achsen-Detektiv (Diagramm ohne Zahlen, markierte Linien)
 js/tasks/errorhunt.js      Typ E: Fehlerjagd (Ralfs Diagramm, ein falscher Abschnitt)
 js/tasks/live.js           Typ F: Live-Steuerung (vₓ per Regler, Spur gegen Soll)
-js/tasks/construct.js      Konstrukteur: Diagramm selbst bauen (Endwerte + Form je Abschnitt)
-js/tasks/reaction.js       Reaktionstest -> eigener Anhalteweg
+js/tasks/construct.js      I: Konstrukteur: Diagramm selbst bauen (Endwerte + Form je Abschnitt)
+js/tasks/reaction.js       J: Reaktionstest -> eigener Anhalteweg
+js/tasks/freehand.js       B: Freihand mit Auto-Begradigung
+js/tasks/area.js           K: Flächen-Puzzle
+js/tasks/slope.js          L: Steigungsdreieck
 js/tasks/questions.js      Gemeinsamer Eingabe-/Prüfblock für H, C und Reaktionstest
 js/tasks/distractors.js    Distraktoren aus Fehlvorstellungen (CATALOG)
 js/ui/overworld.js         Stadtkarte (data/map.json)
-js/ui/dialog.js, state.js  Dialoge, Spielstand (localStorage)
+js/ui/dialog.js, state.js  Dialoge, Spielstand (localStorage; order/earned fürs Auftragsbuch)
+js/ui/questlog.js          Auftragsbuch 📖 (Notizbuch-Animation, Status, Testmodus-Knöpfe)
+js/ui/testmode.js          Testmodus: 20× Oma im Startbildschirm, „amtstest“ tippen, ?amtstest=1
 js/ui/title.js, title-scene.js  Demo-Hinweis, animierter Startbildschirm
 js/ui/room.js              Baumhaus-Zimmer mit Shop und Kiste
 js/ui/delivery.js          Lieferung: Postbote Paul bringt jede Bestellung durch die Luke (Texte: shop.json → delivery)
@@ -73,7 +87,7 @@ schema/                    Formatbeschreibung der JSON-Dateien
 ## Geld-Regeln
 - Auswahl-Aufgaben (A, G, E): nur beim ersten Versuch richtig → voller Lohn, sonst 0 €.
 - Rechen-/Ablese-Aufgaben (H, C) und Live (F): erster Versuch → voll; selbst gelöst nach Hinweisen → halb; „Lösung zeigen“ → 0 €.
-- Konstrukteur und Reaktionstest wie H.
+- Konstrukteur (I), Reaktionstest (J), Freihand (B), Fläche (K), Steigung (L) wie H.
 - Module melden onSolved({ attempts, grade: 'perfect' | 'partial' | 'fail' }).
 - Verpatzte Aufträge (fail) kommen als „Nachfrage“ zurück, sobald zwei weitere erledigt sind (state.retry), mit neuer Variante.
 

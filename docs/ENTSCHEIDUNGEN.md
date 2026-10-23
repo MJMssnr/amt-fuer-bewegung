@@ -18,6 +18,8 @@
 | Erweiterbarkeit | Bewegungen und Aufträge als JSON; Goals per `registerGoal` erweiterbar [W1, W4] | Herr Messner liefert später selbst Inhalte |
 | Eigene Grafiken | Langfristig eigene PNGs möglich (Stadtwappen, Logos) [W4] | `assets/img/`, siehe README |
 | Arbeitsweise | Token-sparsam; Dateien klein; gezielte Änderungen statt Neuschreiben | Wochenlimit |
+| Sitzungsablauf | Herr Messner schreibt auch, während Claude arbeitet. Claude arbeitet in **kurzen Blöcken** und schließt jeden mit Commit + kurzer Meldung ab, damit Nachrichten zeitnah ankommen. Rückfragen kurz [W17] | Paralleles Arbeiten |
+| Schrift | Lokal in `assets/fonts/` (keine Google Fonts). **Silkscreen** („AmtTitel“) für Titel, HUD, Knöpfe, Namen, Auftragsbuch; **VT323** („AmtPixel“) für Aufgabentexte, Zahlen, Einheiten, Canvas. Silkscreen nie für Einheiten: keine Kleinbuchstaben (m/s → M/S) [W16, W17] | Pixelify-Ziffern unlesbar (5 wie S, 2 wie ?) |
 
 ## 2. Story und Ton
 
@@ -27,6 +29,9 @@
 - Physikalische Größen sollen **aus der Geschichte heraus** gebraucht werden (Raser? Bremsweg? Durchschnittsgeschwindigkeit?) [W2].
 - **Humor** ja, pixelig und freundlich. Fehler werden nicht bestraft-zynisch kommentiert, sondern verständnisvoll: „Du bist neu, jeder macht Fehler – gib dir nächstes Mal mehr Mühe“ [W8].
 - Figuren: Erzähler (stumm, ohne Bild), Florian, Bürgermeisterin Kranz, Frau Brösel, Kevin (Fahrradkurier), Ötzi (Busfahrer), Bäcker, Jo (Skaterin), Filialleiterin, Ralf (macht falsche Diagramme), Oma Gerda (Rollator), Dr. Ohm (Schule), Paul Paket (Postbote).
+- **g.Z.-Polizist** [W16]: Comic-Relief wie Paul. Pfeift (Sportpfeife), drängt sich groß und animiert ins Rätselfenster (wackelt, stampft, anfangs roter Kopf), verwarnt freundlich, kündigt an, jedes Mal wiederzukommen, bedankt sich für die Mitarbeit im Amt, kleines Pixelherz. Regeln siehe § 5.
+- **Herr Messner als „Raketenmann“** [W18, Umsetzung später]: weißes T-Shirt, blaue Jeans, unauffällige Sneaker, dunkelbraune/schwarze flache Cap nach vorn, Oberlippen- und Kinnbart plus kleines Dreieck unter der Unterlippe, dunkle Haare, keine Brille. Die Raketenteile stammen von ihm; er gratuliert, wenn alle Teile da sind und die Rakete gebaut wird (Endgame). Brücke zu Teil 2.
+- **Raketenteile künftig als Quest-Belohnung** [W18, später]: nicht mehr von Anfang an kaufbar. Z. B. alle 5 erfolgreichen Aufträge Mitteilung „rätselhaftes Paket während deiner Abwesenheit im Baumhaus zugestellt“, mit kryptischer Notiz („irgendwann wirst du wissen, was damit zu tun ist“). Letzte Lieferung → Endgame-Animation. Ersetzt dann den Kauf im Shop (Balancing in § 5 anpassen).
 - **Belohnung:** Geld → Baumhaus-Einrichtung. Geheimnisvolle **Raketenteile** ohne Beschreibung → Kiste → Abschlussprüfung → Raketenstart als **Teaser für Teil 2** [W8].
 
 ## 3. Optik
@@ -42,15 +47,20 @@
 | Typ | Name | Status | Entscheidungen |
 |---|---|---|---|
 | A | Zuordnen (match) | ✓ | Distraktoren aus Fehlvorstellungen, nicht zufällig |
-| B | Freihand zeichnen | **zurückgestellt** [W4] | Später evtl. mit Toleranz und Auto-Begradigung zu Geraden [W3] |
+| B | Freihand (freehand) | ✓ 1 Auftrag, Playtest offen [W16] | Zeichnen in einem Zug, Auto-Begradigung (Ramer-Douglas-Peucker), Toleranz ±tolY senkrecht, ±0,3 s an Knicken. Bleibt bis zum Feedback so (3 Abschnitte inkl. Stillstand) [W17] |
 | C | Achsen-Detektiv (axes) | ✓ | Diagramm ohne Zahlen, Ablesen an markierten Linien |
-| D | Regie | offen | – |
+| D | Regie (direct) | in Arbeit [W17] | **Variante a:** Schüler stellt Startort, Startzeit und vₓ der Akteure ein, damit ein Drehbuch-Ereignis eintritt (z. B. Begegnung am Ort X zur Zeit T); Animation als Kontrolle. 3 Aufträge |
 | E | Fehlerjagd (errorhunt) | ✓ | Ralfs Diagramm hat genau einen falschen Abschnitt |
 | F | Live-Steuerung (live) | ✓ | vₓ per Regler, Spur gegen Soll |
 | G | Beschreiben (describe) | ✓ [W3] | **Fachsprache**, gute Distraktoren; „verzögert/bremst“ nur, wenn \|v\| abnimmt |
 | H | Berechnen (calc) | ✓ [W3] | **Prüfungsrelevant**; Hinweise für typische Fehlwerte |
-| – | Konstrukteur (construct) | ✓ [W10] | Diagramm selbst bauen: Endwerte + Form je Abschnitt |
-| – | Reaktionstest (reaction) | ✓ [W10] | Eigene Reaktionszeit → eigener Anhalteweg. Achtung: Touch-Latenz verfälscht |
+| I | Konstrukteur (construct) | ✓ [W10] | Diagramm selbst bauen: Endwerte + Form je Abschnitt |
+| J | Reaktionstest (reaction) | ✓ [W10] | Eigene Reaktionszeit → eigener Anhalteweg. Achtung: Touch-Latenz verfälscht |
+| K | Flächen-Puzzle (area) | ✓ 3 Aufträge [W17] | Fläche unter t-vₓ automatisch in Rechtecke/Dreiecke zerlegt; Teilflächen mit Vorzeichen, Δx, ggf. Endort oder Weg. Hinweise für Vorzeichen, ½ vergessen, Weg statt Δx |
+| L | Steigungsdreieck (slope) | ✓ 3 Aufträge [W17] | Zwei Punkte antippen (rasten aufs Feinraster), Δt und Δx am **eigenen** Dreieck ablesen, Steigung berechnen. Dreieck nach erstem Prüfen fest |
+
+- **Kennbuchstaben** stehen in `js/tasks/types.js` und werden **nie umnummeriert** (Schüler bekommen sie als PDF zum Selbstcheck) [W16]. Anzeige als gelbes Badge im Auftragskopf und im Auftragsbuch; keine Farbcodierung (bei vielen Typen verwirrend).
+- **Schwierigkeit** [W17]: künftig Feld `difficulty` (leicht/mittel/schwer) pro Ticket, steuert Lohn und Toleranz. Einstufung nach Playtests; Herr Messner fragt die Einstufung ab und gibt verbal Rückmeldung.
 
 Jeder neue Typ: mindestens 3 konkrete Aufträge [W8].
 
@@ -61,6 +71,7 @@ Jeder neue Typ: mindestens 3 konkrete Aufträge [W8].
 - Rechnen/Ablesen (H, C), Live (F), Konstrukteur, Reaktionstest: erster Versuch voll; nach Hinweisen selbst gelöst halb; **„Lösung zeigen“ → 0 €** [W8].
 - Verpatzt → **Nachfrage**: kommt nach 2 weiteren Aufträgen mit **neuer Zufallsvariante** zurück [W10].
 - **Zufallsvarianten** pro Spieler (Seed), damit Schüler nicht abschreiben [W10].
+- **Gültige Ziffern (g.Z.)** [W16, W17]: g.Z. = Ziffern ab der ersten von 0 verschiedenen (00035,4455 → 6; 1,00 → 3; 120 → 3). Standard im Spiel: **2 g.Z.** **Eine g.Z. ist immer zu wenig!** Eingabe mit 1 g.Z. (z. B. „3“ statt „3,0“) → g.Z.-Polizist; **≥ 4 g.Z.** → Polizist („so genau geht das hier nicht“). 2 oder 3 g.Z. sind okay. **0 hat keine g.Z.** → kein Polizist. Naturkonstanten (g = 9,81 m/s², π) gelten als exakt und begrenzen die Genauigkeit nicht. **Kein Geldabzug** für g.Z.-Fehler. Florians Zusammenfassungen nach dem Auftrag nennen Werte mit mindestens 2 g.Z. (z. B. „6,0 m“, nicht „6 m“).
 - Balancing [W15]: Einrichtung um **20 %** teurer (gerundet auf 5 €) → 1220 €; Raketenteile bleiben bei 40 € (5 × 40 = 200 €), damit niemand vor der Prüfung hängen bleibt. Gesamt 1420 € von 1730 € verdienbar (≈ 82 %).
 
 ## 6. Bedienung
@@ -69,11 +80,15 @@ Jeder neue Typ: mindestens 3 konkrete Aufträge [W8].
 - Baumhaus: Shop-Menü einklappbar; jeder Gegenstand hat einen **festen Platz**, genug Platz lassen [W8].
 - Bestellungen bringt **Postbote Paul** (gelb) durch die Luke; Gegenstand erscheint erst nach dem Auspacken [W13].
 - Paul behält **immer** seinen vollen Dialog – keine Kurzfassung. Herr Messner mag den Postboten sehr [W15].
+- **Auftragsbuch 📖** im HUD, **immer verfügbar** [W16, W17]: blaues Notizbuch mit Pixel-Aufschrift „Aufträge“, Öffnungs-Animation ca. 1 s (heranzoomen, Deckel klappt auf). Liste in **Reihenfolge der Annahme** (oben zuerst), dann offene Aufträge. Spalten: Nr., Status, Typ-Buchstabe, Auftrag, Auftraggeber, Ort, verdientes Geld. Status: grüner Kreis mit weißem ✓ (voll), gelber Kreis mit ~ (halb), roter Kreis mit weißem ✕ (verpatzt). Spielstand speichert `order` und `earned`.
+- **Testmodus** [W16, W17]: **20× im Startbildschirm auf Oma Gerda tippen**, am Notebook „amtstest“ tippen oder `?amtstest=1`. Nicht leicht erratbar (Schüler!). Kein Strg+Shift+T (vom Browser belegt). Im Auftragsbuch dann: gesperrte Aufträge sehen, ▶ starten, ✔/◐/✘ setzen, ↺ zurücksetzen, +100 €, alle abhaken.
+- **Freischaltplan**: `docs/QUESTPLAN.md` (Mermaid) und `docs/questplan.png`, erzeugt mit `node tools/questplan.mjs` + `dot`. PNG auf Nachfrage schicken [W16].
 
 ## 7. Klang [W12]
 
 - WebAudio-Synthese, **keine Audiodateien** (webgünstig).
 - Sprechen: pro Buchstabe ein Laut, **Vokale über Formanten** modelliert, Pausen nach Leerzeichen und Satzzeichen.
+- Sprache startet mit Lautstärke **0,3** (halb so laut wie vorher); alte Spielstände einmal halbiert [W16].
 - Stimmen: `florian`, `frau_mittel`, `frau_alt`, `mann_kraeftig`, `mann_duenn` (Paul). Gewünscht, noch offen: `frau_jung`. Erzähler stumm.
 - **Keine Musik während der Aufgaben** (lenkt ab). Auf der Karte **leise** Vögel und Wind.
 - Klang-Menü im HUD (🔊): Stimmen, Natur, Effekte, stumm; wird gespeichert.
@@ -89,7 +104,10 @@ Jeder neue Typ: mindestens 3 konkrete Aufträge [W8].
 - Zustand: DEFAULT per `structuredClone` kopieren.
 - Erster `requestAnimationFrame` kann negatives dt liefern → klemmen.
 - graph.js: der Block `// Kurve` wurde einmal versehentlich gelöscht; Regressionstest existiert.
-- Google Fonts ist im Cloud-Container blockiert (harmloser Konsolenfehler); „Schrift lokal einbinden“ steht auf der Roadmap.
+- Schriften sind lokal; im Cloud-Container sind npm-Registry und CDNs blockiert, Google-Fonts-Dateien kamen per sparse `git clone` von github.com/google/fonts.
+- Diagrammraster: `niceStep` ohne 2,5 (sonst Rasterlinien bei 1,25 usw.); Feinraster über `minorDiv` (1→5, 2→4, 5→5 Kästchen). Achtung, wirkt auf alle Diagramme [W16].
+- `data/tickets.json` beim Ergänzen **nicht** komplett mit `json.dump` neu schreiben (zerstört das kompakte Format, riesiger Diff) – neue Tickets im Repo-Stil anhängen.
+- Lokale Schriften fürs Canvas mit `document.fonts.load(…)` vorladen, sonst Ersatzschrift.
 - Playwright: pulsierende Knöpfe mit `force=True` klicken.
 
 ## 9. Git
