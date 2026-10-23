@@ -48,6 +48,15 @@
       "y": 220,
       "junction": true
     },
+    "fotolabor": {
+      "x": 220,
+      "y": 220,
+      "name": "Fotolabor",
+      "building": "fotolabor",
+      "at": [220, 207],
+      "markerH": 52,
+      "label": [220, 238]
+    },
     "rathaus": {
       "x": 330,
       "y": 220,
@@ -124,7 +133,8 @@
     ["jw", "baeckerei"],
     ["fahrradladen", "je"],
     ["je", "bushof"],
-    ["jw", "rathaus"],
+    ["jw", "fotolabor"],
+    ["fotolabor", "rathaus"],
     ["rathaus", "js"],
     ["js", "supermarkt"],
     ["supermarkt", "bushof"],
@@ -229,14 +239,6 @@
       "y": 140,
       "w": 44,
       "h": 10
-    },
-    {
-      "kind": "flowerbed",
-      "x": 200,
-      "y": 180,
-      "w": 50,
-      "h": 10,
-      "color": "#b78cff"
     }
   ],
   "decor": [
@@ -419,18 +421,6 @@
       "kind": "birch",
       "x": 212,
       "y": 146
-    },
-    {
-      "type": "bench",
-      "x": 240,
-      "y": 170
-    },
-    {
-      "type": "flowers",
-      "x": 180,
-      "y": 202,
-      "w": 30,
-      "n": 9
     },
     {
       "type": "flowers",

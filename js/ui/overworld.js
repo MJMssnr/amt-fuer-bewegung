@@ -7,10 +7,12 @@ import { drawGround, decor, shadow } from '../render/town.js';
 import { BUILDINGS, halfpipe, rail, funbox, parkedCar } from '../render/buildings.js';
 import { treehouse } from '../render/treehouse.js';
 import { school } from '../render/school.js';
+import { fotolabor } from '../render/fotolabor.js';
 import { natureOn, natureOff } from '../audio/sound.js';
 
 BUILDINGS.treehouse = treehouse;
 BUILDINGS.school = school;
+BUILDINGS.fotolabor = fotolabor;
 
 const SPEED = 140; // Welt-Pixel pro Sekunde
 

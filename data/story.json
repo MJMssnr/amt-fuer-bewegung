@@ -59,6 +59,11 @@
       "sprite": "ohm",
       "voice": "frau_mittel"
     },
+    "slavi": {
+      "name": "Slavi, Fotograf",
+      "sprite": "slavi",
+      "voice": "mann_kraeftig"
+    },
     "post": {
       "name": "Paul Paket",
       "sprite": "postbote",

@@ -215,3 +215,26 @@ test('Regie: Drehbuch-Ereignisse prüfen', async () => {
   const wait = runTake(base, { jo: { x0: 120, v: -6, t0: 20 } }, 25, [{ type: 'at', actor: 'jo', t: 22, x: 108 }]);
   assert.ok(wait.results[0].ok);
 });
+
+test('Stroboskop: Orte, Geschwindigkeit, qualitativer Vergleich', async () => {
+  const S = await import('../js/engine/strobe.js');
+  const uni = S.strobePositions({ kind: 'kin', x0: 0, segments: [{ dt: 3, v: 2 }] }, { n: 6, dt: 0.5 });
+  assert.deepEqual(uni.map((p) => p.x), [0, 1, 2, 3, 4, 5]);
+  near(S.strobeSpeed(uni), 2);
+  const acc = S.strobePositions({ kind: 'kin', x0: 0, segments: [{ dt: 3, a: 2 }] }, { n: 6, dt: 0.5 }).map((p) => p.x);
+  near(acc[5], 6.25);
+  // gleichförmig: leicht verwackelt ok, beschleunigtes Muster falsch
+  assert.ok(S.checkStrobe([0, 1.1, 1.95, 3.05, 4, 5], [0, 1, 2, 3, 4, 5], { tol: 0.3 }).ok);
+  assert.ok(!S.checkStrobe([0, 0.3, 1, 2.2, 3.6, 5], [0, 1, 2, 3, 4, 5], { tol: 0.6 }).ok);
+  // beschleunigt: Abstände müssen wachsen
+  assert.ok(S.checkStrobe([0, 0.2, 1, 2.3, 4, 6.2], acc, { tol: 0.4 }).ok);
+  assert.ok(!S.checkStrobe([0, 1.2, 2.5, 3.7, 5, 6.25], acc, { tol: 2 }).ok);
+  // Reihenfolge, Bewegung nach links
+  assert.ok(S.checkStrobe([5, 4, 3, 2, 1, 0], [5, 4, 3, 2, 1, 0], { tol: 0.1 }).ok);
+  assert.ok(!S.checkStrobe([5, 3, 4, 2, 1, 0], [5, 4, 3, 2, 1, 0], { tol: 2 }).order);
+  // Pendel: außen eng, Mitte weit
+  const pen = S.strobePositions({ kind: 'pendulum', L: 1, amp: 40, D: 2 }, { n: 9, dt: 0.25 }).map((p) => p.x);
+  const gaps = pen.slice(1).map((x, i) => x - pen[i]);
+  assert.ok(gaps[0] < gaps[3] && gaps[7] < gaps[4]);
+  near(pen[4], 0, 1e-9);
+});

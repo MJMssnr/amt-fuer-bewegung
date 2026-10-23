@@ -183,6 +183,16 @@ const postbote = {
     [...postTop, '...BB.BB..', '...B....B.', '...B.....B', '..kk....kk'],
   ],
 };
+// Slavi, Fotograf im Fotolabor [W22]: Glatze, schwarzer Rollkragen, Kamera vor der Brust, Jeans
+const slavi = {
+  w: 10, h: 16, turns: true,
+  frames: [[
+    '...kkkk...', '..kssssk..', '.kssssssk.', '.kskssksk.', '.kssssssk.', '..kSmmSk..',
+    '...kssk...', '..dddddd..', '.dddkkddd.', '.ddkWWkdd.', '.sdkkkkds.', '..dddddd..',
+    '..BB..BB..', '..BB..BB..', '..BB..BB..', '.kkk..kkk.',
+  ]],
+};
+
 // g.Z.-Polizist [W16]: blaue Uniform, Mütze mit Stern, Schnurrbart, Trillerpfeife (w). polizist_rot = wütend (roter Kopf)
 const polTop = [
   '...kkkkkk...', '..kUUUUUUk..', '..kUUyyUUk..', '.kkkkkkkkkk.', '..kssssssk..', '..kskssksk..',
@@ -203,7 +213,7 @@ const sprites = {
   sprites: {
     florian, florian_down, florian_up, florian_side, car_red: car, cyclist, cyclist_b, kevin, broesel, dog,
     bus, oetzi, kranz, baecker, filiale, skater, jo, cart, florian_note, florian_photo, oma_rollator, sled, ohm: { ...kranz, palette: { r: '#c2a56b', p: '#257179', y: '#f4f4f4' } }, postbote, ralf: { ...oetzi, palette: { b: '#e43b44', B: '#ffcd75', d: '#3b5dc9' } },
-    polizist, polizist_rot,
+    polizist, polizist_rot, slavi,
   },
 };
 for (const [name, sp] of Object.entries(sprites.sprites))
