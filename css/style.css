@@ -71,6 +71,40 @@ button { font: inherit; cursor: pointer; }
 .g-cursor line { stroke: var(--cursor); stroke-width: 1.2; stroke-dasharray: 3 3; }
 .g-cursor circle { fill: var(--cursor); stroke: var(--ink); stroke-width: 1; }
 
+.given.empty { display: none; }
+.data-sheet { background: var(--paper); box-shadow: 0 0 0 2px var(--ink), 3px 3px 0 2px rgba(26,28,44,.35); padding: 6px 10px; font-size: 14px; overflow: auto; }
+.ds-actor + .ds-actor { margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--grid-major); }
+.ds-actor strong { font-family: var(--pixel); }
+.ds-actor span { color: #566c86; margin-left: 6px; }
+.data-sheet table { border-collapse: collapse; margin-top: 2px; }
+.data-sheet td { padding: 1px 10px 1px 0; vertical-align: top; }
+.data-sheet td:first-child { color: #566c86; white-space: nowrap; }
+
+/* Typ H: Berechnen */
+.calc-list { display: flex; flex-direction: column; gap: 8px; }
+.calc-row { display: grid; grid-template-columns: 1fr auto 22px; align-items: center; gap: 10px; background: var(--paper); padding: 6px 10px; box-shadow: 0 0 0 2px var(--ink); }
+.calc-label { font-size: 16px; }
+.calc-input { display: flex; align-items: center; gap: 6px; }
+.calc-input input { width: 7.5em; font: 18px var(--text); padding: 4px 8px; border: 2px solid var(--ink); background: #fff; text-align: right; user-select: text; }
+.calc-input input:focus { outline: 3px solid var(--gold); }
+.calc-input .unit { min-width: 3em; font-weight: 600; }
+.calc-row.ok { box-shadow: 0 0 0 3px var(--ok); background: #e3f6e6; }
+.calc-row.ok .calc-mark::after { content: '✓'; color: var(--ok); font-weight: 700; font-size: 20px; }
+.calc-row.bad { box-shadow: 0 0 0 3px var(--bad); }
+.calc-row.bad .calc-mark::after { content: '✗'; color: var(--bad); font-weight: 700; font-size: 20px; }
+.calc-row.shown { box-shadow: 0 0 0 3px #94b0c2; }
+.calc-actions { display: flex; gap: 10px; }
+.btn-check { background: var(--gold); font-size: 17px; }
+.btn:disabled { opacity: .5; }
+
+/* Typ G: Beschreiben */
+.describe-list { display: flex; flex-direction: column; gap: 8px; overflow: auto; min-height: 0; }
+.task-body.wide-right { grid-template-columns: minmax(0, .8fr) minmax(0, 1.35fr); }
+.desc-opt { white-space: pre-line; text-align: left; font: 15px/1.35 var(--text); background: var(--paper); border: 0; padding: 8px 12px 8px 40px; position: relative; box-shadow: 0 0 0 2px var(--ink), 3px 3px 0 2px rgba(26,28,44,.3); color: var(--ink); }
+.desc-opt .letter { position: absolute; left: 8px; top: 8px; font-family: var(--pixel); background: var(--ink); color: #f4f4f4; padding: 0 6px; }
+.desc-opt.right { box-shadow: 0 0 0 4px var(--ok); background: #e3f6e6; }
+.desc-opt.wrong { box-shadow: 0 0 0 4px var(--bad); opacity: .55; }
+
 .paper-note { background: #fffbe0; background-image: linear-gradient(#e6eef7 1px, transparent 1px); background-size: 100% 1.4em; line-height: 1.4em; padding: 6px 12px 8px; font-size: 15px; box-shadow: 0 0 0 2px var(--ink), 3px 3px 0 2px rgba(26,28,44,.35); transform: rotate(-.6deg); }
 .paper-note strong { display: block; font-family: var(--pixel); color: var(--bad); }
 .prompt { margin: 0; font-family: var(--pixel); font-size: 18px; line-height: 1.2; }
@@ -118,6 +152,16 @@ button { font: inherit; cursor: pointer; }
   .prompt { font-size: 15px; }
   .choices { gap: 7px; }
   .feedback { font-size: 13px; min-height: 2.4em; padding: 4px 8px; }
+  .calc-row { padding: 3px 8px; gap: 6px; }
+  .calc-label { font-size: 14px; }
+  .calc-input input { font-size: 16px; padding: 2px 6px; width: 6.5em; }
+  .calc-list { gap: 5px; }
+  .task-body.wide-right { grid-template-columns: minmax(0, .6fr) minmax(0, 1.4fr); }
+  .desc-opt { font-size: 12px; line-height: 1.25; padding: 4px 6px 4px 30px; }
+  .desc-opt .letter { left: 5px; top: 4px; font-size: 12px; }
+  .describe-list { gap: 6px; }
+  .data-sheet { font-size: 12px; padding: 4px 8px; }
+  .paper-note { font-size: 13px; padding: 4px 10px 6px; }
   #dialog { bottom: 6px; padding: 8px 10px; }
   .d-pic { width: 48px; height: 48px; }
   .d-text { font-size: 15px; }

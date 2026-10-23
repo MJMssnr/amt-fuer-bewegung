@@ -10,6 +10,8 @@ Spieler ist Florian, der per Namensverwechslung das „Amt für Bewegung aller A
 - **Physik nur in `js/engine/`** (kein DOM). Darstellung nur in `js/render/`. Spielablauf in `js/ui/` und `js/main.js`.
 - **Inhalte sind Daten:** Neue Aufträge/Bewegungen als JSON in `data/`, nicht im Code.
 - **Tests:** `node --test tests/*.test.mjs` muss grün bleiben. Neue Goals/Engine-Funktionen bekommen einen Test.
+  `tests/data.test.mjs` prüft alle Tickets (Orte, Figuren, Sprites, lösbare Goals).
+- **Sprites ändern:** `tools/gensprites.mjs` bearbeiten, dann `node tools/gensprites.mjs`.
 - Zielgeräte: Notebook, iPad, Smartphone **quer**. Layout bei 667×375 prüfen.
 - Fachsprache korrekt: „verzögert/bremst“ nur, wenn der *Betrag* von v abnimmt.
 
@@ -19,12 +21,19 @@ index.html, css/style.css
 js/main.js                 Einstieg: lädt Daten, verbindet Karte ↔ Tickets ↔ Aufgaben
 js/engine/kinematics.js    2D-Kinematik, stückweise konstantes a, Ereignisse ("until")
 js/engine/goals.js         Auswertbare Fragen, erweiterbar per registerGoal()
+js/engine/answer.js        Antwortprüfung: Toleranz = 1 Einheit in der 2. signifikanten Stelle
 js/render/graph.js         SVG-Diagramme (KINDS: xt, vt, at, yt, vyt, ayt)
 js/render/scene.js         Pixel-Animation der Akteure mit Maßband
 js/render/pixel.js         Sprites aus assets/sprites.json oder PNG
+js/render/painter.js       Welt->Bildschirm, kantenscharf; Text in nativer Auflösung (scharf)
+js/render/town.js          Stadtboden, Bäume (round/pine/birch/fruit/blossom), Büsche, Blumen, Möbel
+js/render/buildings.js     Gebäude, Schilder (wachsen mit dem Text), Skatepark-Rampen, Parkplatz
 js/render/format.js        Zahlenformat, schöne Achsenteilung
 js/tasks/index.js          Register der Aufgabentypen
+js/tasks/common.js         Linke Spalte für alle Typen (Animation, Diagramme, Datenblatt, Notizzettel)
 js/tasks/match.js          Typ A: Zuordnen
+js/tasks/calc.js           Typ H: Berechnen (Goals -> Eingabe, Hinweise für typische Fehler)
+js/tasks/describe.js       Typ G: Beschreiben; Textgenerator in describe-text.js
 js/tasks/distractors.js    Distraktoren aus Fehlvorstellungen (CATALOG)
 js/ui/overworld.js         Stadtkarte (data/map.json)
 js/ui/dialog.js, state.js  Dialoge, Spielstand (localStorage)
@@ -32,7 +41,7 @@ data/tickets.json          Aufträge (Level)
 data/scenarios/*.json      Bewegungen
 data/story.json            Figuren, Intro, Outro
 data/map.json              Orte, Straßen, Bäume
-assets/sprites.json        Pixel-Sprites; assets/img/ für eigene PNGs
+assets/sprites.json        Pixel-Sprites (erzeugt von tools/gensprites.mjs); assets/img/ für eigene PNGs
 schema/                    Formatbeschreibung der JSON-Dateien
 ```
 
@@ -42,5 +51,5 @@ schema/                    Formatbeschreibung der JSON-Dateien
 - **Neue Fehlvorstellung:** Eintrag in `CATALOG` und `PRIORITY` in `distractors.js`.
 
 ## Geplant (Reihenfolge offen)
-H Berechnen (Goals → Eingabe mit Toleranz), G Beschreiben (Fachsprache-Distraktoren), C Achsen-Detektiv,
+C Achsen-Detektiv,
 D Regie, E Fehlerjagd, F Live-Steuerung, 2D-Szenen (Wurf), Vektoraddition, PWA/offline, Geld ausgeben (Messgeräte).

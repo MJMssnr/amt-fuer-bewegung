@@ -92,5 +92,218 @@
       ["florian", "4 s mit 3 m/s nach vorn, 3 s mit 2 m/s zurück, dann 2 s Stillstand. Er endet 6 m vom Start, ist aber 18 m gelaufen."],
       ["baecker", "18 Meter für nix. Wie mein Lehrling."]
     ]
+  },
+  {
+    "id": "t05-radeln",
+    "title": "Partnerschafts-Radeln",
+    "from": "kranz",
+    "node": "park",
+    "requires": ["t01-sportwagen"],
+    "reward": 80,
+    "scenario": "radeln-partnerstadt",
+    "intro": [
+      ["kranz", "Herr Doktor Brandl! Morgen ist Partnerschafts-Radeln mit Unterbach. Anna startet bei uns, Bernd gleichzeitig in Unterbach, 3 km entfernt."],
+      ["kranz", "Ich muss wissen, WANN und WO sie sich treffen. Da stelle ich das Rednerpult hin. Und die Blaskapelle."],
+      ["florian", "Zwei Bewegungsgleichungen, einmal gleichsetzen. Das krieg ich hin."]
+    ],
+    "task": {
+      "type": "calc",
+      "given": ["anim", "data"],
+      "prompt": "Wann und wo treffen sich Anna und Bernd?",
+      "paper": "Stelle für beide x(t) = x₀ + vₓ·t auf, setze die Gleichungen gleich und löse nach t auf. Setze t dann in eine der Gleichungen ein.",
+      "questions": [
+        {
+          "label": "Treffzeitpunkt",
+          "symbol": "t_T",
+          "unit": "s",
+          "goal": {
+            "type": "meet",
+            "a": "anna",
+            "b": "bernd",
+            "ask": "t"
+          },
+          "hints": [
+            {
+              "value": 600,
+              "text": "Das wäre die Zeit, die Anna allein für die ganzen 3 km bräuchte. Beide fahren aber gleichzeitig aufeinander zu."
+            },
+            {
+              "value": 400,
+              "text": "Das ist Bernds Zeit für die ganze Strecke. Beide fahren aber gleichzeitig los."
+            },
+            {
+              "value": 1200,
+              "text": "Hast du die Geschwindigkeiten subtrahiert statt addiert? Bernd fährt in negative Richtung, vₓ ist also negativ."
+            }
+          ],
+          "help": "Setze 5 m/s · t = 3000 m − 7,5 m/s · t und löse nach t auf."
+        },
+        {
+          "label": "Treffpunkt (Ort)",
+          "symbol": "x_T",
+          "unit": "m",
+          "goal": {
+            "type": "meet",
+            "a": "anna",
+            "b": "bernd",
+            "ask": "x"
+          },
+          "hints": [
+            {
+              "value": 1800,
+              "text": "Das ist die Strecke, die Bernd gefahren ist. Gefragt ist der Ort x, gemessen von Annas Start."
+            },
+            {
+              "value": 1500,
+              "text": "Die Mitte wäre es nur bei gleichen Geschwindigkeiten."
+            }
+          ],
+          "help": "Setze t_T in Annas Gleichung x(t) = 5 m/s · t ein."
+        }
+      ]
+    },
+    "success": [
+      ["florian", "Nach 240 s, also 4 Minuten, bei x = 1200 m. Bernd ist schneller, deshalb liegt der Treffpunkt näher an unserer Stadt."],
+      ["kranz", "1,2 Kilometer! Wunderbar! Dann muss die Blaskapelle nicht so weit laufen."]
+    ]
+  },
+  {
+    "id": "t06-broesel-ampel",
+    "title": "Frau Brösels Rache",
+    "from": "broesel",
+    "node": "lindenstrasse",
+    "requires": ["t03-bus", "t05-radeln"],
+    "reward": 90,
+    "scenario": "sportwagen-ampel",
+    "intro": [
+      ["broesel", "DA sind Sie ja! Der rote Sportwagen war heute wieder da! Erst hat er an der Ampel gehalten, und dann ist er wieder losgerast!"],
+      ["broesel", "Und er ist sicher über 50 gefahren! Diesmal hab ich Beweise!"],
+      ["florian", "Ich hab sein t-vₓ-Diagramm von der Ampelkamera. Schauen wir mal genau hin."]
+    ],
+    "task": {
+      "type": "calc",
+      "given": ["anim", "vt"],
+      "prompt": "Werte das t-vₓ-Diagramm aus.",
+      "paper": "Gesamtweg = Fläche unter der t-vₓ-Kurve (Rechtecke, Dreiecke). Durchschnittsgeschwindigkeit = Gesamtweg / Gesamtzeit. Umrechnen: 1 m/s = 3,6 km/h.",
+      "questions": [
+        {
+          "label": "Gesamtweg",
+          "symbol": "s",
+          "unit": "m",
+          "goal": {
+            "type": "totalPath",
+            "actor": "car"
+          },
+          "hints": [
+            {
+              "value": 510,
+              "text": "Du hast nur die Abschnitte mit konstanter Geschwindigkeit gezählt. Auch beim Bremsen und Anfahren legt das Auto Weg zurück (Dreiecke!)."
+            },
+            {
+              "value": 1050,
+              "text": "Rechne die Fläche abschnittsweise. Während das Auto steht, legt es keinen Weg zurück."
+            }
+          ],
+          "help": "Fünf Abschnitte: Rechteck 20 s · 15 m/s, Dreieck beim Bremsen, Stillstand, Dreieck beim Anfahren, Rechteck 14 s · 15 m/s."
+        },
+        {
+          "label": "Durchschnittsgeschwindigkeit",
+          "symbol": "v̄",
+          "unit": "km/h",
+          "goal": {
+            "type": "avgSpeed",
+            "actor": "car"
+          },
+          "hints": [
+            {
+              "value": 54,
+              "text": "Das ist die Höchstgeschwindigkeit. Die Durchschnittsgeschwindigkeit ist Gesamtweg durch Gesamtzeit."
+            },
+            {
+              "value": 8.46,
+              "text": "Das ist der Wert in m/s. Gefragt ist km/h (mal 3,6).",
+              "tol": 0.1
+            },
+            {
+              "value": 27,
+              "text": "Hast du durch 2 geteilt? Bei unterschiedlich langen Abschnitten darf man die Geschwindigkeiten nicht einfach mitteln."
+            }
+          ],
+          "help": "v̄ = s / t mit t = 70 s. Danach mit 3,6 multiplizieren."
+        },
+        {
+          "label": "Höchstgeschwindigkeit",
+          "symbol": "v_max",
+          "unit": "km/h",
+          "goal": {
+            "type": "max",
+            "actor": "car",
+            "q": "speed"
+          },
+          "hints": [
+            {
+              "value": 15,
+              "text": "Das ist der Wert in m/s. Gefragt ist km/h (mal 3,6)."
+            }
+          ],
+          "help": "Lies den größten Wert im t-vₓ-Diagramm ab und rechne in km/h um."
+        }
+      ]
+    },
+    "success": [
+      ["florian", "Im Schnitt nur rund 30 km/h, wegen der Ampel. Aber in der Spitze 54 km/h. Bei Tempo 50 war er also wirklich zu schnell!"],
+      ["broesel", "HA! Hab ich doch gesagt! … Moment, wieso nur 30 im Schnitt? Na egal. Recht hab ich trotzdem."],
+      ["florian", "Durchschnittsgeschwindigkeit und Momentangeschwindigkeit sind eben zwei verschiedene Dinge, Frau Brösel."]
+    ]
+  },
+  {
+    "id": "t07-skater",
+    "title": "Zu schnell im Skatepark?",
+    "from": "jo",
+    "node": "skatepark",
+    "requires": ["t04-brezel"],
+    "reward": 70,
+    "scenario": "skater-jo",
+    "intro": [
+      ["jo", "Ey, Amtsmensch! Der Stadtrat will ein Schild „Langsam fahren“ in den Skatepark stellen. Lächerlich."],
+      ["jo", "Ich hab meinen Run mit der App aufgezeichnet. Beschreib den mal so, dass die im Rathaus das kapieren."],
+      ["florian", "Fachgerecht, für den Bericht an den Stadtrat. Kein Problem."]
+    ],
+    "task": {
+      "type": "describe",
+      "actor": "jo",
+      "given": ["anim", "vt"],
+      "prompt": "Welche Beschreibung von Jos Run gehört in den Bericht?",
+      "paper": "Notiere für jeden Abschnitt: Wie lange? Ändert sich vₓ? Nimmt der Betrag von vₓ zu oder ab? Berechne die Steigung im t-vₓ-Diagramm."
+    },
+    "success": [
+      ["florian", "4 s gleichmäßig beschleunigt mit 1 m/s², dann 3 s gleichförmig mit 4 m/s, dann verzögert bis zum Stillstand. 4 m/s sind 14,4 km/h. Kein Grund für ein Schild."],
+      ["jo", "„Gleichmäßig verzögert“. Klingt, als wär ich ne Straßenbahn. Aber passt. Danke!"]
+    ]
+  },
+  {
+    "id": "t08-einkaufswagen",
+    "title": "Der Einkaufswagen",
+    "from": "filiale",
+    "node": "supermarkt",
+    "requires": ["t07-skater"],
+    "reward": 90,
+    "scenario": "einkaufswagen",
+    "intro": [
+      ["filiale", "Herr Brandl! Auf dem Parkplatz ist ein Einkaufswagen losgerollt, direkt auf das Auto der Bürgermeisterin zu!"],
+      ["filiale", "Sie haben ihn zum Glück in letzter Sekunde gestoppt. Aber die Versicherung will einen fachlich korrekten Bericht."],
+      ["florian", "Achtung, der Wagen rollt in negative x-Richtung. Da muss man bei den Vorzeichen aufpassen."]
+    ],
+    "task": {
+      "type": "describe",
+      "actor": "cart",
+      "given": ["anim", "vt"],
+      "prompt": "Welcher Bericht an die Versicherung ist fachlich korrekt?",
+      "paper": "Vergleiche in jedem Abschnitt die Vorzeichen von vₓ und aₓ. Gleiches Vorzeichen: Der Betrag der Geschwindigkeit wächst. Verschiedene Vorzeichen: Er nimmt ab."
+    },
+    "success": [
+      ["florian", "Am Anfang war aₓ negativ, trotzdem wurde der Wagen schneller, weil er in −x-Richtung gerollt ist. Als ich ihn gestoppt habe, war aₓ positiv, und er wurde langsamer."],
+      ["filiale", "Ich verstehe kein Wort. Aber die Versicherung wird begeistert sein."]
+    ]
   }
 ]

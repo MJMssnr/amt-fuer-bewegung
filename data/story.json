@@ -1,12 +1,41 @@
 {
   "characters": {
-    "erz":      { "name": "",                         "sprite": null },
-    "florian":  { "name": "Florian",                  "sprite": "florian" },
-    "kranz":    { "name": "Bürgermeisterin Kranz",    "sprite": "kranz" },
-    "broesel":  { "name": "Frau Brösel",              "sprite": "broesel" },
-    "kevin":    { "name": "Kevin, Fahrradkurier",     "sprite": "kevin" },
-    "oetzi":    { "name": "Busfahrer Ötzi",           "sprite": "oetzi" },
-    "baecker":  { "name": "Bäckermeister Huber",      "sprite": "oetzi" }
+    "erz": {
+      "name": "",
+      "sprite": null
+    },
+    "florian": {
+      "name": "Florian",
+      "sprite": "florian"
+    },
+    "kranz": {
+      "name": "Bürgermeisterin Kranz",
+      "sprite": "kranz"
+    },
+    "broesel": {
+      "name": "Frau Brösel",
+      "sprite": "broesel"
+    },
+    "kevin": {
+      "name": "Kevin, Fahrradkurier",
+      "sprite": "kevin"
+    },
+    "oetzi": {
+      "name": "Busfahrer Ötzi",
+      "sprite": "oetzi"
+    },
+    "baecker": {
+      "name": "Bäckermeister Huber",
+      "sprite": "baecker"
+    },
+    "jo": {
+      "name": "Jo, Skaterin",
+      "sprite": "jo"
+    },
+    "filiale": {
+      "name": "Filialleiterin Yıldız",
+      "sprite": "filiale"
+    }
   },
   "intro": [
     ["erz", "Montag, 7:58 Uhr. Florian steht im Rathaus. Eigentlich wollte er sich nur für den Ferienjob beim Bauhof bewerben."],

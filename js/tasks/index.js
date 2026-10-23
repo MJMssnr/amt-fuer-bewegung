@@ -3,8 +3,8 @@
 
 const LOADERS = {
   match: () => import('./match.js'),
-  // describe: () => import('./describe.js'),   // G: Bewegung beschreiben
-  // calc:     () => import('./calc.js'),       // H: Berechnen
+  describe: () => import('./describe.js'),     // G: Bewegung beschreiben
+  calc: () => import('./calc.js'),             // H: Berechnen
   // axes:     () => import('./axes.js'),       // C: Achsen-Detektiv
 };
 

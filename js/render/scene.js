@@ -16,7 +16,8 @@ export class Scene {
     this.onTime = onTime;
     this.t = 0;
     this.playing = false;
-    this.rate = rate ?? (world.tEnd > 12 ? 2 : 1);
+    // Zeitraffer, damit eine Animation höchstens ca. 10 s dauert
+    this.rate = rate ?? ([1, 2, 5, 10, 20, 50, 100].find((r) => world.tEnd / r <= 10.5) ?? 200);
     this.facing = new Map();
     this.wall = 0; // Animationszeit für Laufbewegung
     this.#layout();

@@ -7,7 +7,10 @@ export const fmt = (n, digits) =>
     : new Intl.NumberFormat('de-DE', { maximumFractionDigits: digits, minimumFractionDigits: 0 }).format(n);
 
 /** "2,5" oder "2.5" -> 2.5 ; ungültig -> NaN */
-export const parseNum = (s) => Number(String(s).trim().replace(/\s/g, '').replace(',', '.'));
+export const parseNum = (s) => {
+  const t = String(s ?? '').replace(/\s/g, '').replace('−', '-').replace(',', '.');
+  return t === '' ? NaN : Number(t);
+};
 
 /** Schöne Schrittweite (1, 2, 2,5, 5 · 10^n) für ca. `count` Teilstriche. */
 export function niceStep(range, count = 5) {

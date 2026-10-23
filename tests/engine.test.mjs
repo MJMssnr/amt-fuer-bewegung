@@ -79,3 +79,36 @@ test('Zeit bis Endgeschwindigkeit', () => {
   const sc = one([{ dt: 10, a: 1.5 }]);
   near(evaluateGoal({ type: 'timeUntil', actor: 'A', q: 'vx', value: 9 }, sc).value, 6);
 });
+
+import { sigTolerance, isClose, matchHint } from '../js/engine/answer.js';
+import { parseNum } from '../js/render/format.js';
+
+test('Toleranz in der 2. signifikanten Stelle', () => {
+  near(sigTolerance(24), 1);
+  near(sigTolerance(592.5), 10);
+  near(sigTolerance(2.3), 0.1);
+  near(sigTolerance(-7.5), 0.1);
+  assert.ok(isClose(25, 24));
+  assert.ok(!isClose(25.5, 24));
+  assert.ok(isClose(30, 30.47));
+  assert.ok(!isClose(8.46, 30.47));
+  assert.ok(isClose(-7.4, -7.5));
+});
+
+test('Eingabe mit Dezimalkomma und Hinweise', () => {
+  near(parseNum('2,5'), 2.5);
+  near(parseNum(' 1 200 '), 1200);
+  assert.ok(Number.isNaN(parseNum('abc')));
+  assert.equal(matchHint(16.2, [{ value: 16, text: 'Reaktionsweg?' }]).text, 'Reaktionsweg?');
+  assert.equal(matchHint(30, [{ value: 16, text: 'x' }]), null);
+});
+
+import { phrase } from '../js/tasks/describe-text.js';
+
+test('Fachsprache: verzögert nur, wenn |v| abnimmt', () => {
+  assert.match(phrase({ dt: 2, v0: -4, a: -1 }), /beschleunigt in −x/);
+  assert.match(phrase({ dt: 2, v0: -4, a: 2 }), /verzögert in −x-Richtung bis zum Stillstand/);
+  assert.match(phrase({ dt: 2, v0: 4, a: -1 }), /verzögert in \+x/);
+  assert.match(phrase({ dt: 3, v0: 0, a: 0 }), /Stillstand/);
+  assert.match(phrase({ dt: 3, v0: 2, a: -2 }), /Umkehr/);
+});

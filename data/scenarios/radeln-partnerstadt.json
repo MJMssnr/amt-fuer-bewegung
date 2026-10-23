@@ -1,0 +1,10 @@
+{
+  "id": "radeln-partnerstadt",
+  "title": "Partnerschafts-Radeln",
+  "actors": [
+    { "id": "anna", "name": "Anna (aus unserer Stadt)", "sprite": "cyclist", "x0": 0,
+      "segments": [ { "dt": 300, "v": 5 } ] },
+    { "id": "bernd", "name": "Bernd (aus Unterbach)", "sprite": "cyclist_b", "x0": 3000,
+      "segments": [ { "dt": 300, "v": -7.5 } ] }
+  ]
+}

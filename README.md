@@ -51,7 +51,26 @@ Tests der Physik-Engine: `node --test tests/*.test.mjs`
   "success": [["florian", "Auflösung mit Fachsprache …"]]
 }
 ```
-Diagrammarten: `xt`, `vt`, `at` (später `yt`, `vyt`, `ayt`). `given` darf `"anim"` enthalten.
+Diagrammarten: `xt`, `vt`, `at` (später `yt`, `vyt`, `ayt`). `given` darf außerdem `"anim"` (Animation)
+und `"data"` (Datenblatt der Bewegung) enthalten.
+
+**Aufgabentypen** (`task.type`):
+- `match` – passendes Diagramm wählen (`ask`: gesuchte Diagrammart)
+- `describe` – fachsprachlich korrekte Beschreibung wählen (Texte werden automatisch erzeugt)
+- `calc` – Werte berechnen und eintippen:
+```json
+"task": { "type": "calc", "given": ["anim", "data"], "paper": "…",
+  "questions": [
+    { "label": "Treffzeitpunkt", "symbol": "t_T", "unit": "s",
+      "goal": { "type": "meet", "a": "anna", "b": "bernd", "ask": "t" },
+      "hints": [ { "value": 600, "text": "Hinweis, wenn genau dieser falsche Wert eingegeben wird" } ],
+      "help": "Allgemeiner Tipp nach dem 2. Fehlversuch" } ] }
+```
+Einheiten: `m`, `s`, `m/s`, `m/s²`, `km/h`, `km`, `min`. Toleranz: eine Einheit in der 2. signifikanten Stelle
+(eigene Toleranz mit `"tol"`). Verfügbare Goals: `meet`, `timeUntil`, `valueAt`, `displacement`, `totalPath`,
+`avgSpeed`, `avgVelocity`, `segment` (Weg/Dauer eines Abschnitts), `max`, `min`, `distanceAt`, `duration`, `solveFor`.
+
+Nach dem Bearbeiten: `node --test tests/*.test.mjs` prüft, ob alle Verweise stimmen und jede Frage lösbar ist.
 
 ### 3. Figuren und Orte
 - Figuren: `data/story.json` → `characters`

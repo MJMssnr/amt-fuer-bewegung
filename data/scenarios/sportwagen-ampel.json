@@ -1,0 +1,14 @@
+{
+  "id": "sportwagen-ampel",
+  "title": "Der rote Sportwagen an der Ampel",
+  "actors": [
+    { "id": "car", "name": "Roter Sportwagen", "sprite": "car_red", "x0": 0,
+      "segments": [
+        { "dt": 20, "v": 15 },
+        { "until": "rest", "a": -3 },
+        { "dt": 25, "v": 0 },
+        { "dt": 6, "a": 2.5 },
+        { "dt": 14, "v": 15 }
+      ] }
+  ]
+}
