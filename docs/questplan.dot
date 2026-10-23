@@ -33,6 +33,14 @@ digraph Q {
   t28_steigung_ralf [fillcolor="#a0d9d0" label=<<b>L</b>  Ralfs positive Rückwärtsrechnung<br/><font point-size="9">Ralf · Rathaus · 80 €</font>>];
   t29_steigung_bus [fillcolor="#a0d9d0" label=<<b>L</b>  Bremst Ötzi zu scharf?<br/><font point-size="9">Busfahrer Ötzi · Busbahnhof · 90 €</font>>];
   t30_regie_imagefilm [fillcolor="#c7a6ff" label=<<b>D</b>  Der Imagefilm<br/><font point-size="9">Bürgermeisterin Kranz · Rathaus · 90 €</font>>];
+  t31_strobo_erstes [fillcolor="#ddd" label=<<b>O</b>  Das erste Blitzfoto<br/><font point-size="9">Slavi · Fotolabor · 60 €</font>>];
+  t32_strobo_kevin [fillcolor="#ddd" label=<<b>M</b>  Kevin im Blitzlicht<br/><font point-size="9">Slavi · Fotolabor · 70 €</font>>];
+  t33_strobo_fallschirm [fillcolor="#ddd" label=<<b>N</b>  Der schwebende Springer<br/><font point-size="9">Slavi · Fotolabor · 70 €</font>>];
+  t34_strobo_rinne [fillcolor="#ddd" label=<<b>O</b>  Die Kugel in der Rinne<br/><font point-size="9">Slavi · Fotolabor · 80 €</font>>];
+  t35_strobo_auto [fillcolor="#ddd" label=<<b>M</b>  Blitz in der 30er-Zone<br/><font point-size="9">Slavi · Fotolabor · 90 €</font>>];
+  t36_strobo_jo [fillcolor="#ddd" label=<<b>N</b>  Jo im Doppelbild<br/><font point-size="9">Slavi · Fotolabor · 80 €</font>>];
+  t37_strobo_bremsen [fillcolor="#ddd" label=<<b>O</b>  Kevin bremst<br/><font point-size="9">Slavi · Fotolabor · 90 €</font>>];
+  t38_strobo_pendel [fillcolor="#ddd" label=<<b>O</b>  Das Pendel<br/><font point-size="9">Slavi · Fotolabor · 100 €</font>>];
   t01_sportwagen -> t02_kevin;
   t02_kevin -> t03_bus;
   t01_sportwagen -> t04_brezel;
@@ -67,4 +75,12 @@ digraph Q {
   t12_ralf_brezel -> t28_steigung_ralf;
   t10_ampelkamera -> t29_steigung_bus;
   t05_radeln -> t30_regie_imagefilm;
+  t01_sportwagen -> t31_strobo_erstes;
+  t31_strobo_erstes -> t32_strobo_kevin;
+  t32_strobo_kevin -> t33_strobo_fallschirm;
+  t33_strobo_fallschirm -> t34_strobo_rinne;
+  t34_strobo_rinne -> t35_strobo_auto;
+  t35_strobo_auto -> t36_strobo_jo;
+  t36_strobo_jo -> t37_strobo_bremsen;
+  t37_strobo_bremsen -> t38_strobo_pendel;
 }

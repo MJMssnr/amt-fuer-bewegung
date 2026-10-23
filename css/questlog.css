@@ -1,5 +1,6 @@
 /* Auftragsbuch (Questlog), Typ-Buchstaben, Testmodus */
-.type-badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 4px; font-family: var(--pixel); font-size: 15px; line-height: 1; background: var(--gold); color: var(--ink); box-shadow: 0 0 0 2px var(--ink); }
+/* Systemschrift fett: „O“ und „0“ sind in den Pixelschriften kaum zu unterscheiden [W22] */
+.type-badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 4px; font: 700 14px/1 system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1; background: var(--gold); color: var(--ink); box-shadow: 0 0 0 2px var(--ink); }
 .task-head .t-type { flex: none; }
 
 #questlog { position: absolute; inset: 0; z-index: 40; display: grid; place-items: center; padding: 10px; background: rgba(26, 28, 44, .72); perspective: 1400px; }

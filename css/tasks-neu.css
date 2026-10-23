@@ -63,3 +63,22 @@
 .g-note.dr-num { font: 13px var(--pixel); fill: var(--ink); paint-order: stroke; stroke: #fffdf6; stroke-width: 3px; }
 .g-trace-direct polyline { fill: none; stroke: var(--accent); stroke-width: 2.6; }
 .dr-clap { font-family: var(--pixel); color: #f4f4f4; font-size: 14px; }
+
+/* Stroboskop (M, N, O) */
+.strobe-photo { display: block; width: 100%; aspect-ratio: 2.6 / 1; image-rendering: auto; box-shadow: 0 0 0 3px var(--ink); background: #10122a; }
+.sb-build .strobe-photo { aspect-ratio: 2.2 / 1; }
+.sb-anim { padding: 0; }
+.sb-ctrl { background: var(--ink); padding: 4px; }
+.sb-ctrl .btn { padding: 2px 6px; font-size: 12px; }
+.sb-info { margin: 4px 0; font-size: 14px; }
+.sb-tray { display: flex; flex-wrap: wrap; gap: 8px; padding: 8px 4px; min-height: 44px; align-items: center; }
+.sb-chip { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--ink); background: #ffcd75; font: 16px var(--pixel); touch-action: none; cursor: grab; }
+.sb-empty { font-size: 13px; opacity: .7; }
+.sb-ghost { position: fixed; z-index: 90; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; border: 2px solid var(--ink); background: #ffcd75;
+  display: grid; place-items: center; font: 16px var(--pixel); pointer-events: none; opacity: .85; }
+.strobe-choice { display: block; width: 100%; text-align: left; margin: 6px 0; padding: 8px 10px 8px 34px; position: relative; background: #fffdf6; border: 0; box-shadow: 0 0 0 2px var(--ink); font-size: 15px; }
+.strobe-choice .letter { position: absolute; left: 8px; top: 8px; font-family: var(--title); background: var(--ink); color: #f4f4f4; padding: 0 5px; font-size: 12px; }
+.strobe-choice.right { background: #d8f5df; box-shadow: 0 0 0 3px var(--ok); }
+.strobe-choice.wrong { background: #f8dde2; box-shadow: 0 0 0 2px var(--bad); opacity: .8; }
+.strobe-context { background: #fffdf6; box-shadow: 0 0 0 2px var(--ink); padding: 6px 10px; margin: 6px 0; font-size: 14px; }
+.strobe-photo.vertical { aspect-ratio: 1.25 / 1; }

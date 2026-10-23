@@ -14,6 +14,9 @@ const LOADERS = {
   area: () => import('./area.js'),             // K: Flächen-Puzzle (Fläche unter t-vₓ = Δx)
   slope: () => import('./slope.js'),           // L: Steigungsdreieck
   direct: () => import('./direct.js'),         // D: Regie (Variante a)
+  strobecalc: () => import('./strobecalc.js'), // M: Stroboskop – rechnen
+  strobedescribe: () => import('./strobedescribe.js'), // N: Stroboskop – beschreiben
+  strobebuild: () => import('./strobebuild.js'), // O: Stroboskop – bauen
 };
 
 export async function loadTask(type) {

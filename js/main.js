@@ -115,7 +115,8 @@ const pick = (variants, key) => variants[[...key].reduce((h, ch) => h + ch.charC
 const withFrom = (lines, from) => lines.map(([who, txt]) => [who === '$from' ? from : who, txt]);
 
 async function runTicket(ticket, raw, params) {
-  const world = buildWorld(applyScenario(await scenarioOf(raw.scenario), raw, params));
+  // Stroboskop-Aufträge (M, N, O) bringen ihre Bewegung im Ticket mit und brauchen kein Szenario
+  const world = raw.scenario ? buildWorld(applyScenario(await scenarioOf(raw.scenario), raw, params)) : null;
   const result = await runTaskScreen({
     title: ticket.title, fromName: story.characters[ticket.from]?.name, rewardText: `${ticket.reward} €`, ticket, world,
   });

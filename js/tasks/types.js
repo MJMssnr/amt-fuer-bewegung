@@ -1,5 +1,6 @@
 // Kennbuchstaben und Namen der Aufgabentypen (Questlog, Auftragskopf, Selbstcheck-PDF).
 // Buchstaben NIE umnummerieren: Schüler bekommen sie als Liste [W16].
+// Geht das Alphabet aus: weiter mit griechischen Buchstaben (Α, Β, Γ …) [W22].
 
 export const TYPES = {
   match:     { letter: 'A', name: 'Zuordnen' },
@@ -14,6 +15,9 @@ export const TYPES = {
   reaction:  { letter: 'J', name: 'Reaktionstest' },
   area:      { letter: 'K', name: 'Flächen-Puzzle' },
   slope:     { letter: 'L', name: 'Steigungsdreieck' },
+  strobecalc:     { letter: 'M', name: 'Stroboskop: rechnen' },
+  strobedescribe: { letter: 'N', name: 'Stroboskop: beschreiben' },
+  strobebuild:    { letter: 'O', name: 'Stroboskop: bauen' },
 };
 
 export const typeOf = (type) => TYPES[type] ?? { letter: '?', name: type };

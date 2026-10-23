@@ -1279,6 +1279,30 @@
      ".kkk..kkk."
     ]
    ]
+  },
+  "fallschirm": {
+   "w": 14,
+   "h": 15,
+   "turns": false,
+   "frames": [
+    [
+     "...kkkkkkkk...",
+     ".kkrrwwrrwwkk.",
+     "krrwwrrwwrrwwk",
+     "kkkkkkkkkkkkkk",
+     ".k..........k.",
+     "..k........k..",
+     "...k......k...",
+     "....k....k....",
+     ".....kkkk.....",
+     ".....kssk.....",
+     "....kGGGGk....",
+     "....kGGGGk....",
+     ".....kbbk.....",
+     ".....kbbk.....",
+     ".....k..k....."
+    ]
+   ]
   }
  }
 }

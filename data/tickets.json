@@ -1058,5 +1058,436 @@
       ["florian", "Jo startet bei 200 m und fährt mit −4,0 m/s. Bei 10 s ist sie am Brunnen, bei 20 s trifft sie Kevin vor dem Rathaus."],
       ["kranz", "Und – Schnitt! Wunderbar! Das wird der schönste Imagefilm, den diese Stadt je hatte."]
     ]
+  },
+  {
+    "id": "t31-strobo-erstes",
+    "title": "Das erste Blitzfoto",
+    "from": "slavi",
+    "node": "fotolabor",
+    "requires": ["t01-sportwagen"],
+    "reward": 60,
+    "intro": [
+      ["slavi", "Ah, das neue Amt! Ich bin Slavi, Fotograf. Ich mache Stroboskopbilder."],
+      ["slavi", "Im dunklen Studio blitzt es immer im gleichen Zeitabstand. Bei jedem Blitz landet die Kugel einmal auf demselben Foto."],
+      ["slavi", "Leider hat meine Kamera beim letzten Bild gestreikt. Ich hab nur das Video. Kannst du mir das Foto nachbauen?"],
+      ["florian", "Blitz, Blitz, Blitz – und dazwischen immer gleich viel Zeit. Ich versuch's."]
+    ],
+    "task": {
+      "type": "strobebuild",
+      "motion": {
+        "kind": "kin",
+        "x0": 0,
+        "segments": [
+          {
+            "dt": 2.5,
+            "v": 2
+          }
+        ]
+      },
+      "flash": {
+        "n": 6,
+        "dt": 0.5
+      },
+      "photo": {
+        "bg": "night",
+        "obj": "ball"
+      },
+      "explain": "Gleiche Zeitabstände, gleiche Wege: Die Kugel bewegt sich gleichförmig.",
+      "paper": "Spiel das Video ab und achte auf die Blitze. Mit 📸 springst du von Blitz zu Blitz. Sind die Abstände der Kugel immer gleich groß?"
+    },
+    "success": [
+      ["slavi", "Gleiche Abstände, wie Perlen auf einer Schnur. So sieht eine gleichförmige Bewegung aus."],
+      ["florian", "Und ich dachte, Fotografie ist Kunst. Dabei ist es Physik."]
+    ]
+  },
+  {
+    "id": "t32-strobo-kevin",
+    "title": "Kevin im Blitzlicht",
+    "from": "slavi",
+    "node": "fotolabor",
+    "requires": ["t31-strobo-erstes"],
+    "reward": 70,
+    "intro": [
+      ["slavi", "Kevin, der Fahrradkurier, will Werbefotos. Ich hab ihn im Park mit dem Stroboskop erwischt."],
+      ["slavi", "Er will wissen, wie schnell er war. Auf dem Boden lag ein Maßband – du musst nur noch rechnen."]
+    ],
+    "task": {
+      "type": "strobecalc",
+      "motion": {
+        "kind": "kin",
+        "x0": 1,
+        "segments": [
+          {
+            "dt": 1.6,
+            "v": 5
+          }
+        ]
+      },
+      "flash": {
+        "n": 5,
+        "dt": 0.4
+      },
+      "photo": {
+        "bg": "park",
+        "obj": "cyclist",
+        "ruler": "band",
+        "range": [0, 10]
+      },
+      "context": "Kevin radelt gleichförmig durch den Park. Das Maßband liegt am Boden.",
+      "prompt": "Wie schnell war Kevin?",
+      "paper": "Lies am Maßband ab, wo Kevin beim ersten und beim letzten Blitz ist. Zähle die Zeitabstände dazwischen: Δt = Anzahl · 0,40 s. Dann vₓ = Δx / Δt.",
+      "questions": [
+        {
+          "label": "Geschwindigkeit",
+          "symbol": "v_x",
+          "unit": "m/s",
+          "ask": "v",
+          "hints": [
+            {
+              "value": 2,
+              "text": "Das ist der Weg zwischen zwei Abbildern. Teile ihn noch durch die Zeit zwischen zwei Blitzen."
+            },
+            {
+              "value": 4,
+              "text": "Zwischen dem ersten und dem letzten Abbild liegen 4 Zeitabstände, nicht 5."
+            },
+            {
+              "value": 20,
+              "text": "Zu groß: Zwischen erstem und letztem Abbild vergehen 4 · 0,40 s = 1,6 s."
+            }
+          ],
+          "help": "Δx = 8,0 m vom ersten bis zum letzten Abbild, Δt = 4 · 0,40 s."
+        },
+        {
+          "label": "Geschwindigkeit in km/h",
+          "unit": "km/h",
+          "ask": "kmh",
+          "hints": [
+            {
+              "value": 1.39,
+              "tol": 0.05,
+              "text": "Von m/s nach km/h wird mit 3,6 multipliziert, nicht geteilt."
+            }
+          ]
+        }
+      ]
+    },
+    "success": [
+      ["florian", "8,0 m in 1,6 s, also 5,0 m/s. Mal 3,6 sind das 18 km/h."],
+      ["slavi", "18 km/h im Park. Ich schreib es aufs Foto: „Kevin – schneller als das Blitzlicht“. Fast."]
+    ]
+  },
+  {
+    "id": "t33-strobo-fallschirm",
+    "title": "Der schwebende Springer",
+    "from": "slavi",
+    "node": "fotolabor",
+    "requires": ["t32-strobo-kevin"],
+    "reward": 70,
+    "intro": [
+      ["slavi", "Beim Stadtfest ist ein Fallschirmspringer über dem Marktplatz gelandet. Ich hab ihn im Blitzlicht erwischt!"],
+      ["slavi", "Die Zeitung will eine Bildunterschrift. Aber bitte fachlich richtig, sonst schimpft wieder irgendein Physiklehrer."]
+    ],
+    "task": {
+      "type": "strobedescribe",
+      "motion": {
+        "kind": "kin",
+        "x0": 0,
+        "segments": [
+          {
+            "dt": 2.5,
+            "v": 4
+          }
+        ]
+      },
+      "flash": {
+        "n": 6,
+        "dt": 0.5
+      },
+      "photo": {
+        "bg": "city",
+        "obj": "fallschirm",
+        "vertical": true,
+        "ruler": "none"
+      },
+      "context": "Ein Fallschirmspringer mit geöffnetem Schirm schwebt über dem Marktplatz nach unten.",
+      "prompt": "Welche Bildunterschrift ist fachlich richtig?",
+      "choices": [
+        {
+          "text": "Der Springer bewegt sich gleichförmig nach unten.",
+          "correct": true
+        },
+        {
+          "text": "Der Springer wird beim Fallen immer schneller (gleichmäßig beschleunigt).",
+          "feedback": "Dann müssten die Abstände von Bild zu Bild größer werden. Miss nach: Sie sind gleich groß."
+        },
+        {
+          "text": "Der Springer bremst ab (gleichmäßig verzögert).",
+          "feedback": "Dann müssten die Abstände von Bild zu Bild kleiner werden. Sie sind aber gleich groß."
+        },
+        {
+          "text": "Der Springer bewegt sich gleichförmig nach oben.",
+          "feedback": "Gleichförmig stimmt! Aber die Richtung verrät das Foto allein nicht – die steht im Zusammenhang: Er schwebt nach unten."
+        }
+      ],
+      "explain": "Gleiche Abstände in gleichen Zeiten: gleichförmig. Dass es nach unten geht, zeigt nicht das Foto, sondern der Zusammenhang."
+    },
+    "success": [
+      ["slavi", "„Gleichförmig nach unten.“ Klingt nicht spektakulär, ist aber richtig. Die Zeitung druckt es."],
+      ["florian", "Spektakulär ist das Blitzlicht. Die Physik ist einfach nur korrekt."]
+    ]
+  },
+  {
+    "id": "t34-strobo-rinne",
+    "title": "Die Kugel in der Rinne",
+    "from": "slavi",
+    "node": "fotolabor",
+    "requires": ["t33-strobo-fallschirm"],
+    "reward": 80,
+    "intro": [
+      ["slavi", "Ein Klassiker für meine Ausstellung: Eine Kugel rollt aus der Ruhe eine schräge Rinne hinunter."],
+      ["slavi", "Und – natürlich – die Kamera hat wieder gestreikt. Ich glaube, sie mag mich nicht."],
+      ["florian", "Dann bau ich es eben wieder nach. Diesmal wird die Kugel bestimmt nicht gleich schnell bleiben."]
+    ],
+    "task": {
+      "type": "strobebuild",
+      "motion": {
+        "kind": "kin",
+        "x0": 0,
+        "segments": [
+          {
+            "dt": 2.5,
+            "a": 1.6
+          }
+        ]
+      },
+      "flash": {
+        "n": 6,
+        "dt": 0.5
+      },
+      "photo": {
+        "bg": "night",
+        "obj": "ball"
+      },
+      "explain": "Die Abstände wachsen von Blitz zu Blitz: Die Kugel wird gleichmäßig schneller. Aus der Ruhe verhalten sich die Abstände wie 1 : 3 : 5 : 7 : 9.",
+      "paper": "Startet ein Körper aus der Ruhe gleichmäßig beschleunigt, wachsen die Abstände zwischen zwei Blitzen wie 1 : 3 : 5 : 7 : … Achte darauf, dass der erste Abstand sehr klein ist!"
+    },
+    "success": [
+      ["slavi", "Wunderschön: Die Abstände wachsen wie 1, 3, 5, 7, 9. Das hänge ich ganz groß auf."],
+      ["florian", "Gleichmäßig beschleunigt aus der Ruhe. Galilei hätte es auch nicht schöner gemacht."]
+    ]
+  },
+  {
+    "id": "t35-strobo-auto",
+    "title": "Blitz in der 30er-Zone",
+    "from": "slavi",
+    "node": "fotolabor",
+    "requires": ["t34-strobo-rinne"],
+    "reward": 90,
+    "intro": [
+      ["slavi", "Ich habe vor der Schule ein Auto im Blitzlicht erwischt. Da gilt Tempo 30!"],
+      ["slavi", "Diesmal lag kein Maßband am Boden, nur meine Maßstabsleiste. Rechnest du nach, ob der zu schnell war?"]
+    ],
+    "task": {
+      "type": "strobecalc",
+      "motion": {
+        "kind": "kin",
+        "x0": 0,
+        "segments": [
+          {
+            "dt": 0.6,
+            "v": 12.5
+          }
+        ]
+      },
+      "flash": {
+        "n": 4,
+        "dt": 0.2
+      },
+      "photo": {
+        "bg": "city",
+        "obj": "car_red",
+        "ruler": "bar",
+        "bar": 2,
+        "range": [-1.5, 9]
+      },
+      "context": "Ein Auto fährt gleichförmig durch die 30er-Zone vor der Schule. Die Leiste unten ist 2,0 m lang.",
+      "prompt": "War das Auto zu schnell?",
+      "paper": "Vergleiche den Abstand zweier Abbilder mit der Maßstabsleiste: Wie oft passt die Leiste dazwischen? Dann vₓ = Δx / Δt und in km/h umrechnen. Miss am besten an der Vorderkante des Autos.",
+      "questions": [
+        {
+          "label": "Geschwindigkeit",
+          "symbol": "v_x",
+          "unit": "m/s",
+          "ask": "v",
+          "range": [11, 14],
+          "hints": [
+            {
+              "value": 2.5,
+              "tol": 0.3,
+              "text": "Das ist der Weg zwischen zwei Abbildern. Teile ihn noch durch Δt = 0,20 s."
+            }
+          ],
+          "help": "Zwischen zwei Abbildern passt die 2,0-m-Leiste etwas mehr als einmal. Δt = 0,20 s."
+        },
+        {
+          "label": "Geschwindigkeit in km/h",
+          "unit": "km/h",
+          "ask": "kmh",
+          "range": [40, 50],
+          "hints": [
+            {
+              "value": 3.5,
+              "tol": 0.5,
+              "text": "Von m/s nach km/h wird mit 3,6 multipliziert, nicht geteilt."
+            }
+          ]
+        }
+      ]
+    },
+    "success": [
+      ["florian", "Etwa 2,5 m in 0,20 s, also rund 12,5 m/s. Mal 3,6 sind das ungefähr 45 km/h – viel zu schnell für eine 30er-Zone!"],
+      ["slavi", "Das Foto geht an die Bürgermeisterin. Kunst kann auch Verkehrssicherheit."]
+    ]
+  },
+  {
+    "id": "t36-strobo-jo",
+    "title": "Jo im Doppelbild",
+    "from": "slavi",
+    "node": "fotolabor",
+    "requires": ["t35-strobo-auto"],
+    "reward": 80,
+    "intro": [
+      ["slavi", "Jo, die Skaterin, will ein Poster. Ich hab sie im Park geblitzt."],
+      ["slavi", "Aber jetzt streiten wir: Ich sage, sie bremst. Sie sagt, sie wird schneller. Wer hat recht?"],
+      ["florian", "Das Foto allein kann das gar nicht entscheiden. Wir brauchen die Richtung."]
+    ],
+    "task": {
+      "type": "strobedescribe",
+      "motion": {
+        "kind": "kin",
+        "x0": 9,
+        "segments": [
+          {
+            "dt": 3,
+            "a": -2
+          }
+        ]
+      },
+      "flash": {
+        "n": 7,
+        "dt": 0.5
+      },
+      "photo": {
+        "bg": "park",
+        "obj": "jo",
+        "flip": true,
+        "ruler": "none",
+        "range": [-1, 10]
+      },
+      "context": "Jo rollt auf dem Skateboard von rechts nach links, also in negative x-Richtung. Das letzte, kräftigste Abbild ist das neueste.",
+      "prompt": "Wie bewegt sich Jo?",
+      "choices": [
+        {
+          "text": "Jo wird nach links gleichmäßig schneller.",
+          "correct": true
+        },
+        {
+          "text": "Jo bremst nach links gleichmäßig ab.",
+          "feedback": "Schau in Bewegungsrichtung, also von rechts nach links: Die Abstände werden größer, nicht kleiner."
+        },
+        {
+          "text": "Jo bremst nach rechts gleichmäßig ab.",
+          "feedback": "Für eine Bewegung nach rechts würde das passen – das Foto allein sieht genauso aus! Aber laut Zusammenhang fährt Jo nach links."
+        },
+        {
+          "text": "Jo fährt gleichförmig nach links.",
+          "feedback": "Dann wären alle Abstände gleich groß. Sie sind es nicht."
+        }
+      ],
+      "explain": "Das Foto allein ist doppeldeutig: Nach rechts gelesen schrumpfen die Abstände, nach links wachsen sie. Erst der Zusammenhang (Jo fährt nach links) entscheidet: Sie wird schneller."
+    },
+    "success": [
+      ["florian", "Jo hat recht: In ihrer Fahrtrichtung, also nach links, werden die Abstände größer. Sie wird schneller."],
+      ["slavi", "Na gut. Dann heißt das Poster eben „Jo – Vollgas nach links“."]
+    ]
+  },
+  {
+    "id": "t37-strobo-bremsen",
+    "title": "Kevin bremst",
+    "from": "slavi",
+    "node": "fotolabor",
+    "requires": ["t36-strobo-jo"],
+    "reward": 90,
+    "intro": [
+      ["slavi", "Kevin will noch ein Foto: eine Vollbremsung vor meinem Laden. Und – du ahnst es – die Kamera …"],
+      ["florian", "… hat gestreikt. Slavi, du brauchst eine neue Kamera."],
+      ["slavi", "Ich brauche vor allem dich. Bau es mir bitte nach!"]
+    ],
+    "task": {
+      "type": "strobebuild",
+      "motion": {
+        "kind": "kin",
+        "x0": 0,
+        "segments": [
+          {
+            "dt": 2,
+            "v0": 6,
+            "a": -3
+          }
+        ]
+      },
+      "flash": {
+        "n": 6,
+        "dt": 0.4
+      },
+      "photo": {
+        "bg": "park",
+        "obj": "cyclist"
+      },
+      "explain": "Beim Bremsen werden die Abstände von Blitz zu Blitz kleiner. Gleichmäßig verzögert: Sie schrumpfen jedes Mal um gleich viel.",
+      "paper": "Beim Bremsen wird der Weg pro Zeitabstand immer kleiner. Wo steht Kevin ganz am Ende?"
+    },
+    "success": [
+      ["slavi", "Die Abstände werden immer kleiner, bis er steht. Man sieht die Bremse förmlich quietschen."],
+      ["florian", "Gleichmäßig verzögert. Kevins Bremsen sind repariert, das sieht man auch."]
+    ]
+  },
+  {
+    "id": "t38-strobo-pendel",
+    "title": "Das Pendel",
+    "from": "slavi",
+    "node": "fotolabor",
+    "requires": ["t37-strobo-bremsen"],
+    "reward": 100,
+    "intro": [
+      ["slavi", "Mein Meisterstück für die Ausstellung: ein Pendel, das einmal von links nach rechts durchschwingt."],
+      ["slavi", "Dafür braucht es ein Genie. Oder dich. Meine Kamera hat übrigens gekündigt."],
+      ["florian", "Am Rand ist das Pendel kurz in Ruhe, in der Mitte am schnellsten. Das muss man im Bild sehen."]
+    ],
+    "task": {
+      "type": "strobebuild",
+      "motion": {
+        "kind": "pendulum",
+        "L": 1.2,
+        "amp": 40,
+        "D": 2
+      },
+      "flash": {
+        "n": 9,
+        "dt": 0.25
+      },
+      "photo": {
+        "bg": "night",
+        "obj": "ball"
+      },
+      "prompt": "Bau das Stroboskopbild des Pendels: Zieh die Abbilder 2 bis 9 auf den Bogen. Sie rasten dort ein.",
+      "explain": "Außen ist das Pendel langsam, die Abbilder liegen eng. In der Mitte ist es am schnellsten, die Abstände sind am größten.",
+      "paper": "Wo ist das Pendel am langsamsten, wo am schnellsten? Dort, wo es langsam ist, liegen die Abbilder dicht beieinander."
+    },
+    "success": [
+      ["slavi", "Eng, weit, weit, eng. Das ist Physik, die man rahmen kann!"],
+      ["florian", "Und keine einzige Abschnittsgleichung. Das Pendel macht es einfach."]
+    ]
   }
 ]

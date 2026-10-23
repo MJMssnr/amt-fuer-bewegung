@@ -62,6 +62,10 @@ js/tasks/reaction.js       J: Reaktionstest -> eigener Anhalteweg
 js/tasks/freehand.js       B: Freihand mit Auto-Begradigung
 js/tasks/area.js           K: Flächen-Puzzle
 js/tasks/slope.js          L: Steigungsdreieck
+js/tasks/direct.js         D: Regie (Engine: js/engine/direct.js)
+js/tasks/strobe*.js        M/N/O: Stroboskop rechnen/beschreiben/bauen (Engine js/engine/strobe.js, Bild js/render/strobe.js)
+js/ui/police.js            g.Z.-Polizist (Texte data/police.json, Regeln js/engine/sigfig.js)
+js/render/fotolabor.js     Slavis Fotolabor auf der Karte
 js/tasks/questions.js      Gemeinsamer Eingabe-/Prüfblock für H, C und Reaktionstest
 js/tasks/distractors.js    Distraktoren aus Fehlvorstellungen (CATALOG)
 js/ui/overworld.js         Stadtkarte (data/map.json)
@@ -87,7 +91,7 @@ schema/                    Formatbeschreibung der JSON-Dateien
 ## Geld-Regeln
 - Auswahl-Aufgaben (A, G, E): nur beim ersten Versuch richtig → voller Lohn, sonst 0 €.
 - Rechen-/Ablese-Aufgaben (H, C) und Live (F): erster Versuch → voll; selbst gelöst nach Hinweisen → halb; „Lösung zeigen“ → 0 €.
-- Konstrukteur (I), Reaktionstest (J), Freihand (B), Fläche (K), Steigung (L) wie H.
+- Konstrukteur (I), Reaktionstest (J), Freihand (B), Fläche (K), Steigung (L), Regie (D), Strobo M und O wie H. Strobo N wie A/G.
 - Module melden onSolved({ attempts, grade: 'perfect' | 'partial' | 'fail' }).
 - Verpatzte Aufträge (fail) kommen als „Nachfrage“ zurück, sobald zwei weitere erledigt sind (state.retry), mit neuer Variante.
 

@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 30, verdienbar: 2410 €.
+Anzahl Aufträge: 38, verdienbar: 3050 €.
 
 ```mermaid
 flowchart LR
@@ -39,6 +39,14 @@ flowchart LR
   t28_steigung_ralf["<b>L</b> Ralfs positive Rückwärtsrechnung<br/><small>Ralf · Rathaus · 80 €</small>"]:::tL
   t29_steigung_bus["<b>L</b> Bremst Ötzi zu scharf?<br/><small>Busfahrer Ötzi · Busbahnhof · 90 €</small>"]:::tL
   t30_regie_imagefilm["<b>D</b> Der Imagefilm<br/><small>Bürgermeisterin Kranz · Rathaus · 90 €</small>"]:::tD
+  t31_strobo_erstes["<b>O</b> Das erste Blitzfoto<br/><small>Slavi · Fotolabor · 60 €</small>"]:::tO
+  t32_strobo_kevin["<b>M</b> Kevin im Blitzlicht<br/><small>Slavi · Fotolabor · 70 €</small>"]:::tM
+  t33_strobo_fallschirm["<b>N</b> Der schwebende Springer<br/><small>Slavi · Fotolabor · 70 €</small>"]:::tN
+  t34_strobo_rinne["<b>O</b> Die Kugel in der Rinne<br/><small>Slavi · Fotolabor · 80 €</small>"]:::tO
+  t35_strobo_auto["<b>M</b> Blitz in der 30er-Zone<br/><small>Slavi · Fotolabor · 90 €</small>"]:::tM
+  t36_strobo_jo["<b>N</b> Jo im Doppelbild<br/><small>Slavi · Fotolabor · 80 €</small>"]:::tN
+  t37_strobo_bremsen["<b>O</b> Kevin bremst<br/><small>Slavi · Fotolabor · 90 €</small>"]:::tO
+  t38_strobo_pendel["<b>O</b> Das Pendel<br/><small>Slavi · Fotolabor · 100 €</small>"]:::tO
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -73,6 +81,14 @@ flowchart LR
   t12_ralf_brezel --> t28_steigung_ralf
   t10_ampelkamera --> t29_steigung_bus
   t05_radeln --> t30_regie_imagefilm
+  t01_sportwagen --> t31_strobo_erstes
+  t31_strobo_erstes --> t32_strobo_kevin
+  t32_strobo_kevin --> t33_strobo_fallschirm
+  t33_strobo_fallschirm --> t34_strobo_rinne
+  t34_strobo_rinne --> t35_strobo_auto
+  t35_strobo_auto --> t36_strobo_jo
+  t36_strobo_jo --> t37_strobo_bremsen
+  t37_strobo_bremsen --> t38_strobo_pendel
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -102,6 +118,9 @@ flowchart LR
 | J | Reaktionstest | 2 |
 | K | Flächen-Puzzle | 3 |
 | L | Steigungsdreieck | 3 |
+| M | Stroboskop: rechnen | 2 |
+| N | Stroboskop: beschreiben | 2 |
+| O | Stroboskop: bauen | 4 |
 
 ## Liste
 | Auftrag | Typ | von | Ort | Lohn | braucht |
@@ -136,3 +155,11 @@ flowchart LR
 | Ralfs positive Rückwärtsrechnung | L | Ralf | Rathaus | 80 € | Ralfs erstes Diagramm |
 | Bremst Ötzi zu scharf? | L | Busfahrer Ötzi | Busbahnhof | 90 € | Die nasse Ampelkamera |
 | Der Imagefilm | D | Bürgermeisterin Kranz | Rathaus | 90 € | Partnerschafts-Radeln |
+| Das erste Blitzfoto | O | Slavi | Fotolabor | 60 € | Der rote Blitz |
+| Kevin im Blitzlicht | M | Slavi | Fotolabor | 70 € | Das erste Blitzfoto |
+| Der schwebende Springer | N | Slavi | Fotolabor | 70 € | Kevin im Blitzlicht |
+| Die Kugel in der Rinne | O | Slavi | Fotolabor | 80 € | Der schwebende Springer |
+| Blitz in der 30er-Zone | M | Slavi | Fotolabor | 90 € | Die Kugel in der Rinne |
+| Jo im Doppelbild | N | Slavi | Fotolabor | 80 € | Blitz in der 30er-Zone |
+| Kevin bremst | O | Slavi | Fotolabor | 90 € | Jo im Doppelbild |
+| Das Pendel | O | Slavi | Fotolabor | 100 € | Kevin bremst |

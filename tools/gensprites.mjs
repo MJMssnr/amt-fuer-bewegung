@@ -193,6 +193,16 @@ const slavi = {
   ]],
 };
 
+// Fallschirmspringer fürs Stroboskopbild [W22]
+const fallschirm = {
+  w: 14, h: 15, turns: false,
+  frames: [[
+    '...kkkkkkkk...', '.kkrrwwrrwwkk.', 'krrwwrrwwrrwwk', 'kkkkkkkkkkkkkk', '.k..........k.',
+    '..k........k..', '...k......k...', '....k....k....', '.....kkkk.....', '.....kssk.....',
+    '....kGGGGk....', '....kGGGGk....', '.....kbbk.....', '.....kbbk.....', '.....k..k.....',
+  ]],
+};
+
 // g.Z.-Polizist [W16]: blaue Uniform, Mütze mit Stern, Schnurrbart, Trillerpfeife (w). polizist_rot = wütend (roter Kopf)
 const polTop = [
   '...kkkkkk...', '..kUUUUUUk..', '..kUUyyUUk..', '.kkkkkkkkkk.', '..kssssssk..', '..kskssksk..',
@@ -213,7 +223,7 @@ const sprites = {
   sprites: {
     florian, florian_down, florian_up, florian_side, car_red: car, cyclist, cyclist_b, kevin, broesel, dog,
     bus, oetzi, kranz, baecker, filiale, skater, jo, cart, florian_note, florian_photo, oma_rollator, sled, ohm: { ...kranz, palette: { r: '#c2a56b', p: '#257179', y: '#f4f4f4' } }, postbote, ralf: { ...oetzi, palette: { b: '#e43b44', B: '#ffcd75', d: '#3b5dc9' } },
-    polizist, polizist_rot, slavi,
+    polizist, polizist_rot, slavi, fallschirm,
   },
 };
 for (const [name, sp] of Object.entries(sprites.sprites))
