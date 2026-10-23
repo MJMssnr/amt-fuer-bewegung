@@ -8,11 +8,13 @@ import { BUILDINGS, halfpipe, rail, funbox, parkedCar } from '../render/building
 import { treehouse } from '../render/treehouse.js';
 import { school } from '../render/school.js';
 import { fotolabor } from '../render/fotolabor.js';
+import { bauplatz } from '../render/bauplatz.js';
 import { natureOn, natureOff } from '../audio/sound.js';
 
 BUILDINGS.treehouse = treehouse;
 BUILDINGS.school = school;
 BUILDINGS.fotolabor = fotolabor;
+BUILDINGS.bauplatz = bauplatz;
 
 const SPEED = 140; // Welt-Pixel pro Sekunde
 

@@ -75,6 +75,15 @@
       "markerH": 100,
       "label": [450, 238]
     },
+    "bauplatz": {
+      "x": 515,
+      "y": 220,
+      "name": "Bauplatz",
+      "building": "bauplatz",
+      "at": [515, 207],
+      "markerH": 40,
+      "label": [532, 251]
+    },
     "je": {
       "x": 560,
       "y": 220,
@@ -139,7 +148,8 @@
     ["js", "supermarkt"],
     ["supermarkt", "bushof"],
     ["rathaus", "baumhaus"],
-    ["baumhaus", "je"],
+    ["baumhaus", "bauplatz"],
+    ["bauplatz", "je"],
     ["baeckerei", "schule"],
     ["schule", "js"]
   ],
@@ -441,12 +451,6 @@
     },
     {
       "type": "tree",
-      "kind": "pine",
-      "x": 520,
-      "y": 170
-    },
-    {
-      "type": "tree",
       "kind": "round",
       "x": 40,
       "y": 170
@@ -527,12 +531,6 @@
       "x": 396,
       "y": 204,
       "color": "#ffd166"
-    },
-    {
-      "type": "bush",
-      "x": 506,
-      "y": 204,
-      "color": "#f78ad1"
     },
     {
       "type": "flowers",

@@ -81,56 +81,25 @@
     }
   ],
   "rocketParts": [
-    {
-      "id": "rt_duese",
-      "name": "Düse, gebraucht",
-      "price": 40
-    },
-    {
-      "id": "rt_roehre",
-      "name": "Alu-Röhre, 2,0 m",
-      "price": 40
-    },
-    {
-      "id": "rt_bleche",
-      "name": "Drei rote Bleche",
-      "price": 40
-    },
-    {
-      "id": "rt_hut",
-      "name": "Spitzer Blechhut",
-      "price": 40
-    },
-    {
-      "id": "rt_platine",
-      "name": "Blinkende Platine",
-      "price": 40
-    }
+    { "id": "rt_duese", "name": "Düse, gebraucht", "note": "Wer nach oben will, muss nach unten drücken. – M." },
+    { "id": "rt_roehre", "name": "Alu-Röhre, 2,0 m", "note": "Ein Rohr ist nur ein Rohr. Bis es etwas Höheres wird. – M." },
+    { "id": "rt_bleche", "name": "Drei rote Bleche", "note": "Rot. Wie ein gewisser Sportwagen. Nur deutlich schneller. – M." },
+    { "id": "rt_hut", "name": "Spitzer Blechhut", "note": "Die Spitze zeigt, wohin die Reise geht. Nicht nach links. Nicht nach rechts. – M." },
+    { "id": "rt_platine", "name": "Blinkende Platine", "note": "Blinkt. Piept. Zählt rückwärts. Bei null wirst du es wissen. – M." },
+    { "id": "rt_flossen", "name": "Drei Flossen", "note": "Für Stabilität. Und für den Stil. – M." },
+    { "id": "rt_sitz", "name": "Ein Sitz mit Gurt – und eine Anleitung", "note": "Für Florian, der jeden Auftrag angenommen hat. Jetzt weißt du, was es ist. Die Anleitung liegt bei. Bau sie draußen, auf dem Platz neben dem Baumhaus. – M.", "last": true }
   ],
-  "partBought": [
-    [
-      "florian",
-      "Hm. Was soll ich damit eigentlich? Egal, das kommt erst mal in die Kiste."
-    ],
-    [
-      "florian",
-      "Noch ein komisches Teil. Ab in die Kiste damit. Irgendwann ergibt das bestimmt Sinn."
-    ],
-    [
-      "florian",
-      "Die Kiste wird langsam voll. Moment … kommt mir das bekannt vor?"
-    ],
-    [
-      "florian",
-      "Düse, Röhre, Bleche, ein spitzer Hut … Nein. Oder doch? Ab in die Kiste."
-    ],
-    [
-      "florian",
-      "Das war das letzte Teil! Ich glaube, ich weiß jetzt, was das wird …"
-    ]
-  ],
+  "packages": {
+    "arrived": "📦 Ein rätselhaftes Paket wurde im Baumhaus abgegeben!",
+    "found": [["florian", "Da steht ein Paket. Ohne Absender. Nur ein großes „M.“ auf dem Klebeband."], ["florian", "Schon wieder ein Paket ohne Absender. Wer schickt mir das bloß?"], ["florian", "Noch ein Geheimpaket! Ich mach's gleich auf."]],
+    "note": "Auf einem Zettel steht:",
+    "after": [["florian", "Rätselhaft. Ab in die Kiste damit."], ["florian", "Ich verstehe kein Wort. Aber es klingt wichtig. Ab in die Kiste."], ["florian", "Die Kiste füllt sich. Langsam bekomme ich eine Ahnung …"]],
+    "manual": [["florian", "Eine ANLEITUNG! „Bausatz: Rakete, rot, einsitzig.“ Das ist … eine Rakete!"], ["florian", "Alle Teile sind da. Ich brauche Platz – der leere Bauplatz neben dem Baumhaus! Ich trag die Kisten raus."]],
+    "lotEmpty": [["erz", "Ein leerer Bauplatz neben dem Baumhaus. Ein Schild: „Privatgelände des Amtes. Bald: Großes.“"]],
+    "lotDone": [["erz", "Hier stand einmal eine rote Rakete. Jetzt ist der Platz leer – aber jeder in der Stadt erinnert sich."]]
+  },
   "crate": {
-    "empty": "Florians Aufbewahrungskiste. Noch leer.",
+    "empty": "Florians Aufbewahrungskiste. Noch leer. Vielleicht kommt ja mal Post?",
     "some": "In der Kiste liegen merkwürdige Teile. Es fehlen wohl noch welche.",
     "full": "Alle Teile sind da! Zeit, herauszufinden, was man daraus bauen kann."
   },

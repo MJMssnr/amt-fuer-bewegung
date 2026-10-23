@@ -179,7 +179,7 @@ export const DRAW = {
     const { x, y } = SLOTS.kiste;
     P.rect(x, y, 30, 20, ink); P.rect(x + 1, y + 1, 28, 18, '#a0622d');
     P.rect(x + 1, y + 6, 28, 2, '#73441d'); P.rect(x + 13, y + 1, 4, 6, '#c2c7cf');
-    if (count > 0) for (let i = 0; i < count; i++) P.rect(x + 4 + i * 5, y + 11, 3, 5, ['#94b0c2', '#c2c7cf', '#e43b44', '#e43b44', '#38b764'][i]);
+    if (count > 0) for (let i = 0; i < count; i++) P.rect(x + 3 + i * 3.6, y + 11, 3, 5, ['#94b0c2', '#c2c7cf', '#e43b44', '#e43b44', '#38b764', '#ffcd75', '#3b5dc9'][i % 7]);
     if (count >= total) {
       const g = 0.25 + Math.abs(Math.sin(t * 3)) * 0.35;
       P.blob(x + 15, y + 10, 22, `rgba(255,220,120,${g.toFixed(2)})`, 14);

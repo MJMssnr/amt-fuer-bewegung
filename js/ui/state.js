@@ -1,7 +1,7 @@
 // Spielstand im Browser (localStorage). Fehlertolerant: ohne Speicher läuft das Spiel trotzdem.
 
 const KEY = 'amt-fuer-bewegung.v1';
-const DEFAULT = { money: 0, done: {}, introSeen: false, node: null, items: {}, grades: {}, examTried: false, examPassed: false };
+const DEFAULT = { money: 0, done: {}, introSeen: false, node: null, items: {}, grades: {}, pkg: { sent: 0, waiting: [] }, finaleReady: false, finaleDone: false };
 
 export function loadState() {
   try {

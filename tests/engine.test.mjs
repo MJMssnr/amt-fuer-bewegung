@@ -238,3 +238,21 @@ test('Stroboskop: Orte, Geschwindigkeit, qualitativer Vergleich', async () => {
   assert.ok(gaps[0] < gaps[3] && gaps[7] < gaps[4]);
   near(pen[4], 0, 1e-9);
 });
+
+test('Pakete: wachsende Abstände, letztes nur bei allen Aufträgen und 80 %', async () => {
+  const P = await import('../js/engine/packages.js');
+  const tickets = Array.from({ length: 50 }, (_, i) => ({ id: `t${i}` }));
+  const parts = ['a', 'b', 'c', 'd', 'e', 'f'].map((id) => ({ id })).concat([{ id: 'last', last: true }]);
+  const st = { seed: 42, done: {}, grades: {} };
+  const finish = (n, g = 'perfect') => { for (let i = 0; i < n; i++) { st.done[`t${i}`] = true; st.grades[`t${i}`] = g; } };
+  finish(2); assert.equal(P.deliverDue(st, tickets, parts), 0);
+  finish(3); assert.equal(P.deliverDue(st, tickets, parts), 1);
+  finish(38); assert.equal(P.deliverDue(st, tickets, parts), 5); assert.equal(st.pkg.sent, 6);
+  assert.ok(!st.pkg.waiting.includes('last'));
+  finish(50, 'fail'); for (let i = 0; i < 39; i++) st.grades[`t${i}`] = 'partial';
+  assert.equal(P.deliverDue(st, tickets, parts), 0, '39/50 = 78 % reicht nicht');
+  st.grades.t40 = 'perfect';
+  assert.equal(P.deliverDue(st, tickets, parts), 1, '40/50 = 80 % reicht');
+  assert.equal(st.pkg.waiting.at(-1), 'last');
+  assert.equal(new Set(st.pkg.waiting).size, 7);
+});

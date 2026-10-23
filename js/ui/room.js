@@ -1,4 +1,5 @@
-// Florians Baumhaus-Zimmer: Gegenstände ansehen, im Shop bestellen, Raketenteile in die Kiste.
+// Florians Baumhaus-Zimmer: Gegenstände ansehen, im Shop bestellen. Rätselhafte Pakete (Raketenteile)
+// werden beim Betreten ausgepackt und kommen in die Kiste [W24].
 // Daten: data/shop.json. Zustand: state.items[id] = true, state.money.
 
 import { Painter } from '../render/painter.js';
@@ -7,16 +8,26 @@ import { ROOM, SLOTS, DRAW, drawRoomBase, emptySlot } from '../render/room-art.j
 import { showDialog, toast } from './dialog.js';
 import { deliver, stepDelivery, drawDelivery } from './delivery.js';
 
+/** Paket ohne Absender: braun, mit großem „M.“ */
+function mysteryParcel(P, x, y, t) {
+  const b = Math.round(Math.sin(t * 3) * 0.6);
+  P.rect(x - 7, y - 11 + b, 14, 11, '#1a1c2c');
+  P.rect(x - 6, y - 10 + b, 12, 9, '#a0622d');
+  P.rect(x - 6, y - 10 + b, 12, 2, '#c58b5e');
+  P.text('M.', x, y - 5 + b, 4.5, { color: '#ffcd75', bold: true, minPx: 8, dpr: P.dpr });
+  P.text('?', x + 7, y - 14 + b, 5, { color: '#ffffff', bold: true, minPx: 9, dpr: P.dpr });
+}
+
 const FLOOR_Y = 186; // Fußlinie, auf der Florian im Zimmer läuft
 
 export class Room {
-  constructor(el, { shop, state, save, onChange, onCrateFull }) {
+  constructor(el, { shop, state, save, onChange, onManual }) {
     this.el = el;
     this.shop = shop;
     this.state = state;
     this.save = save;
     this.onChange = onChange;
-    this.onCrateFull = onCrateFull;
+    this.onManual = onManual;
     this.c = el.querySelector('canvas');
     this.ctx = this.c.getContext('2d');
     this.flo = { x: 180, target: 180, flip: false };
@@ -50,6 +61,7 @@ export class Room {
       requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);
+    if (this.state.pkg?.waiting?.length) setTimeout(() => this.#unpack(), 500);
     return new Promise((resolve) => {
       this.close = () => { this.running = false; this.el.classList.add('hidden'); resolve(); };
       this.el.querySelector('.r-back').onclick = () => this.close();
@@ -85,8 +97,9 @@ export class Room {
       const z = it.id === 'teppich' ? -1 : ['neon', 'rennrad'].includes(it.id) ? -2 : s.y + s.h;
       items.push({ z, draw: () => (owned ? DRAW[it.id](P, this.t) : emptySlot(P, s)) });
     }
-    const inCrate = this.partsOwned - (this.shop.rocketParts.some((p) => p.id === this.pending) ? 1 : 0);
-    items.push({ z: 198, draw: () => DRAW.kiste(P, this.t, inCrate, this.partsTotal) });
+    items.push({ z: 198, draw: () => DRAW.kiste(P, this.t, this.partsOwned, this.partsTotal) });
+    // wartende Pakete neben der Kiste
+    (this.state.pkg?.waiting ?? []).forEach((_, i) => items.push({ z: 199, draw: () => mysteryParcel(P, SLOTS.kiste.x - 12 - i * 16, FLOOR_Y + 10, this.t) }));
     items.push({ z: FLOOR_Y + 0.5, draw: () => drawDelivery(P, this, FLOOR_Y) });
     items.push({ z: 197, draw: () => DRAW.luke(P, this.t) });
     items.push({ z: FLOOR_Y, draw: () => this.#florian(P) });
@@ -129,8 +142,7 @@ export class Room {
       await this.#walkTo(id === 'kiste' ? s.x + 48 : s.x + s.w / 2);
       if (id === 'kiste') {
         const n = this.partsOwned, c = this.shop.crate;
-        if (n >= this.partsTotal) { await showDialog([['florian', c.full]]); await this.onCrateFull?.(); }
-        else await showDialog([['florian', n ? c.some : c.empty]]);
+        await showDialog([['florian', n >= this.partsTotal ? c.full : n ? c.some : c.empty]]);
         return;
       }
       const item = this.shop.items.find((i) => i.id === id);
@@ -165,16 +177,14 @@ export class Room {
         <button class="btn shop-buy" data-id="${it.id}" ${owned || needs || poor ? 'disabled' : ''}>${label}</button>
       </div>`;
     };
-    list.innerHTML = `<h4>Einrichtung</h4>${this.shop.items.map((i) => row(i, false)).join('')}
-      <h4>Sonstiges</h4>${this.shop.rocketParts.map((p) => row(p, true)).join('')}`;
+    list.innerHTML = `<h4>Einrichtung</h4>${this.shop.items.map((i) => row(i, false)).join('')}`;
     list.querySelectorAll('.shop-buy').forEach((b) => b.addEventListener('click', () => this.#buy(b.dataset.id)));
   }
 
   async #buy(id) {
     if (this.busy) return;
     const item = this.shop.items.find((i) => i.id === id);
-    const part = this.shop.rocketParts.find((p) => p.id === id);
-    const it = item ?? part;
+    const it = item;
     if (!it || this.state.items[id] || this.state.money < it.price) return;
     this.busy = true;
     this.state.money -= it.price;
@@ -185,15 +195,31 @@ export class Room {
     this.#header();
     toast(`−${it.price} €  ${it.name}`, 'money');
     if (window.matchMedia('(max-width: 900px)').matches) this.#toggleShop(false);
-    const tx = item ? SLOTS[id].x + SLOTS[id].w / 2 : SLOTS.kiste.x + 30;
-    await deliver(this, { id, name: it.name, tx, isPart: !item, walkTo: (x) => this.#walkTo(x), texts: this.shop.delivery });
-    if (item) {
-      await showDialog([['florian', `Geliefert: ${item.name}!`]]);
-    } else {
-      const lines = this.shop.partBought;
-      await showDialog([lines[Math.min(this.partsOwned - 1, lines.length - 1)]]);
-      if (this.partsOwned >= this.partsTotal) await showDialog([['florian', 'Ich sollte mir die Kiste mal genauer ansehen.']]);
-    }
+    const tx = SLOTS[id].x + SLOTS[id].w / 2;
+    await deliver(this, { id, name: it.name, tx, isPart: false, walkTo: (x) => this.#walkTo(x), texts: this.shop.delivery });
+    await showDialog([['florian', `Geliefert: ${item.name}!`]]);
     this.busy = false;
+  }
+
+  /** Rätselhafte Pakete auspacken: Zettel lesen, Teil in die Kiste. Mit dem letzten kommt die Anleitung. */
+  async #unpack() {
+    if (this.busy || !this.running) return;
+    this.busy = true;
+    const T = this.shop.packages;
+    try {
+      while (this.state.pkg.waiting.length && this.running) {
+        const id = this.state.pkg.waiting[0];
+        const part = this.shop.rocketParts.find((p) => p.id === id);
+        await this.#walkTo(SLOTS.kiste.x - 30);
+        const k = this.partsOwned;
+        await showDialog([T.found[k % T.found.length], ['erz', `${T.note} „${part.note}“`], ['erz', `Im Paket: ${part.name}.`]]);
+        this.state.pkg.waiting.shift();
+        this.state.items[id] = true;
+        this.save();
+        this.#header();
+        if (part.last) { await showDialog(T.manual); this.onManual?.(); }
+        else await showDialog([T.after[k % T.after.length]]);
+      }
+    } finally { this.busy = false; }
   }
 }

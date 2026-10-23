@@ -8,6 +8,8 @@ import { loadState, saveState, resetState } from './ui/state.js';
 import { showNotice, showTitle } from './ui/title.js';
 import { Room } from './ui/room.js';
 import { playFinale } from './ui/finale.js';
+import { deliverDue } from './engine/packages.js';
+import { LOT } from './render/bauplatz.js';
 import { loadTask } from './tasks/index.js';
 import { pickParams, resolveTicket, applyScenario } from './engine/variants.js';
 import { unlockAudio } from './audio/sound.js';
@@ -28,7 +30,7 @@ const getJSON = async (url) => {
 };
 
 let state = loadState();
-let tickets = [], story = {}, shop = {}, exam = {}, map = {}, overworld = null, room = null, busy = false;
+let tickets = [], story = {}, shop = {}, map = {}, overworld = null, room = null, busy = false;
 const scenarioCache = new Map();
 
 async function scenarioOf(ref) {
@@ -44,15 +46,16 @@ const isRegularOpen = (t) => !state.done[t.id] && (t.requires || []).every((r) =
 const isRetry = (t) => Boolean(state.retry?.[t.id])
   && (doneCount() >= state.retry[t.id].after || !tickets.some(isRegularOpen));
 const isOpen = (t) => isRegularOpen(t) || isRetry(t);
-const crateFull = () => shop.rocketParts.every((p) => state.items[p.id]);
 
 function markers() {
   const m = {};
+  LOT.phase = state.finaleDone ? 'done' : state.finaleReady ? 'ready' : 'empty';
   for (const t of tickets) {
     if (isOpen(t)) m[t.node] = 'open';
     else if (state.done[t.id] && m[t.node] !== 'open') m[t.node] = 'done';
   }
-  if (crateFull() && !state.examPassed) m.baumhaus = 'open';
+  if (state.pkg?.waiting?.length) m.baumhaus = 'open';
+  if (state.finaleReady && !state.finaleDone) m.bauplatz = 'open';
   return m;
 }
 
@@ -143,38 +146,13 @@ async function runTicket(ticket, raw, params) {
     await showDialog(ticket.success || []);
     toast(`+${reward} €${grade === 'partial' ? '  (halber Lohn)' : ''}`, 'money');
   }
+  // Rätselhafte Pakete [W24]
+  if (deliverDue(state, tickets, shop.rocketParts)) { save(); toast(shop.packages.arrived, 'money'); }
   if (tickets.every((t) => state.done[t.id]) && !Object.keys(state.retry).length && !state.outroSeen) {
     state.outroSeen = true;
     save();
     await showDialog(story.outro);
   }
-}
-
-async function runExam() {
-  const roomEl = document.getElementById('room');
-  await showDialog(state.examTried ? exam.intro : [...exam.discover, ...exam.intro]);
-  state.examTried = true;
-  save();
-  const world = buildWorld(await scenarioOf(exam.scenario));
-  roomEl.classList.add('hidden');
-  let passed = 0;
-  for (const [i, part] of exam.parts.entries()) {
-    const ticket = { id: `exam-${i}`, title: part.title, task: part.task };
-    const r = await runTaskScreen({ title: part.title, fromName: 'Raketenschlitten', ticket, world });
-    if (!r) { roomEl.classList.remove('hidden'); await showDialog([['kranz', 'Prüfung abgebrochen. Sie können jederzeit wieder an die Kiste.']]); return; }
-    if (r.grade === 'perfect' || r.grade === 'partial') passed++;
-    toast(`Prüfungsteil ${i + 1}: ${r.grade === 'fail' ? 'nicht bestanden' : 'bestanden'}`, r.grade === 'fail' ? 'bad' : 'money');
-  }
-  roomEl.classList.remove('hidden');
-  await showDialog([['erz', `Ergebnis: ${passed} von ${exam.parts.length} Prüfungsteilen bestanden.`]]);
-  if (passed < exam.passNeeded) { await showDialog(exam.fail); return; }
-  await showDialog(exam.pass);
-  state.examPassed = true;
-  save();
-  room.close();
-  overworld.stop();
-  await playFinale();
-  overworld.start();
 }
 
 /** Intro-Dialog + Aufgabe für einen Auftrag (auch aus dem Testmodus im Auftragsbuch) */
@@ -211,6 +189,7 @@ async function showQuestlog() {
           state.retry ??= {};
           if (g === 'fail') state.retry[t.id] = { after: doneCount() + 2, n: (state.retry[t.id]?.n ?? 0) + 1 };
           else delete state.retry[t.id];
+          if (deliverDue(state, tickets, shop.rocketParts)) toast(shop.packages.arrived, 'money');
           save();
         },
       },
@@ -239,6 +218,14 @@ async function onArrive(nodeId) {
     const raw = tickets.find((t) => t.node === nodeId && isOpen(t));
     if (raw) {
       await playTicket(raw);
+    } else if (nodeId === 'bauplatz') {
+      if (state.finaleReady && !state.finaleDone) {
+        overworld.stop();
+        await playFinale();
+        state.finaleDone = true;
+        save();
+        overworld.start();
+      } else await showDialog(state.finaleDone ? shop.packages.lotDone : shop.packages.lotEmpty);
     } else if (nodeId === 'rathaus') {
       await showDialog(story.office);
     } else {
@@ -256,7 +243,7 @@ async function boot() {
   [map] = await Promise.all([getJSON('data/map.json'), loadSprites(),
     // lokale Schriften aktiv laden, sonst zeichnet das Canvas anfangs mit Ersatzschrift
     ...['16px AmtPixel', '16px AmtTitel', '600 16px AmtTitel'].map((f) => document.fonts?.load(f).catch(() => {}))]);
-  [tickets, story, shop, exam] = await Promise.all(['tickets', 'story', 'shop', 'exam'].map((n) => getJSON(`data/${n}.json`)));
+  [tickets, story, shop] = await Promise.all(['tickets', 'story', 'shop'].map((n) => getJSON(`data/${n}.json`)));
   setCharacters(story.characters);
   document.getElementById('loading').classList.add('hidden');
 
@@ -270,13 +257,14 @@ async function boot() {
   overworld.tutorial = () => doneCount() === 0;
   if (state.node) overworld.setNode(state.node);
   overworld.start();
-  room = new Room(document.getElementById('room'), { shop, state, save: () => save(), onChange: updateHud, onCrateFull: runExam });
+  room = new Room(document.getElementById('room'), { shop, state, save: () => save(), onChange: updateHud, onManual: () => { state.finaleReady = true; save(); } });
   updateHud();
 
   document.querySelector('.hud-reset').addEventListener('click', () => {
     if (confirm('Spielstand wirklich löschen?')) { resetState(); location.reload(); }
   });
   initSoundMenu(document.querySelector('.hud-sound'));
+  window.amtTest = { arrive: (n) => onArrive(n), state: () => state }; // für automatische Tests
   document.querySelector('.hud-log').addEventListener('click', showQuestlog);
   initTestMode((on) => toast(on ? '🧪 Testmodus an – siehe Auftragsbuch 📖' : 'Testmodus aus'));
   document.querySelector('.hud-full').addEventListener('click', () => {

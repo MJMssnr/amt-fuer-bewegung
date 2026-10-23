@@ -61,19 +61,12 @@ for (const tk0 of tickets) {
   });
 }
 
-test('Abschlussprüfung', () => {
-  const exam = read('data/exam.json');
-  const world = buildWorld(read(`data/scenarios/${exam.scenario}.json`));
-  exam.parts.forEach((p, i) => checkTask(p.task, world, `Prüfung ${i + 1}`));
-  assert.ok(exam.passNeeded <= exam.parts.length);
-});
-
 test('Shop: jeder Gegenstand hat einen Platz im Zimmer', async () => {
   const { SLOTS } = await import('../js/render/room-art.js');
   const shop = read('data/shop.json');
   for (const it of shop.items) assert.ok(SLOTS[it.id], `Kein Platz für "${it.id}"`);
   const earn = tickets.reduce((a, t) => a + t.reward, 0);
-  const cost = [...shop.items, ...shop.rocketParts].reduce((a, i) => a + i.price, 0);
+  const cost = shop.items.reduce((a, i) => a + i.price, 0);
   assert.ok(cost <= earn, `Shop (${cost} €) teurer als alle Aufträge zusammen (${earn} €)`);
 });
 
