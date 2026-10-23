@@ -74,6 +74,11 @@
       "sprite": "slavi",
       "voice": "mann_kraeftig"
     },
+    "hilde": {
+      "name": "Hilde, Tüftlerin",
+      "sprite": "hilde",
+      "voice": "frau_alt"
+    },
     "post": {
       "name": "Paul Paket",
       "sprite": "postbote",

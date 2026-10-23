@@ -132,6 +132,24 @@
       "at": [607, 330],
       "markerH": 52,
       "label": [600, 345]
+    },
+    "polizei": {
+      "x": 46,
+      "y": 220,
+      "name": "Polizeirevier",
+      "building": "police",
+      "at": [48, 207],
+      "markerH": 56,
+      "label": [48, 238]
+    },
+    "werkstatt": {
+      "x": 610,
+      "y": 220,
+      "name": "Hobbywerkstatt",
+      "building": "workshop",
+      "at": [610, 207],
+      "markerH": 52,
+      "label": [606, 238]
     }
   },
   "roads": [
@@ -151,7 +169,9 @@
     ["baumhaus", "bauplatz"],
     ["bauplatz", "je"],
     ["baeckerei", "schule"],
-    ["schule", "js"]
+    ["schule", "js"],
+    ["polizei", "jw"],
+    ["je", "werkstatt"]
   ],
   "crosswalks": [
     [
@@ -452,25 +472,25 @@
     {
       "type": "tree",
       "kind": "round",
-      "x": 40,
-      "y": 170
+      "x": 24,
+      "y": 272
     },
     {
       "type": "tree",
       "kind": "pine",
-      "x": 70,
-      "y": 210
+      "x": 84,
+      "y": 160
     },
     {
       "type": "tree",
       "kind": "birch",
-      "x": 610,
-      "y": 180
+      "x": 628,
+      "y": 160
     },
     {
       "type": "bush",
-      "x": 600,
-      "y": 220
+      "x": 628,
+      "y": 262
     },
     {
       "type": "car",

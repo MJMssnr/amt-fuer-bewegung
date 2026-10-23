@@ -1732,9 +1732,9 @@
   {
     "id": "t46-schwer-reaktion",
     "title": "Landstraße bei Regen",
-    "from": "ohm",
-    "node": "schule",
-    "requires": ["t22-reaktion-auto", "t45-schwer-konstrukteur"],
+    "from": "polizist",
+    "node": "polizei",
+    "requires": ["t22-reaktion-auto"],
     "reward": 120,
     "difficulty": "mittel",
     "scenario": {
@@ -1752,8 +1752,8 @@
       ]
     },
     "intro": [
-      ["ohm", "Florian, der Abschlussjahrgang macht Führerschein. Ich will ihnen zeigen, was Regen auf der Landstraße bedeutet."],
-      ["ohm", "Tempo 70, nasse Straße, nur 5,0 m/s² Bremsverzögerung. Messen Sie Ihre Reaktionszeit und rechnen Sie den Anhalteweg aus."]
+      ["polizist", "TRRRILLL! Keine Sorge, heute keine gültigen Ziffern. Heute ist Verkehrssicherheitstag im Revier!"],
+      ["polizist", "Landstraße, Tempo 70, nasse Fahrbahn, nur 5,0 m/s² Bremsverzögerung. Messen Sie Ihre Reaktionszeit und rechnen Sie den Anhalteweg aus."]
     ],
     "task": {
       "type": "reaction",
@@ -1765,7 +1765,7 @@
     },
     "success": [
       ["florian", "Bei Tempo 70 auf nasser Straße ist allein der Bremsweg schon fast 38 m lang. Dazu kommt noch der Reaktionsweg."],
-      ["ohm", "Und genau deshalb fährt man bei Regen langsamer. Das zeige ich morgen jedem einzelnen."]
+      ["polizist", "Und genau deshalb fährt man bei Regen langsamer. Das hänge ich im Revier an die Wand – mit zwei gültigen Ziffern!"]
     ]
   },
   {

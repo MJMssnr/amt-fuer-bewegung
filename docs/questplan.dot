@@ -47,7 +47,7 @@ digraph Q {
   t43_schwer_fehlerjagd [fillcolor="#ff9f7a" label=<<b>E</b>  Ralfs krumme Kurve<br/><font point-size="9">Ralf · Rathaus · 120 €</font>>];
   t44_schwer_live [fillcolor="#73eff7" label=<<b>F</b>  Pauls Zustellrunde<br/><font point-size="9">Paul Paket · Bäckerei · 130 €</font>>];
   t45_schwer_konstrukteur [fillcolor="#b6e3b0" label=<<b>I</b>  Hausaufgabe: Die Wende<br/><font point-size="9">Frau Dr. Ohm · Schule · 130 €</font>>];
-  t46_schwer_reaktion [fillcolor="#f0b0e0" label=<<b>J</b>  Landstraße bei Regen<br/><font point-size="9">Frau Dr. Ohm · Schule · 120 €</font>>];
+  t46_schwer_reaktion [fillcolor="#f0b0e0" label=<<b>J</b>  Landstraße bei Regen<br/><font point-size="9">Gültige-Ziffern-Polizei · Polizeirevier · 120 €</font>>];
   t47_schwer_freihand [fillcolor="#f6a6b2" label=<<b>B</b>  Kevin ohne Video<br/><font point-size="9">Kevin · Radl-Eck · 130 €</font>>];
   t48_schwer_flaeche [fillcolor="#d9d9a0" label=<<b>K</b>  Hin, um und zurück<br/><font point-size="9">Filialleiterin Yıldız · Supermarkt · 130 €</font>>];
   t49_schwer_steigung [fillcolor="#a0d9d0" label=<<b>L</b>  Bremsen durch null<br/><font point-size="9">Busfahrer Ötzi · Busbahnhof · 120 €</font>>];
@@ -113,7 +113,6 @@ digraph Q {
   t17_live_kevin -> t44_schwer_live;
   t20_konstrukt_wagen -> t45_schwer_konstrukteur;
   t22_reaktion_auto -> t46_schwer_reaktion;
-  t45_schwer_konstrukteur -> t46_schwer_reaktion;
   t23_freihand_brezel -> t47_schwer_freihand;
   t26_flaeche_wagen -> t48_schwer_flaeche;
   t29_steigung_bus -> t49_schwer_steigung;

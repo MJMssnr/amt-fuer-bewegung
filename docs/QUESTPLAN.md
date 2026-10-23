@@ -53,7 +53,7 @@ flowchart LR
   t43_schwer_fehlerjagd["<b>E</b> Ralfs krumme Kurve<br/><small>Ralf · Rathaus · 120 €</small>"]:::tE
   t44_schwer_live["<b>F</b> Pauls Zustellrunde<br/><small>Paul Paket · Bäckerei · 130 €</small>"]:::tF
   t45_schwer_konstrukteur["<b>I</b> Hausaufgabe: Die Wende<br/><small>Frau Dr. Ohm · Schule · 130 €</small>"]:::tI
-  t46_schwer_reaktion["<b>J</b> Landstraße bei Regen<br/><small>Frau Dr. Ohm · Schule · 120 €</small>"]:::tJ
+  t46_schwer_reaktion["<b>J</b> Landstraße bei Regen<br/><small>Gültige-Ziffern-Polizei · Polizeirevier · 120 €</small>"]:::tJ
   t47_schwer_freihand["<b>B</b> Kevin ohne Video<br/><small>Kevin · Radl-Eck · 130 €</small>"]:::tB
   t48_schwer_flaeche["<b>K</b> Hin, um und zurück<br/><small>Filialleiterin Yıldız · Supermarkt · 130 €</small>"]:::tK
   t49_schwer_steigung["<b>L</b> Bremsen durch null<br/><small>Busfahrer Ötzi · Busbahnhof · 120 €</small>"]:::tL
@@ -119,7 +119,6 @@ flowchart LR
   t17_live_kevin --> t44_schwer_live
   t20_konstrukt_wagen --> t45_schwer_konstrukteur
   t22_reaktion_auto --> t46_schwer_reaktion
-  t45_schwer_konstrukteur --> t46_schwer_reaktion
   t23_freihand_brezel --> t47_schwer_freihand
   t26_flaeche_wagen --> t48_schwer_flaeche
   t29_steigung_bus --> t49_schwer_steigung
@@ -224,7 +223,7 @@ flowchart LR
 | Ralfs krumme Kurve | E | Ralf | Rathaus | 120 € | Ralfs Busfahrt |
 | Pauls Zustellrunde | F | Paul Paket | Bäckerei | 130 € | Kevins Express-Lieferung |
 | Hausaufgabe: Die Wende | I | Frau Dr. Ohm | Schule | 130 € | Hausaufgabe: Die Falle |
-| Landstraße bei Regen | J | Frau Dr. Ohm | Schule | 120 € | Tempo 30 vor der Schule?, Hausaufgabe: Die Wende |
+| Landstraße bei Regen | J | Gültige-Ziffern-Polizei | Polizeirevier | 120 € | Tempo 30 vor der Schule? |
 | Kevin ohne Video | B | Kevin | Radl-Eck | 130 € | Brezels Tagebuch |
 | Hin, um und zurück | K | Filialleiterin Yıldız | Supermarkt | 130 € | Wie knapp war's? |
 | Bremsen durch null | L | Busfahrer Ötzi | Busbahnhof | 120 € | Bremst Ötzi zu scharf? |

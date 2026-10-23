@@ -248,12 +248,22 @@ const polizist = {
 };
 const polizist_rot = { ...polizist, palette: { ...polizist.palette, s: '#e8705f', S: '#c24f45' } };
 
+// Hilde, Tüftlerin in der Hobbywerkstatt [W32]: grauer Dutt, Schutzbrille auf der Stirn, grüne Latzhose, Schraubenschlüssel
+const hilde = {
+  w: 10, h: 16, turns: true, palette: { a: '#c2c7cf', A: '#94b0c2', v: '#2f7d4f', V: '#1f5c39' },
+  frames: [[
+    '...aaa....', '..aAaaak..', '.kaaaaaak.', '.kccccck..', '.kssssssk.', '.kskssksk.',
+    '..kSmmSk..', '...kssk...', '..wvvvvw..', '.svvyvvvs.', '.svvvvvvWW', '..vvvvvv..',
+    '..VV..VV..', '..VV..VV..', '..VV..VV..', '.kkk..kkk.',
+  ]],
+};
+
 const sprites = {
   palette,
   sprites: {
     florian, florian_down, florian_up, florian_side, car_red: car, cyclist, cyclist_b, kevin, broesel, dog,
     bus, oetzi, kranz, baecker, filiale, skater, jo, cart, florian_note, florian_photo, oma_rollator, sled, ohm: { ...kranz, palette: { r: '#c2a56b', p: '#257179', y: '#f4f4f4' } }, postbote, ralf: { ...oetzi, palette: { b: '#e43b44', B: '#ffcd75', d: '#3b5dc9' } },
-    polizist, polizist_rot, slavi, fallschirm, baerti, baerti_sit, messner, florian_suit,
+    polizist, polizist_rot, slavi, fallschirm, baerti, baerti_sit, messner, florian_suit, hilde,
   },
 };
 for (const [name, sp] of Object.entries(sprites.sprites))

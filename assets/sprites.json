@@ -1560,6 +1560,37 @@
     "B": "#c2c7cf",
     "w": "#94b0c2"
    }
+  },
+  "hilde": {
+   "w": 10,
+   "h": 16,
+   "turns": true,
+   "palette": {
+    "a": "#c2c7cf",
+    "A": "#94b0c2",
+    "v": "#2f7d4f",
+    "V": "#1f5c39"
+   },
+   "frames": [
+    [
+     "...aaa....",
+     "..aAaaak..",
+     ".kaaaaaak.",
+     ".kccccck..",
+     ".kssssssk.",
+     ".kskssksk.",
+     "..kSmmSk..",
+     "...kssk...",
+     "..wvvvvw..",
+     ".svvyvvvs.",
+     ".svvvvvvWW",
+     "..vvvvvv..",
+     "..VV..VV..",
+     "..VV..VV..",
+     "..VV..VV..",
+     ".kkk..kkk."
+    ]
+   ]
   }
  }
 }

@@ -8,6 +8,7 @@ import { BUILDINGS, halfpipe, rail, funbox, parkedCar } from '../render/building
 import { treehouse } from '../render/treehouse.js';
 import { school } from '../render/school.js';
 import { fotolabor } from '../render/fotolabor.js';
+import { police, workshop } from '../render/places2.js';
 import { bauplatz } from '../render/bauplatz.js';
 import { natureOn, natureOff, sfx, engineStart, engineSet, engineStop } from '../audio/sound.js';
 import { bikeRide, motoRide, smoke } from '../render/ride.js';
@@ -16,6 +17,8 @@ BUILDINGS.treehouse = treehouse;
 BUILDINGS.school = school;
 BUILDINGS.fotolabor = fotolabor;
 BUILDINGS.bauplatz = bauplatz;
+BUILDINGS.police = police;
+BUILDINGS.workshop = workshop;
 
 const SPEED = 140; // Welt-Pixel pro Sekunde (zu Fuß)
 // Fahrzeuge [W26]: Höchstgeschwindigkeit und Beschleunigung (Welt-Pixel/s bzw. /s²)
