@@ -258,12 +258,19 @@ const hilde = {
   ]],
 };
 
+// Passanten für die Stadtkarte [W33]: Postboten-Laufzyklus mit anderen Farben (Y/Z Oberteil, B Hose, h Haare)
+const passant = (Y, Z, B, h) => ({ ...postbote, palette: { Y, Z, B, h } });
+const passant_a = passant('#e43b44', '#a8303a', '#29366f', '#5d3a1a');
+const passant_b = passant('#38b764', '#257179', '#333c57', '#1a1c2c');
+const passant_c = passant('#b55fb8', '#8b3d8f', '#566c86', '#ffcd75');
+const passant_d = passant('#73eff7', '#3b5dc9', '#5d3a1a', '#94b0c2');
+
 const sprites = {
   palette,
   sprites: {
     florian, florian_down, florian_up, florian_side, car_red: car, cyclist, cyclist_b, kevin, broesel, dog,
     bus, oetzi, kranz, baecker, filiale, skater, jo, cart, florian_note, florian_photo, oma_rollator, sled, ohm: { ...kranz, palette: { r: '#c2a56b', p: '#257179', y: '#f4f4f4' } }, postbote, ralf: { ...oetzi, palette: { b: '#e43b44', B: '#ffcd75', d: '#3b5dc9' } },
-    polizist, polizist_rot, slavi, fallschirm, baerti, baerti_sit, messner, florian_suit, hilde,
+    polizist, polizist_rot, slavi, fallschirm, baerti, baerti_sit, messner, florian_suit, hilde, passant_a, passant_b, passant_c, passant_d,
   },
 };
 for (const [name, sp] of Object.entries(sprites.sprites))

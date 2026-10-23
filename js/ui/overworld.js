@@ -12,6 +12,8 @@ import { police, workshop } from '../render/places2.js';
 import { bauplatz } from '../render/bauplatz.js';
 import { natureOn, natureOff, sfx, engineStart, engineSet, engineStop } from '../audio/sound.js';
 import { bikeRide, motoRide, smoke } from '../render/ride.js';
+import { TownLife } from './townlife.js';
+import { windmill, solar, cloud } from '../render/townlife-art.js';
 
 BUILDINGS.treehouse = treehouse;
 BUILDINGS.school = school;
@@ -45,6 +47,7 @@ export class Overworld {
       (this.adj[a] ??= []).push(b);
       (this.adj[b] ??= []).push(a);
     }
+    this.life = new TownLife(); // Radler und Fußgänger [W33]
     canvas.addEventListener('pointerup', (e) => this.#tap(e));
     new ResizeObserver(() => this.#resize()).observe(canvas);
     this.#resize();
@@ -89,6 +92,7 @@ export class Overworld {
       last = now;
       this.time += dt;
       this.#walk(dt);
+      this.life.step(dt);
       this.draw();
       requestAnimationFrame(loop);
     };
@@ -215,10 +219,14 @@ export class Overworld {
       items.push({ y: by, draw: () => fn(P, cx, by, n, t, this.dpr) });
     }
     for (const d of this.map.decor || []) {
-      items.push({ y: d.y, draw: () => this.#decor(P, d, t) });
+      items.push({ y: d.z ?? d.y, draw: () => this.#decor(P, d, t) }); // z: Zeichenreihenfolge (z. B. Solar auf dem Dach)
     }
     items.push({ y: this.pos.y + 0.5, draw: () => this.#florian(P) });
+    items.push(...this.life.items(P, this.dpr));
     items.sort((a, b) => a.y - b.y).forEach((it) => it.draw());
+    // zwei fast durchsichtige Wolken ziehen am oberen und unteren Rand entlang [W33]
+    cloud(P, ((t * 6) % (this.W + 120)) - 60, 26, 1.2);
+    cloud(P, this.W + 60 - ((t * 4 + 300) % (this.W + 120)), this.H - 52, 1);
     this.#markers(P);
     this.#labels(P);
   }
@@ -229,6 +237,8 @@ export class Overworld {
       case 'rail': return rail(P, d.x, d.y, d.w);
       case 'funbox': return funbox(P, d.x, d.y);
       case 'car': return parkedCar(P, d.x, d.y, d.color);
+      case 'windmill': return windmill(P, d.x, d.y, t, d.h, d.x * 0.1);
+      case 'solar': return solar(P, d.x, d.y, d.n, t);
       default: return decor(P, d, t);
     }
   }
@@ -296,12 +306,23 @@ export class Overworld {
     }
   }
 
+  // Ortsnamen nur in der Nähe [W33]: unsichtbar ab ~200 Bildschirm-px Abstand zu Florian, voll sichtbar ab ~130 px.
+  // Das Ziel einer Fahrt wird immer angezeigt.
   #labels(P) {
-    for (const n of Object.values(this.map.nodes)) {
+    const far = 200 / (this.s / this.dpr), near = far * 0.65;
+    const goal = this.path.at(-1)?.id;
+    const ctx = this.ctx;
+    for (const [id, n] of Object.entries(this.map.nodes)) {
       if (n.junction || !n.name) continue;
+      const [bx, by] = n.at ?? [n.x, n.y];
+      const d = Math.min(Math.hypot(n.x - this.pos.x, n.y - this.pos.y), Math.hypot(bx - this.pos.x, by - this.pos.y));
+      const a = id === goal ? 1 : Math.max(0, Math.min(1, (far - d) / (far - near)));
+      if (a <= 0.01) continue;
       const [lx, ly] = n.label ?? [n.x, n.y + 18];
+      ctx.globalAlpha = a;
       P.text(n.name, lx, ly, 6, { color: '#ffffff', bg: 'rgba(26,28,44,0.78)', pad: 2, minPx: 11, dpr: this.dpr });
     }
+    ctx.globalAlpha = 1;
   }
 }
 
