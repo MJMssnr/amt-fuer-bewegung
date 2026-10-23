@@ -43,13 +43,13 @@
 | t40 Die Paket-Jagd | H | schwer | Hinweis: erst rechnen, Zeit in der Animation prüfen [W29] |
 | t41 Jo in der Halfpipe | G | (schwer) | Diagramm größer, Hinweis kurz; Lösung geprüft: D ist richtig (①+, ② gleichförmig 4,0 m/s, ③ verzögert, ④ aus der Ruhe in −x) [W29] |
 | t42 Der Wende-Tacho | C | leicht | passt (vorher „schwer“) |
-| t45 Hausaufgabe: Die Wende | I | mittel | Herr Messner prüft nach den Änderungen nochmal |
+| t45 Hausaufgabe: Die Wende | I | mittel | **Herr Messner will das nochmal prüfen** (nach den Änderungen) |
 | t46 Landstraße bei Regen | J | mittel | passt (einer von 2 J-Aufträgen) |
 | t47 Kevin ohne Video | B | mittel | viel mehr Toleranz [W29] |
 | t49 Bremsen durch null | L | mittel | ±-Knopf [W28] |
 | t51 Der Wurf nach oben | N | (schwer) | Foto kleiner, Zusammenhang steht rechts über den Antworten, Hinweis verweist darauf [W29] |
 | t52 Die schräge Rinne | M | schwer | Hinweis: welches Zeitintervall (Mitte 1→2 bis Mitte 4→5 = 1,5 s) [W29] |
-| t53 Gas und Bremse | O | zu leicht | „kann ggf. raus“ – Entscheidung offen |
+| t53 Bergab, flach, bergauf | O | (schwer) | war zu leicht → jetzt drei Abschnitte (a = 2, gleichförmig, a = −1), 10 Blitze [W30] – neu testen |
 
 ## Feedback ohne Einstufung
 - Hausaufgabe: Der Bus (I): Diagramm unlesbar → Feinraster [W16]
@@ -60,7 +60,8 @@
 - F: Oma Gerda am Zebrastreifen, Kevins Express-Lieferung (t17, Eckpunkte), t44 (schwer, Eckpunkte)
 - K: Wie lang ist mein Run?
 - D: Der Imagefilm (Testauftrag; danach 2 weitere D-Aufträge bauen)
-- schwer: t43, t48, t50 und t45 (nochmal)
+- schwer: t43, t48, t50, t53 (neu) und t45 (nochmal)
+- neue Typen [W30]: P t54, t55 · Q t56, t57 · R t58, t59
 - Gültige-Ziffern-Polizei: Lob nach ≥ 2 Verwarnungen
 - Systeme: Pakete/Kiste, Bärti, Rennrad/Motorrad auf der Karte, Finale am Bauplatz, Auftragsbuch-Animation, Weiter-Tippen nach dem Lösen
 

@@ -40,7 +40,8 @@ Hinweis: Sitzung 1 wurde nachträglich aus einer Zusammenfassung des Chats rekon
 
 | W28 | Sitzung 3, Playtest-Sammelpunkte: ±-Knopf an allen Zahlenfeldern; Aufgaben passen nicht aufs Handy quer (Hinweise kleiner, Diagramme/Beschriftung größer, Scroll-Pfeile); F: Geschwindigkeiten vorher ausrechnen, Knopf „halbe Geschwindigkeit“, späte F nur Eckpunkte; B viel kulanter (Finger 1,5 cm); eine Reaktions-Aufgabe streichen (t21); Karte: Bewegung umlenken; Umbenennung „Gültige-Ziffern-Polizei“; einmaliges Lob nach 2. Verwarnung | c9704c5, 761f5f9, 199ff04, (dieser Commit) |
 | W29 | Playtest-Runde 2 je Auftrag (t10–t53): Hinweise korrigiert (t10, t20, t23, t37, t40, t41, t51, t52), t20 „Letzte Hausaufgabe“ → „Neue“, Diagramme auf dem Handy größer (Einheiten = echte Pixelhöhe), Freihand ±1,5 cm, t35 durchgehender Maßstab mit ganzzahligem Abstand, t37 Abbilder als Fahrräder, Pendel/senkrechte Fotos kleiner, N: Zusammenhang rechts über den Antworten, Einstufungen eingetragen | (dieser Commit) |
+| W30 | Drei neue Typen: **P Fehlerbalken** (Größt-/Kleinstwert mit verschiebbaren Whiskern, keine g.Z.; t54 Strecken addieren, t55 v_max/v_min), **Q Bewegungsformel** (umstellen, ausrechnen; t56 E-Auto, t57 Brunnen mit Startwert), **R Verbinden** (3 t-x ↔ 3 t-vₓ per Fingerlinie; t58, t59). t53 schwerer (bergab, flach, bergauf). Ab jetzt per Du | 22983a0, 1c3e2ce, 230882c, (dieser Commit) |
 
 **Stand Ende Sitzung 2:** 53 Aufträge (A–O, je ein schwerer), 4950 € verdienbar, Shop 23 Gegenstände für 2265 €. Offen: siehe `ROADMAP.md` und `PLAYTEST.md`.
 
-**Stand Sitzung 3 (W28):** 52 Aufträge, 4880 € verdienbar.
+**Stand Sitzung 3 (W30):** 58 Aufträge (A–R), 5420 € verdienbar.
