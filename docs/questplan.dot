@@ -57,6 +57,8 @@ digraph Q {
   t53_schwer_strobo_bauen [fillcolor="#f0d0a0" label=<<b>O</b>  Gas und Bremse<br/><font point-size="9">Slavi · Fotolabor · 140 €</font>>];
   t54_fehler_route [fillcolor="#dddddd" label=<<b>P</b>  Wie lang ist meine Route?<br/><font point-size="9">Kevin · Radl-Eck · 80 €</font>>];
   t55_fehler_blitz [fillcolor="#dddddd" label=<<b>P</b>  Wie genau ist mein Blitz?<br/><font point-size="9">Slavi · Fotolabor · 100 €</font>>];
+  t56_formel_eauto [fillcolor="#dddddd" label=<<b>Q</b>  Das neue E-Auto<br/><font point-size="9">Bürgermeisterin Kranz · Rathaus · 90 €</font>>];
+  t57_formel_brunnen [fillcolor="#dddddd" label=<<b>Q</b>  Wie tief ist der Wunschbrunnen?<br/><font point-size="9">Oma Gerda · Stadtpark · 110 €</font>>];
   t01_sportwagen -> t02_kevin;
   t02_kevin -> t03_bus;
   t01_sportwagen -> t04_brezel;
@@ -117,4 +119,6 @@ digraph Q {
   t05_radeln -> t54_fehler_route;
   t54_fehler_route -> t55_fehler_blitz;
   t32_strobo_kevin -> t55_fehler_blitz;
+  t06_broesel_ampel -> t56_formel_eauto;
+  t56_formel_eauto -> t57_formel_brunnen;
 }

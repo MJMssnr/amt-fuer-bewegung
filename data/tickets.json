@@ -2221,5 +2221,183 @@
       ["florian", "Größter Weg durch kleinste Zeit: 1,2 m / 0,18 s ≈ 6,7 m/s. Kleinster Weg durch größte Zeit: 0,8 m / 0,22 s ≈ 3,6 m/s."],
       ["slavi", "Zwischen 3,6 und 6,7 m/s. Das ist ehrlich – und es heißt: Ich brauche eine neue Blitzlampe."]
     ]
+  },
+  {
+    "id": "t56-formel-eauto",
+    "title": "Das neue E-Auto",
+    "from": "kranz",
+    "node": "rathaus",
+    "requires": ["t06-broesel-ampel"],
+    "reward": 90,
+    "scenario": {
+      "actors": [
+        {
+          "id": "car",
+          "name": "E-Auto",
+          "sprite": "car_red",
+          "x0": 0,
+          "segments": [
+            {
+              "until": {
+                "x": 100
+              },
+              "a": 3
+            }
+          ]
+        }
+      ]
+    },
+    "intro": [
+      ["kranz", "Herr Doktor Brandl, die Stadt hat ein E-Auto gekauft! Der Händler sagt: beschleunigt gleichmäßig mit 3,0 m/s²."],
+      ["kranz", "Für die Pressemitteilung brauche ich eine Zahl, die Eindruck macht: Wie lange braucht es aus dem Stand für 100 m?"],
+      ["florian", "Gleichmäßig beschleunigt aus der Ruhe: x = ½ · a · t². Ich muss nur nach t umstellen."]
+    ],
+    "task": {
+      "type": "formula",
+      "actor": "car",
+      "given": ["anim"],
+      "prompt": "Wie lange braucht das E-Auto aus dem Stand für 100 m?",
+      "paper": "Stell die Formel auf dem Zettel um: erst beide Seiten mal 2, dann durch a teilen, dann die Wurzel ziehen. Erst danach Zahlen einsetzen.",
+      "formula": "x = ½ · a · t²",
+      "solveFor": "t",
+      "known": [
+        {
+          "name": "a",
+          "sym": "a",
+          "value": 3,
+          "unit": "m/s²",
+          "text": "3,0 m/s²"
+        },
+        {
+          "name": "x",
+          "sym": "x",
+          "value": 100,
+          "unit": "m",
+          "text": "100 m"
+        }
+      ],
+      "choices": [
+        {
+          "text": "t = √(2·x / a)",
+          "correct": true
+        },
+        {
+          "text": "t = 2·x / a",
+          "feedback": "Hier fehlt die Wurzel: t steht in der Formel im Quadrat."
+        },
+        {
+          "text": "t = √(x / (2·a))",
+          "feedback": "Das ½ ist falsch umgestellt: Beide Seiten mal 2 gibt 2·x = a·t²."
+        },
+        {
+          "text": "t = √(2·a / x)",
+          "feedback": "Der Bruch steht auf dem Kopf. Probe mit Einheiten: (m/s²) / m = 1/s², nicht s²."
+        }
+      ],
+      "expr": "sqrt(2*x/a)",
+      "label": "Zeit für 100 m",
+      "symbol": "t",
+      "unit": "s",
+      "hints": [
+        {
+          "value": 66.7,
+          "text": "Das ist t² in s². Zieh noch die Wurzel!"
+        },
+        {
+          "value": 5.77,
+          "text": "Hast du das ½ vergessen? Unter der Wurzel steht 2·x / a."
+        }
+      ],
+      "help": "t = √(2 · 100 m / 3,0 m/s²) = √(66,7 s²)"
+    },
+    "success": [
+      ["florian", "t = √(2 · 100 m / 3,0 m/s²) ≈ 8,2 s. Und dabei ist das Auto am Ende schon 24 m/s schnell, also fast 90 km/h."],
+      ["kranz", "„In 8,2 Sekunden auf 100 Meter!“ – perfekt für die Zeitung. Und dann bitte langsam, wir sind ja eine 30er-Stadt."]
+    ]
+  },
+  {
+    "id": "t57-formel-brunnen",
+    "title": "Wie tief ist der Wunschbrunnen?",
+    "from": "gerda",
+    "node": "park",
+    "requires": ["t56-formel-eauto"],
+    "reward": 110,
+    "intro": [
+      ["gerda", "Junger Mann! Im Park steht doch der alte Wunschbrunnen. Seit siebzig Jahren frage ich mich, wie tief der ist."],
+      ["gerda", "Ich hab einen Kiesel reinfallen lassen und mitgezählt: nach 2,4 Sekunden hat es geplatscht."],
+      ["florian", "Freier Fall aus der Ruhe. Die Zeit, bis der Schall wieder oben ist, lassen wir weg – die ist sehr kurz."]
+    ],
+    "task": {
+      "type": "formula",
+      "picture": {
+        "kind": "well",
+        "t": 2.4,
+        "label": "Wunschbrunnen"
+      },
+      "prompt": "Wie tief ist der Brunnen vom Rand bis zur Wasseroberfläche?",
+      "paper": "Lege die y-Achse nach oben und y = 0 an die Wasseroberfläche. Der Kiesel startet am Rand bei y₀ aus der Ruhe und ist nach t = 2,4 s bei y = 0. Stell nach y₀ um, dann einsetzen.",
+      "formula": "y = y₀ − ½ · g · t²",
+      "solveFor": "y₀ (Startwert = Tiefe)",
+      "known": [
+        {
+          "name": "t",
+          "sym": "t",
+          "value": 2.4,
+          "unit": "s",
+          "text": "2,4 s"
+        },
+        {
+          "name": "g",
+          "sym": "g",
+          "value": 9.81,
+          "unit": "m/s²",
+          "text": "9,81 m/s²"
+        },
+        {
+          "name": "y",
+          "sym": "y",
+          "value": 0,
+          "unit": "m",
+          "text": "0 m (Wasser)"
+        }
+      ],
+      "choices": [
+        {
+          "text": "y₀ = y + ½ · g · t²",
+          "correct": true
+        },
+        {
+          "text": "y₀ = y − ½ · g · t²",
+          "feedback": "Vorzeichen: Bringst du − ½ · g · t² auf die andere Seite, wird daraus plus."
+        },
+        {
+          "text": "y₀ = y + g · t²",
+          "feedback": "Da ist das ½ verloren gegangen."
+        },
+        {
+          "text": "y₀ = y + ½ · g · t",
+          "feedback": "Die Zeit steht in der Formel im Quadrat: t²."
+        }
+      ],
+      "expr": "y + 0.5*g*t*t",
+      "label": "Tiefe des Brunnens",
+      "symbol": "y_0",
+      "unit": "m",
+      "hints": [
+        {
+          "value": 56.5,
+          "text": "Hast du das ½ vergessen?"
+        },
+        {
+          "value": 11.8,
+          "text": "Die Zeit muss quadriert werden: t² = 5,76 s²."
+        }
+      ],
+      "help": "y₀ = 0 m + ½ · 9,81 m/s² · (2,4 s)²"
+    },
+    "success": [
+      ["florian", "y₀ = ½ · 9,81 m/s² · (2,4 s)² ≈ 28 m. Ihr Wunschbrunnen ist ungefähr 28 Meter tief, Oma Gerda!"],
+      ["gerda", "Achtundzwanzig Meter! Da liegen also siebzig Jahre Wünsche ganz schön tief. Danke, mein Junge."]
+    ]
   }
 ]
