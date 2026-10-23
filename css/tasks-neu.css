@@ -244,3 +244,4 @@ body.finale-on #dialog { z-index: 80; }
   .pp-ctrl .btn { padding: 2px 8px; font-size: 13px; }
   .pp-score { font-size: 13px; }
 }
+.sk-given { font-weight: 600; background: #fde7b2; padding: 2px 8px; box-shadow: 0 0 0 2px var(--ink); }

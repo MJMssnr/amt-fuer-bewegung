@@ -44,6 +44,14 @@ export function drawSkid(c, o) {
   const sp = getSprite('car_red'), k = (H * 0.2) / sp.h, cw = sp.w * k, ch = sp.h * k;
   ctx.imageSmoothingEnabled = false;
   ctx.drawImage(sp.frames[0], X1 - (5.5 / 24) * cw, road + roadH * 0.55 - ch, cw, ch);
+  // Hindernis vor dem Auto (Aufprall mit Restgeschwindigkeit) [W33]
+  if (o.obstacle) {
+    const bx = X1 + (18.5 / 24) * cw + 2 * d, bh = H * 0.17, bw = bh * 0.7, by = road + roadH * 0.55 - bh;
+    ctx.fillStyle = INK; ctx.fillRect(bx, by, bw, bh);
+    ctx.fillStyle = '#38b764'; ctx.fillRect(bx + d, by + d, bw - 2 * d, bh - 2 * d);
+    ctx.fillStyle = '#257179'; ctx.fillRect(bx - d, by, bw + 2 * d, 3 * d);
+    ctx.fillStyle = '#ffcd75'; for (let i = 0; i < 4; i++) ctx.fillRect(bx - 4 * d - i * 2 * d, by + bh * 0.3 + (i % 2) * 4 * d, 2 * d, 2 * d); // Aufprall-Sternchen
+  }
   // Tempo-Schild
   const sx = 10 * d, sy = road - roadH * 0.15 - 44 * d;
   ctx.fillStyle = '#94b0c2'; ctx.fillRect(sx + 9 * d, sy + 18 * d, 2 * d, 26 * d);
@@ -57,7 +65,7 @@ export function drawSkid(c, o) {
   for (let x = Math.ceil(lo * 2) / 2; x <= hi + 1e-9; x += 0.5) {
     const X = toPx(x), major = Math.abs(x - Math.round(x)) < 1e-6;
     ctx.fillRect(X, ry, 1.5 * d, (major ? 8 : 4) * d);
-    if (major && Math.round(x) % 2 === 0) ctx.fillText(`${Math.round(x)} m`, X, ry + 19 * d);
+    if (major && Math.round(x) % (hi - lo > 16 ? 4 : 2) === 0) ctx.fillText(`${Math.round(x)} m`, X, ry + 19 * d);
   }
   // Regen / Schneefall
   if (wx === 'rain') { ctx.strokeStyle = 'rgba(200,225,255,0.6)'; ctx.lineWidth = 1.2 * d; for (let i = 0; i < 50; i++) { const x = ((i * 0.0731 + t * 0.4) % 1) * W, y = ((i * 0.193 + t * 1.3) % 1) * road; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x - 3 * d, y + 9 * d); ctx.stroke(); } }

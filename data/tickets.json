@@ -2862,5 +2862,100 @@
       ["hilde", "Die Kurve war perfekt! So sieht gleichmäßiges Beschleunigen aus, wenn man es selber macht."],
       ["florian", "Am Anfang fast gar nicht bewegen, am Ende richtig schnell. Genau das bedeutet die Linkskurve."]
     ]
+  },
+  {
+    "id": "t67-schwer-gutachten",
+    "title": "Glatteis in der Wohnstraße",
+    "from": "polizist",
+    "node": "polizei",
+    "requires": ["t64-gutachten-regen"],
+    "reward": 140,
+    "difficulty": "schwer",
+    "intro": [
+      ["polizist", "TRRRILLL! Schnee in der Wohnstraße, Tempo 30. Ein Auto ist gerutscht und in eine Mülltonne gekracht."],
+      ["polizist", "Die Werkstatt sagt: Beim Aufprall war es noch 5,0 m/s schnell. Es stand also am Ende der Bremsspur noch nicht!"],
+      ["florian", "Dann ist v₁ nicht null. Diesmal brauche ich die ganze Gleichung: v₁² − v₀² = 2·a·Δx."]
+    ],
+    "task": {
+      "type": "skid",
+      "weather": "snow",
+      "limit": 30,
+      "range": [0, 30],
+      "skid": [1, 21],
+      "v1": 5,
+      "v1Text": "Laut Werkstatt beim Aufprall noch v₁ = 5,0 m/s",
+      "prompt": "Erstelle das Gutachten: Wie schnell war das Auto, bevor es zu bremsen begann?",
+      "paper": "v₁² − v₀² = 2 · a · Δx mit a < 0. Nach v₀ umstellen: v₀ = √(v₁² + 2 · |a| · Δx). Achtung: v₁ ist hier nicht null! Am Ende mal 3,6.",
+      "hints": [
+        {
+          "value": 32.2,
+          "text": "Du hast die Restgeschwindigkeit beim Aufprall vergessen: v₀² = v₁² + 2 · |a| · Δx."
+        },
+        {
+          "value": 26.7,
+          "text": "Vorzeichen: v₁² wird addiert, nicht abgezogen. Vor dem Bremsen war das Auto schneller als beim Aufprall!"
+        },
+        {
+          "value": 10.2,
+          "text": "Das sind m/s. Gefragt ist km/h: mal 3,6."
+        }
+      ],
+      "help": "v₀ = √((5,0 m/s)² + 2 · 2,0 m/s² · 20 m) = √(105 m²/s²)"
+    },
+    "success": [
+      ["florian", "v₀ = √(25 + 80) m/s ≈ 10 m/s, also etwa 37 km/h. Bei Schnee in einer 30er-Straße – eindeutig zu schnell."],
+      ["polizist", "Und die Mülltonne hat es auch nicht verdient. Herr Brandl, Sie sind der beste Gutachter, den das Revier je hatte!"]
+    ]
+  },
+  {
+    "id": "t68-schwer-puppe",
+    "title": "Jo, die Marionetten-Skaterin",
+    "from": "hilde",
+    "node": "werkstatt",
+    "requires": ["t66-puppe-brezel"],
+    "reward": 140,
+    "difficulty": "schwer",
+    "intro": [
+      ["hilde", "Das große Finale fürs Stadtfest: Jo auf dem Skateboard! Anrollen, sausen, abbremsen, kurz posieren – und rückwärts zurück."],
+      ["hilde", "Fünf Abschnitte, zwei Kurven. Der Regisseur sagt, nur ein Meister schafft das."],
+      ["florian", "Linkskurve: immer schneller schieben. Rechtskurve: immer langsamer werden. Und am Ende entschlossen zurück."]
+    ],
+    "task": {
+      "type": "puppet",
+      "sprite": "skater",
+      "x0": 0,
+      "segments": [
+        {
+          "dt": 3,
+          "v0": 0,
+          "a": 1
+        },
+        {
+          "dt": 1,
+          "v": 3
+        },
+        {
+          "dt": 2,
+          "v0": 3,
+          "a": -1.5
+        },
+        {
+          "dt": 1,
+          "v": 0
+        },
+        {
+          "dt": 2,
+          "v": -3
+        }
+      ],
+      "range": [0, 12],
+      "tol": 0.7,
+      "prompt": "Führe Jo durch alle fünf Abschnitte. Achte auf die Kurven: schneller werden, gleich schnell, langsamer werden, stehen, zurück.",
+      "paper": "Lies die Orte an allen Abschnittsgrenzen ab. Bei der Rechtskurve langsam ausrollen lassen, bis die Linie waagrecht ist. Mit 🐢 darfst du so oft üben, wie du willst."
+    },
+    "success": [
+      ["hilde", "Bravo! Das Publikum wird toben. Fünf Abschnitte, und man sieht in jedem, was die Physik macht."],
+      ["florian", "Die Kurven im Finger zu spüren ist was ganz anderes, als sie nur zu zeichnen."]
+    ]
   }
 ]

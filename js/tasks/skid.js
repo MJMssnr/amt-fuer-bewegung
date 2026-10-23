@@ -38,7 +38,7 @@ export function mount(root, { ticket, onSolved }) {
     const d = Math.min(window.devicePixelRatio || 1, 3), r = cv.getBoundingClientRect();
     if (!r.width) return;
     if (cv.width !== Math.round(r.width * d)) { cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); }
-    geo = drawSkid(cv, { range: task.range, skid: task.skid, weather: task.weather, limit: task.limit, marks: step === 1 ? marks : [s0, s1], dpr: d, t: now / 1000 });
+    geo = drawSkid(cv, { range: task.range, skid: task.skid, weather: task.weather, limit: task.limit, obstacle: !!task.v1, marks: step === 1 ? marks : [s0, s1], dpr: d, t: now / 1000 });
   };
   const loop = (now) => { draw(now); raf = requestAnimationFrame(loop); };
   raf = requestAnimationFrame(loop);
@@ -65,7 +65,7 @@ export function mount(root, { ticket, onSolved }) {
     <div class="f-step sk-2 hidden"><div class="f-head">② Straßenzustand: Welche Bremsverzögerung gilt?</div>
       <div class="sk-surf">${SURFACES.map((s) => `<button class="f-choice" type="button" data-id="${s.id}">${s.icon} ${s.label}<br><b>|a| = ${s.a.toFixed(1).replace('.', ',')} m/s²</b></button>`).join('')}</div>
       <div class="feedback sk-fb2"></div></div>
-    <div class="f-step sk-3 hidden"><div class="f-head">③ Geschwindigkeit vor dem Bremsen</div></div>
+    <div class="f-step sk-3 hidden"><div class="f-head">③ Geschwindigkeit vor dem Bremsen</div>${task.v1 ? `<div class="sk-given">${task.v1Text ?? `Beim Aufprall noch v₁ = ${task.v1.toFixed(1).replace('.', ',')} m/s`}</div>` : ''}</div>
     <div class="f-step sk-4 hidden"><div class="f-head">④ Urteil bei Tempo ${task.limit}</div>
       <div class="sk-verdict"><button class="f-choice" type="button" data-v="1">🚨 Zu schnell</button><button class="f-choice" type="button" data-v="0">✅ Nicht zu schnell</button></div>
       <div class="feedback sk-fb4"></div></div>`;
@@ -86,7 +86,7 @@ export function mount(root, { ticket, onSolved }) {
     errors++;
     fb.className = 'feedback sk-fb1 bad';
     fb.textContent = !okA ? 'Der Anfang stimmt noch nicht: Die Spur beginnt dort, wo der erste (blasse) schwarze Strich anfängt.'
-      : 'Das Ende stimmt noch nicht: Die Spur endet am Hinterrad des stehenden Autos.';
+      : 'Das Ende stimmt noch nicht: Die Spur endet am Hinterrad des Autos.';
   });
   // ② Straßenzustand
   right.querySelectorAll('.sk-surf .f-choice').forEach((b) => b.addEventListener('click', () => {
