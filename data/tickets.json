@@ -803,5 +803,162 @@
       ["florian", "Gerade hoch bis 12 m bei 4 s, Gerade zurück bis 6,0 m bei 7 s, danach waagrecht bis 9 s."],
       ["baecker", "Das hänge ich in die Backstube. Neben das Meisterbrief-Foto."]
     ]
+  },
+  {
+    "id": "t24-flaeche-jo",
+    "title": "Wie lang ist mein Run?",
+    "from": "jo",
+    "node": "skatepark",
+    "requires": ["t07-skater"],
+    "reward": 80,
+    "scenario": "skater-jo",
+    "intro": [
+      ["jo", "Okay, Amtsmensch, dein Bericht hat den Stadtrat beruhigt. Jetzt wollen die mir sogar eine neue Bahn bauen!"],
+      ["jo", "Die fragen aber, wie lang mein Run ist. Ein Maßband hab ich nicht. Nur das Diagramm aus der App."],
+      ["florian", "Brauchst du auch nicht. Die Fläche unter dem t-vₓ-Diagramm ist der Weg. Ich zerleg sie in Stücke."]
+    ],
+    "task": {
+      "type": "area",
+      "actor": "jo",
+      "given": ["anim"],
+      "graph": "vt",
+      "ask": ["pieces", "dx"],
+      "paper": "Zeichne das t-vₓ-Diagramm mit den Teilflächen ins Heft. Rechteck: A = Δt · vₓ. Dreieck: A = ½ · Δt · Δvₓ. Lies Grundseite und Höhe an den Kästchen ab."
+    },
+    "success": [
+      ["florian", "Dreieck 8,0 m, Rechteck 12 m, Dreieck 4,0 m. Zusammen ist dein Run 24 m lang."],
+      ["jo", "24 Meter. Ich bestell 30. Man wächst ja mit seinen Aufgaben."]
+    ]
+  },
+  {
+    "id": "t25-flaeche-kevin",
+    "title": "Hin und zurück",
+    "from": "kevin",
+    "node": "fahrradladen",
+    "requires": ["t09-tacho"],
+    "reward": 90,
+    "scenario": "kevin-express",
+    "intro": [
+      ["kevin", "Chef, mein Boss zahlt mir nur die Entfernung zwischen Start und Ziel. Dabei bin ich ein Stück zurückgefahren, weil ich das falsche Paket hatte!"],
+      ["kevin", "Ich will, dass er den ganzen Weg bezahlt. Kannst du beides ausrechnen? Dann sieht er den Unterschied schwarz auf weiß."],
+      ["florian", "Ortsänderung und Weg. Bei den Flächen unter der t-Achse muss man dafür genau hinschauen."]
+    ],
+    "task": {
+      "type": "area",
+      "actor": "kevin",
+      "given": ["anim"],
+      "graph": "vt",
+      "ask": ["pieces", "dx", "path"],
+      "paper": "Flächen über der t-Achse zählen für Δx positiv, Flächen darunter negativ. Für den Weg s zählt jede Fläche positiv."
+    },
+    "success": [
+      ["florian", "20 m hin, 9,0 m zurück. Die Ortsänderung ist Δx = 11 m, gefahren bist du aber 29 m."],
+      ["kevin", "29 Meter! Ich schreib dem Boss eine Rechnung. Mit Diagramm im Anhang."]
+    ]
+  },
+  {
+    "id": "t26-flaeche-wagen",
+    "title": "Wie knapp war's?",
+    "from": "filiale",
+    "node": "supermarkt",
+    "requires": ["t08-einkaufswagen"],
+    "reward": 100,
+    "scenario": "einkaufswagen",
+    "intro": [
+      ["filiale", "Herr Brandl, die Versicherung hat noch eine Frage zum Einkaufswagen. Das Auto der Bürgermeisterin parkt genau bei x = 0."],
+      ["filiale", "Die wollen wissen: Wo genau ist der Wagen zum Stehen gekommen? Und wie knapp war es?"],
+      ["florian", "Startort plus Ortsänderung. Und weil er in negative Richtung rollt, sind alle Flächen negativ."]
+    ],
+    "task": {
+      "type": "area",
+      "actor": "cart",
+      "given": ["anim", "data"],
+      "graph": "vt",
+      "ask": ["pieces", "dx", "xend"],
+      "paper": "Alle Teilflächen liegen unter der t-Achse, also sind sie negativ. Danach: x = x₀ + Δx. Den Startort x₀ findest du im Datenblatt."
+    },
+    "success": [
+      ["florian", "Die Teilflächen sind −4,0 m, −6,0 m und −1,0 m, also Δx = −11 m. Gestartet ist er bei 12 m, stehen geblieben bei 1,0 m."],
+      ["filiale", "Einen Meter vor dem Auto der Bürgermeisterin! Ich brauche jetzt einen Kaffee. Einen großen."]
+    ]
+  },
+  {
+    "id": "t27-steigung-blitz",
+    "title": "Der rote Blitz am Abend",
+    "from": "broesel",
+    "node": "lindenstrasse",
+    "requires": ["t01-sportwagen"],
+    "reward": 70,
+    "scenario": "sportwagen-abend",
+    "intro": [
+      ["broesel", "Junger Mann! Der rote Sportwagen war gestern Abend WIEDER da! Diesmal kam er mir aber viel schneller vor!"],
+      ["broesel", "Meine Nachbarin hat ihn mit ihrer Wildkamera erwischt. Daraus haben Sie ja so ein Diagramm gemacht."],
+      ["florian", "Im t-x-Diagramm ist die Geschwindigkeit die Steigung. Ich lege ein Steigungsdreieck an."]
+    ],
+    "task": {
+      "type": "slope",
+      "actor": "car",
+      "given": ["anim"],
+      "graph": "xt",
+      "segment": 0,
+      "kmh": true,
+      "paper": "Zeichne das Steigungsdreieck auch ins Heft, möglichst groß. Wähle Punkte, an denen die Gerade genau durch Kästchenecken geht. Dann vₓ = Δx / Δt."
+    },
+    "success": [
+      ["florian", "Δx = 60 m in Δt = 4,0 s, also vₓ = 15 m/s. Mal 3,6 sind das 54 km/h. Tempo 50 überschritten!"],
+      ["broesel", "Ich hab's gewusst! Ich hab's IMMER gewusst! Das Bild hänge ich in den Hausflur."]
+    ]
+  },
+  {
+    "id": "t28-steigung-ralf",
+    "title": "Ralfs positive Rückwärtsrechnung",
+    "from": "ralf",
+    "node": "rathaus",
+    "requires": ["t12-ralf-brezel"],
+    "reward": 80,
+    "scenario": "hund-brezel",
+    "intro": [
+      ["ralf", "Chef, ich hab bei Brezels Rückweg ein Steigungsdreieck gezeichnet. Da kommt bei mir eine positive Geschwindigkeit raus."],
+      ["ralf", "Aber Brezel läuft doch zurück?! Ich glaub, mein Lineal ist kaputt."],
+      ["florian", "Das Lineal ist es bestimmt nicht. Zeig mal her, ich mach es nochmal sauber."]
+    ],
+    "task": {
+      "type": "slope",
+      "actor": "dog",
+      "given": ["anim"],
+      "graph": "xt",
+      "segment": 1,
+      "paper": "Δx ist Endwert minus Anfangswert. Fällt die Gerade, ist Δx negativ, und damit auch die Steigung vₓ = Δx / Δt."
+    },
+    "success": [
+      ["florian", "Von 12 m auf 6,0 m in 3,0 s: Δx = −6,0 m, also vₓ = −2,0 m/s. Negativ, weil Brezel in negative x-Richtung läuft."],
+      ["ralf", "Ach so, ich hab oben minus unten gerechnet statt Ende minus Anfang. Das Lineal ist rehabilitiert!"]
+    ]
+  },
+  {
+    "id": "t29-steigung-bus",
+    "title": "Bremst Ötzi zu scharf?",
+    "from": "oetzi",
+    "node": "bushof",
+    "requires": ["t10-ampelkamera"],
+    "reward": 90,
+    "scenario": "bus-anfahren",
+    "intro": [
+      ["oetzi", "Servus! Ein Fahrgast hat sich beschwert, ich bremse zu scharf. Sein Kaffee ist übergeschwappt."],
+      ["oetzi", "Laut Betriebsanweisung darf ich mit höchstens 3,5 m/s² verzögern. Halte ich mich dran?"],
+      ["florian", "Im t-vₓ-Diagramm ist die Beschleunigung die Steigung. Ich nehme mir das Bremsstück vor."]
+    ],
+    "task": {
+      "type": "slope",
+      "actor": "bus",
+      "given": ["anim"],
+      "graph": "vt",
+      "segment": 2,
+      "paper": "Steigungsdreieck im t-vₓ-Diagramm: aₓ = Δvₓ / Δt. Beim Bremsen nimmt vₓ ab, also ist Δvₓ negativ. Vergleiche dann den Betrag mit 3,5 m/s²."
+    },
+    "success": [
+      ["florian", "Von 9,0 m/s auf 0 in 3,0 s: aₓ = −3,0 m/s². Der Betrag 3,0 m/s² liegt unter den erlaubten 3,5 m/s²."],
+      ["oetzi", "Siehste! Der Kaffee war einfach zu voll. Ich häng das Diagramm in den Bus."]
+    ]
   }
 ]

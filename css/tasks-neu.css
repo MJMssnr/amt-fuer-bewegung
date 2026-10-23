@@ -1,2 +1,18 @@
 /* Neue Aufgabentypen (Sitzung 2): B Freihand, K Fläche, L Steigung, D Regie */
 .fh-draw { cursor: crosshair; }
+
+/* K Flächen-Puzzle */
+.g-area { stroke: var(--ink); stroke-width: 1; fill-opacity: .55; }
+.g-area-0 { fill: #ffcd75; } .g-area-1 { fill: #a7f070; } .g-area-2 { fill: #73eff7; } .g-area-3 { fill: #f6a6b2; }
+.g-area.neg { stroke-dasharray: 4 2; fill-opacity: .4; }
+.g-area-label { font: 13px var(--pixel); fill: var(--ink); paint-order: stroke; stroke: #fffdf6; stroke-width: 3px; }
+.g-limit { stroke: var(--bad); stroke-width: 1.5; stroke-dasharray: 5 3; }
+
+/* L Steigungsdreieck */
+.sl-draw { cursor: crosshair; touch-action: none; }
+.g-tri { fill: rgba(239, 125, 87, .18); stroke: none; }
+.g-seg.leg { stroke: var(--accent); stroke-width: 2.4; }
+.g-dot { fill: var(--accent); stroke: var(--ink); stroke-width: 1.5; }
+.g-note.leg { font: 12px var(--pixel); fill: #a3402a; paint-order: stroke; stroke: #fffdf6; stroke-width: 3px; }
+.g-band.sl-seg { fill: rgba(255, 205, 117, .28); pointer-events: none; }
+.sl-info { margin: 4px 0; font-size: 13px; }

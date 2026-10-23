@@ -140,6 +140,26 @@ export function drawGraph(kind, pieces, opts = {}) {
       const p = pt.matrixTransform(svg.getScreenCTM().inverse());
       return [tR.lo + ((p.x - M.l) / (W - M.l - M.r)) * (tR.hi - tR.lo), yR.lo + ((H - M.b - p.y) / (H - M.t - M.b)) * (yR.hi - yR.lo)];
     },
+    /** Fläche/Polygon in Diagrammwerten (Flächen-Puzzle, Steigungsdreieck); vor der Kurve eingefügt */
+    shape(pts, cls = 'g-shape') {
+      const e = el('polygon', { points: toPts(pts), class: cls });
+      svg.insertBefore(e, curve);
+      return e;
+    },
+    /** Linie in Diagrammwerten über allem (z. B. Dreiecksschenkel) */
+    seg([a, b], cls = 'g-seg') {
+      return el('line', { x1: X(a[0]), y1: Y(a[1]), x2: X(b[0]), y2: Y(b[1]), class: cls }, svg);
+    },
+    /** Beschriftung in Diagrammwerten, optional mit Pixelversatz */
+    note([t, y], text, cls = 'g-note', [dx, dy] = [0, 0]) {
+      const e = el('text', { x: X(t) + dx, y: Y(y) + dy, 'text-anchor': 'middle', class: cls }, svg);
+      e.textContent = text;
+      return e;
+    },
+    /** Kreis in Diagrammwerten */
+    dot([t, y], cls = 'g-dot', r = 4) {
+      return el('circle', { cx: X(t), cy: Y(y), r, class: cls }, svg);
+    },
     /** Diagrammwerte -> SVG-Pixel (für Toleranzen in Pixeln) */
     toPx: ([t, y]) => [X(t), Y(y)],
     /** Zusätzliche Kurve (z. B. Lösung) mit eigener CSS-Klasse */

@@ -11,6 +11,8 @@ const LOADERS = {
   construct: () => import('./construct.js'),   // Konstrukteur: Diagramm selbst bauen
   reaction: () => import('./reaction.js'),     // Reaktionstest -> eigener Anhalteweg
   freehand: () => import('./freehand.js'),     // B: Freihand mit Auto-Begradigung
+  area: () => import('./area.js'),             // K: Flächen-Puzzle (Fläche unter t-vₓ = Δx)
+  slope: () => import('./slope.js'),           // L: Steigungsdreieck
 };
 
 export async function loadTask(type) {

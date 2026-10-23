@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 23, verdienbar: 1810 €.
+Anzahl Aufträge: 29, verdienbar: 2320 €.
 
 ```mermaid
 flowchart LR
@@ -32,6 +32,12 @@ flowchart LR
   t21_reaktion_rad["<b>J</b> Die Schrecksekunde<br/><small>Frau Dr. Ohm · Schule · 70 €</small>"]:::tJ
   t22_reaktion_auto["<b>J</b> Tempo 30 vor der Schule?<br/><small>Bürgermeisterin Kranz · Rathaus · 90 €</small>"]:::tJ
   t23_freihand_brezel["<b>B</b> Brezels Tagebuch<br/><small>Bäckermeister Huber · Bäckerei · 80 €</small>"]:::tB
+  t24_flaeche_jo["<b>K</b> Wie lang ist mein Run?<br/><small>Jo · Skatepark · 80 €</small>"]:::tK
+  t25_flaeche_kevin["<b>K</b> Hin und zurück<br/><small>Kevin · Radl-Eck · 90 €</small>"]:::tK
+  t26_flaeche_wagen["<b>K</b> Wie knapp war's?<br/><small>Filialleiterin Yıldız · Supermarkt · 100 €</small>"]:::tK
+  t27_steigung_blitz["<b>L</b> Der rote Blitz am Abend<br/><small>Frau Brösel · Lindenstraße · 70 €</small>"]:::tL
+  t28_steigung_ralf["<b>L</b> Ralfs positive Rückwärtsrechnung<br/><small>Ralf · Rathaus · 80 €</small>"]:::tL
+  t29_steigung_bus["<b>L</b> Bremst Ötzi zu scharf?<br/><small>Busfahrer Ötzi · Busbahnhof · 90 €</small>"]:::tL
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -59,6 +65,12 @@ flowchart LR
   t02_kevin --> t21_reaktion_rad
   t21_reaktion_rad --> t22_reaktion_auto
   t15_live_brezel --> t23_freihand_brezel
+  t07_skater --> t24_flaeche_jo
+  t09_tacho --> t25_flaeche_kevin
+  t08_einkaufswagen --> t26_flaeche_wagen
+  t01_sportwagen --> t27_steigung_blitz
+  t12_ralf_brezel --> t28_steigung_ralf
+  t10_ampelkamera --> t29_steigung_bus
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -86,8 +98,8 @@ flowchart LR
 | H | Berechnen | 2 |
 | I | Konstrukteur | 3 |
 | J | Reaktionstest | 2 |
-| K | Flächen-Puzzle | 0 |
-| L | Steigungsdreieck | 0 |
+| K | Flächen-Puzzle | 3 |
+| L | Steigungsdreieck | 3 |
 
 ## Liste
 | Auftrag | Typ | von | Ort | Lohn | braucht |
@@ -115,3 +127,9 @@ flowchart LR
 | Die Schrecksekunde | J | Frau Dr. Ohm | Schule | 70 € | Bremsen durch? |
 | Tempo 30 vor der Schule? | J | Bürgermeisterin Kranz | Rathaus | 90 € | Die Schrecksekunde |
 | Brezels Tagebuch | B | Bäckermeister Huber | Bäckerei | 80 € | Brezels Ersatzrunde |
+| Wie lang ist mein Run? | K | Jo | Skatepark | 80 € | Zu schnell im Skatepark? |
+| Hin und zurück | K | Kevin | Radl-Eck | 90 € | Der verschmierte Ausdruck |
+| Wie knapp war's? | K | Filialleiterin Yıldız | Supermarkt | 100 € | Der Einkaufswagen |
+| Der rote Blitz am Abend | L | Frau Brösel | Lindenstraße | 70 € | Der rote Blitz |
+| Ralfs positive Rückwärtsrechnung | L | Ralf | Rathaus | 80 € | Ralfs erstes Diagramm |
+| Bremst Ötzi zu scharf? | L | Busfahrer Ötzi | Busbahnhof | 90 € | Die nasse Ampelkamera |

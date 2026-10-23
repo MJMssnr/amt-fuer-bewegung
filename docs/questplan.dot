@@ -26,6 +26,12 @@ digraph Q {
   t21_reaktion_rad [fillcolor="#f0b0e0" label=<<b>J</b>  Die Schrecksekunde<br/><font point-size="9">Frau Dr. Ohm · Schule · 70 €</font>>];
   t22_reaktion_auto [fillcolor="#f0b0e0" label=<<b>J</b>  Tempo 30 vor der Schule?<br/><font point-size="9">Bürgermeisterin Kranz · Rathaus · 90 €</font>>];
   t23_freihand_brezel [fillcolor="#f6a6b2" label=<<b>B</b>  Brezels Tagebuch<br/><font point-size="9">Bäckermeister Huber · Bäckerei · 80 €</font>>];
+  t24_flaeche_jo [fillcolor="#d9d9a0" label=<<b>K</b>  Wie lang ist mein Run?<br/><font point-size="9">Jo · Skatepark · 80 €</font>>];
+  t25_flaeche_kevin [fillcolor="#d9d9a0" label=<<b>K</b>  Hin und zurück<br/><font point-size="9">Kevin · Radl-Eck · 90 €</font>>];
+  t26_flaeche_wagen [fillcolor="#d9d9a0" label=<<b>K</b>  Wie knapp war's?<br/><font point-size="9">Filialleiterin Yıldız · Supermarkt · 100 €</font>>];
+  t27_steigung_blitz [fillcolor="#a0d9d0" label=<<b>L</b>  Der rote Blitz am Abend<br/><font point-size="9">Frau Brösel · Lindenstraße · 70 €</font>>];
+  t28_steigung_ralf [fillcolor="#a0d9d0" label=<<b>L</b>  Ralfs positive Rückwärtsrechnung<br/><font point-size="9">Ralf · Rathaus · 80 €</font>>];
+  t29_steigung_bus [fillcolor="#a0d9d0" label=<<b>L</b>  Bremst Ötzi zu scharf?<br/><font point-size="9">Busfahrer Ötzi · Busbahnhof · 90 €</font>>];
   t01_sportwagen -> t02_kevin;
   t02_kevin -> t03_bus;
   t01_sportwagen -> t04_brezel;
@@ -53,4 +59,10 @@ digraph Q {
   t02_kevin -> t21_reaktion_rad;
   t21_reaktion_rad -> t22_reaktion_auto;
   t15_live_brezel -> t23_freihand_brezel;
+  t07_skater -> t24_flaeche_jo;
+  t09_tacho -> t25_flaeche_kevin;
+  t08_einkaufswagen -> t26_flaeche_wagen;
+  t01_sportwagen -> t27_steigung_blitz;
+  t12_ralf_brezel -> t28_steigung_ralf;
+  t10_ampelkamera -> t29_steigung_bus;
 }

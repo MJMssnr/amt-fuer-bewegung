@@ -161,3 +161,20 @@ test('Freihand: Begradigung und Vergleich', async () => {
   assert.ok(!r.ok && r.first.t < 0.2 && r.first.dy > 0);
   assert.equal(compareLine(line.filter(([t]) => t < 5), truth, { tEnd: 7, tolY: 1 }).missing, 'end');
 });
+
+test('Flächen-Puzzle: Zerlegung und Summe = Δx', async () => {
+  const { areaPieces, segmentSlope } = await import('../js/engine/geometry.js');
+  const { buildActor } = await import('../js/engine/kinematics.js');
+  const jo = buildActor({ id: 'jo', x0: 0, segments: [{ dt: 4, a: 1 }, { dt: 3, v: 4 }, { dt: 2, a: -2 }] });
+  const P = areaPieces(jo);
+  assert.deepEqual(P.map((p) => p.kind), ['tri', 'rect', 'tri']);
+  assert.deepEqual(P.map((p) => p.area), [8, 12, 4]);
+  const cart = buildActor({ id: 'c', x0: 12, segments: [{ dt: 4, a: -0.5 }, { dt: 3, v: -2 }, { dt: 1, a: 2 }] });
+  near(areaPieces(cart).reduce((s, p) => s + p.area, 0), -11);
+  // Trapez → Rechteck + Dreieck; Vorzeichenwechsel → zwei Dreiecke
+  const tr = buildActor({ id: 't', segments: [{ dt: 2, v0: 2, a: 1 }, { dt: 4, a: -2 }] });
+  const Q = areaPieces(tr);
+  assert.deepEqual(Q.map((p) => p.kind), ['rect', 'tri', 'tri', 'tri']);
+  near(Q.reduce((s, p) => s + p.area, 0), 6 + 4 - 4);
+  assert.equal(segmentSlope(buildActor({ id: 'd', segments: [{ dt: 4, v: 3 }, { dt: 3, v: -2 }] }), 'x', 1).slope, -2);
+});

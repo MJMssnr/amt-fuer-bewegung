@@ -1,0 +1,8 @@
+{
+  "id": "sportwagen-abend",
+  "title": "Der rote Sportwagen am Abend",
+  "actors": [
+    { "id": "car", "name": "Roter Sportwagen", "sprite": "car_red", "x0": 0,
+      "segments": [ { "dt": 6, "v": 15 } ] }
+  ]
+}
