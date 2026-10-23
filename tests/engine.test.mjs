@@ -245,9 +245,11 @@ test('Pakete: wachsende Abstände, letztes nur bei allen Aufträgen und 80 %', a
   const parts = ['a', 'b', 'c', 'd', 'e', 'f'].map((id) => ({ id })).concat([{ id: 'last', last: true }]);
   const st = { seed: 42, done: {}, grades: {} };
   const finish = (n, g = 'perfect') => { for (let i = 0; i < n; i++) { st.done[`t${i}`] = true; st.grades[`t${i}`] = g; } };
-  finish(2); assert.equal(P.deliverDue(st, tickets, parts), 0);
-  finish(3); assert.equal(P.deliverDue(st, tickets, parts), 1);
-  finish(38); assert.equal(P.deliverDue(st, tickets, parts), 5); assert.equal(st.pkg.sent, 6);
+  const T = P.THRESHOLDS;
+  finish(T[0] - 1); assert.equal(P.deliverDue(st, tickets, parts), 0);
+  finish(T[0]); assert.equal(P.deliverDue(st, tickets, parts), 1);
+  finish(T[5]); assert.equal(P.deliverDue(st, tickets, parts), 5); assert.equal(st.pkg.sent, 6);
+  for (let i = 2; i < T.length; i++) assert.ok(T[i] - T[i - 1] >= T[i - 1] - T[i - 2], 'Abstände wachsen');
   assert.ok(!st.pkg.waiting.includes('last'));
   finish(50, 'fail'); for (let i = 0; i < 39; i++) st.grades[`t${i}`] = 'partial';
   assert.equal(P.deliverDue(st, tickets, parts), 0, '39/50 = 78 % reicht nicht');
