@@ -5,6 +5,7 @@ import { Painter } from '../render/painter.js';
 import { getSprite } from '../render/pixel.js';
 import { ROOM, SLOTS, DRAW, drawRoomBase, emptySlot } from '../render/room-art.js';
 import { showDialog, toast } from './dialog.js';
+import { deliver, stepDelivery, drawDelivery } from './delivery.js';
 
 const FLOOR_Y = 186; // Fußlinie, auf der Florian im Zimmer läuft
 
@@ -44,6 +45,7 @@ export class Room {
       const d = this.flo.target - this.flo.x;
       if (Math.abs(d) > 0.5) { this.flo.x += Math.sign(d) * Math.min(Math.abs(d), 70 * dt); this.flo.flip = d < 0; this.flo.walking = true; }
       else this.flo.walking = false;
+      stepDelivery(this, dt);
       this.draw();
       requestAnimationFrame(loop);
     };
@@ -78,12 +80,14 @@ export class Room {
     for (const it of this.shop.items) {
       const s = SLOTS[it.id];
       if (!s) continue;
-      const owned = this.state.items[it.id];
+      const owned = this.state.items[it.id] && this.pending !== it.id;
       // Wand-Gegenstände und Teppich zuerst, sonst nach Unterkante sortiert
       const z = it.id === 'teppich' ? -1 : ['neon', 'rennrad'].includes(it.id) ? -2 : s.y + s.h;
       items.push({ z, draw: () => (owned ? DRAW[it.id](P, this.t) : emptySlot(P, s)) });
     }
-    items.push({ z: 198, draw: () => DRAW.kiste(P, this.t, this.partsOwned, this.partsTotal) });
+    const inCrate = this.partsOwned - (this.shop.rocketParts.some((p) => p.id === this.pending) ? 1 : 0);
+    items.push({ z: 198, draw: () => DRAW.kiste(P, this.t, inCrate, this.partsTotal) });
+    items.push({ z: FLOOR_Y + 0.5, draw: () => drawDelivery(P, this, FLOOR_Y) });
     items.push({ z: 197, draw: () => DRAW.luke(P, this.t) });
     items.push({ z: FLOOR_Y, draw: () => this.#florian(P) });
     items.sort((a, b) => a.z - b.z).forEach((i) => i.draw());
@@ -181,11 +185,11 @@ export class Room {
     this.#header();
     toast(`−${it.price} €  ${it.name}`, 'money');
     if (window.matchMedia('(max-width: 900px)').matches) this.#toggleShop(false);
+    const tx = item ? SLOTS[id].x + SLOTS[id].w / 2 : SLOTS.kiste.x + 30;
+    await deliver(this, { id, name: it.name, tx, isPart: !item, walkTo: (x) => this.#walkTo(x), texts: this.shop.delivery });
     if (item) {
-      await this.#walkTo(SLOTS[id].x + SLOTS[id].w / 2);
       await showDialog([['florian', `Geliefert: ${item.name}!`]]);
     } else {
-      await this.#walkTo(SLOTS.kiste.x + 48);
       const lines = this.shop.partBought;
       await showDialog([lines[Math.min(this.partsOwned - 1, lines.length - 1)]]);
       if (this.partsOwned >= this.partsTotal) await showDialog([['florian', 'Ich sollte mir die Kiste mal genauer ansehen.']]);

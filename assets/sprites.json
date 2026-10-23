@@ -1035,6 +1035,90 @@
     "y": "#f4f4f4"
    }
   },
+  "postbote": {
+   "w": 10,
+   "h": 16,
+   "fps": 6,
+   "turns": true,
+   "palette": {
+    "Y": "#f7c815",
+    "Z": "#c9960c"
+   },
+   "frames": [
+    [
+     "...YYYY...",
+     "..YYYYYYk.",
+     "..hsssss..",
+     "..sssks...",
+     "...ssSs...",
+     "....ss....",
+     "...YYYY...",
+     "..YhYYYY..",
+     "..YYhYYY..",
+     "..YZhhZs..",
+     "...BBBB...",
+     "...BBBB...",
+     "...BB.BB..",
+     "...B...B..",
+     "...B...B..",
+     "..kk..kk.."
+    ],
+    [
+     "...YYYY...",
+     "..YYYYYYk.",
+     "..hsssss..",
+     "..sssks...",
+     "...ssSs...",
+     "....ss....",
+     "...YYYY...",
+     "..YhYYYY..",
+     "..YYhYYY..",
+     "..YZhhZs..",
+     "...BBBB...",
+     "...BBBB...",
+     "...BB.BB..",
+     "..B....B..",
+     ".B.....B..",
+     "kk....kk.."
+    ],
+    [
+     "...YYYY...",
+     "..YYYYYYk.",
+     "..hsssss..",
+     "..sssks...",
+     "...ssSs...",
+     "....ss....",
+     "...YYYY...",
+     "..YhYYYY..",
+     "..YYhYYY..",
+     "..YZhhZs..",
+     "...BBBB...",
+     "...BBBB...",
+     "...BB.BB..",
+     "...B...B..",
+     "...B...B..",
+     "..kk..kk.."
+    ],
+    [
+     "...YYYY...",
+     "..YYYYYYk.",
+     "..hsssss..",
+     "..sssks...",
+     "...ssSs...",
+     "....ss....",
+     "...YYYY...",
+     "..YhYYYY..",
+     "..YYhYYY..",
+     "..YZhhZs..",
+     "...BBBB...",
+     "...BBBB...",
+     "...BB.BB..",
+     "...B....B.",
+     "...B.....B",
+     "..kk....kk"
+    ]
+   ]
+  },
   "ralf": {
    "w": 10,
    "h": 16,

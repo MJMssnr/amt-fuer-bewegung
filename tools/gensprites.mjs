@@ -169,11 +169,25 @@ const cart = {
   ]],
 };
 
+// Postbote: gelbe Uniform, Mütze mit Schirm, Posttasche (Y/Z = Postgelb)
+const postTop = [
+  '...YYYY...', '..YYYYYYk.', '..hsssss..', '..sssks...', '...ssSs...', '....ss....',
+  '...YYYY...', '..YhYYYY..', '..YYhYYY..', '..YZhhZs..', '...BBBB...', '...BBBB...',
+];
+const postbote = {
+  w: 10, h: 16, fps: 6, turns: true, palette: { Y: '#f7c815', Z: '#c9960c' },
+  frames: [
+    [...postTop, '...BB.BB..', '...B...B..', '...B...B..', '..kk..kk..'],
+    [...postTop, '...BB.BB..', '..B....B..', '.B.....B..', 'kk....kk..'],
+    [...postTop, '...BB.BB..', '...B...B..', '...B...B..', '..kk..kk..'],
+    [...postTop, '...BB.BB..', '...B....B.', '...B.....B', '..kk....kk'],
+  ],
+};
 const sprites = {
   palette,
   sprites: {
     florian, florian_down, florian_up, florian_side, car_red: car, cyclist, cyclist_b, kevin, broesel, dog,
-    bus, oetzi, kranz, baecker, filiale, skater, jo, cart, florian_note, florian_photo, oma_rollator, sled, ohm: { ...kranz, palette: { r: '#c2a56b', p: '#257179', y: '#f4f4f4' } }, ralf: { ...oetzi, palette: { b: '#e43b44', B: '#ffcd75', d: '#3b5dc9' } },
+    bus, oetzi, kranz, baecker, filiale, skater, jo, cart, florian_note, florian_photo, oma_rollator, sled, ohm: { ...kranz, palette: { r: '#c2a56b', p: '#257179', y: '#f4f4f4' } }, postbote, ralf: { ...oetzi, palette: { b: '#e43b44', B: '#ffcd75', d: '#3b5dc9' } },
   },
 };
 for (const [name, sp] of Object.entries(sprites.sprites))

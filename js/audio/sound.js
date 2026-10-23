@@ -54,6 +54,7 @@ export const VOICES = {
   florian: { f0: 150, wave: 'sawtooth', fScale: 1.0, dur: 0.07, vib: 0, gain: 0.5, speed: 1 },
   frau_mittel: { f0: 215, wave: 'sawtooth', fScale: 1.12, dur: 0.075, vib: 0, gain: 0.45, speed: 1 },
   frau_alt: { f0: 245, wave: 'triangle', fScale: 1.08, dur: 0.09, vib: 7, gain: 0.6, speed: 0.8 },
+  mann_duenn: { f0: 132, wave: 'triangle', fScale: 1.04, dur: 0.06, vib: 0, gain: 0.6, speed: 1.12 },
   mann_kraeftig: { f0: 98, wave: 'sawtooth', fScale: 0.88, dur: 0.085, vib: 0, gain: 0.55, speed: 0.92 },
 };
 export const voiceSpeed = (v) => VOICES[v]?.speed ?? 1;

@@ -58,6 +58,11 @@
       "name": "Frau Dr. Ohm, Physiklehrerin",
       "sprite": "ohm",
       "voice": "frau_mittel"
+    },
+    "post": {
+      "name": "Paul Paket",
+      "sprite": "postbote",
+      "voice": "mann_duenn"
     }
   },
   "intro": [
