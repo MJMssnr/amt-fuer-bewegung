@@ -1,6 +1,6 @@
 # Playtest-Stand (Feedback von Herrn Messner)
 
-> Stand: 23.10.2026, Sitzung 3 (Playtest-Runde 2 eingearbeitet, W29). Nach jedem Playtest hier nachtragen (Einstufung → auch `difficulty` im Ticket).
+> Stand: 23.10.2026, Sitzung 3 (Playtest-Runde 2 eingearbeitet, W29; Liste für Runde 3: W33). Nach jedem Playtest hier nachtragen (Einstufung → auch `difficulty` im Ticket).
 > „schwer“ bei t41, t43, t44, t48, t50, t51, t53 hat Claude gesetzt – noch zu bestätigen. „mittel schwer“ von Herrn Messner als „mittel“ (= mittelschwer) eingetragen.
 
 ## Mit Feedback und Einstufung
@@ -56,15 +56,52 @@
 - Kevin im Blitzlicht (M): Polizist nur Text, kein Bild → Cache/Safari-Fix, **erneut prüfen** [W25]
 - Stroboskop bauen (O) allgemein: Skala fehlte → Maßband + Hilfslinien [W25]
 
-## Noch ohne Feedback (gezielt testen)
-- F: Kevins Express-Lieferung (t17, Eckpunkte), t44 (schwer, Eckpunkte) – t16 Oma Gerda gestrichen [W32]
-- K: Wie lang ist mein Run?
-- D: Der Imagefilm (Testauftrag; danach 2 weitere D-Aufträge bauen)
-- schwer: t43, t48, t50, t53 (neu) und t45 (nochmal)
-- neue Typen S t63, t64 · T t65, t66 · neue Schauplätze Polizeirevier, Hobbywerkstatt [W32]
-- neue Typen [W30, W31]: P t54, t55, t60 (schwer) · Q t56, t57, t61 (schwer) · R t58, t59, t62 (schwer)
-- Gültige-Ziffern-Polizei: Lob nach ≥ 2 Verwarnungen
-- Systeme: Pakete/Kiste, Bärti, Rennrad/Motorrad auf der Karte, Finale am Bauplatz, Auftragsbuch-Animation, Weiter-Tippen nach dem Lösen
+## Playtest-Runde 3 (Stand W33)
+**Neu (noch nie gespielt)**
+| Auftrag | Typ | Was prüfen |
+|---|---|---|
+| t69 Erstes Übungsblatt: Steil, flach, fallend | R | kommt nach ~4 Aufträgen? Linien ziehen am Handy |
+| t58 Übungsblatt: Wer gehört zu wem? | R | |
+| t70 Übungsblatt: Losfahren, fahren, bremsen | R | |
+| t59 Übungsblatt: Drei Kurven | R | |
+| t62 Klausur-Vorbereitung: Umkehrpunkte | R | schwer |
+| t54 Wie lang ist meine Route? | P | Whisker ziehen, ▲/▼ |
+| t55 Wie genau ist mein Blitz? | P | Toleranz ±0,1 m/s okay? |
+| t60 Kevins Sprint-Messung | P | schwer |
+| t56 Das neue E-Auto | Q | |
+| t71 Hildes Modellflieger | Q | Mittelteil, zeitunabhängige Gleichung |
+| t57 Wie tief ist der Wunschbrunnen? | Q | Fall-Animation |
+| t61 Ötzi gibt Gas | Q | schwer |
+| t63 „Ich war nicht zu schnell!“ | S | Marken A/B ziehen, Polizeirevier |
+| t64 Regen vor der Schule | S | Straßenzustand erkennbar? |
+| t67 Glatteis in der Wohnstraße | S | schwer, v₁ ≠ 0 |
+| t65 Die Oma-Gerda-Marionette | T | Korridor 90 % fair? Hobbywerkstatt |
+| t66 Brezel, der Marionetten-Hund | T | Linkskurve mit dem Finger |
+| t68 Jo, die Marionetten-Skaterin | T | schwer |
+| t53 Bergab, flach, bergauf | O | neu gebaut (war zu leicht) |
+
+**Geändert – bitte nochmal**
+| Auftrag | Typ | Was geändert |
+|---|---|---|
+| t10 Die nasse Ampelkamera | C | Hinweis neu |
+| t17 Kevins Express-Lieferung, t44 Pauls Zustellrunde | F | nur Eckpunkte, 🐢 halbe Zeit |
+| t20 Hausaufgabe: Die Falle | I | Hinweis „Startwert“, Text „Neue Hausaufgabe“ |
+| t23 Brezels Tagebuch, t47 Kevin ohne Video | B | Toleranz ±1,5 cm |
+| t35 Blitz in der 30er-Zone | M | durchgehender Maßstab, jetzt im Revier |
+| t37 Kevin bremst | O | Fahrrad-Abbilder |
+| t38 Das Pendel | O | kleiner, jetzt in der Werkstatt |
+| t40 Die Paket-Jagd | H | Hinweis |
+| t41 Jo in der Halfpipe | G | Diagramm größer, Hinweis kurz |
+| t51 Der Wurf nach oben | N | Zusammenhang rechts über den Antworten |
+| t52 Die schräge Rinne | M | Zeitintervall im Hinweis |
+| t45 Hausaufgabe: Die Wende | I | **Herr Messner wollte nochmal prüfen** |
+| t46 Landstraße bei Regen | J | jetzt im Revier, Polizist statt Frau Ohm |
+
+**Noch nie gespielt (alt)**: t24 Wie lang ist mein Run? (K), t30 Der Imagefilm (D), t43 Ralfs krumme Kurve (E, schwer), t48 Hin, um und zurück (K, schwer), t50 Die Verfolgungsjagd (D, schwer).
+
+**Nur Texte/Ort geändert (kurz drüberschauen)**: t12, t13, t14, t28 (Ralf unterwegs), t32, t33, t36 (Slavi unterwegs).
+
+**Systeme**: Karte (Ortsnamen erst in der Nähe, Radler, plaudernde Fußgänger, Wolken, Windräder), Polizei-Lob nach 2 Verwarnungen, Pakete (neue Abstände 4/10/17/26/37/50), Finale (Bauschritte tippen, Bärti, kürzere Stadt), Wiederholungsflug am Bauplatz, ±-Knopf, Scroll-Pfeile.
 
 ## So testet man schnell
 Testmodus (20× Oma im Startbildschirm, „amtstest“ tippen oder `?amtstest=1`) → 📖: ▶ starten, ✔/◐/✘ setzen, ↺ zurücksetzen, +100 €, „alle abhaken“ (löst alle Pakete aus) → Baumhaus (auspacken) → Bauplatz (Finale).

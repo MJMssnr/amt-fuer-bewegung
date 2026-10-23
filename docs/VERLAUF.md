@@ -43,7 +43,8 @@ Hinweis: Sitzung 1 wurde nachträglich aus einer Zusammenfassung des Chats rekon
 | W30 | Drei neue Typen: **P Fehlerbalken** (Größt-/Kleinstwert mit verschiebbaren Whiskern, keine g.Z.; t54 Strecken addieren, t55 v_max/v_min), **Q Bewegungsformel** (umstellen, ausrechnen; t56 E-Auto, t57 Brunnen mit Startwert), **R Verbinden** (3 t-x ↔ 3 t-vₓ per Fingerlinie; t58, t59). t53 schwerer (bergab, flach, bergauf). Ab jetzt per Du | 22983a0, 1c3e2ce, 230882c, (dieser Commit) |
 | W31 | Schwere Abschluss-Aufträge auch für P, Q, R: t60 Kevins Sprint (a = 2s/t², t im Quadrat), t61 Ötzi gibt Gas (x = v₀t + ½at² nach a), t62 Umkehrpunkte (R). Ideen für zwei weitere Typen gewünscht: Rechnen mit der zeitunabhängigen Gleichung + etwas Kreatives | (dieser Commit) |
 | W32 | **S Unfallgutachten** (Bremsspur, v₁² − v₀² = 2·a·Δx; t63 leicht, t64 mittel). **T Puppenspieler** statt eines F-Auftrags (t16 raus; t65 Oma-Gerda-Marionette, t66 Brezel). Neue Schauplätze **Polizeirevier** (weit links, weg von Baumhaus/Rathaus) und **Hobbywerkstatt** (Hilde) | 665f460, 490000c, (dieser Commit) |
+| W33 | Slavi-/Ralf-Aufträge auf andere Orte verteilt, schwere S (t67) und T (t68), Pakete neu verteilt, Karte: Ortsnamen erst in der Nähe, Radler, plaudernde Fußgänger, Wolken, Windräder, Solar. Finale: Bauschritte per Tippen, Bärti fliegt mit, weniger Stadt-Text, Rakete bleibt + Wiederholungsflug. Zwei frühe R-Aufträge (t69, t70), Q-Auftrag im Mittelteil (t71). Playtest-Liste | W33-Commits bis e3fae3d, (dieser Commit) |
 
 **Stand Ende Sitzung 2:** 53 Aufträge (A–O, je ein schwerer), 4950 € verdienbar, Shop 23 Gegenstände für 2265 €. Offen: siehe `ROADMAP.md` und `PLAYTEST.md`.
 
-**Stand Sitzung 3 (W32):** 64 Aufträge (A–T), 6100 € verdienbar.
+**Stand Sitzung 3 (W33):** 69 Aufträge (A–T), 6620 € verdienbar.

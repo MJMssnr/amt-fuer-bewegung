@@ -72,6 +72,7 @@ js/tasks/pairs.js          R: Verbinden (3 t-x ↔ 3 t-vₓ mit Fingerlinien)
 js/tasks/skid.js           S: Unfallgutachten (Bild js/render/skid.js)
 js/tasks/puppet.js         T: Puppenspieler (x mit dem Finger, Korridor)
 js/render/places2.js       Polizeirevier und Hobbywerkstatt auf der Karte
+js/ui/townlife.js          Stadtleben: Radler, plaudernde Fußgänger (Grafik: js/render/townlife-art.js: Windrad, Solar, Wolke)
 js/ui/police.js            Gültige-Ziffern-Polizist (Texte data/police.json, Regeln js/engine/sigfig.js)
 js/render/fotolabor.js     Slavis Fotolabor auf der Karte
 js/tasks/questions.js      Gemeinsamer Eingabe-/Prüfblock für H, C und Reaktionstest
@@ -83,7 +84,7 @@ js/ui/testmode.js          Testmodus: 20× Oma im Startbildschirm, „amtstest�
 js/ui/title.js, title-scene.js  Demo-Hinweis, animierter Startbildschirm
 js/ui/room.js              Baumhaus-Zimmer mit Shop und Kiste
 js/ui/delivery.js          Lieferung: Postbote Paul bringt jede Bestellung durch die Luke (Texte: shop.json → delivery)
-js/ui/finale.js            Finale am Bauplatz (Bauen, Herr Messner, Stadt, Start), Texte data/finale.json
+js/ui/finale.js            Finale am Bauplatz (Bauen per Tippen, Herr Messner, Stadt, Bärti, Start) und Wiederholungsflug (mode 'flight'), Texte data/finale.json
 js/engine/packages.js      7 rätselhafte Pakete (Schwellen, 80-%-Regel)
 js/ui/baerti.js            Waschbär Bärti im Baumhaus
 js/render/ride.js          Rennrad/Motorrad auf der Karte
