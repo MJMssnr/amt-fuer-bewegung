@@ -25,6 +25,7 @@ digraph Q {
   t20_konstrukt_wagen [fillcolor="#b6e3b0" label=<<b>I</b>  Hausaufgabe: Die Falle<br/><font point-size="9">Frau Dr. Ohm · Schule · 100 €</font>>];
   t21_reaktion_rad [fillcolor="#f0b0e0" label=<<b>J</b>  Die Schrecksekunde<br/><font point-size="9">Frau Dr. Ohm · Schule · 70 €</font>>];
   t22_reaktion_auto [fillcolor="#f0b0e0" label=<<b>J</b>  Tempo 30 vor der Schule?<br/><font point-size="9">Bürgermeisterin Kranz · Rathaus · 90 €</font>>];
+  t23_freihand_brezel [fillcolor="#f6a6b2" label=<<b>B</b>  Brezels Tagebuch<br/><font point-size="9">Bäckermeister Huber · Bäckerei · 80 €</font>>];
   t01_sportwagen -> t02_kevin;
   t02_kevin -> t03_bus;
   t01_sportwagen -> t04_brezel;
@@ -51,4 +52,5 @@ digraph Q {
   t08_einkaufswagen -> t20_konstrukt_wagen;
   t02_kevin -> t21_reaktion_rad;
   t21_reaktion_rad -> t22_reaktion_auto;
+  t15_live_brezel -> t23_freihand_brezel;
 }

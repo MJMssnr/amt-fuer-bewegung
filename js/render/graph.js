@@ -133,6 +133,15 @@ export function drawGraph(kind, pieces, opts = {}) {
   return {
     el: svg,
     tR, yR, bands,
+    /** Bildschirmkoordinaten (clientX/Y) -> Diagrammwerte [t, y] (für Freihand) */
+    toData(cx, cy) {
+      const pt = svg.createSVGPoint();
+      pt.x = cx; pt.y = cy;
+      const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+      return [tR.lo + ((p.x - M.l) / (W - M.l - M.r)) * (tR.hi - tR.lo), yR.lo + ((H - M.b - p.y) / (H - M.t - M.b)) * (yR.hi - yR.lo)];
+    },
+    /** Diagrammwerte -> SVG-Pixel (für Toleranzen in Pixeln) */
+    toPx: ([t, y]) => [X(t), Y(y)],
     /** Zusätzliche Kurve (z. B. Lösung) mit eigener CSS-Klasse */
     overlay(more, cls = 'g-overlay') {
       const g = el('g', { class: cls }, svg);

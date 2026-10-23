@@ -147,3 +147,17 @@ test('Raster: Schritte ohne 2,5; Feinraster zählbar', async () => {
   assert.equal(minorDiv(10), 5);
   assert.equal(minorDiv(0.2), 4);
 });
+
+test('Freihand: Begradigung und Vergleich', async () => {
+  const { straighten, compareLine } = await import('../js/engine/freehand.js');
+  const truth = (t) => (t <= 4 ? 3 * t : 12 - 2 * (t - 4));
+  const raw = [];
+  for (let t = 0; t <= 7; t += 0.1) raw.push([t, truth(t) + 0.1 * Math.sin(t * 7)]);
+  const line = straighten(raw, { sx: 20, sy: 10, eps: 7 });
+  assert.ok(line.length <= 5, `zu viele Knicke: ${line.length}`);
+  assert.ok(compareLine(line, truth, { tEnd: 7, tolY: 1 }).ok);
+  const off = line.map(([t, y]) => [t, y + 2]);
+  const r = compareLine(off, truth, { tEnd: 7, tolY: 1 });
+  assert.ok(!r.ok && r.first.t < 0.2 && r.first.dy > 0);
+  assert.equal(compareLine(line.filter(([t]) => t < 5), truth, { tEnd: 7, tolY: 1 }).missing, 'end');
+});

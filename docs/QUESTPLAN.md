@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 22, verdienbar: 1730 €.
+Anzahl Aufträge: 23, verdienbar: 1810 €.
 
 ```mermaid
 flowchart LR
@@ -31,6 +31,7 @@ flowchart LR
   t20_konstrukt_wagen["<b>I</b> Hausaufgabe: Die Falle<br/><small>Frau Dr. Ohm · Schule · 100 €</small>"]:::tI
   t21_reaktion_rad["<b>J</b> Die Schrecksekunde<br/><small>Frau Dr. Ohm · Schule · 70 €</small>"]:::tJ
   t22_reaktion_auto["<b>J</b> Tempo 30 vor der Schule?<br/><small>Bürgermeisterin Kranz · Rathaus · 90 €</small>"]:::tJ
+  t23_freihand_brezel["<b>B</b> Brezels Tagebuch<br/><small>Bäckermeister Huber · Bäckerei · 80 €</small>"]:::tB
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -57,6 +58,7 @@ flowchart LR
   t08_einkaufswagen --> t20_konstrukt_wagen
   t02_kevin --> t21_reaktion_rad
   t21_reaktion_rad --> t22_reaktion_auto
+  t15_live_brezel --> t23_freihand_brezel
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -75,7 +77,7 @@ flowchart LR
 | Buchstabe | Typ | Aufträge |
 |---|---|---|
 | A | Zuordnen | 4 |
-| B | Freihand zeichnen | 0 |
+| B | Freihand zeichnen | 1 |
 | C | Achsen-Detektiv | 3 |
 | D | Regie | 0 |
 | E | Fehlerjagd | 3 |
@@ -112,3 +114,4 @@ flowchart LR
 | Hausaufgabe: Die Falle | I | Frau Dr. Ohm | Schule | 100 € | Hausaufgabe: Der Bus, Der Einkaufswagen |
 | Die Schrecksekunde | J | Frau Dr. Ohm | Schule | 70 € | Bremsen durch? |
 | Tempo 30 vor der Schule? | J | Bürgermeisterin Kranz | Rathaus | 90 € | Die Schrecksekunde |
+| Brezels Tagebuch | B | Bäckermeister Huber | Bäckerei | 80 € | Brezels Ersatzrunde |

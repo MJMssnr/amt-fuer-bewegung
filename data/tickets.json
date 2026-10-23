@@ -776,5 +776,32 @@
       ["florian", "Bei Tempo 50 ist der Bremsweg fast dreimal so lang wie bei Tempo 30. Denn (50/30)² ist ungefähr 2,8."],
       ["kranz", "Überzeugt! Tempo 30 vor der Schule ist beschlossen. Die Kinder werden es Ihnen danken."]
     ]
+  },
+  {
+    "id": "t23-freihand-brezel",
+    "title": "Brezels Tagebuch",
+    "from": "baecker",
+    "node": "baeckerei",
+    "requires": ["t15-live-brezel"],
+    "reward": 80,
+    "scenario": "hund-brezel",
+    "intro": [
+      ["baecker", "Herr Amt, Brezel bekommt ein Hundetagebuch. Für jeden Tag ein Diagramm, sagt meine Frau. Aber der Drucker ist kaputt."],
+      ["baecker", "Ich hab nur das Geschwindigkeitsdiagramm vom Halsband. Können Sie den Weg einfach von Hand reinzeichnen? Freihand, wie ein Künstler."],
+      ["florian", "Ein Künstler mit Taschenrechner. Ich mach's."]
+    ],
+    "task": {
+      "type": "freehand",
+      "actor": "dog",
+      "given": ["anim", "vt"],
+      "ask": "xt",
+      "tolY": 1,
+      "prompt": "Zeichne Brezels t-x-Diagramm in einem Zug von t = 0 s bis zum Ende. Beim Loslassen wird deine Linie automatisch begradigt.",
+      "paper": "Berechne zuerst die Ortswerte an den Knickstellen: Δx = vₓ · Δt in jedem Abschnitt. Trage die Punkte ins Heft ein und verbinde sie – erst dann zeichnen."
+    },
+    "success": [
+      ["florian", "Gerade hoch bis 12 m bei 4 s, Gerade zurück bis 6,0 m bei 7 s, danach waagrecht bis 9 s."],
+      ["baecker", "Das hänge ich in die Backstube. Neben das Meisterbrief-Foto."]
+    ]
   }
 ]

@@ -10,6 +10,7 @@ const LOADERS = {
   live: () => import('./live.js'),             // F: Live-Steuerung
   construct: () => import('./construct.js'),   // Konstrukteur: Diagramm selbst bauen
   reaction: () => import('./reaction.js'),     // Reaktionstest -> eigener Anhalteweg
+  freehand: () => import('./freehand.js'),     // B: Freihand mit Auto-Begradigung
 };
 
 export async function loadTask(type) {
