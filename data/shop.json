@@ -59,7 +59,7 @@
       "id": "rennrad",
       "name": "Rennrad an der Wand",
       "price": 120,
-      "text": "Leicht, schnell, rot. Kevin wird neidisch sein."
+      "text": "Mein Rennrad an der Wand. Auf der Karte kann ich jetzt oben mit 🚲 aufs Rad umsteigen – damit bin ich viel schneller bei den Aufträgen."
     },
     {
       "id": "teleskop",
@@ -78,7 +78,17 @@
       "name": "Kleiner Whirlpool",
       "price": 180,
       "text": "Blubb. Die Blasen steigen, Florian entspannt. Rechnen kann man auch später noch."
-    }
+    },
+    {"id": "pflanze3", "name": "Ampelpflanze", "price": 40, "text": "Hängt vom Dachbalken und wächst langsam nach unten. Gleichmäßig verzögert, würde ich sagen."},
+    {"id": "bild", "name": "Bild „Mitarbeiter des Monats“", "price": 45, "text": "Mitarbeiter des Monats: ich. Wer sonst? Ich bin auch der einzige Mitarbeiter."},
+    {"id": "pflanze1", "name": "Monstera im Topf", "price": 55, "text": "Große Blätter mit Löchern. Wie ein Stroboskopbild aus Grün."},
+    {"id": "schach", "name": "Edles Schachbrett", "price": 75, "text": "Der Läufer bewegt sich nur diagonal. Zweidimensional! Ich glaube, das ist ein Hinweis."},
+    {"id": "vitrine", "name": "Vitrine mit alten Rechenmaschinen", "price": 85, "text": "Mechanische Rechenmaschinen von 1937. Kurbeln statt Akku. Und sie rechnen trotzdem richtig."},
+    {"id": "pflanze2", "name": "Große Bananenstaude", "price": 90, "text": "Riesige Blätter, fast bis zur Decke. Bananen gibt es keine, aber Dschungel-Gefühl gratis."},
+    {"id": "discokugel", "name": "Discokugel mit Licht", "price": 95, "text": "Hunderte kleine Spiegel. Und jeder Lichtpunkt bewegt sich auf einer Kreisbahn. Herrlich."},
+    {"id": "couch", "name": "Bequeme Schlafcouch", "price": 140, "text": "Hier wird nach einem langen Amtstag geschlafen. Oder gerechnet. Meistens geschlafen."},
+    {"id": "waschbaer", "name": "Bärti, ein zahmer Waschbär", "price": 160, "text": "Bärti! Er wohnt jetzt hier. Tipp ihn an – dann kommt er kuscheln."},
+    {"id": "motorrad", "name": "Rotes Rennmotorrad", "price": 260, "requires": "rennrad", "text": "Mein Helm. Das Rennmotorrad steht unten am Baum. Auf der Karte kann ich jetzt damit zu den Aufträgen fahren!"}
   ],
   "rocketParts": [
     { "id": "rt_duese", "name": "Düse, gebraucht", "note": "Wer nach oben will, muss nach unten drücken. – M." },

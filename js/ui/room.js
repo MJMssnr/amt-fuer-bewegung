@@ -7,6 +7,7 @@ import { getSprite } from '../render/pixel.js';
 import { ROOM, SLOTS, DRAW, drawRoomBase, emptySlot } from '../render/room-art.js';
 import { showDialog, toast } from './dialog.js';
 import { deliver, stepDelivery, drawDelivery } from './delivery.js';
+import { Baerti } from './baerti.js';
 
 /** Paket ohne Absender: braun, mit großem „M.“ */
 function mysteryParcel(P, x, y, t) {
@@ -57,6 +58,10 @@ export class Room {
       if (Math.abs(d) > 0.5) { this.flo.x += Math.sign(d) * Math.min(Math.abs(d), 70 * dt); this.flo.flip = d < 0; this.flo.walking = true; }
       else this.flo.walking = false;
       stepDelivery(this, dt);
+      if (this.state.items.waschbaer && this.pending !== 'waschbaer') {
+        this.baerti ??= new Baerti(FLOOR_Y);
+        this.baerti.step(dt, Object.keys(this.state.items).filter((k) => this.state.items[k]));
+      }
       this.draw();
       requestAnimationFrame(loop);
     };
@@ -94,7 +99,7 @@ export class Room {
       if (!s) continue;
       const owned = this.state.items[it.id] && this.pending !== it.id;
       // Wand-Gegenstände und Teppich zuerst, sonst nach Unterkante sortiert
-      const z = it.id === 'teppich' ? -1 : ['neon', 'rennrad'].includes(it.id) ? -2 : s.y + s.h;
+      const z = it.id === 'teppich' ? -1 : ['neon', 'rennrad', 'bild', 'pflanze3', 'motorrad'].includes(it.id) ? -2 : it.id === 'discokugel' ? 300 : s.y + s.h;
       items.push({ z, draw: () => (owned ? DRAW[it.id](P, this.t) : emptySlot(P, s)) });
     }
     items.push({ z: 198, draw: () => DRAW.kiste(P, this.t, this.partsOwned, this.partsTotal) });
@@ -103,6 +108,7 @@ export class Room {
     items.push({ z: FLOOR_Y + 0.5, draw: () => drawDelivery(P, this, FLOOR_Y) });
     items.push({ z: 197, draw: () => DRAW.luke(P, this.t) });
     items.push({ z: FLOOR_Y, draw: () => this.#florian(P) });
+    if (this.baerti && this.state.items.waschbaer && this.pending !== 'waschbaer') items.push({ z: FLOOR_Y + 1, draw: () => this.baerti.draw(P) });
     items.sort((a, b) => a.z - b.z).forEach((i) => i.draw());
   }
 
@@ -114,7 +120,7 @@ export class Room {
   }
 
   async #walkTo(x) {
-    this.flo.target = Math.max(20, Math.min(340, x));
+    this.flo.target = Math.max(20, Math.min(460, x));
     await new Promise((r) => {
       const check = () => (Math.abs(this.flo.target - this.flo.x) < 1 || !this.running ? r() : setTimeout(check, 50));
       check();
@@ -126,6 +132,8 @@ export class Room {
     const r = this.c.getBoundingClientRect();
     const x = ((e.clientX - r.left) * this.dpr - this.ox) / this.s;
     const y = ((e.clientY - r.top) * this.dpr - this.oy) / this.s;
+    // Bärti antippen: kuscheln! [W26]
+    if (this.baerti?.hit(x, y)) { this.baerti.cuddle(this.flo); this.flo.target = this.flo.x; return; }
     const hit = Object.entries(SLOTS)
       .filter(([, s]) => x >= s.x && x <= s.x + s.w && y >= s.y && y <= s.y + s.h)
       .sort((a, b) => a[1].w * a[1].h - b[1].w * b[1].h)[0];

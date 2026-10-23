@@ -40,7 +40,7 @@ export async function deliver(room, { id, name, tx, isPart, walkTo, texts }) {
   sfx('ok'); // Klingeln
   await until(room, () => room.post.rise <= 0.001);
   // Florian geht zur Seite, Paul trägt das Paket zum Platz
-  const fx = tx + 30 <= 340 ? tx + 30 : tx - 30;
+  const fx = tx + 30 <= 460 ? tx + 30 : tx - 30;
   room.post.tx = tx;
   await Promise.all([walkTo(fx), until(room, () => !room.post.walking && Math.abs(room.post.tx - room.post.x) < 1)]);
   room.flo.flip = fx > tx;

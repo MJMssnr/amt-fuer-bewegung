@@ -2,8 +2,9 @@
 // SLOTS[id] = { x, y, w, h } (Klickfläche) und eine Zeichenfunktion in DRAW[id].
 
 import { C } from './town.js';
+import { SLOTS2, DRAW2 } from './room-art2.js';
 
-export const ROOM = { W: 360, H: 200, FLOOR: 128 };
+export const ROOM = { W: 480, H: 200, FLOOR: 128 }; // seit W26 mit Anbau rechts (x 360–480)
 const ink = '#1a1c2c';
 
 export const SLOTS = {
@@ -22,6 +23,7 @@ export const SLOTS = {
   whirlpool:   { x: 14,  y: 160, w: 70, h: 34 },
   kiste:       { x: 136, y: 178, w: 30, h: 20 },
   luke:        { x: 214, y: 184, w: 34, h: 14 },
+  ...SLOTS2,
 };
 
 export function drawRoomBase(P, t) {
@@ -193,3 +195,5 @@ export const DRAW = {
     P.text('↓ Karte', x + 17, y - 6, 4.6, { color: '#fff7e0', bg: 'rgba(26,28,44,0.6)', minPx: 10, dpr: P.dpr });
   },
 };
+
+Object.assign(DRAW, DRAW2);

@@ -203,6 +203,20 @@ const fallschirm = {
   ]],
 };
 
+// Bärti, der Waschbär [W26]: 22×14, Seitenansicht nach rechts. Buschiger Ringelschwanz, große Glanzaugen,
+// rosa Bäckchen. G Fell, F hellgrau, D Maske/Ringe, P rosa.
+const bBody = ['..kk..........kk...kk.', '.kGGk........kFDk.kDFk', 'kDDDDk.......kGGGGGGGk', 'kGGGGk.......GDDDFDDDG', 'kDDDDk...kkkkDkwkFkwkD', '.kGGGk.kkGGGGDkkkFkkkD', '..kDDkkGGGGGGGPDFFFDPG', '...kGGGGGGGGG.GFFkFFG.', '....kGGGGGGGGGGFFFFG..', '....kGFFFFFGGGGGk.....', '.....kFFFFFGGGk.......', '.....kGGkkGGkk........'];
+const bBlink = ['..kk..........kk...kk.', '.kGGk........kFDk.kDFk', 'kDDDDk.......kGGGGGGGk', 'kGGGGk.......GDDDFDDDG', 'kDDDDk...kkkkDDkDFDkDD', '.kGGGk.kkGGGGDDDDFDDDD', '..kDDkkGGGGGGGPDFFFDPG', '...kGGGGGGGGG.GFFkFFG.', '....kGGGGGGGGGGFFFFG..', '....kGFFFFFGGGGGk.....', '.....kFFFFFGGGk.......', '.....kGGkkGGkk........'];
+const baerti = {
+  w: 22, h: 14, fps: 8, turns: true, palette: { G: '#8f93a3', F: '#e4e6ee', D: '#3e4152', P: '#f6a6b2', w: '#ffffff', k: '#1a1c2c' },
+  frames: [[...bBody, '......kD.kD..kD.kD....', '......kk.kk..kk.kk....'], [...bBody, '.....kD...kD.kD...kD..', '.....kk...kk.kk...kk..']],
+};
+// sitzend (Snack, Hängen, Kuscheln): Beine eingezogen; 2. Bild blinzelt
+const baerti_sit = {
+  w: 22, h: 14, fps: 3, turns: true, palette: baerti.palette,
+  frames: [[...bBody, '......kGGGGGGGk.......', '.......kkkkkkk........'], [...bBlink, '......kGGGGGGGk.......', '.......kkkkkkk........']],
+};
+
 // g.Z.-Polizist [W16]: blaue Uniform, Mütze mit Stern, Schnurrbart, Trillerpfeife (w). polizist_rot = wütend (roter Kopf)
 const polTop = [
   '...kkkkkk...', '..kUUUUUUk..', '..kUUyyUUk..', '.kkkkkkkkkk.', '..kssssssk..', '..kskssksk..',
@@ -223,7 +237,7 @@ const sprites = {
   sprites: {
     florian, florian_down, florian_up, florian_side, car_red: car, cyclist, cyclist_b, kevin, broesel, dog,
     bus, oetzi, kranz, baecker, filiale, skater, jo, cart, florian_note, florian_photo, oma_rollator, sled, ohm: { ...kranz, palette: { r: '#c2a56b', p: '#257179', y: '#f4f4f4' } }, postbote, ralf: { ...oetzi, palette: { b: '#e43b44', B: '#ffcd75', d: '#3b5dc9' } },
-    polizist, polizist_rot, slavi, fallschirm,
+    polizist, polizist_rot, slavi, fallschirm, baerti, baerti_sit,
   },
 };
 for (const [name, sp] of Object.entries(sprites.sprites))
