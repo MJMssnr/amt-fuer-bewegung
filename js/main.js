@@ -3,7 +3,7 @@
 import { loadSprites } from './render/pixel.js';
 import { buildWorld } from './engine/kinematics.js';
 import { Overworld } from './ui/overworld.js';
-import { showDialog, setCharacters, toast } from './ui/dialog.js';
+import { askChoice, showDialog, setCharacters, toast } from './ui/dialog.js';
 import { loadState, saveState, resetState } from './ui/state.js';
 import { showNotice, showTitle } from './ui/title.js';
 import { Room } from './ui/room.js';
@@ -238,7 +238,15 @@ async function onArrive(nodeId) {
         state.finaleDone = true;
         save();
         overworld.start();
-      } else await showDialog(state.finaleDone ? shop.packages.lotDone : shop.packages.lotEmpty);
+      } else if (state.finaleDone) { // Rakete steht wieder bereit: kurzer Flug [W33]
+        const F = finaleTexts ??= await getJSON('data/finale.json');
+        await showDialog(F.again.ask);
+        if (await askChoice(F.again.question, [F.again.yes, F.again.no])) {
+          overworld.stop();
+          await playFinale({ texts: F, baerti: Boolean(state.items.waschbaer), mode: 'flight' });
+          overworld.start();
+        }
+      } else await showDialog(shop.packages.lotEmpty);
     } else if (nodeId === 'rathaus') {
       await showDialog(story.office);
     } else {

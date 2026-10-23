@@ -2,6 +2,8 @@
 // (Schutzbrille, Schweißen, Anleitung), Herr Messner bedankt sich und befördert ihn (Teil 2: 2D),
 // die ganze Stadt kommt, Florian steigt im Raumanzug ein – Countdown, Feuer, Rauch, Start.
 // Texte: data/finale.json. Ablauf als „Regie“-Funktionen nacheinander; eine Zeichenschleife zeigt den Zustand S.
+// [W33] Bauschritte per Tippen bestätigen, Bärti kommt mit (falls gekauft), kürzere Stadt-Szene.
+// mode 'flight': kurzer Wiederholungsflug nach dem Finale (Rakete steht schon, Bärti springt vom Baum).
 
 import { Painter, hash } from '../render/painter.js';
 import { getSprite } from '../render/pixel.js';
@@ -15,7 +17,7 @@ const W = 320, H = 180, GROUND = 150, LOT = 236, HOUSE = 70;
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const ease = (u) => (u < 0 ? 0 : u > 1 ? 1 : u * u * (3 - 2 * u));
 
-export async function playFinale({ texts, baerti = false } = {}) {
+export async function playFinale({ texts, baerti = false, mode = 'full' } = {}) {
   const el = document.getElementById('finale');
   const c = el.querySelector('canvas'), ctx = c.getContext('2d');
   const panel = el.querySelector('.finale-text');
@@ -27,7 +29,7 @@ export async function playFinale({ texts, baerti = false } = {}) {
   const S = {
     t: 0, zoom: 1, cam: [W / 2, H / 2], zoomTo: 1, camTo: [W / 2, H / 2],
     stage: 0, thrust: 0, lift: 0, lights: false, caption: '', big: '', flash: 0,
-    actors: [], smoke: [], sparks: [], weld: false, book: false,
+    actors: [], smoke: [], sparks: [], weld: false, book: false, hearts: [], tap: false,
   };
   const flo = { id: 'florian', sprite: 'florian', x: HOUSE + 8, flip: false, moving: false, boxes: false, goggles: false, helmet: false, show: true };
   S.actors.push(flo);
@@ -47,6 +49,20 @@ export async function playFinale({ texts, baerti = false } = {}) {
     a.moving = false;
   };
   const camera = (zoom, cx, cy) => { S.zoomTo = zoom; S.camTo = [cx, cy]; };
+  // Weiter erst nach Tippen / Leertaste [W33]
+  const waitTap = () => new Promise((resolve) => {
+    S.tap = true;
+    const go = (e) => {
+      if (e.type === 'keydown' && e.key !== ' ' && e.key !== 'Enter') return;
+      e.preventDefault?.(); el.removeEventListener('pointerup', go); document.removeEventListener('keydown', go);
+      S.tap = false; resolve();
+    };
+    setTimeout(() => { el.addEventListener('pointerup', go); document.addEventListener('keydown', go); }, 250);
+  });
+  const arc = async (a, x1, y1, ms = 500, h = 14) => { // Sprung im Bogen
+    const x0 = a.x, y0 = a.y ?? GROUND + 2, n = Math.max(1, Math.round(ms / 16));
+    for (let i = 1; i <= n && running; i++) { const u = i / n; a.x = x0 + (x1 - x0) * u; a.y = y0 + (y1 - y0) * u - Math.sin(Math.PI * u) * h; await wait(16); }
+  };
 
   // ---------- Zeichnen ----------
   const frame = (now) => {
@@ -64,6 +80,8 @@ export async function playFinale({ texts, baerti = false } = {}) {
     stepParticles(S.smoke, dt, 5); stepParticles(S.sparks, dt);
     for (const p of S.sparks) p.vy += 120 * dt;
     S.flash = Math.max(0, S.flash - dt * 2);
+    for (const a of S.actors) if (a.carried) { a.x = a.carried.x + 3; a.y = (a.carried.y ?? GROUND + 2) - 8; a.show = a.carried.show; }
+    S.hearts = S.hearts.filter((h) => S.t - h.t0 < 1.4);
     draw(ry);
     requestAnimationFrame(frame);
   };
@@ -95,6 +113,7 @@ export async function playFinale({ texts, baerti = false } = {}) {
     }
     for (const a of S.actors) if (a.show) actor(P, a);
     drawParticles(P, S.sparks);
+    for (const h of S.hearts) { const u = (S.t - h.t0) / 1.4, hx = h.x + Math.sin(u * 6) * 2, hy = h.y - u * 18; for (const [dx, dy] of [[-1, 0], [1, 0], [-2, -1], [-1, -1], [1, -1], [2, -1], [0, 1], [-1, 1], [1, 1], [0, 2], [0, 0]]) P.px(hx + dx, hy + dy, u < 0.8 ? '#e43b44' : 'rgba(228,59,68,0.5)'); }
     if (S.book) book(P, flo.x + (flo.flip ? -9 : 9), GROUND - 10, S.t);
     if (S.weld && Math.sin(S.t * 30) > 0.3) P.blob(LOT - 4, GROUND - 10 - S.stage * 5, 5, 'rgba(200,240,255,0.7)');
     if (S.flash > 0) { ctx.fillStyle = `rgba(255,255,255,${(0.7 * S.flash).toFixed(2)})`; ctx.fillRect(0, 0, c.width, c.height); }
@@ -102,16 +121,24 @@ export async function playFinale({ texts, baerti = false } = {}) {
     const PS = new Painter(ctx, s, (c.width - W * s) / 2, (c.height - H * s) / 2); PS.dpr = dpr;
     if (S.caption) PS.text(S.caption, W / 2, 14, 6, { color: '#ffffff', bg: 'rgba(26,28,44,0.7)', pad: 3, minPx: 13, dpr });
     if (S.big) PS.text(S.big, W / 2, 70, 18, { color: '#ffcd75', bold: true, bg: 'rgba(26,28,44,0.6)', pad: 4, minPx: 26, dpr });
+    if (S.tap && Math.sin(S.t * 5) > -0.4) PS.text(T.tap ?? '▶ tippen', W - 26, H - 10, 5, { color: '#1a1c2c', bg: '#ffcd75', pad: 2, minPx: 12, dpr });
   }
 
   function actor(P, a) {
     const sp = getSprite(a.sprite);
     const f = a.moving ? Math.floor(S.t * sp.fps) % sp.frames.length : 0;
-    const k = a.scale ?? 1, w = sp.w * k, h = sp.h * k, y = (a.y ?? GROUND + 2) - h;
+    const hop = a.hop && a.moving ? Math.abs(Math.sin(S.t * 10)) * 4 : 0;
+    const k = a.scale ?? 1, w = sp.w * k, h = sp.h * k, y = (a.y ?? GROUND + 2) - h - hop;
     P.blob(a.x, (a.y ?? GROUND + 2), w * 0.4, 'rgba(20,24,40,0.25)', 1);
     P.image(sp.frames[f], a.x - w / 2, y, w, h, a.flip && sp.turns !== false);
     if (a.boxes) for (let i = 0; i < 3; i++) { P.rect(a.x - 5, y - 6 - i * 5, 10, 5, '#1a1c2c'); P.rect(a.x - 4, y - 5 - i * 5, 8, 3, '#a0622d'); }
     if (a.goggles) { P.rect(a.x - 4, y + 5, 8, 2, '#1a1c2c'); P.rect(a.x - 3, y + 5, 2, 1, '#73eff7'); P.rect(a.x + 1, y + 5, 2, 1, '#73eff7'); }
+    if (a.raccoon) { // Bärti: Keks, eigener kleiner Helm
+      const hx = a.x + (a.flip ? -1 : 1) * w * 0.27, hy = y + h * 0.35;
+      if (a.cookie) { P.blob(hx + (a.flip ? -4 : 4), hy + 3, 2, '#1a1c2c'); P.blob(hx + (a.flip ? -4 : 4), hy + 3, 1.5, '#c58b5e'); if (Math.sin(S.t * 9) > 0.6) P.px(hx + (a.flip ? -5 : 5), (a.y ?? GROUND + 2) - 1, '#e7b98a'); }
+      if (a.helmet) { P.blob(hx, hy, 5, 'rgba(168,236,255,0.45)'); P.rect(hx - 5, hy + 3, 10, 1, '#c2c7cf'); P.px(hx - 2, hy - 3, '#ffffff'); }
+      return;
+    }
     if (a.helmet) { P.blob(a.x, y + 5, 7, 'rgba(168,236,255,0.45)'); P.blob(a.x, y + 5, 7, 'rgba(255,255,255,0.0)'); P.rect(a.x - 7, y + 10, 14, 2, '#c2c7cf'); P.px(a.x - 3, y + 1, '#ffffff'); }
   }
   function book(P, x, y, t) {
@@ -121,13 +148,58 @@ export async function playFinale({ texts, baerti = false } = {}) {
   }
 
   // ---------- Regie ----------
+  // Bärti kommt mit [W33]: hüpft heran (oder springt vom Baumhaus), isst einen Keks, bekommt einen Helm,
+  // springt Florian in die Arme, die beiden kuscheln.
+  async function baertiJoins(fromTree) {
+    const b = { sprite: 'baerti', raccoon: true, hop: true, scale: 0.7, x: fromTree ? HOUSE + 10 : -14, y: fromTree ? GROUND - 34 : GROUND + 2, show: true };
+    S.actors.push(b);
+    if (fromTree) { await arc(b, HOUSE + 30, GROUND + 2, 650, 10); sfx('ok'); }
+    await walk(b, flo.x - 16, 55);
+    b.sprite = 'baerti_sit'; b.flip = false; b.hop = false;
+    b.cookie = true; await wait(2200); b.cookie = false;
+    S.flash = 0.5; b.helmet = true; sfx('coin'); await wait(600);
+    b.sprite = 'baerti'; await arc(b, flo.x, GROUND - 6, 450, 12); b.carried = flo; b.sprite = 'baerti_sit';
+    for (let i = 0; i < 8; i++) { S.hearts.push({ x: flo.x + (Math.random() - 0.5) * 10, y: GROUND - 14, t0: S.t + i * 0.12 }); }
+    await wait(1400);
+    return b;
+  }
+  async function climbAndLaunch(maxLift = 900) {
+    flo.moving = true;
+    for (let i = 0; i < 60 && running; i++) { flo.x += (LOT - flo.x) * 0.06; flo.y = GROUND + 2 - i * 0.55; await wait(16); }
+    flo.show = false; flo.moving = false;
+    camera(1, W / 2, H / 2 + 10);
+    S.lights = true;
+    for (const n of T.countdown) { S.big = n; sfx('ok'); await wait(900); }
+    S.big = ''; S.flash = 0.8; engineStart();
+    for (let i = 0; i <= 40 && running; i++) { S.thrust = Math.min(1, i / 25); engineSet(S.thrust); await wait(30); }
+    const t0 = S.t;
+    while (running && S.lift < maxLift) {
+      const tt = S.t - t0;
+      S.lift = 0.5 * 26 * tt * tt;
+      if (S.lift > 60) camera(1, W / 2, GROUND - S.lift + 40);
+      await wait(16);
+    }
+  }
+
   try {
+    if (mode === 'flight') {
+      // Kurzer Wiederholungsflug: Rakete steht schon
+      S.stage = 7; camera(1.6, (HOUSE + LOT) / 2, GROUND - 14);
+      await wait(500);
+      if (baerti) { await showDialog(T.again.baerti); await baertiJoins(true); }
+      S.flash = 0.6; flo.sprite = 'florian_suit'; flo.helmet = true; sfx('coin');
+      await showDialog(T.again.suit);
+      await climbAndLaunch(520);
+      engineStop(); S.flash = 1; await wait(500);
+      await showDialog(T.again.back);
+      return;
+    }
     // 1) Kisten raus zum Bauplatz
     camera(1, W / 2, H / 2 + 10);
     S.caption = T.carry; flo.boxes = true;
     await walk(flo, LOT - 26, 50);
     flo.boxes = false; S.caption = '';
-    // 2) Nahaufnahme: Bauen mit Schutzbrille, Schweißen, Anleitung
+    // 2) Nahaufnahme: Bauen mit Schutzbrille, Schweißen, Anleitung – jede Stufe per Tippen bestätigen [W33]
     camera(2.2, LOT - 8, GROUND - 30);
     flo.goggles = true; flo.flip = false;
     await wait(900);
@@ -135,7 +207,8 @@ export async function playFinale({ texts, baerti = false } = {}) {
       S.caption = T.steps[i];
       if (i % 3 === 1) { S.book = true; S.caption = `${T.steps[i]}  📖 ${T.reading[(i / 3) | 0] ?? ''}`; await wait(1500); S.book = false; }
       S.weld = true; sfx('ok'); await wait(1100); S.weld = false;
-      S.stage = i + 1; S.flash = 0.3; await wait(450);
+      S.stage = i + 1; S.flash = 0.3; await wait(300);
+      await waitTap();
     }
     S.caption = ''; flo.goggles = false;
     // 3) Herr Messner kommt
@@ -145,38 +218,25 @@ export async function playFinale({ texts, baerti = false } = {}) {
     await walk(mess, LOT - 54, 40);
     flo.flip = true;
     await showDialog(T.messner);
-    // 4) Die ganze Stadt eilt herbei
+    // 4) Die ganze Stadt eilt herbei (alle kommen, nur einige sprechen)
     camera(1.15, W / 2 + 10, GROUND - 8);
-    const who = T.town.map(([id]) => id);
-    const sprites = { kranz: 'kranz', post: 'postbote', broesel: 'broesel', kevin: 'kevin', oetzi: 'oetzi', baecker: 'baecker', jo: 'jo', filiale: 'filiale', ralf: 'ralf', gerda: 'oma_rollator', ohm: 'ohm', slavi: 'slavi', polizist: 'polizist' };
-    const slots = who.map((_, i) => (i < 7 ? 12 + i * 22 : 258 + (i - 7) * 11));
-    const crowd = who.map((id, i) => ({ sprite: sprites[id] ?? 'florian', x: i < 7 ? -20 - i * 14 : W + 20 + i * 10, show: true, flip: i >= 7, scale: id === 'polizist' ? 0.9 : 1 }));
+    const who = [...T.town.map(([id]) => id), ...(T.crowdExtra ?? [])];
+    const sprites = { kranz: 'kranz', post: 'postbote', broesel: 'broesel', kevin: 'kevin', oetzi: 'oetzi', baecker: 'baecker', jo: 'jo', filiale: 'filiale', ralf: 'ralf', gerda: 'oma_rollator', ohm: 'ohm', slavi: 'slavi', polizist: 'polizist', hilde: 'hilde' };
+    const half = Math.ceil(who.length / 2);
+    const slots = who.map((_, i) => (i < half ? 10 + i * 19 : 252 + (i - half) * 9));
+    const crowd = who.map((id, i) => ({ sprite: sprites[id] ?? 'florian', x: i < half ? -20 - i * 14 : W + 20 + i * 10, show: true, flip: i >= half, scale: id === 'polizist' ? 0.9 : 1 }));
     crowd.forEach((a) => S.actors.push(a));
-    if (baerti) S.actors.push({ sprite: 'baerti_sit', x: LOT - 44, show: true, scale: 0.7 });
     await Promise.all(crowd.map((a, i) => walk(a, slots[i], 70 + (i % 4) * 12)));
     crowd.forEach((a, i) => (a.flip = slots[i] > LOT));
     await showDialog(T.town);
-    // 5) Raumanzug, Helm, einsteigen
-    camera(2.4, flo.x, GROUND - 6);
+    // 5) Raumanzug, Helm, (Bärti), einsteigen
+    camera(2.4, flo.x - 8, GROUND - 6);
     await wait(700);
     S.flash = 0.6; flo.sprite = 'florian_suit'; flo.helmet = true; sfx('coin');
     await showDialog(T.suit);
-    flo.moving = true;
-    for (let i = 0; i < 60 && running; i++) { flo.x += (LOT - flo.x) * 0.06; flo.y = GROUND + 2 - i * 0.55; await wait(16); }
-    flo.show = false; flo.moving = false;
+    if (baerti) { await baertiJoins(false); await showDialog(T.baerti); }
     // 6) Countdown, Zündung, Start
-    camera(1, W / 2, H / 2 + 10);
-    S.lights = true;
-    for (const n of T.countdown) { S.big = n; sfx('ok'); await wait(900); }
-    S.big = ''; S.flash = 0.8; engineStart();
-    for (let i = 0; i <= 40 && running; i++) { S.thrust = Math.min(1, i / 25); engineSet(S.thrust); await wait(30); }
-    const t0 = S.t;
-    while (running && S.lift < 900) {
-      const tt = S.t - t0;
-      S.lift = 0.5 * 26 * tt * tt;
-      if (S.lift > 60) camera(1, W / 2, GROUND - S.lift + 40);
-      await wait(16);
-    }
+    await climbAndLaunch();
     engineStop();
     await wait(600);
     panel.classList.remove('hidden');

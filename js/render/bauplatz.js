@@ -1,7 +1,8 @@
 // Bauplatz neben dem Baumhaus [W24]: erst leer mit Schild, im Finale steht hier die rote Rakete.
-// LOT.phase: 'empty' | 'ready' (Kisten stehen bereit) | 'done' (nach dem Start: Brandfleck)
+// LOT.phase: 'empty' | 'ready' (Kisten stehen bereit) | 'done' (nach dem Finale: neue Rakete steht bereit [W33])
 
 import { shadow } from './town.js';
+import { rocket } from './vehicles.js';
 
 const ink = '#1a1c2c';
 export const LOT = { phase: 'empty' };
@@ -16,8 +17,8 @@ export function bauplatz(P, cx, by, n, t, dpr) {
   for (const px of [x - 2, x + w + 1]) { P.rect(px, y - 6, 2, h + 6, '#7d4c26'); }
   P.rect(x - 2, y - 4, w + 5, 1, '#7d4c26');
   if (LOT.phase === 'done') {
-    P.blob(cx, by - 10, 10, 'rgba(40,40,48,0.55)', 6);
-    P.blob(cx, by - 10, 5, 'rgba(20,20,26,0.6)', 3);
+    P.blob(cx - 4, by - 8, 9, 'rgba(40,40,48,0.35)', 4); // alter Brandfleck
+    rocket(P, cx - 4, by - 7, t, 0, true);              // Nachschub: die nächste rote Rakete
   }
   if (LOT.phase === 'ready') {
     for (const [dx, dy] of [[-12, -6], [0, -9], [11, -5]]) {

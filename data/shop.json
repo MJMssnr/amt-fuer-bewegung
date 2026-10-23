@@ -106,7 +106,7 @@
     "after": [["florian", "Rätselhaft. Ab in die Kiste damit."], ["florian", "Ich verstehe kein Wort. Aber es klingt wichtig. Ab in die Kiste."], ["florian", "Die Kiste füllt sich. Langsam bekomme ich eine Ahnung …"]],
     "manual": [["florian", "Eine ANLEITUNG! „Bausatz: Rakete, rot, einsitzig.“ Das ist … eine Rakete!"], ["florian", "Alle Teile sind da. Ich brauche Platz – der leere Bauplatz neben dem Baumhaus! Ich trag die Kisten raus."]],
     "lotEmpty": [["erz", "Ein leerer Bauplatz neben dem Baumhaus. Ein Schild: „Privatgelände des Amtes. Bald: Großes.“"]],
-    "lotDone": [["erz", "Hier stand einmal eine rote Rakete. Jetzt ist der Platz leer – aber jeder in der Stadt erinnert sich."]]
+    "lotDone": [["erz", "Neben dem Baumhaus steht wieder eine rote Rakete. Das Amt wird jetzt regelmäßig beliefert."]]
   },
   "crate": {
     "empty": "Florians Aufbewahrungskiste. Noch leer. Vielleicht kommt ja mal Post?",

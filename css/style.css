@@ -309,3 +309,6 @@ button { font: inherit; cursor: pointer; }
 .sound-panel input[type=range] { width: 120px; accent-color: var(--gold); }
 @media (max-height: 500px) { .sound-panel { top: 34px; font-size: 12px; } }
 .sound-panel .sp-mute { justify-content: flex-start; }
+.choice-box { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 70; background: var(--panel); padding: 14px 18px; box-shadow: 0 0 0 3px var(--ink), 0 0 0 6px #f4f4f4, 0 0 0 9px var(--ink); text-align: center; width: min(420px, 90vw); }
+.choice-box p { margin: 0 0 10px; font-size: 17px; }
+.choice-box div { display: flex; gap: 12px; justify-content: center; }

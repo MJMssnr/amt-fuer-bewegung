@@ -24,16 +24,27 @@
     ["post", "Glückwunsch! Und ehrlich gesagt bin ich froh, dass ich erst mal keine Pakete mehr den Baum hochschleppen muss."],
     ["broesel", "Erst ein roter Sportwagen, jetzt eine rote RAKETE! … Na gut. Für Sie mache ich eine Ausnahme, junger Mann."],
     ["kevin", "Chef! Die ist schneller als mein Rad. Das muss ich neidlos zugeben."],
-    ["oetzi", "Servus! Die fährt ja ganz ohne Haltestelle. Respekt!"],
-    ["baecker", "Brezel und ich backen eine Raketen-Torte. Gleichmäßig aufgegangen, versprochen!"],
     ["jo", "Krass, Amtsmensch. Das wird der krasseste Run, den diese Stadt je gesehen hat."],
-    ["filiale", "Und diesmal rollt nichts davon. Hoffe ich."],
-    ["ralf", "Ich zeichne das t-y-Diagramm vom Start! Diesmal ganz bestimmt richtig."],
     ["gerda", "Passen Sie auf sich auf, junger Mann. Und ziehen Sie sich warm an da oben!"],
     ["ohm", "Florian, Sie haben das Fach gerockt. Pardon: geraketet."],
     ["slavi", "Ich habe eine neue Kamera! Diesmal streikt sie nicht. Alle lächeln!"],
     ["polizist", "Beim Countdown bitte auf die gültigen Ziffern achten! … Ach was. Heute nicht. Viel Glück!"]
   ],
+  "crowdExtra": ["oetzi", "filiale", "ralf", "baecker", "hilde"],
+  "baerti": [
+    ["erz", "Da hüpft Bärti heran, einen Keks zwischen den Pfoten. Waschbären haben eben immer Lust auf Abenteuer."],
+    ["florian", "Bärti! Natürlich kommst du mit. Helm auf, Kleiner – wir fliegen zusammen!"]
+  ],
+  "tap": "▶ tippen",
+  "again": {
+    "ask": [["erz", "Neben dem Baumhaus steht wieder eine rote Rakete. Ein Zettel klebt dran: „Für das Amt – Nachschub folgt regelmäßig. M.“"]],
+    "question": "Florian wird für sein Amt nun regelmäßig mit Raketen versorgt. Willst du eine Runde fliegen?",
+    "yes": "🚀 Fliegen!",
+    "no": "Später",
+    "baerti": [["erz", "Bärti springt vom Baum. Er hat es schon gerochen: Abenteuer!"]],
+    "suit": [["florian", "Anzug an, Helm auf. Los geht's!"]],
+    "back": [["erz", "Ein kurzer Ausflug in die Höhe – und eine weiche Landung. Die nächste Rakete steht schon bereit."]]
+  },
   "suit": [["florian", "Raumanzug an. Helm auf. Gurt fest. Ich bin bereit!"]],
   "countdown": ["3,0", "2,0", "1,0", "ZÜNDUNG!"]
 }

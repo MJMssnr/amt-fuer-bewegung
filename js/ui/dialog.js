@@ -72,6 +72,21 @@ export function showDialog(lines) {
   });
 }
 
+/** Frage mit zwei Antworten [W33]: Rückgabe true (erste) oder false (zweite Antwort). */
+export function askChoice(question, [yes, no] = ['Ja', 'Nein']) {
+  return new Promise((resolve) => {
+    const el = document.createElement('div');
+    el.className = 'choice-box';
+    el.innerHTML = '<p></p><div><button class="btn btn-check" type="button"></button><button class="btn" type="button"></button></div>';
+    el.querySelector('p').textContent = question;
+    const [a, b] = el.querySelectorAll('button');
+    a.textContent = yes; b.textContent = no;
+    const done = (v) => { el.remove(); resolve(v); };
+    a.addEventListener('click', () => done(true)); b.addEventListener('click', () => done(false));
+    document.body.appendChild(el);
+  });
+}
+
 /** Kurze Einblendung, z. B. "+50 €". */
 export function toast(text, cls = '') {
   const t = document.createElement('div');
