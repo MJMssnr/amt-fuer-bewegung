@@ -61,7 +61,7 @@
 - K: Wie lang ist mein Run?
 - D: Der Imagefilm (Testauftrag; danach 2 weitere D-Aufträge bauen)
 - schwer: t43, t48, t50, t53 (neu) und t45 (nochmal)
-- neue Typen [W30]: P t54, t55 · Q t56, t57 · R t58, t59
+- neue Typen [W30, W31]: P t54, t55, t60 (schwer) · Q t56, t57, t61 (schwer) · R t58, t59, t62 (schwer)
 - Gültige-Ziffern-Polizei: Lob nach ≥ 2 Verwarnungen
 - Systeme: Pakete/Kiste, Bärti, Rennrad/Motorrad auf der Karte, Finale am Bauplatz, Auftragsbuch-Animation, Weiter-Tippen nach dem Lösen
 

@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 58, verdienbar: 5420 €.
+Anzahl Aufträge: 61, verdienbar: 5800 €.
 
 ```mermaid
 flowchart LR
@@ -60,13 +60,16 @@ flowchart LR
   t50_schwer_regie["<b>D</b> Die Verfolgungsjagd<br/><small>Bürgermeisterin Kranz · Rathaus · 140 €</small>"]:::tD
   t51_schwer_strobo_beschreiben["<b>N</b> Der Wurf nach oben<br/><small>Slavi · Fotolabor · 120 €</small>"]:::tN
   t52_schwer_strobo_rechnen["<b>M</b> Die schräge Rinne<br/><small>Slavi · Fotolabor · 130 €</small>"]:::tM
-  t53_schwer_strobo_bauen["<b>O</b> Gas und Bremse<br/><small>Slavi · Fotolabor · 140 €</small>"]:::tO
+  t53_schwer_strobo_bauen["<b>O</b> Bergab, flach, bergauf<br/><small>Slavi · Fotolabor · 140 €</small>"]:::tO
   t54_fehler_route["<b>P</b> Wie lang ist meine Route?<br/><small>Kevin · Radl-Eck · 80 €</small>"]:::tP
   t55_fehler_blitz["<b>P</b> Wie genau ist mein Blitz?<br/><small>Slavi · Fotolabor · 100 €</small>"]:::tP
   t56_formel_eauto["<b>Q</b> Das neue E-Auto<br/><small>Bürgermeisterin Kranz · Rathaus · 90 €</small>"]:::tQ
   t57_formel_brunnen["<b>Q</b> Wie tief ist der Wunschbrunnen?<br/><small>Oma Gerda · Stadtpark · 110 €</small>"]:::tQ
   t58_verbinden_uebung["<b>R</b> Übungsblatt: Wer gehört zu wem?<br/><small>Frau Dr. Ohm · Schule · 70 €</small>"]:::tR
   t59_verbinden_kurven["<b>R</b> Übungsblatt: Drei Kurven<br/><small>Frau Dr. Ohm · Schule · 90 €</small>"]:::tR
+  t60_schwer_fehlerbalken["<b>P</b> Kevins Sprint-Messung<br/><small>Kevin · Radl-Eck · 130 €</small>"]:::tP
+  t61_schwer_formel["<b>Q</b> Ötzi gibt Gas<br/><small>Busfahrer Ötzi · Busbahnhof · 130 €</small>"]:::tQ
+  t62_schwer_verbinden["<b>R</b> Klausur-Vorbereitung: Umkehrpunkte<br/><small>Frau Dr. Ohm · Schule · 120 €</small>"]:::tR
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -132,6 +135,9 @@ flowchart LR
   t04_brezel --> t58_verbinden_uebung
   t58_verbinden_uebung --> t59_verbinden_kurven
   t08_einkaufswagen --> t59_verbinden_kurven
+  t55_fehler_blitz --> t60_schwer_fehlerbalken
+  t57_formel_brunnen --> t61_schwer_formel
+  t59_verbinden_kurven --> t62_schwer_verbinden
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -167,9 +173,9 @@ flowchart LR
 | M | Stroboskop: rechnen | 3 |
 | N | Stroboskop: beschreiben | 3 |
 | O | Stroboskop: bauen | 5 |
-| P | Fehlerbalken | 2 |
-| Q | Bewegungsformel | 2 |
-| R | Verbinden | 2 |
+| P | Fehlerbalken | 3 |
+| Q | Bewegungsformel | 3 |
+| R | Verbinden | 3 |
 
 ## Liste
 | Auftrag | Typ | von | Ort | Lohn | braucht |
@@ -225,10 +231,13 @@ flowchart LR
 | Die Verfolgungsjagd | D | Bürgermeisterin Kranz | Rathaus | 140 € | Der Imagefilm |
 | Der Wurf nach oben | N | Slavi | Fotolabor | 120 € | Das Pendel |
 | Die schräge Rinne | M | Slavi | Fotolabor | 130 € | Der Wurf nach oben |
-| Gas und Bremse | O | Slavi | Fotolabor | 140 € | Die schräge Rinne |
+| Bergab, flach, bergauf | O | Slavi | Fotolabor | 140 € | Die schräge Rinne |
 | Wie lang ist meine Route? | P | Kevin | Radl-Eck | 80 € | Partnerschafts-Radeln |
 | Wie genau ist mein Blitz? | P | Slavi | Fotolabor | 100 € | Wie lang ist meine Route?, Kevin im Blitzlicht |
 | Das neue E-Auto | Q | Bürgermeisterin Kranz | Rathaus | 90 € | Frau Brösels Rache |
 | Wie tief ist der Wunschbrunnen? | Q | Oma Gerda | Stadtpark | 110 € | Das neue E-Auto |
 | Übungsblatt: Wer gehört zu wem? | R | Frau Dr. Ohm | Schule | 70 € | Der Hund, der zurückläuft |
 | Übungsblatt: Drei Kurven | R | Frau Dr. Ohm | Schule | 90 € | Übungsblatt: Wer gehört zu wem?, Der Einkaufswagen |
+| Kevins Sprint-Messung | P | Kevin | Radl-Eck | 130 € | Wie genau ist mein Blitz? |
+| Ötzi gibt Gas | Q | Busfahrer Ötzi | Busbahnhof | 130 € | Wie tief ist der Wunschbrunnen? |
+| Klausur-Vorbereitung: Umkehrpunkte | R | Frau Dr. Ohm | Schule | 120 € | Übungsblatt: Drei Kurven |

@@ -2510,5 +2510,217 @@
       ["ohm", "Sehr gut. Die zweite und die dritte Kurve sind beide rechtsgekrümmt – aber die eine bremst bis zum Stillstand, die andere wird rückwärts schneller."],
       ["florian", "Gleiche Krümmung, gleiches aₓ. Das vₓ verrät den Unterschied."]
     ]
+  },
+  {
+    "id": "t60-schwer-fehlerbalken",
+    "title": "Kevins Sprint-Messung",
+    "from": "kevin",
+    "node": "fahrradladen",
+    "requires": ["t55-fehler-blitz"],
+    "reward": 130,
+    "difficulty": "schwer",
+    "intro": [
+      ["kevin", "Ich will wissen, wie stark ich aus dem Stand beschleunige. Jo hat gestoppt: 20,0 m in 4,0 s."],
+      ["kevin", "Aber Jo hat mit dem Handy gestoppt, das ist höchstens auf 0,2 s genau. Und die Strecke hab ich abgeschritten, auf einen halben Meter genau."],
+      ["florian", "Aus der Ruhe gleichmäßig beschleunigt: a = 2·s / t². Und die Zeit steht im Quadrat – da wird jede Ungenauigkeit doppelt teuer."]
+    ],
+    "task": {
+      "type": "errorbar",
+      "context": "Kevin beschleunigt aus dem Stand gleichmäßig. Strecke und Zeit sind nur ungenau gemessen.",
+      "prompt": "Zwischen welchen Werten liegt Kevins Beschleunigung? Zieh die Enden des Fehlerbalkens dorthin.",
+      "paper": "a = 2·s / t². Für a_max: großes s und kleines t – und t zählt im Quadrat! Rechne beide Grenzen auf dem Zettel aus. Gültige Ziffern spielen hier keine Rolle.",
+      "measures": [
+        {
+          "name": "s",
+          "label": "s",
+          "value": 20,
+          "err": 0.5,
+          "unit": "m",
+          "dec": 1
+        },
+        {
+          "name": "t",
+          "label": "t",
+          "value": 4,
+          "err": 0.2,
+          "unit": "s",
+          "dec": 1
+        }
+      ],
+      "result": {
+        "expr": "2*s/(t*t)",
+        "label": "a",
+        "unit": "m/s²",
+        "axis": [1.8, 3.2],
+        "step": 0.01,
+        "tol": 0.03,
+        "bestDec": 2,
+        "help": {
+          "max": "a_max = 2 · 20,5 m / (3,8 s)²",
+          "min": "a_min = 2 · 19,5 m / (4,2 s)²"
+        }
+      }
+    },
+    "success": [
+      ["florian", "Bestwert 2,5 m/s², aber ehrlich gesagt irgendwo zwischen 2,2 und 2,8 m/s². Fast die ganze Unsicherheit kommt von der Handy-Stoppuhr."],
+      ["kevin", "Dann kauf ich mir Lichtschranken. Für die Wissenschaft. Und fürs Angeben."]
+    ]
+  },
+  {
+    "id": "t61-schwer-formel",
+    "title": "Ötzi gibt Gas",
+    "from": "oetzi",
+    "node": "bushof",
+    "requires": ["t57-formel-brunnen"],
+    "reward": 130,
+    "difficulty": "schwer",
+    "scenario": {
+      "actors": [
+        {
+          "id": "bus",
+          "name": "Stadtbus",
+          "sprite": "bus",
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 6,
+              "v0": 5,
+              "a": 1.6666667
+            }
+          ]
+        }
+      ]
+    },
+    "intro": [
+      ["oetzi", "Servus! Ich fahr mit 5,0 m/s am Ortsschild vorbei und geb dann gleichmäßig Gas. Nach 6,0 s bin ich 60 m weiter."],
+      ["oetzi", "Der neue Bus soll mindestens 1,5 m/s² schaffen. Schafft er's?"],
+      ["florian", "Diesmal mit Anfangsgeschwindigkeit: x = v₀·t + ½·a·t². Und gesucht ist a – das wird eine Umstellung in zwei Schritten."]
+    ],
+    "task": {
+      "type": "formula",
+      "actor": "bus",
+      "given": ["anim"],
+      "prompt": "Wie groß ist die Beschleunigung des Busses?",
+      "paper": "Erst v₀·t auf die linke Seite bringen, dann beide Seiten mal 2 und durch t² teilen. Probe mit Einheiten: Am Ende muss m/s² herauskommen.",
+      "formula": "x = v₀ · t + ½ · a · t²",
+      "solveFor": "a",
+      "known": [
+        {
+          "name": "x",
+          "sym": "x",
+          "value": 60,
+          "unit": "m",
+          "text": "60 m"
+        },
+        {
+          "name": "v",
+          "sym": "v₀",
+          "value": 5,
+          "unit": "m/s",
+          "text": "5,0 m/s"
+        },
+        {
+          "name": "t",
+          "sym": "t",
+          "value": 6,
+          "unit": "s",
+          "text": "6,0 s"
+        }
+      ],
+      "choices": [
+        {
+          "text": "a = 2·(x − v₀·t) / t²",
+          "correct": true
+        },
+        {
+          "text": "a = 2·x / t² − v₀",
+          "feedback": "Probe mit Einheiten: m/s² minus m/s geht nicht. v₀·t muss erst von x abgezogen werden."
+        },
+        {
+          "text": "a = (x − v₀·t) / (2·t²)",
+          "feedback": "Das ½ ist falsch umgestellt: Aus ½·a wird a, wenn man mit 2 malnimmt – die 2 gehört in den Zähler."
+        },
+        {
+          "text": "a = 2·(x + v₀·t) / t²",
+          "feedback": "Vorzeichen: v₀·t steht rechts mit Plus, also wird es links abgezogen."
+        }
+      ],
+      "expr": "2*(x - v*t)/(t*t)",
+      "label": "Beschleunigung",
+      "symbol": "a",
+      "unit": "m/s²",
+      "hints": [
+        {
+          "value": 3.33,
+          "text": "Das wäre richtig, wenn der Bus aus dem Stand losfahren würde. Er hat aber schon 5,0 m/s."
+        },
+        {
+          "value": 0.83,
+          "text": "Hast du durch 2 geteilt statt mit 2 malgenommen?"
+        }
+      ],
+      "help": "a = 2 · (60 m − 5,0 m/s · 6,0 s) / (6,0 s)² = 2 · 30 m / 36 s²"
+    },
+    "success": [
+      ["florian", "a = 2 · (60 m − 30 m) / 36 s² ≈ 1,7 m/s². Der Bus schafft die 1,5 m/s² locker."],
+      ["oetzi", "Dann sag ich dem Verkehrsbetrieb: Der Neue bleibt! Und ich bleib auch."]
+    ]
+  },
+  {
+    "id": "t62-schwer-verbinden",
+    "title": "Klausur-Vorbereitung: Umkehrpunkte",
+    "from": "ohm",
+    "node": "schule",
+    "requires": ["t59-verbinden-kurven"],
+    "reward": 120,
+    "difficulty": "schwer",
+    "intro": [
+      ["ohm", "Letztes Übungsblatt vor der Klausur. Zwei der drei Bewegungen kehren um, eine nicht. Und alle Kurven sind gekrümmt."],
+      ["florian", "Am Umkehrpunkt ist die t-x-Kurve waagrecht, also vₓ = 0. Da schau ich zuerst hin."]
+    ],
+    "task": {
+      "type": "pairs",
+      "left": "xt",
+      "right": "vt",
+      "prompt": "Verbinde jedes t-x-Diagramm mit dem passenden t-vₓ-Diagramm. Achtung, Umkehrpunkte!",
+      "paper": "Wo ist die t-x-Kurve waagrecht? Dort ist vₓ = 0. Steigt sie davor oder fällt sie?",
+      "help": "Hochpunkt im t-x: vₓ wechselt von + nach −. Tiefpunkt: von − nach +. Waagrecht erst am Ende: vₓ wird null, wechselt aber nicht.",
+      "items": [
+        {
+          "x0": 2,
+          "segments": [
+            {
+              "dt": 4,
+              "v0": 2,
+              "a": -1
+            }
+          ]
+        },
+        {
+          "x0": 4,
+          "segments": [
+            {
+              "dt": 4,
+              "v0": -2,
+              "a": 1
+            }
+          ]
+        },
+        {
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 4,
+              "v0": 2,
+              "a": -0.5
+            }
+          ]
+        }
+      ]
+    },
+    "success": [
+      ["ohm", "Exzellent. Hochpunkt, Tiefpunkt und ein Bremsen bis zum Stillstand – und kein einziges Mal verwechselt."],
+      ["florian", "Gleiche Krümmung heißt gleiches Vorzeichen von aₓ. Den Rest verrät vₓ."]
+    ]
   }
 ]
