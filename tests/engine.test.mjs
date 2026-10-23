@@ -117,3 +117,23 @@ test('Diagramm-Modul zeichnet eine Kurve (Regressionstest)', async () => {
   const src = (await import('node:fs')).readFileSync(new URL('../js/render/graph.js', import.meta.url), 'utf8');
   assert.match(src, /class: 'g-curve'/);
 });
+
+import { evalExpr, pickParams, resolveTicket, applyScenario } from '../js/engine/variants.js';
+
+test('Zufallsvarianten: Ausdrücke, Texte, Szenario', () => {
+  near(evalExpr('3000/(va+vb)', { va: 5, vb: 7.5 }), 240);
+  assert.throws(() => evalExpr('alert(1)', {}));
+  assert.throws(() => evalExpr('window', {}));
+  const tk = { id: 't', vary: { options: [{ v: 10 }, { v: 12.5 }], set: { 'actors.car.segments.0.v': 'v' } },
+    intro: [['a', 'Er fährt {v} m/s, also {v*3.6} km/h.']], task: { hints: [{ value: '{v*3.6}', text: 'x' }] } };
+  const p = pickParams(tk, 42);
+  assert.ok([10, 12.5].includes(p.v));
+  const r = resolveTicket(tk, { v: 12.5 });
+  assert.equal(r.intro[0][1], 'Er fährt 12,5 m/s, also 45 km/h.');
+  assert.equal(r.task.hints[0].value, 45);
+  const sc = applyScenario({ actors: [{ id: 'car', segments: [{ dt: 8, v: 1 }] }] }, tk, { v: 12.5 });
+  assert.equal(sc.actors[0].segments[0].v, 12.5);
+  // verschiedene Seeds -> verschiedene Varianten (mindestens einmal)
+  const seen = new Set([0, 1, 2, 3, 4, 5, 6, 7].map((s) => pickParams(tk, s).v));
+  assert.equal(seen.size, 2);
+});

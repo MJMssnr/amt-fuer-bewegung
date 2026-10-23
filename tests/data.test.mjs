@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { buildWorld } from '../js/engine/kinematics.js';
 import { evaluateGoal } from '../js/engine/goals.js';
+import { resolveTicket, applyScenario } from '../js/engine/variants.js';
 
 const read = (p) => JSON.parse(readFileSync(new URL(`../${p}`, import.meta.url)));
 const tickets = read('data/tickets.json');
@@ -43,10 +44,14 @@ function checkTask(task, world, label) {
   for (const q of task.questions || []) assert.ok(Number.isFinite(evaluateGoal(q.goal, world).value), `${label}: "${q.label}" ohne Wert`);
 }
 
-for (const tk of tickets) {
-  test(`Aufgabe ${tk.id} (${tk.task.type})`, () => {
-    const sc = typeof tk.scenario === 'object' ? tk.scenario : read(`data/scenarios/${tk.scenario}.json`);
-    checkTask(tk.task, buildWorld(sc), tk.id);
+for (const tk0 of tickets) {
+  test(`Aufgabe ${tk0.id} (${tk0.task.type}), alle Varianten`, () => {
+    for (const params of tk0.vary?.options ?? [{}]) {
+      const tk = resolveTicket(tk0, params);
+      const sc0 = typeof tk0.scenario === 'object' ? tk0.scenario : read(`data/scenarios/${tk0.scenario}.json`);
+      checkTask(tk.task, buildWorld(applyScenario(sc0, tk0, params)), `${tk0.id} ${JSON.stringify(params)}`);
+      assert.ok(!/"[^"]*\{[\w\s+\-*/().,]+\}[^"]*"/.test(JSON.stringify(tk)), `${tk0.id}: Platzhalter nicht ersetzt`);
+    }
   });
 }
 
@@ -64,4 +69,15 @@ test('Shop: jeder Gegenstand hat einen Platz im Zimmer', async () => {
   const earn = tickets.reduce((a, t) => a + t.reward, 0);
   const cost = [...shop.items, ...shop.rocketParts].reduce((a, i) => a + i.price, 0);
   assert.ok(cost <= earn, `Shop (${cost} €) teurer als alle Aufträge zusammen (${earn} €)`);
+});
+
+import { constructTruth } from '../js/tasks/construct.js';
+
+test('Konstrukteur: Lösungen der Hausaufgaben', () => {
+  const sc = read('data/scenarios/einkaufswagen.json');
+  const tr = constructTruth(buildWorld(sc).actors.get('cart'), 'xt');
+  assert.deepEqual(tr.shapes, ['down', 'line', 'up']);
+  assert.deepEqual(tr.values.map((v) => Math.round(v * 100) / 100), [12, 8, 2, 1]);
+  const bus = constructTruth(buildWorld(read('data/scenarios/bus-anfahren.json')).actors.get('bus'), 'xt');
+  assert.deepEqual(bus.values.map((v) => Math.round(v * 10) / 10), [0, 27, 117, 130.5]);
 });

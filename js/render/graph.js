@@ -113,7 +113,7 @@ export function drawGraph(kind, pieces, opts = {}) {
   // Zeit-Cursor (für Synchronisation mit der Animation)
   const cur = el('g', { class: 'g-cursor', visibility: 'hidden' }, svg);
   const cline = el('line', { y1: Y(yR.lo), y2: Y(yR.hi) }, cur);
-  const cdot = el('circle', { r: 4 }, cur);
+  const cdot = el('circle', { r: 4, visibility: 'hidden' }, cur);
 
   const valueAt = (t) => {
     for (const pc of pieces) {
@@ -149,6 +149,7 @@ export function drawGraph(kind, pieces, opts = {}) {
       cur.setAttribute('visibility', 'visible');
       cline.setAttribute('x1', X(t));
       cline.setAttribute('x2', X(t));
+      cdot.setAttribute('visibility', v === null ? 'hidden' : 'visible');
       if (v !== null) { cdot.setAttribute('cx', X(t)); cdot.setAttribute('cy', Y(v)); }
     },
   };

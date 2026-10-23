@@ -9,6 +9,7 @@ import { showNotice, showTitle } from './ui/title.js';
 import { Room } from './ui/room.js';
 import { playFinale } from './ui/finale.js';
 import { loadTask } from './tasks/index.js';
+import { pickParams, resolveTicket, applyScenario } from './engine/variants.js';
 
 const getJSON = async (url) => {
   const r = await fetch(url);
@@ -26,7 +27,13 @@ async function scenarioOf(ref) {
   return scenarioCache.get(ref);
 }
 
-const isOpen = (t) => !state.done[t.id] && (t.requires || []).every((r) => state.done[r]);
+const doneCount = () => tickets.filter((t) => state.done[t.id]).length;
+// Nachfrage: verpatzter Auftrag kommt zurück, sobald zwei weitere erledigt sind (mit neuen Zahlen, falls "vary")
+const isRegularOpen = (t) => !state.done[t.id] && (t.requires || []).every((r) => state.done[r]);
+// …oder sofort, wenn es keine regulären Aufträge mehr gibt
+const isRetry = (t) => Boolean(state.retry?.[t.id])
+  && (doneCount() >= state.retry[t.id].after || !tickets.some(isRegularOpen));
+const isOpen = (t) => isRegularOpen(t) || isRetry(t);
 const crateFull = () => shop.rocketParts.every((p) => state.items[p.id]);
 
 function markers() {
@@ -43,6 +50,7 @@ function updateHud() {
   document.querySelector('.hud-money').textContent = `${state.money} €`;
   const n = tickets.filter((t) => state.done[t.id]).length;
   document.querySelector('.hud-tickets').textContent = `Aufträge ${n}/${tickets.length}`;
+  document.querySelector('.map-hint')?.classList.toggle('hidden', n > 0);
 }
 const save = () => { saveState(state); updateHud(); };
 
@@ -71,8 +79,8 @@ async function runTaskScreen({ title, fromName, rewardText, ticket, world }) {
 const pick = (variants, key) => variants[[...key].reduce((h, ch) => h + ch.charCodeAt(0), 0) % variants.length];
 const withFrom = (lines, from) => lines.map(([who, txt]) => [who === '$from' ? from : who, txt]);
 
-async function runTicket(ticket) {
-  const world = buildWorld(await scenarioOf(ticket.scenario));
+async function runTicket(ticket, raw, params) {
+  const world = buildWorld(applyScenario(await scenarioOf(raw.scenario), raw, params));
   const result = await runTaskScreen({
     title: ticket.title, fromName: story.characters[ticket.from]?.name, rewardText: `${ticket.reward} €`, ticket, world,
   });
@@ -82,6 +90,9 @@ async function runTicket(ticket) {
   state.money += reward;
   state.done[ticket.id] = true;
   state.grades = { ...(state.grades || {}), [ticket.id]: grade };
+  state.retry ??= {};
+  if (grade === 'fail') state.retry[ticket.id] = { after: doneCount() + 2, n: (state.retry[ticket.id]?.n ?? 0) + 1 };
+  else delete state.retry[ticket.id];
   save();
   if (grade === 'fail') {
     const florianLines = (ticket.success || []).filter(([who]) => who === 'florian');
@@ -92,7 +103,11 @@ async function runTicket(ticket) {
     await showDialog(ticket.success || []);
     toast(`+${reward} €${grade === 'partial' ? '  (halber Lohn)' : ''}`, 'money');
   }
-  if (tickets.every((t) => state.done[t.id])) await showDialog(story.outro);
+  if (tickets.every((t) => state.done[t.id]) && !Object.keys(state.retry).length && !state.outroSeen) {
+    state.outroSeen = true;
+    save();
+    await showDialog(story.outro);
+  }
 }
 
 async function runExam() {
@@ -134,10 +149,13 @@ async function onArrive(nodeId) {
       overworld.start();
       return;
     }
-    const ticket = tickets.find((t) => t.node === nodeId && isOpen(t));
-    if (ticket) {
-      await showDialog(ticket.intro || []);
-      await runTicket(ticket);
+    const raw = tickets.find((t) => t.node === nodeId && isOpen(t));
+    if (raw) {
+      const retry = isRetry(raw);
+      const params = pickParams(raw, state.seed, state.retry?.[raw.id]?.n ?? 0);
+      const ticket = resolveTicket(raw, params);
+      await showDialog([...(retry ? withFrom(pick(story.retry, raw.id), raw.from) : []), ...(ticket.intro || [])]);
+      await runTicket(ticket, raw, params);
     } else if (nodeId === 'rathaus') {
       await showDialog(story.office);
     } else {
@@ -160,9 +178,11 @@ async function boot() {
   await showNotice();
   const choice = await showTitle(Boolean(state.introSeen));
   if (choice === 'new') { resetState(); state = loadState(); }
+  if (!state.seed) { state.seed = Math.floor(Math.random() * 2 ** 31); saveState(state); }
 
   overworld = new Overworld(document.getElementById('map'), map, { onArrive, markers });
   overworld.locked = () => busy;
+  overworld.tutorial = () => doneCount() === 0;
   if (state.node) overworld.setNode(state.node);
   overworld.start();
   room = new Room(document.getElementById('room'), { shop, state, save: () => save(), onChange: updateHud, onCrateFull: runExam });

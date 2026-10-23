@@ -60,6 +60,8 @@ und `"data"` (Datenblatt der Bewegung) enthalten.
 - `axes` – Achsen-Detektiv: `"graph": "vt"`, `"marks": ["t","y"]`, optional `"hints": {"t":[…], "y":[…]}`
 - `errorhunt` – Fehlerjagd: `"graph": "xt"`, `"error": {"segment": 1, "kind": "sign" | "value" | "shape", "factor": 0.5}`
 - `live` – Live-Steuerung: `"player": "florian"`, `"vmax": 4`, `"ghost": false`, optional `"tol"` (nur gleichförmige Abschnitte)
+- `construct` – Konstrukteur: `"given": ["anim","vt"]`, `"ask": "xt"` (Endwerte und Form je Abschnitt selbst eintragen)
+- `reaction` – Reaktionstest: `"v_kmh": 25`, `"a": 4`, `"sprite": "cyclist"`, `"vehicle": "mit dem Fahrrad"`
 - `calc` – Werte berechnen und eintippen:
 ```json
 "task": { "type": "calc", "given": ["anim", "data"], "paper": "…",
@@ -72,6 +74,12 @@ und `"data"` (Datenblatt der Bewegung) enthalten.
 Einheiten: `m`, `s`, `m/s`, `m/s²`, `km/h`, `km`, `min`. Toleranz: eine Einheit in der 2. signifikanten Stelle
 (eigene Toleranz mit `"tol"`). Verfügbare Goals: `meet`, `timeUntil`, `valueAt`, `displacement`, `totalPath`,
 `avgSpeed`, `avgVelocity`, `segment` (Weg/Dauer eines Abschnitts), `max`, `min`, `distanceAt`, `duration`, `solveFor`.
+
+**Zufallsvarianten** (jeder Spieler bekommt andere Zahlen):
+```json
+"vary": { "options": [ { "v": 10 }, { "v": 12.5 } ], "set": { "actors.car.segments.0.v": "v" } }
+```
+In allen Texten und Hinweisen des Tickets werden `{Ausdrücke}` eingesetzt, z. B. `"{v*3.6} km/h"` oder `"value": "{3000/va}"`.
 
 Nach dem Bearbeiten: `node --test tests/*.test.mjs` prüft, ob alle Verweise stimmen und jede Frage lösbar ist.
 

@@ -83,6 +83,15 @@
       "markerH": 58,
       "label": [70, 345]
     },
+    "schule": {
+      "x": 220,
+      "y": 316,
+      "name": "Schule",
+      "building": "school",
+      "at": [220, 300],
+      "markerH": 72,
+      "label": [220, 334]
+    },
     "js": {
       "x": 330,
       "y": 316,
@@ -117,11 +126,12 @@
     ["je", "bushof"],
     ["jw", "rathaus"],
     ["rathaus", "js"],
-    ["baeckerei", "js"],
     ["js", "supermarkt"],
     ["supermarkt", "bushof"],
     ["rathaus", "baumhaus"],
-    ["baumhaus", "je"]
+    ["baumhaus", "je"],
+    ["baeckerei", "schule"],
+    ["schule", "js"]
   ],
   "crosswalks": [
     [
@@ -227,13 +237,6 @@
       "w": 50,
       "h": 10,
       "color": "#b78cff"
-    },
-    {
-      "kind": "gravel",
-      "x": 140,
-      "y": 250,
-      "w": 150,
-      "h": 6
     }
   ],
   "decor": [
@@ -476,44 +479,6 @@
       "y": 220
     },
     {
-      "type": "tree",
-      "kind": "fruit",
-      "x": 160,
-      "y": 290
-    },
-    {
-      "type": "tree",
-      "kind": "fruit",
-      "x": 200,
-      "y": 284
-    },
-    {
-      "type": "tree",
-      "kind": "fruit",
-      "x": 240,
-      "y": 292
-    },
-    {
-      "type": "tree",
-      "kind": "blossom",
-      "x": 282,
-      "y": 284
-    },
-    {
-      "type": "flowers",
-      "x": 180,
-      "y": 268,
-      "w": 40,
-      "n": 10
-    },
-    {
-      "type": "flowers",
-      "x": 260,
-      "y": 266,
-      "w": 30,
-      "n": 8
-    },
-    {
       "type": "car",
       "x": 350,
       "y": 256,
@@ -592,6 +557,24 @@
       "y": 210,
       "w": 14,
       "n": 5
+    },
+    {
+      "type": "tree",
+      "kind": "fruit",
+      "x": 140,
+      "y": 270
+    },
+    {
+      "type": "tree",
+      "kind": "blossom",
+      "x": 302,
+      "y": 262
+    },
+    {
+      "type": "bush",
+      "x": 296,
+      "y": 296,
+      "color": "#ffd166"
     }
   ]
 }

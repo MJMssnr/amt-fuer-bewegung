@@ -22,6 +22,7 @@ js/main.js                 Einstieg: Demo-Hinweis → Startbildschirm → Karte;
 js/engine/kinematics.js    2D-Kinematik, stückweise konstantes a, Ereignisse ("until")
 js/engine/goals.js         Auswertbare Fragen, erweiterbar per registerGoal()
 js/engine/answer.js        Antwortprüfung: Toleranz = 1 Einheit in der 2. signifikanten Stelle
+js/engine/variants.js      Zufallsvarianten: "vary" im Ticket, {Ausdrücke} in Texten, Spieler-Seed
 js/render/graph.js         SVG-Diagramme (KINDS: xt, vt, at, yt, vyt, ayt)
 js/render/scene.js         Pixel-Animation der Akteure mit Maßband
 js/render/pixel.js         Sprites aus assets/sprites.json oder PNG
@@ -29,6 +30,7 @@ js/render/painter.js       Welt->Bildschirm, kantenscharf; Text in nativer Aufl�
 js/render/town.js          Stadtboden, Bäume (round/pine/birch/fruit/blossom), Büsche, Blumen, Möbel
 js/render/buildings.js     Gebäude, Schilder (wachsen mit dem Text), Kuckucks-Stadtuhr, Skatepark, Parkplatz
 js/render/treehouse.js     Florians Baumhaus auf der Karte
+js/render/school.js        Schule (FOS) auf der Karte
 js/render/room-art.js      Baumhaus-Zimmer: Hintergrund, feste Plätze (SLOTS), Gegenstände (DRAW)
 js/render/vehicles.js      Auto, Sportmotorrad, Rakete, Partikel (Startbildschirm, Finale)
 js/render/format.js        Zahlenformat, schöne Achsenteilung
@@ -40,7 +42,9 @@ js/tasks/describe.js       Typ G: Beschreiben; Textgenerator in describe-text.js
 js/tasks/axes.js           Typ C: Achsen-Detektiv (Diagramm ohne Zahlen, markierte Linien)
 js/tasks/errorhunt.js      Typ E: Fehlerjagd (Ralfs Diagramm, ein falscher Abschnitt)
 js/tasks/live.js           Typ F: Live-Steuerung (vₓ per Regler, Spur gegen Soll)
-js/tasks/questions.js      Gemeinsamer Eingabe-/Prüfblock für H und C
+js/tasks/construct.js      Konstrukteur: Diagramm selbst bauen (Endwerte + Form je Abschnitt)
+js/tasks/reaction.js       Reaktionstest -> eigener Anhalteweg
+js/tasks/questions.js      Gemeinsamer Eingabe-/Prüfblock für H, C und Reaktionstest
 js/tasks/distractors.js    Distraktoren aus Fehlvorstellungen (CATALOG)
 js/ui/overworld.js         Stadtkarte (data/map.json)
 js/ui/dialog.js, state.js  Dialoge, Spielstand (localStorage)
@@ -60,7 +64,9 @@ schema/                    Formatbeschreibung der JSON-Dateien
 ## Geld-Regeln
 - Auswahl-Aufgaben (A, G, E): nur beim ersten Versuch richtig → voller Lohn, sonst 0 €.
 - Rechen-/Ablese-Aufgaben (H, C) und Live (F): erster Versuch → voll; selbst gelöst nach Hinweisen → halb; „Lösung zeigen“ → 0 €.
+- Konstrukteur und Reaktionstest wie H.
 - Module melden onSolved({ attempts, grade: 'perfect' | 'partial' | 'fail' }).
+- Verpatzte Aufträge (fail) kommen als „Nachfrage“ zurück, sobald zwei weitere erledigt sind (state.retry), mit neuer Variante.
 
 ## Erweitern
 - **Neuer Aufgabentyp:** `js/tasks/<typ>.js` mit `export function mount(root, { ticket, world, onSolved })` → `{ destroy() }`, dann in `js/tasks/index.js` eintragen.
@@ -68,4 +74,4 @@ schema/                    Formatbeschreibung der JSON-Dateien
 - **Neue Fehlvorstellung:** Eintrag in `CATALOG` und `PRIORITY` in `distractors.js`.
 
 ## Geplant (Reihenfolge offen)
-D Regie, Freihandzeichnen, 2D-Szenen (Wurf) = Teil 2, Vektoraddition, PWA/offline, Schrift lokal einbinden.
+D Regie, Flächen-Puzzle, Steigungsdreieck, Druck-Arbeitsblatt, Sounds, 2D-Szenen (Wurf) = Teil 2, Vektoraddition, PWA/offline, Schrift lokal einbinden.

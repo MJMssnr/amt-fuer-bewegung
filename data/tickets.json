@@ -18,9 +18,25 @@
       "paper": "Lies im t-x-Diagramm zwei Punkte ab, berechne die Steigung und rechne sie in km/h um."
     },
     "success": [
-      ["florian", "Konstante Steigung im t-x-Diagramm heißt konstante Geschwindigkeit: 12,5 m/s. Mal 3,6 macht das 45 km/h."],
-      ["broesel", "Fünfundvierzig? Dann ist er eben zu LEISE schnell! … Na gut. Danke, junger Mann."]
-    ]
+      ["florian", "Konstante Steigung im t-x-Diagramm heißt konstante Geschwindigkeit: {v} m/s. Mal 3,6 macht das {v*3.6} km/h."],
+      ["broesel", "{v*3.6} km/h? Dann ist er eben zu LEISE schnell! … Na gut. Danke, junger Mann."]
+    ],
+    "vary": {
+      "options": [
+        {
+          "v": 10
+        },
+        {
+          "v": 11
+        },
+        {
+          "v": 12.5
+        }
+      ],
+      "set": {
+        "actors.car.segments.0.v": "v"
+      }
+    }
   },
   {
     "id": "t02-kevin",
@@ -42,9 +58,29 @@
       "paper": "Berechne Reaktionsweg und Bremsweg als Flächen unter der t-vₓ-Kurve."
     },
     "success": [
-      ["florian", "Erst gleichförmig, also eine Gerade. Dann gleichmäßig verzögert, also eine Parabel, die flach ausläuft. Anhalteweg: 8 m Reaktionsweg plus 16 m Bremsweg."],
-      ["kevin", "24 Meter?! Bei nur 2 m/s² Bremsverzögerung? Ich bring's sofort zum Radl-Eck. Danke, Chef!"]
-    ]
+      ["florian", "Erst gleichförmig, also eine Gerade. Dann gleichmäßig verzögert, also eine Parabel, die flach ausläuft. Anhalteweg: {v} m Reaktionsweg plus {v*v/(2*a)} m Bremsweg."],
+      ["kevin", "{v+v*v/(2*a)} Meter?! Bei nur {a} m/s² Bremsverzögerung? Ich bring's sofort zum Radl-Eck. Danke, Chef!"]
+    ],
+    "vary": {
+      "options": [
+        {
+          "v": 8,
+          "a": 2
+        },
+        {
+          "v": 6,
+          "a": 1.5
+        },
+        {
+          "v": 10,
+          "a": 2.5
+        }
+      ],
+      "set": {
+        "actors.kevin.segments.0.v": "v",
+        "actors.kevin.segments.1.a": "-a"
+      }
+    }
   },
   {
     "id": "t03-bus",
@@ -124,19 +160,19 @@
           },
           "hints": [
             {
-              "value": 600,
+              "value": "{3000/va}",
               "text": "Das wäre die Zeit, die Anna allein für die ganzen 3 km bräuchte. Beide fahren aber gleichzeitig aufeinander zu."
             },
             {
-              "value": 400,
+              "value": "{3000/vb}",
               "text": "Das ist Bernds Zeit für die ganze Strecke. Beide fahren aber gleichzeitig los."
             },
             {
-              "value": 1200,
+              "value": "{3000/max(abs(vb-va),0.001)}",
               "text": "Hast du die Geschwindigkeiten subtrahiert statt addiert? Bernd fährt in negative Richtung, vₓ ist also negativ."
             }
           ],
-          "help": "Setze 5 m/s · t = 3000 m − 7,5 m/s · t und löse nach t auf."
+          "help": "Setze {va} m/s · t = 3000 m − {vb} m/s · t und löse nach t auf."
         },
         {
           "label": "Treffpunkt (Ort)",
@@ -150,7 +186,7 @@
           },
           "hints": [
             {
-              "value": 1800,
+              "value": "{3000*vb/(va+vb)}",
               "text": "Das ist die Strecke, die Bernd gefahren ist. Gefragt ist der Ort x, gemessen von Annas Start."
             },
             {
@@ -158,14 +194,38 @@
               "text": "Die Mitte wäre es nur bei gleichen Geschwindigkeiten."
             }
           ],
-          "help": "Setze t_T in Annas Gleichung x(t) = 5 m/s · t ein."
+          "help": "Setze t_T in Annas Gleichung x(t) = {va} m/s · t ein."
         }
       ]
     },
     "success": [
-      ["florian", "Nach 240 s, also 4 Minuten, bei x = 1200 m. Bernd ist schneller, deshalb liegt der Treffpunkt näher an unserer Stadt."],
-      ["kranz", "1,2 Kilometer! Wunderbar! Dann muss die Blaskapelle nicht so weit laufen."]
-    ]
+      ["florian", "Nach {3000/(va+vb)} s, also {50/(va+vb)} Minuten, bei x = {3000*va/(va+vb)} m. Wer schneller fährt, legt bis zum Treffen mehr Weg zurück."],
+      ["kranz", "{3*va/(va+vb)} Kilometer von uns! Wunderbar! Dann weiß die Blaskapelle, wohin."]
+    ],
+    "vary": {
+      "options": [
+        {
+          "va": 5,
+          "vb": 7.5
+        },
+        {
+          "va": 4,
+          "vb": 6
+        },
+        {
+          "va": 6,
+          "vb": 4
+        },
+        {
+          "va": 5,
+          "vb": 5
+        }
+      ],
+      "set": {
+        "actors.anna.segments.0.v": "va",
+        "actors.bernd.segments.0.v": "-vb"
+      }
+    }
   },
   {
     "id": "t06-broesel-ampel",
@@ -566,6 +626,155 @@
     "success": [
       ["kevin", "Auf die Sekunde genau! Ich glaube, du bist der bessere Kurier."],
       ["florian", "Ich bleib lieber beim Amt."]
+    ]
+  },
+  {
+    "id": "t18-konstrukt-kevin",
+    "title": "Hausaufgabe: Selbst zeichnen!",
+    "from": "ohm",
+    "node": "schule",
+    "requires": ["t02-kevin"],
+    "reward": 80,
+    "scenario": "kevin-bremsen",
+    "intro": [
+      ["ohm", "Florian! Schön, dass du dich trotz Ferienjob mal in der Schule blicken lässt."],
+      ["ohm", "Hausaufgabe: Konstruiere das t-x-Diagramm zu einer Vollbremsung. Selbst zeichnen, nicht ankreuzen!"],
+      ["florian", "(Die weiß nichts vom Amt. Und das bleibt auch so.)"]
+    ],
+    "task": {
+      "type": "construct",
+      "actor": "kevin",
+      "given": ["anim", "vt"],
+      "ask": "xt",
+      "paper": "Δx in jedem Abschnitt = Fläche unter der t-vₓ-Kurve. Gleichförmig: Gerade. aₓ < 0: Rechtskurve ⌢, aₓ > 0: Linkskurve ⌣."
+    },
+    "success": [
+      ["florian", "Erst eine Gerade bis 8 m, dann eine Rechtskurve, die bei 24 m waagrecht ausläuft."],
+      ["ohm", "Sehr ordentlich. Woher kannst du das auf einmal so gut?"],
+      ["florian", "Äh … Ferienjob."]
+    ]
+  },
+  {
+    "id": "t19-konstrukt-bus",
+    "title": "Hausaufgabe: Der Bus",
+    "from": "ohm",
+    "node": "schule",
+    "requires": ["t18-konstrukt-kevin", "t03-bus"],
+    "reward": 90,
+    "scenario": "bus-anfahren",
+    "intro": [
+      ["ohm", "Nächste Hausaufgabe, Florian: der Stadtbus zwischen zwei Haltestellen. Drei Abschnitte, drei Formen."],
+      ["florian", "Anfahren, Fahren, Bremsen. Das kenne ich irgendwoher."]
+    ],
+    "task": {
+      "type": "construct",
+      "actor": "bus",
+      "given": ["anim", "vt"],
+      "ask": "xt",
+      "paper": "Berechne die Flächen: Dreieck beim Anfahren, Rechteck beim Fahren, Dreieck beim Bremsen. Addiere zu den x-Werten an den Grenzen."
+    },
+    "success": [
+      ["florian", "Linkskurve bis 27 m, Gerade bis 117 m, Rechtskurve bis 130,5 m."],
+      ["ohm", "Exzellent. Und an den Übergängen keine Knicke, die Steigung ändert sich nirgends sprunghaft. Genau so!"]
+    ]
+  },
+  {
+    "id": "t20-konstrukt-wagen",
+    "title": "Hausaufgabe: Die Falle",
+    "from": "ohm",
+    "node": "schule",
+    "requires": ["t19-konstrukt-bus", "t08-einkaufswagen"],
+    "reward": 100,
+    "scenario": "einkaufswagen",
+    "intro": [
+      ["ohm", "Letzte Hausaufgabe, und die ist gemein: ein Einkaufswagen, der in negative x-Richtung rollt."],
+      ["ohm", "Hier verwechseln fast alle Links- und Rechtskurve. Mal sehen, ob du auch."]
+    ],
+    "task": {
+      "type": "construct",
+      "actor": "cart",
+      "given": ["anim", "vt"],
+      "ask": "xt",
+      "paper": "Die Form im t-x-Diagramm hängt nur vom Vorzeichen von aₓ ab: aₓ > 0 heißt Linkskurve ⌣, aₓ < 0 heißt Rechtskurve ⌢. Egal, in welche Richtung sich der Wagen bewegt!"
+    },
+    "success": [
+      ["florian", "Erst Rechtskurve, weil aₓ < 0 ist, dann eine fallende Gerade, am Ende eine Linkskurve, weil aₓ > 0 ist, obwohl der Wagen dabei langsamer wird."],
+      ["ohm", "Genau das verwechseln die meisten in der Schulaufgabe. Du nicht. Respekt!"]
+    ]
+  },
+  {
+    "id": "t21-reaktion-rad",
+    "title": "Die Schrecksekunde",
+    "from": "ohm",
+    "node": "schule",
+    "requires": ["t02-kevin"],
+    "reward": 70,
+    "scenario": {
+      "actors": [
+        {
+          "id": "me",
+          "sprite": "cyclist",
+          "segments": [
+            {
+              "dt": 1,
+              "v": 0
+            }
+          ]
+        }
+      ]
+    },
+    "intro": [
+      ["ohm", "Projekttag Verkehrssicherheit! Heute messen wir eure eigene Reaktionszeit."],
+      ["florian", "Meine eigene? Dann rechne ich gleich meinen eigenen Anhalteweg aus."]
+    ],
+    "task": {
+      "type": "reaction",
+      "v_kmh": 25,
+      "a": 4,
+      "sprite": "cyclist",
+      "vehicle": "mit dem Fahrrad"
+    },
+    "success": [
+      ["ohm", "Merke: Bei doppelter Geschwindigkeit wird der Reaktionsweg doppelt so lang, der Bremsweg aber viermal so lang!"],
+      ["florian", "Und mit dem Handy in der Hand wird die Reaktionszeit noch länger. Ich fahr ab jetzt ohne."]
+    ]
+  },
+  {
+    "id": "t22-reaktion-auto",
+    "title": "Tempo 30 vor der Schule?",
+    "from": "kranz",
+    "node": "rathaus",
+    "requires": ["t21-reaktion-rad"],
+    "reward": 90,
+    "scenario": {
+      "actors": [
+        {
+          "id": "me",
+          "sprite": "car_red",
+          "segments": [
+            {
+              "dt": 1,
+              "v": 0
+            }
+          ]
+        }
+      ]
+    },
+    "intro": [
+      ["kranz", "Herr Doktor Brandl, der Stadtrat streitet: Tempo 30 vor der Schule oder nicht? Wir brauchen Fakten!"],
+      ["florian", "Ich messe meine Reaktionszeit nochmal und rechne den Anhalteweg bei Tempo 50 aus."]
+    ],
+    "task": {
+      "type": "reaction",
+      "v_kmh": 50,
+      "a": 7,
+      "sprite": "car_red",
+      "vehicle": "mit dem Auto bei Tempo 50",
+      "paper": "50 km/h in m/s umrechnen. Reaktionsweg = v · t_R, Bremsweg = v² / (2a). Vergleiche danach im Kopf mit Tempo 30: Der Bremsweg wächst mit v²."
+    },
+    "success": [
+      ["florian", "Bei Tempo 50 ist der Bremsweg fast dreimal so lang wie bei Tempo 30. Denn (50/30)² ist ungefähr 2,8."],
+      ["kranz", "Überzeugt! Tempo 30 vor der Schule ist beschlossen. Die Kinder werden es Ihnen danken."]
     ]
   }
 ]

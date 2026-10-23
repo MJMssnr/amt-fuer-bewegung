@@ -6,8 +6,10 @@ import { getSprite } from '../render/pixel.js';
 import { drawGround, decor, shadow } from '../render/town.js';
 import { BUILDINGS, halfpipe, rail, funbox, parkedCar } from '../render/buildings.js';
 import { treehouse } from '../render/treehouse.js';
+import { school } from '../render/school.js';
 
 BUILDINGS.treehouse = treehouse;
+BUILDINGS.school = school;
 
 const SPEED = 140; // Welt-Pixel pro Sekunde
 
@@ -189,6 +191,24 @@ export class Overworld {
     P.image(sp.frames[f], this.pos.x - sp.w / 2, this.pos.y - sp.h + 2 - bob, sp.w, sp.h, this.dir === 'side' && this.flip);
   }
 
+  // Erster Auftrag: großes Ausrufezeichen mit Puls-Ring und tippendem Finger
+  #tutorialMarker(P, x, y) {
+    y = Math.max(y, 34); // nie oben aus dem Bild
+    const pulse = (this.time * 1.5) % 1;
+    P.blob(x, y, Math.round(10 + pulse * 14), `rgba(255,205,117,${(0.55 * (1 - pulse)).toFixed(2)})`);
+    P.rect(x - 11, y - 14, 23, 28, C_INK); P.rect(x - 10, y - 13, 21, 26, '#ffcd75'); P.rect(x - 10, y - 13, 21, 3, '#fff1c4');
+    P.rect(x - 2, y - 9, 5, 12, C_INK); P.rect(x - 2, y + 6, 5, 4, C_INK);
+    P.rect(x - 2, y + 14, 5, 3, C_INK); P.rect(x, y + 17, 1, 2, C_INK);
+    const tap = Math.abs(Math.sin(this.time * 3.2));
+    const fx = x + 4 + Math.round(tap * 6), fy = y + 8 + Math.round(tap * 6);
+    const HAND = ['...kk....', '..kssk...', '..kssk...', '..ksskkk.', '..ksskssk', 'kkksssssk', 'ksksssssk', 'kssssssSk', '.kssssSk.', '..kwwwk..', '..kwwwk..', '..kkkkk..'];
+    const pal = { k: C_INK, s: '#f2c9a0', S: '#d9a07a', w: '#f4f4f4' };
+    // Finger in doppelter Größe
+    HAND.forEach((row, j) => [...row].forEach((ch, i) => { if (pal[ch]) P.rect(fx + i * 2, fy + j * 2, 2, 2, pal[ch]); }));
+    if (tap > 0.85) for (const [dx, dy] of [[-3, -2], [-5, 3], [1, -5]]) P.rect(fx + dx, fy + dy, 2, 2, '#ffffff');
+    P.text('Hier tippen!', x, y - 22, 6, { color: C_INK, bold: true, bg: '#ffffff', pad: 2, minPx: 12, dpr: this.dpr });
+  }
+
   #markers(P) {
     const m = this.markers?.() || {};
     for (const [id, state] of Object.entries(m)) {
@@ -197,7 +217,9 @@ export class Overworld {
       const top = by - (n.markerH ?? 46);
       const bob = state === 'open' ? Math.round(Math.sin(this.time * 4) * 2) : 0;
       const x = cx, y = top + bob;
-      if (state === 'open') {
+      if (state === 'open' && this.tutorial?.()) {
+        this.#tutorialMarker(P, x, y);
+      } else if (state === 'open') {
         P.blob(x, y + 8, 7, 'rgba(20,24,40,0.0)');
         P.rect(x - 6, y - 7, 13, 15, C_INK); P.rect(x - 5, y - 6, 11, 13, '#ffcd75'); P.rect(x - 5, y - 6, 11, 2, '#fff1c4');
         P.rect(x - 1, y + 8, 3, 2, C_INK); P.rect(x, y + 10, 1, 1, C_INK);

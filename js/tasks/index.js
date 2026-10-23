@@ -8,6 +8,8 @@ const LOADERS = {
   axes: () => import('./axes.js'),             // C: Achsen-Detektiv
   errorhunt: () => import('./errorhunt.js'),   // E: Fehlerjagd
   live: () => import('./live.js'),             // F: Live-Steuerung
+  construct: () => import('./construct.js'),   // Konstrukteur: Diagramm selbst bauen
+  reaction: () => import('./reaction.js'),     // Reaktionstest -> eigener Anhalteweg
 };
 
 export async function loadTask(type) {

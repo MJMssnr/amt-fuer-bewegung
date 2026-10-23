@@ -43,6 +43,10 @@
     "gerda": {
       "name": "Oma Gerda",
       "sprite": "oma_rollator"
+    },
+    "ohm": {
+      "name": "Frau Dr. Ohm, Physiklehrerin",
+      "sprite": "ohm"
     }
   },
   "intro": [
@@ -90,5 +94,15 @@
       ["$from", "Na also, geht doch! Beim nächsten Mal bitte gleich beim ersten Versuch. Ich zahle erst mal die Hälfte."]
     ]
   ],
-  "failExplain": ["florian", "(Nochmal in Ruhe nachgedacht:)"]
+  "failExplain": ["florian", "(Nochmal in Ruhe nachgedacht:)"],
+  "retry": [
+    [
+      ["$from", "Herr Brandl, gut dass Sie da sind! Ich hätte da nochmal eine ganz ähnliche Frage."],
+      ["florian", "(Zweite Chance. Diesmal rechne ich sauber.)"]
+    ],
+    [
+      ["$from", "Erinnern Sie sich an neulich? Es gibt eine neue Messung. Schauen Sie nochmal drüber?"],
+      ["florian", "(Diesmal klappt das. Erst Papier, dann tippen.)"]
+    ]
+  ]
 }
