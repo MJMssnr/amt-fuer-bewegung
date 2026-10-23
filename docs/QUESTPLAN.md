@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 56, verdienbar: 5260 €.
+Anzahl Aufträge: 58, verdienbar: 5420 €.
 
 ```mermaid
 flowchart LR
@@ -65,6 +65,8 @@ flowchart LR
   t55_fehler_blitz["<b>P</b> Wie genau ist mein Blitz?<br/><small>Slavi · Fotolabor · 100 €</small>"]:::tP
   t56_formel_eauto["<b>Q</b> Das neue E-Auto<br/><small>Bürgermeisterin Kranz · Rathaus · 90 €</small>"]:::tQ
   t57_formel_brunnen["<b>Q</b> Wie tief ist der Wunschbrunnen?<br/><small>Oma Gerda · Stadtpark · 110 €</small>"]:::tQ
+  t58_verbinden_uebung["<b>R</b> Übungsblatt: Wer gehört zu wem?<br/><small>Frau Dr. Ohm · Schule · 70 €</small>"]:::tR
+  t59_verbinden_kurven["<b>R</b> Übungsblatt: Drei Kurven<br/><small>Frau Dr. Ohm · Schule · 90 €</small>"]:::tR
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -127,6 +129,9 @@ flowchart LR
   t32_strobo_kevin --> t55_fehler_blitz
   t06_broesel_ampel --> t56_formel_eauto
   t56_formel_eauto --> t57_formel_brunnen
+  t04_brezel --> t58_verbinden_uebung
+  t58_verbinden_uebung --> t59_verbinden_kurven
+  t08_einkaufswagen --> t59_verbinden_kurven
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -164,7 +169,7 @@ flowchart LR
 | O | Stroboskop: bauen | 5 |
 | P | Fehlerbalken | 2 |
 | Q | Bewegungsformel | 2 |
-| R | Verbinden | 0 |
+| R | Verbinden | 2 |
 
 ## Liste
 | Auftrag | Typ | von | Ort | Lohn | braucht |
@@ -225,3 +230,5 @@ flowchart LR
 | Wie genau ist mein Blitz? | P | Slavi | Fotolabor | 100 € | Wie lang ist meine Route?, Kevin im Blitzlicht |
 | Das neue E-Auto | Q | Bürgermeisterin Kranz | Rathaus | 90 € | Frau Brösels Rache |
 | Wie tief ist der Wunschbrunnen? | Q | Oma Gerda | Stadtpark | 110 € | Das neue E-Auto |
+| Übungsblatt: Wer gehört zu wem? | R | Frau Dr. Ohm | Schule | 70 € | Der Hund, der zurückläuft |
+| Übungsblatt: Drei Kurven | R | Frau Dr. Ohm | Schule | 90 € | Übungsblatt: Wer gehört zu wem?, Der Einkaufswagen |

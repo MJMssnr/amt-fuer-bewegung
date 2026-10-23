@@ -191,3 +191,28 @@ body.finale-on #dialog { z-index: 80; }
   .f-head { font-size: 13px; }
   .drop { max-height: 42vh; }
 }
+
+/* R Verbinden [W30] */
+.pairs { height: 100%; display: flex; flex-direction: column; gap: 6px; padding: 8px 12px; }
+.pairs-grid { position: relative; flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 8px 0; touch-action: none; }
+.pair-card { position: relative; min-height: 0; cursor: pointer; }
+.pair-card > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pair-tag { position: absolute; top: 3px; right: 6px; z-index: 2; font-family: var(--title); font-size: 13px; background: var(--ink); color: #f4f4f4; padding: 0 5px; pointer-events: none; }
+.pair-dot { position: absolute; top: 50%; width: 18px; height: 18px; margin-top: -9px; border-radius: 50%; background: #fff; border: 3px solid var(--ink); z-index: 2; pointer-events: none; }
+.pair-card[data-side="L"] .pair-dot { right: -10px; } .pair-card[data-side="R"] .pair-dot { left: -10px; }
+.pair-card.linked .pair-dot { background: var(--gold); }
+.pair-card.picked { box-shadow: 0 0 0 4px var(--gold), 3px 3px 0 2px rgba(26,28,44,.35); }
+.pairs-lines { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 3; overflow: visible; }
+.pair-line { stroke: var(--navy, #29366f); stroke-width: 4; stroke-linecap: round; }
+.pair-line.temp { stroke: var(--gold); stroke-dasharray: 6 5; }
+.pair-line.ok { stroke: var(--ok); } .pair-line.bad { stroke: var(--bad); }
+.pairs-foot { display: flex; align-items: center; gap: 8px; }
+.pairs-foot .feedback { flex: 1; margin: 0; }
+@media (max-height: 500px) {
+  .pairs { padding: 4px 8px; gap: 4px; }
+  .pairs-prompt { font-size: 13px; }
+  .pairs-grid { gap: 5px 0; grid-template-columns: minmax(0, 1fr) 54px minmax(0, 1fr); }
+  .pairs-foot .btn { padding: 3px 10px; font-size: 14px; }
+}
+.pairs-paper { margin: 0; font-size: 13px; color: #566c86; }
+@media (max-height: 500px) { .pairs-paper { font-size: 11px; } }

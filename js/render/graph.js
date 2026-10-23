@@ -27,7 +27,7 @@ export function rangeOf(pieces) {
 
 /**
  * pieces: [[ [t,y], ... ], ...]   kind: Schlüssel aus KINDS
- * opts: { tMax, yRange:[lo,hi], width, height, hideScale, compact }
+ * opts: { tMax, yRange:[lo,hi], width, height, hideScale, compact, yCount (Teilstriche y, Standard 5) }
  * Rückgabe: { el: SVGElement, setCursor(t|null) }
  */
 export function drawGraph(kind, pieces, opts = {}) {
@@ -37,7 +37,7 @@ export function drawGraph(kind, pieces, opts = {}) {
   const M = { l: compact ? 40 : 46, r: 16, t: compact ? 18 : 20, b: compact ? 22 : 26 };
   const tR = niceRange(0, opts.tMax ?? Math.max(...pieces.flat().map((p) => p[0])), compact ? 5 : 6);
   const [ylo, yhi] = opts.yRange ?? rangeOf(pieces);
-  const yR = niceRange(ylo, yhi, 5);
+  const yR = niceRange(ylo, yhi, opts.yCount ?? 5);
 
   const X = (t) => M.l + ((t - tR.lo) / (tR.hi - tR.lo)) * (W - M.l - M.r);
   const Y = (y) => H - M.b - ((y - yR.lo) / (yR.hi - yR.lo)) * (H - M.t - M.b);

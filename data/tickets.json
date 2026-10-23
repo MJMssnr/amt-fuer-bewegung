@@ -2399,5 +2399,121 @@
       ["florian", "y₀ = ½ · 9,81 m/s² · (2,4 s)² ≈ 28 m. Ihr Wunschbrunnen ist ungefähr 28 Meter tief, Oma Gerda!"],
       ["gerda", "Achtundzwanzig Meter! Da liegen also siebzig Jahre Wünsche ganz schön tief. Danke, mein Junge."]
     ]
+  },
+  {
+    "id": "t58-verbinden-uebung",
+    "title": "Übungsblatt: Wer gehört zu wem?",
+    "from": "ohm",
+    "node": "schule",
+    "requires": ["t04-brezel"],
+    "reward": 70,
+    "intro": [
+      ["ohm", "Florian, kleines Übungsblatt für zwischendurch. Drei t-x-Diagramme, drei t-vₓ-Diagramme – leider ist der Kopierer durcheinandergekommen."],
+      ["florian", "Ich verbinde einfach, was zusammengehört. Steigung im t-x-Diagramm ist vₓ."]
+    ],
+    "task": {
+      "type": "pairs",
+      "left": "xt",
+      "right": "vt",
+      "prompt": "Verbinde jedes t-x-Diagramm (links) mit dem passenden t-vₓ-Diagramm (rechts): Linie mit dem Finger ziehen.",
+      "help": "Steigung im t-x-Diagramm = vₓ: waagrecht heißt vₓ = 0, fallend heißt vₓ negativ.",
+      "items": [
+        {
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 6,
+              "v": 2
+            }
+          ]
+        },
+        {
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 3,
+              "v": 0
+            },
+            {
+              "dt": 3,
+              "v": 2
+            }
+          ]
+        },
+        {
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 3,
+              "v": 2
+            },
+            {
+              "dt": 3,
+              "v": -2
+            }
+          ]
+        }
+      ]
+    },
+    "success": [
+      ["ohm", "Tadellos. Waagrecht im t-x heißt null im t-vₓ – und eine fallende Gerade heißt negatives vₓ."],
+      ["florian", "Das Übungsblatt hätte ich auch ohne Kopierer-Chaos gern gemacht."]
+    ]
+  },
+  {
+    "id": "t59-verbinden-kurven",
+    "title": "Übungsblatt: Drei Kurven",
+    "from": "ohm",
+    "node": "schule",
+    "requires": ["t58-verbinden-uebung", "t08-einkaufswagen"],
+    "reward": 90,
+    "intro": [
+      ["ohm", "Zweites Übungsblatt. Diesmal sind alle drei Bewegungen beschleunigt, und die Kurven sehen sich ziemlich ähnlich."],
+      ["florian", "Dann schau ich genau hin: Wird die Kurve steiler oder flacher? Steigt sie oder fällt sie?"]
+    ],
+    "task": {
+      "type": "pairs",
+      "left": "xt",
+      "right": "vt",
+      "prompt": "Alle drei Bewegungen sind beschleunigt. Verbinde jedes t-x-Diagramm mit dem passenden t-vₓ-Diagramm.",
+      "paper": "Lies an Anfang und Ende jeder t-x-Kurve die Steigung ab: positiv, null oder negativ? Wird sie steiler oder flacher?",
+      "help": "Steigung am Anfang und am Ende vergleichen: Das ist vₓ am Anfang und am Ende. Waagrechtes Ende heißt vₓ = 0.",
+      "items": [
+        {
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 4,
+              "v0": 0,
+              "a": 1
+            }
+          ]
+        },
+        {
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 4,
+              "v0": 4,
+              "a": -1
+            }
+          ]
+        },
+        {
+          "x0": 8,
+          "segments": [
+            {
+              "dt": 4,
+              "v0": 0,
+              "a": -1
+            }
+          ]
+        }
+      ]
+    },
+    "success": [
+      ["ohm", "Sehr gut. Die zweite und die dritte Kurve sind beide rechtsgekrümmt – aber die eine bremst bis zum Stillstand, die andere wird rückwärts schneller."],
+      ["florian", "Gleiche Krümmung, gleiches aₓ. Das vₓ verrät den Unterschied."]
+    ]
   }
 ]
