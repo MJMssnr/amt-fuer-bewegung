@@ -18,7 +18,6 @@ digraph Q {
   t13_ralf_kevin [fillcolor="#ff9f7a" label=<<b>E</b>  Ralf und die Bremse<br/><font point-size="9">Ralf · Rathaus · 80 €</font>>];
   t14_ralf_bus [fillcolor="#ff9f7a" label=<<b>E</b>  Ralfs Busfahrt<br/><font point-size="9">Ralf · Rathaus · 90 €</font>>];
   t15_live_brezel [fillcolor="#73eff7" label=<<b>F</b>  Brezels Ersatzrunde<br/><font point-size="9">Bäckermeister Huber · Bäckerei · 70 €</font>>];
-  t16_live_gerda [fillcolor="#73eff7" label=<<b>F</b>  Oma Gerda am Zebrastreifen<br/><font point-size="9">Oma Gerda · Lindenstraße · 80 €</font>>];
   t17_live_kevin [fillcolor="#73eff7" label=<<b>F</b>  Kevins Express-Lieferung<br/><font point-size="9">Kevin · Radl-Eck · 90 €</font>>];
   t18_konstrukt_kevin [fillcolor="#b6e3b0" label=<<b>I</b>  Hausaufgabe: Selbst zeichnen!<br/><font point-size="9">Frau Dr. Ohm · Schule · 80 €</font>>];
   t19_konstrukt_bus [fillcolor="#b6e3b0" label=<<b>I</b>  Hausaufgabe: Der Bus<br/><font point-size="9">Frau Dr. Ohm · Schule · 90 €</font>>];
@@ -66,6 +65,8 @@ digraph Q {
   t62_schwer_verbinden [fillcolor="#dddddd" label=<<b>R</b>  Klausur-Vorbereitung: Umkehrpunkte<br/><font point-size="9">Frau Dr. Ohm · Schule · 120 €</font>>];
   t63_gutachten_trocken [fillcolor="#dddddd" label=<<b>S</b>  „Ich war nicht zu schnell!“<br/><font point-size="9">Gültige-Ziffern-Polizei · Polizeirevier · 90 €</font>>];
   t64_gutachten_regen [fillcolor="#dddddd" label=<<b>S</b>  Regen vor der Schule<br/><font point-size="9">Gültige-Ziffern-Polizei · Polizeirevier · 110 €</font>>];
+  t65_puppe_gerda [fillcolor="#dddddd" label=<<b>T</b>  Die Oma-Gerda-Marionette<br/><font point-size="9">Hilde · Hobbywerkstatt · 80 €</font>>];
+  t66_puppe_brezel [fillcolor="#dddddd" label=<<b>T</b>  Brezel, der Marionetten-Hund<br/><font point-size="9">Hilde · Hobbywerkstatt · 100 €</font>>];
   t01_sportwagen -> t02_kevin;
   t02_kevin -> t03_bus;
   t01_sportwagen -> t04_brezel;
@@ -83,8 +84,7 @@ digraph Q {
   t13_ralf_kevin -> t14_ralf_bus;
   t03_bus -> t14_ralf_bus;
   t04_brezel -> t15_live_brezel;
-  t15_live_brezel -> t16_live_gerda;
-  t16_live_gerda -> t17_live_kevin;
+  t15_live_brezel -> t17_live_kevin;
   t02_kevin -> t18_konstrukt_kevin;
   t18_konstrukt_kevin -> t19_konstrukt_bus;
   t03_bus -> t19_konstrukt_bus;
@@ -135,4 +135,6 @@ digraph Q {
   t59_verbinden_kurven -> t62_schwer_verbinden;
   t56_formel_eauto -> t63_gutachten_trocken;
   t63_gutachten_trocken -> t64_gutachten_regen;
+  t15_live_brezel -> t65_puppe_gerda;
+  t65_puppe_gerda -> t66_puppe_brezel;
 }

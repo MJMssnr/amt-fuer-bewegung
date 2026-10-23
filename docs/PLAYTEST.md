@@ -57,10 +57,11 @@
 - Stroboskop bauen (O) allgemein: Skala fehlte → Maßband + Hilfslinien [W25]
 
 ## Noch ohne Feedback (gezielt testen)
-- F: Oma Gerda am Zebrastreifen, Kevins Express-Lieferung (t17, Eckpunkte), t44 (schwer, Eckpunkte)
+- F: Kevins Express-Lieferung (t17, Eckpunkte), t44 (schwer, Eckpunkte) – t16 Oma Gerda gestrichen [W32]
 - K: Wie lang ist mein Run?
 - D: Der Imagefilm (Testauftrag; danach 2 weitere D-Aufträge bauen)
 - schwer: t43, t48, t50, t53 (neu) und t45 (nochmal)
+- neue Typen S t63, t64 · T t65, t66 · neue Schauplätze Polizeirevier, Hobbywerkstatt [W32]
 - neue Typen [W30, W31]: P t54, t55, t60 (schwer) · Q t56, t57, t61 (schwer) · R t58, t59, t62 (schwer)
 - Gültige-Ziffern-Polizei: Lob nach ≥ 2 Verwarnungen
 - Systeme: Pakete/Kiste, Bärti, Rennrad/Motorrad auf der Karte, Finale am Bauplatz, Auftragsbuch-Animation, Weiter-Tippen nach dem Lösen

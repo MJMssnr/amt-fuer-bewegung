@@ -3,12 +3,13 @@
 Stand: 23.10.2026, Sitzung 3 (W30). Reihenfolge offen, Herr Messner entscheidet.
 
 ## Offene Entscheidungen (bitte nicht eigenmächtig festlegen)
-- Neue Typen S (Unfallgutachten, v₁² − v₀² = 2·a·Δx) und T (Puppenspieler oder Ralfs Zeitungsartikel) vorgeschlagen [W31] – Herr Messner wählt
+- Schwere Abschluss-Aufträge auch für S und T? (bisher je leicht + mittel)
+- Dritter neuer Schauplatz (z. B. Recyclinghof)? Ladung jetzt: fotolabor 12, rathaus 10, fahrradladen 8, schule 7, bushof 6, lindenstrasse 4, baeckerei 4, skatepark 3, supermarkt 3, polizei 3, park 2, werkstatt 2
 
 ## Nächste Schritte (Sitzung 3)
 - Playtest-Feedback einarbeiten (Liste in `docs/PLAYTEST.md`), Einstufungen als `difficulty` eintragen
 - **D Regie**: 2 weitere Aufträge, sobald „Der Imagefilm“ abgenommen ist
-- **Balancing**: Shop 2265 € vs. verdienbar 5800 € → mehr Gegenstände oder höhere Preise (Herr Messner entscheidet)
+- **Balancing**: Shop 2265 € vs. verdienbar 6100 € → mehr Gegenstände oder höhere Preise (Herr Messner entscheidet)
 - `difficulty` soll später Lohn und Toleranz steuern (noch ohne Wirkung)
 - Optional: Rennmotorrad sichtbar unter dem Baumhaus parken (bisher nur Helm im Zimmer)
 - Finale-Länge (~1 min) nach Playtest anpassen
@@ -18,7 +19,7 @@ Stand: 23.10.2026, Sitzung 3 (W30). Reihenfolge offen, Herr Messner entscheidet.
 - Danach: Feld `difficulty` (leicht/mittel/schwer) pro Ticket → Lohn und Toleranz
 
 ## Geplant
-- **Balancing Shop** nach Playtest: 23 Gegenstände für 2265 €, verdienbar 5800 € [W24/W26]
+- **Balancing Shop** nach Playtest: 23 Gegenstände für 2265 €, verdienbar 6100 € [W24/W26]
 - **Teil 2 (2D):** waagrechter und schiefer Wurf, grafische Vektoraddition. Engine kann 2D schon (`until: landing`, Vektoren `[x, y]`, Diagrammarten `yt`, `vyt`, `ayt`).
 - **Druck-Arbeitsblatt** (passend zur Papierstütze)
 - Stimme **frau_jung**

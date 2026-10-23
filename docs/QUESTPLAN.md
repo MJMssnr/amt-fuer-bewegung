@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 63, verdienbar: 6000 €.
+Anzahl Aufträge: 64, verdienbar: 6100 €.
 
 ```mermaid
 flowchart LR
@@ -24,7 +24,6 @@ flowchart LR
   t13_ralf_kevin["<b>E</b> Ralf und die Bremse<br/><small>Ralf · Rathaus · 80 €</small>"]:::tE
   t14_ralf_bus["<b>E</b> Ralfs Busfahrt<br/><small>Ralf · Rathaus · 90 €</small>"]:::tE
   t15_live_brezel["<b>F</b> Brezels Ersatzrunde<br/><small>Bäckermeister Huber · Bäckerei · 70 €</small>"]:::tF
-  t16_live_gerda["<b>F</b> Oma Gerda am Zebrastreifen<br/><small>Oma Gerda · Lindenstraße · 80 €</small>"]:::tF
   t17_live_kevin["<b>F</b> Kevins Express-Lieferung<br/><small>Kevin · Radl-Eck · 90 €</small>"]:::tF
   t18_konstrukt_kevin["<b>I</b> Hausaufgabe: Selbst zeichnen!<br/><small>Frau Dr. Ohm · Schule · 80 €</small>"]:::tI
   t19_konstrukt_bus["<b>I</b> Hausaufgabe: Der Bus<br/><small>Frau Dr. Ohm · Schule · 90 €</small>"]:::tI
@@ -72,6 +71,8 @@ flowchart LR
   t62_schwer_verbinden["<b>R</b> Klausur-Vorbereitung: Umkehrpunkte<br/><small>Frau Dr. Ohm · Schule · 120 €</small>"]:::tR
   t63_gutachten_trocken["<b>S</b> „Ich war nicht zu schnell!“<br/><small>Gültige-Ziffern-Polizei · Polizeirevier · 90 €</small>"]:::tS
   t64_gutachten_regen["<b>S</b> Regen vor der Schule<br/><small>Gültige-Ziffern-Polizei · Polizeirevier · 110 €</small>"]:::tS
+  t65_puppe_gerda["<b>T</b> Die Oma-Gerda-Marionette<br/><small>Hilde · Hobbywerkstatt · 80 €</small>"]:::tT
+  t66_puppe_brezel["<b>T</b> Brezel, der Marionetten-Hund<br/><small>Hilde · Hobbywerkstatt · 100 €</small>"]:::tT
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -89,8 +90,7 @@ flowchart LR
   t13_ralf_kevin --> t14_ralf_bus
   t03_bus --> t14_ralf_bus
   t04_brezel --> t15_live_brezel
-  t15_live_brezel --> t16_live_gerda
-  t16_live_gerda --> t17_live_kevin
+  t15_live_brezel --> t17_live_kevin
   t02_kevin --> t18_konstrukt_kevin
   t18_konstrukt_kevin --> t19_konstrukt_bus
   t03_bus --> t19_konstrukt_bus
@@ -141,6 +141,8 @@ flowchart LR
   t59_verbinden_kurven --> t62_schwer_verbinden
   t56_formel_eauto --> t63_gutachten_trocken
   t63_gutachten_trocken --> t64_gutachten_regen
+  t15_live_brezel --> t65_puppe_gerda
+  t65_puppe_gerda --> t66_puppe_brezel
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -166,7 +168,7 @@ flowchart LR
 | C | Achsen-Detektiv | 4 |
 | D | Regie | 2 |
 | E | Fehlerjagd | 4 |
-| F | Live-Steuerung | 4 |
+| F | Live-Steuerung | 3 |
 | G | Beschreiben | 3 |
 | H | Berechnen | 3 |
 | I | Konstrukteur | 4 |
@@ -180,7 +182,7 @@ flowchart LR
 | Q | Bewegungsformel | 3 |
 | R | Verbinden | 3 |
 | S | Unfallgutachten | 2 |
-| T | Puppenspieler | 0 |
+| T | Puppenspieler | 2 |
 
 ## Liste
 | Auftrag | Typ | von | Ort | Lohn | braucht |
@@ -200,8 +202,7 @@ flowchart LR
 | Ralf und die Bremse | E | Ralf | Rathaus | 80 € | Ralfs erstes Diagramm, Bremsen durch? |
 | Ralfs Busfahrt | E | Ralf | Rathaus | 90 € | Ralf und die Bremse, Ruckelt der Bus? |
 | Brezels Ersatzrunde | F | Bäckermeister Huber | Bäckerei | 70 € | Der Hund, der zurückläuft |
-| Oma Gerda am Zebrastreifen | F | Oma Gerda | Lindenstraße | 80 € | Brezels Ersatzrunde |
-| Kevins Express-Lieferung | F | Kevin | Radl-Eck | 90 € | Oma Gerda am Zebrastreifen |
+| Kevins Express-Lieferung | F | Kevin | Radl-Eck | 90 € | Brezels Ersatzrunde |
 | Hausaufgabe: Selbst zeichnen! | I | Frau Dr. Ohm | Schule | 80 € | Bremsen durch? |
 | Hausaufgabe: Der Bus | I | Frau Dr. Ohm | Schule | 90 € | Hausaufgabe: Selbst zeichnen!, Ruckelt der Bus? |
 | Hausaufgabe: Die Falle | I | Frau Dr. Ohm | Schule | 100 € | Hausaufgabe: Der Bus, Der Einkaufswagen |
@@ -248,3 +249,5 @@ flowchart LR
 | Klausur-Vorbereitung: Umkehrpunkte | R | Frau Dr. Ohm | Schule | 120 € | Übungsblatt: Drei Kurven |
 | „Ich war nicht zu schnell!“ | S | Gültige-Ziffern-Polizei | Polizeirevier | 90 € | Das neue E-Auto |
 | Regen vor der Schule | S | Gültige-Ziffern-Polizei | Polizeirevier | 110 € | „Ich war nicht zu schnell!“ |
+| Die Oma-Gerda-Marionette | T | Hilde | Hobbywerkstatt | 80 € | Brezels Ersatzrunde |
+| Brezel, der Marionetten-Hund | T | Hilde | Hobbywerkstatt | 100 € | Die Oma-Gerda-Marionette |

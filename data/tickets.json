@@ -599,38 +599,11 @@
     ]
   },
   {
-    "id": "t16-live-gerda",
-    "title": "Oma Gerda am Zebrastreifen",
-    "from": "gerda",
-    "node": "lindenstrasse",
-    "requires": ["t15-live-brezel"],
-    "reward": 80,
-    "scenario": "gerda-zebra",
-    "intro": [
-      ["gerda", "Junger Mann, Sie sind doch vom Amt? Ich möchte über die Straße, aber die Ampel ist so kurz."],
-      ["gerda", "Mein Enkel hat mir einen Plan gemacht: losgehen, auf der Verkehrsinsel kurz verschnaufen, weitergehen. Helfen Sie mir, das Tempo zu halten?"],
-      ["florian", "Sie gehen, ich gebe das Tempo vor. Diesmal ohne Vorbild, nur nach dem Plan."]
-    ],
-    "task": {
-      "type": "live",
-      "actor": "gerda",
-      "player": "oma_rollator",
-      "vmax": 1.5,
-      "ghost": false,
-      "prompt": "Steuere Oma Gerdas Tempo genau nach dem Plan im t-x-Diagramm.",
-      "paper": "Berechne die Geschwindigkeiten aus dem Plan. Tipp: Ein waagrechtes Stück im t-x-Diagramm heißt vₓ = 0."
-    },
-    "success": [
-      ["gerda", "Das war ja wie auf Schienen! Sie bekommen nächste Woche einen Kuchen."],
-      ["florian", "(Ich mag diesen Job.)"]
-    ]
-  },
-  {
     "id": "t17-live-kevin",
     "title": "Kevins Express-Lieferung",
     "from": "kevin",
     "node": "fahrradladen",
-    "requires": ["t16-live-gerda"],
+    "requires": ["t15-live-brezel"],
     "reward": 90,
     "scenario": "kevin-express",
     "intro": [
@@ -2805,6 +2778,89 @@
     "success": [
       ["florian", "10 m Bremsspur auf nasser Straße: v₀ = √(2 · 5,0 m/s² · 10 m) = 10 m/s, also 36 km/h. Das ist zu schnell für eine 30er-Zone."],
       ["polizist", "Wusste ich's doch! Und bei Regen vor einer Schule … das wird ein ernstes Gespräch. Danke, Herr Gutachter!"]
+    ]
+  },
+  {
+    "id": "t65-puppe-gerda",
+    "title": "Die Oma-Gerda-Marionette",
+    "from": "hilde",
+    "node": "werkstatt",
+    "requires": ["t15-live-brezel"],
+    "reward": 80,
+    "difficulty": "leicht",
+    "intro": [
+      ["hilde", "Grüß dich, Florian! Ich bin Hilde. Hier in der Werkstatt baue ich Marionetten fürs Stadtfest."],
+      ["hilde", "Meine neueste: Oma Gerda mit Rollator! Psst, sie weiß noch nichts davon. Der Regisseur hat ihren Weg als t-x-Diagramm aufgemalt."],
+      ["florian", "Dann führe ich die Puppe genau nach Plan. Steile Linie heißt schnell, waagrecht heißt stehen bleiben."]
+    ],
+    "task": {
+      "type": "puppet",
+      "sprite": "oma_rollator",
+      "x0": 0,
+      "segments": [
+        {
+          "dt": 4,
+          "v": 1.5
+        },
+        {
+          "dt": 2,
+          "v": 0
+        },
+        {
+          "dt": 4,
+          "v": 1
+        }
+      ],
+      "range": [0, 12],
+      "tol": 0.9,
+      "prompt": "Führe die Marionette nach dem Regie-Diagramm: Schieb sie mit dem Finger, deine Linie muss im grünen Korridor bleiben.",
+      "paper": "Lies vorher ab: Bis wann geht Oma Gerda wohin? Wo bleibt sie stehen? Bei der waagrechten Linie die Figur einfach festhalten."
+    },
+    "success": [
+      ["hilde", "Herrlich! Genau wie die echte Oma Gerda: erst flott, dann ein Päuschen, dann gemütlich weiter."],
+      ["florian", "Und die Steigung hab ich im Finger gespürt. Steil ist anstrengend!"]
+    ]
+  },
+  {
+    "id": "t66-puppe-brezel",
+    "title": "Brezel, der Marionetten-Hund",
+    "from": "hilde",
+    "node": "werkstatt",
+    "requires": ["t65-puppe-gerda"],
+    "reward": 100,
+    "difficulty": "mittel",
+    "intro": [
+      ["hilde", "Zweite Szene: Brezel, der Bäckershund, sieht eine Wurst. Er wird immer schneller, schnappt sie – und rennt zurück!"],
+      ["hilde", "Die Kurve am Anfang ist der schwierige Teil. Der Regisseur sagt: gleichmäßig beschleunigt!"],
+      ["florian", "Gekrümmte Linie heißt: Ich muss mit dem Finger immer schneller werden. Und dann abrupt umdrehen."]
+    ],
+    "task": {
+      "type": "puppet",
+      "sprite": "dog",
+      "x0": 0,
+      "segments": [
+        {
+          "dt": 4,
+          "v0": 0,
+          "a": 1
+        },
+        {
+          "dt": 3,
+          "v": -2
+        },
+        {
+          "dt": 2,
+          "v": 0
+        }
+      ],
+      "range": [0, 10],
+      "tol": 0.8,
+      "prompt": "Führe Brezel nach dem Regie-Diagramm. Am Anfang langsam, dann immer schneller – deine Linie muss im Korridor bleiben.",
+      "paper": "Erst eine Linkskurve: langsam anfangen und immer schneller schieben. Bei 8 m sofort umdrehen und gleichmäßig zurück. Am Ende festhalten."
+    },
+    "success": [
+      ["hilde", "Die Kurve war perfekt! So sieht gleichmäßiges Beschleunigen aus, wenn man es selber macht."],
+      ["florian", "Am Anfang fast gar nicht bewegen, am Ende richtig schnell. Genau das bedeutet die Linkskurve."]
     ]
   }
 ]

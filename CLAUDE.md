@@ -51,7 +51,7 @@ js/render/room-art.js      Baumhaus-Zimmer: Hintergrund, feste Plätze (SLOTS), 
 js/render/vehicles.js      Auto, Sportmotorrad, Rakete, Partikel (Startbildschirm, Finale)
 js/render/format.js        Zahlenformat, schöne Achsenteilung
 js/tasks/index.js          Register der Aufgabentypen
-js/tasks/types.js          Kennbuchstaben A–R der Typen (nie umnummerieren!)
+js/tasks/types.js          Kennbuchstaben A–T der Typen (nie umnummerieren!)
 js/tasks/common.js         Linke Spalte für alle Typen (Animation, Diagramme, Datenblatt, Notizzettel)
 js/tasks/match.js          Typ A: Zuordnen
 js/tasks/calc.js           Typ H: Berechnen (Goals -> Eingabe, Hinweise für typische Fehler)
@@ -69,6 +69,9 @@ js/tasks/strobe*.js        M/N/O: Stroboskop rechnen/beschreiben/bauen (Engine j
 js/tasks/errorbar.js       P: Fehlerbalken (Engine js/engine/errors.js: Größt-/Kleinstwert)
 js/tasks/formula.js        Q: Bewegungsformel umstellen + ausrechnen (Bild js/render/drop.js)
 js/tasks/pairs.js          R: Verbinden (3 t-x ↔ 3 t-vₓ mit Fingerlinien)
+js/tasks/skid.js           S: Unfallgutachten (Bild js/render/skid.js)
+js/tasks/puppet.js         T: Puppenspieler (x mit dem Finger, Korridor)
+js/render/places2.js       Polizeirevier und Hobbywerkstatt auf der Karte
 js/ui/police.js            Gültige-Ziffern-Polizist (Texte data/police.json, Regeln js/engine/sigfig.js)
 js/render/fotolabor.js     Slavis Fotolabor auf der Karte
 js/tasks/questions.js      Gemeinsamer Eingabe-/Prüfblock für H, C und Reaktionstest
@@ -102,7 +105,7 @@ schema/                    Formatbeschreibung der JSON-Dateien
 ## Geld-Regeln
 - Auswahl-Aufgaben (A, G, E) und Verbinden (R): nur beim ersten Versuch richtig → voller Lohn, sonst 0 €.
 - Rechen-/Ablese-Aufgaben (H, C) und Live (F): erster Versuch → voll; selbst gelöst nach Hinweisen → halb; „Lösung zeigen“ → 0 €.
-- Konstrukteur (I), Reaktionstest (J), Freihand (B), Fläche (K), Steigung (L), Regie (D), Strobo M und O, Fehlerbalken (P), Formel (Q) wie H. Strobo N wie A/G.
+- Konstrukteur (I), Reaktionstest (J), Freihand (B), Fläche (K), Steigung (L), Regie (D), Strobo M und O, Fehlerbalken (P), Formel (Q), Unfallgutachten (S), Puppenspieler (T) wie H. Strobo N wie A/G.
 - Module melden onSolved({ attempts, grade: 'perfect' | 'partial' | 'fail' }).
 - Verpatzte Aufträge (fail) kommen als „Nachfrage“ zurück, sobald zwei weitere erledigt sind (state.retry), mit neuer Variante.
 

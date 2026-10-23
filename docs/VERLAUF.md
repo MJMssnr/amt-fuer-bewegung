@@ -42,7 +42,8 @@ Hinweis: Sitzung 1 wurde nachträglich aus einer Zusammenfassung des Chats rekon
 | W29 | Playtest-Runde 2 je Auftrag (t10–t53): Hinweise korrigiert (t10, t20, t23, t37, t40, t41, t51, t52), t20 „Letzte Hausaufgabe“ → „Neue“, Diagramme auf dem Handy größer (Einheiten = echte Pixelhöhe), Freihand ±1,5 cm, t35 durchgehender Maßstab mit ganzzahligem Abstand, t37 Abbilder als Fahrräder, Pendel/senkrechte Fotos kleiner, N: Zusammenhang rechts über den Antworten, Einstufungen eingetragen | (dieser Commit) |
 | W30 | Drei neue Typen: **P Fehlerbalken** (Größt-/Kleinstwert mit verschiebbaren Whiskern, keine g.Z.; t54 Strecken addieren, t55 v_max/v_min), **Q Bewegungsformel** (umstellen, ausrechnen; t56 E-Auto, t57 Brunnen mit Startwert), **R Verbinden** (3 t-x ↔ 3 t-vₓ per Fingerlinie; t58, t59). t53 schwerer (bergab, flach, bergauf). Ab jetzt per Du | 22983a0, 1c3e2ce, 230882c, (dieser Commit) |
 | W31 | Schwere Abschluss-Aufträge auch für P, Q, R: t60 Kevins Sprint (a = 2s/t², t im Quadrat), t61 Ötzi gibt Gas (x = v₀t + ½at² nach a), t62 Umkehrpunkte (R). Ideen für zwei weitere Typen gewünscht: Rechnen mit der zeitunabhängigen Gleichung + etwas Kreatives | (dieser Commit) |
+| W32 | **S Unfallgutachten** (Bremsspur, v₁² − v₀² = 2·a·Δx; t63 leicht, t64 mittel). **T Puppenspieler** statt eines F-Auftrags (t16 raus; t65 Oma-Gerda-Marionette, t66 Brezel). Neue Schauplätze **Polizeirevier** (weit links, weg von Baumhaus/Rathaus) und **Hobbywerkstatt** (Hilde) | 665f460, 490000c, (dieser Commit) |
 
 **Stand Ende Sitzung 2:** 53 Aufträge (A–O, je ein schwerer), 4950 € verdienbar, Shop 23 Gegenstände für 2265 €. Offen: siehe `ROADMAP.md` und `PLAYTEST.md`.
 
-**Stand Sitzung 3 (W31):** 61 Aufträge (A–R), 5800 € verdienbar.
+**Stand Sitzung 3 (W32):** 64 Aufträge (A–T), 6100 € verdienbar.

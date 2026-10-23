@@ -225,3 +225,22 @@ body.finale-on #dialog { z-index: 80; }
 .sk-verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .sk-take { align-self: flex-start; background: var(--gold); }
 @media (max-height: 500px) { .skid-info { font-size: 12px; } .sk-surf .f-choice { font-size: 12px; padding: 3px 4px; } }
+
+/* T Puppenspieler [W32] */
+.puppet { height: 100%; display: flex; flex-direction: column; gap: 6px; padding: 8px 12px; }
+.pp-top { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 10px; }
+.pp-graph { min-height: 0; }
+.pp-side { display: flex; flex-direction: column; gap: 6px; min-height: 0; overflow: auto; }
+.pp-band polyline { fill: none; stroke: rgba(56, 183, 100, .28); stroke-linecap: round; stroke-linejoin: round; }
+.pp-street { padding: 0; }
+.pp-cv { display: block; width: 100%; height: 92px; touch-action: none; cursor: ew-resize; }
+.pp-ctrl { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pp-ctrl .feedback { flex: 1 1 200px; margin: 0; min-height: 0; }
+.pp-score { font-family: var(--pixel); font-size: 15px; }
+@media (max-height: 500px) {
+  .puppet { padding: 4px 8px; gap: 4px; }
+  .pp-cv { height: 74px; }
+  .pp-side .prompt { font-size: 13px; }
+  .pp-ctrl .btn { padding: 2px 8px; font-size: 13px; }
+  .pp-score { font-size: 13px; }
+}
