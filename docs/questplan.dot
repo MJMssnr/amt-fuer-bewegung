@@ -32,6 +32,7 @@ digraph Q {
   t27_steigung_blitz [fillcolor="#a0d9d0" label=<<b>L</b>  Der rote Blitz am Abend<br/><font point-size="9">Frau Brösel · Lindenstraße · 70 €</font>>];
   t28_steigung_ralf [fillcolor="#a0d9d0" label=<<b>L</b>  Ralfs positive Rückwärtsrechnung<br/><font point-size="9">Ralf · Rathaus · 80 €</font>>];
   t29_steigung_bus [fillcolor="#a0d9d0" label=<<b>L</b>  Bremst Ötzi zu scharf?<br/><font point-size="9">Busfahrer Ötzi · Busbahnhof · 90 €</font>>];
+  t30_regie_imagefilm [fillcolor="#c7a6ff" label=<<b>D</b>  Der Imagefilm<br/><font point-size="9">Bürgermeisterin Kranz · Rathaus · 90 €</font>>];
   t01_sportwagen -> t02_kevin;
   t02_kevin -> t03_bus;
   t01_sportwagen -> t04_brezel;
@@ -65,4 +66,5 @@ digraph Q {
   t01_sportwagen -> t27_steigung_blitz;
   t12_ralf_brezel -> t28_steigung_ralf;
   t10_ampelkamera -> t29_steigung_bus;
+  t05_radeln -> t30_regie_imagefilm;
 }

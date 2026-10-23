@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 29, verdienbar: 2320 €.
+Anzahl Aufträge: 30, verdienbar: 2410 €.
 
 ```mermaid
 flowchart LR
@@ -38,6 +38,7 @@ flowchart LR
   t27_steigung_blitz["<b>L</b> Der rote Blitz am Abend<br/><small>Frau Brösel · Lindenstraße · 70 €</small>"]:::tL
   t28_steigung_ralf["<b>L</b> Ralfs positive Rückwärtsrechnung<br/><small>Ralf · Rathaus · 80 €</small>"]:::tL
   t29_steigung_bus["<b>L</b> Bremst Ötzi zu scharf?<br/><small>Busfahrer Ötzi · Busbahnhof · 90 €</small>"]:::tL
+  t30_regie_imagefilm["<b>D</b> Der Imagefilm<br/><small>Bürgermeisterin Kranz · Rathaus · 90 €</small>"]:::tD
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -71,6 +72,7 @@ flowchart LR
   t01_sportwagen --> t27_steigung_blitz
   t12_ralf_brezel --> t28_steigung_ralf
   t10_ampelkamera --> t29_steigung_bus
+  t05_radeln --> t30_regie_imagefilm
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -91,7 +93,7 @@ flowchart LR
 | A | Zuordnen | 4 |
 | B | Freihand zeichnen | 1 |
 | C | Achsen-Detektiv | 3 |
-| D | Regie | 0 |
+| D | Regie | 1 |
 | E | Fehlerjagd | 3 |
 | F | Live-Steuerung | 3 |
 | G | Beschreiben | 2 |
@@ -133,3 +135,4 @@ flowchart LR
 | Der rote Blitz am Abend | L | Frau Brösel | Lindenstraße | 70 € | Der rote Blitz |
 | Ralfs positive Rückwärtsrechnung | L | Ralf | Rathaus | 80 € | Ralfs erstes Diagramm |
 | Bremst Ötzi zu scharf? | L | Busfahrer Ötzi | Busbahnhof | 90 € | Die nasse Ampelkamera |
+| Der Imagefilm | D | Bürgermeisterin Kranz | Rathaus | 90 € | Partnerschafts-Radeln |

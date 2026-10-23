@@ -49,7 +49,7 @@
 | A | Zuordnen (match) | ✓ | Distraktoren aus Fehlvorstellungen, nicht zufällig |
 | B | Freihand (freehand) | ✓ 1 Auftrag, Playtest offen [W16] | Zeichnen in einem Zug, Auto-Begradigung (Ramer-Douglas-Peucker), Toleranz ±tolY senkrecht, ±0,3 s an Knicken. Bleibt bis zum Feedback so (3 Abschnitte inkl. Stillstand) [W17] |
 | C | Achsen-Detektiv (axes) | ✓ | Diagramm ohne Zahlen, Ablesen an markierten Linien |
-| D | Regie (direct) | in Arbeit [W17] | **Variante a:** Schüler stellt Startort, Startzeit und vₓ der Akteure ein, damit ein Drehbuch-Ereignis eintritt (z. B. Begegnung am Ort X zur Zeit T); Animation als Kontrolle. 3 Aufträge |
+| D | Regie (direct) | ✓ 1 Testauftrag „Der Imagefilm“ [W20] | **Variante a:** Drehbuch mit Ereignissen (Ort zu Zeit, Begegnung); Schüler stellt x₀, t₀ (Wartezeit), vₓ ein, „Klappe – Action!“ spielt die Szene, danach ✅/❌ je Szene. t-x-Plan mit festen Akteuren und Drehbuch-Punkten. Kein g.Z.-Polizist (Regie-Werte). Bewertung wie H. 2 weitere Aufträge nach Freigabe |
 | E | Fehlerjagd (errorhunt) | ✓ | Ralfs Diagramm hat genau einen falschen Abschnitt |
 | F | Live-Steuerung (live) | ✓ | vₓ per Regler, Spur gegen Soll |
 | G | Beschreiben (describe) | ✓ [W3] | **Fachsprache**, gute Distraktoren; „verzögert/bremst“ nur, wenn \|v\| abnimmt |

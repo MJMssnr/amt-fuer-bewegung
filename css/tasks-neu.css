@@ -53,3 +53,13 @@
 #task.await-tap { cursor: pointer; }
 #task.await-tap .t-reward { animation: blink 1.4s steps(2) infinite; }
 #task.await-tap .t-reward.hidden { display: inline-block !important; }
+
+/* D Regie */
+.drehbuch { background: #fffdf6; box-shadow: 0 0 0 2px var(--ink); padding: 6px 10px; margin: 6px 0; font-size: 14px; }
+.db-head { font-family: var(--title); color: var(--bad); font-size: 13px; }
+.db-events { margin: 4px 0; padding-left: 22px; }
+.db-cast { margin: 2px 0 0; padding-left: 18px; color: #3a4466; font-size: 13px; }
+.dr-star { fill: var(--gold); stroke: var(--ink); stroke-width: 2; }
+.g-note.dr-num { font: 13px var(--pixel); fill: var(--ink); paint-order: stroke; stroke: #fffdf6; stroke-width: 3px; }
+.g-trace-direct polyline { fill: none; stroke: var(--accent); stroke-width: 2.6; }
+.dr-clap { font-family: var(--pixel); color: #f4f4f4; font-size: 14px; }

@@ -6,7 +6,7 @@ Stand: 23.10.2026 (Sitzung 2). Reihenfolge offen, Herr Messner entscheidet.
 - derzeit keine
 
 ## In Arbeit (Sitzung 2, Branch, noch nicht auf main)
-- Aufgabentyp **D Regie** (Variante a), 3 Aufträge
+- **D Regie**: Testauftrag „Der Imagefilm“ fertig; 2 weitere Aufträge nach Playtest (Ideen: Einholen mit Wartezeit t₀, Begegnung dreier Akteure)
 
 ## Wartet auf Playtest-Feedback
 - B Freihand („Brezels Tagebuch“), K Flächen-Puzzle, L Steigungsdreieck, Auftragsbuch, Schrift, Feinraster

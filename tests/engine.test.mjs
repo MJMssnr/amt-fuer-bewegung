@@ -202,3 +202,16 @@ test('Gültige Ziffern nach Herrn Messners Regeln', async () => {
   assert.equal(sigSuggest(13.333), '13');
   assert.equal(sigSuggest(1200), '1,2 · 10³');
 });
+
+test('Regie: Drehbuch-Ereignisse prüfen', async () => {
+  const { runTake } = await import('../js/engine/direct.js');
+  const base = JSON.parse((await import('node:fs')).readFileSync(new URL('../data/scenarios/regie-imagefilm.json', import.meta.url)));
+  const events = [{ type: 'at', actor: 'jo', t: 10, x: 160 }, { type: 'meet', a: 'kevin', b: 'jo', t: 20, x: 120 }];
+  const good = runTake(base, { jo: { x0: 200, v: -4 } }, 25, events);
+  assert.ok(good.results.every((r) => r.ok), JSON.stringify(good.results.map((r) => [r.t, r.x])));
+  const bad = runTake(base, { jo: { x0: 200, v: 4 } }, 25, events);
+  assert.ok(!bad.results[0].ok && !bad.results[1].ok);
+  // Wartezeit t₀: steht erst, fährt dann los
+  const wait = runTake(base, { jo: { x0: 120, v: -6, t0: 20 } }, 25, [{ type: 'at', actor: 'jo', t: 22, x: 108 }]);
+  assert.ok(wait.results[0].ok);
+});

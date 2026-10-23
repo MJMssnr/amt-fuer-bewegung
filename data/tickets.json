@@ -981,5 +981,82 @@
       ["florian", "Von 9,0 m/s auf 0 in 3,0 s: aₓ = −3,0 m/s². Der Betrag 3,0 m/s² liegt unter den erlaubten 3,5 m/s²."],
       ["oetzi", "Siehste! Der Kaffee war einfach zu voll. Ich häng das Diagramm in den Bus."]
     ]
+  },
+  {
+    "id": "t30-regie-imagefilm",
+    "title": "Der Imagefilm",
+    "from": "kranz",
+    "node": "rathaus",
+    "requires": ["t05-radeln"],
+    "reward": 90,
+    "scenario": "regie-imagefilm",
+    "intro": [
+      ["kranz", "Herr Doktor Brandl! Die Stadt dreht einen Imagefilm. Und Sie – Sie führen Regie!"],
+      ["kranz", "Kevin radelt vom Radl-Eck los, Jo kommt ihm auf dem Skateboard entgegen. Zwei Kameras, zwei Momente. Alles muss auf die Sekunde stimmen!"],
+      ["florian", "Regie im t-x-Diagramm. Zwei Punkte legen eine Gerade fest – mal sehen, ob Jo mitspielt."]
+    ],
+    "task": {
+      "type": "direct",
+      "tEnd": 25,
+      "controls": [
+        {
+          "actor": "jo",
+          "fields": ["x0", "v"]
+        }
+      ],
+      "events": [
+        {
+          "type": "at",
+          "actor": "jo",
+          "t": 10,
+          "x": 160,
+          "label": "Kamera 1: Jo rollt bei t = 10 s am Brunnen vorbei (x = 160 m)."
+        },
+        {
+          "type": "meet",
+          "a": "kevin",
+          "b": "jo",
+          "t": 20,
+          "x": 120,
+          "label": "Kamera 2: Kevin und Jo begegnen sich bei t = 20 s vor dem Rathaus (x = 120 m)."
+        }
+      ],
+      "tolX": 2,
+      "tolT": 0.5,
+      "solution": {
+        "jo": {
+          "x0": 200,
+          "v": -4
+        }
+      },
+      "hints": {
+        "jo.v": [
+          {
+            "value": 4,
+            "text": "Jo fährt Kevin entgegen, also in negative x-Richtung: vₓ ist negativ."
+          },
+          {
+            "value": -8,
+            "text": "Δx zwischen den Kameras ist −40 m, Δt ist 10 s – nicht 5 s."
+          }
+        ],
+        "jo.x0": [
+          {
+            "value": 160,
+            "text": "160 m ist Jos Ort bei t = 10 s. Rechne zurück bis t = 0: x₀ = x − vₓ · t."
+          },
+          {
+            "value": 120,
+            "text": "120 m ist der Treffpunkt. Wo war Jo bei t = 0?"
+          }
+        ]
+      },
+      "prompt": "Stell Jos Startort und Geschwindigkeit so ein, dass beide Kameras ihren Moment bekommen.",
+      "paper": "Trage beide Drehbuch-Punkte ins t-x-Diagramm ein und verbinde sie: Das ist Jos Gerade. Steigung vₓ = Δx / Δt. Dann zurück bis t = 0: x₀ = x − vₓ · t."
+    },
+    "success": [
+      ["florian", "Jo startet bei 200 m und fährt mit −4,0 m/s. Bei 10 s ist sie am Brunnen, bei 20 s trifft sie Kevin vor dem Rathaus."],
+      ["kranz", "Und – Schnitt! Wunderbar! Das wird der schönste Imagefilm, den diese Stadt je hatte."]
+    ]
   }
 ]

@@ -13,6 +13,7 @@ const LOADERS = {
   freehand: () => import('./freehand.js'),     // B: Freihand mit Auto-Begradigung
   area: () => import('./area.js'),             // K: Flächen-Puzzle (Fläche unter t-vₓ = Δx)
   slope: () => import('./slope.js'),           // L: Steigungsdreieck
+  direct: () => import('./direct.js'),         // D: Regie (Variante a)
 };
 
 export async function loadTask(type) {
