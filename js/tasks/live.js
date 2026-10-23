@@ -4,6 +4,8 @@
 // Ticket-Feld "task":
 // { "type":"live", "actor":"plan", "player":"florian", "vmax":4, "tol":0.8, "ghost":false, "paper":"…", "prompt":"…" }
 // ghost:false blendet die Soll-Figur in der Animation aus (dann nur nach Diagramm steuern).
+// points:true zeigt im Plan nur die Eckpunkte zwischen den Abschnitten – die Linie denkt man sich selbst [W28].
+// Knopf „🐢 halbe Zeit“: Zeit läuft halb so schnell, damit man die Linie besser halten kann [W28].
 
 import { series, quantityAt } from '../engine/kinematics.js';
 import { Scene } from '../render/scene.js';
@@ -30,19 +32,24 @@ export function mount(root, { ticket, world, onSolved }) {
         <button class="btn live-step" data-d="0.5" aria-label="schneller">+</button>
       </div>
       <div class="live-v">vₓ = 0 m/s</div>
-      <button class="btn live-zero">Stopp (vₓ = 0)</button>
+      <div class="live-row"><button class="btn live-zero">Stopp (vₓ = 0)</button><button class="btn live-slow" type="button" aria-pressed="false">🐢 halbe Zeit</button></div>
     </div>
     <div class="paper-note"><strong>✎ Auf Papier</strong><span></span></div>`;
-  left.querySelector('.paper-note span').textContent = task.paper
-    ?? 'Lies aus dem Plan für jeden Abschnitt Δx und Δt ab und berechne vₓ = Δx/Δt, bevor du startest.';
+  // Grundsatz für alle F-Aufträge: Geschwindigkeiten vorher im Kopf oder auf Papier ausrechnen [W28]
+  left.querySelector('.paper-note span').textContent = `Rechne vor dem Start alle nötigen Geschwindigkeiten aus (vₓ = Δx / Δt) – dann klappt's! ${task.paper ?? ''}`.trim();
 
   right.innerHTML = `<p class="prompt"></p><figure class="graph-card axes-card"></figure>
     <div class="calc-actions"><button class="btn btn-check live-start">Start ▶</button></div>
     <div class="feedback" aria-live="polite"></div>`;
   right.querySelector('.prompt').textContent = task.prompt
     ?? 'Folge dem Plan! Die blaue Kurve ist das Soll, deine Bewegung wird orange mitgezeichnet.';
-  const g = graphInto(right.querySelector('.axes-card'), 'xt', series(target, 'x'),
+  const plan = task.points ? [] : series(target, 'x');
+  const g = graphInto(right.querySelector('.axes-card'), 'xt', plan,
     { tMax: world.tEnd, yRange: [Math.min(...xs) - range * 0.15, Math.max(...xs) + range * 0.15] });
+  if (task.points) { // nur die Eckpunkte des Plans
+    const corners = [...target.pieces.map((p) => p.t0), target.tEnd];
+    corners.forEach((t) => g.dot([t, quantityAt(target, 'x', t)], 'g-dot live-pt', 4.5));
+  }
 
   const slider = left.querySelector('.live-slider');
   const vLabel = left.querySelector('.live-v');
@@ -124,5 +131,13 @@ export function mount(root, { ticket, world, onSolved }) {
   }
 
   btnStart.addEventListener('click', start);
+  const slow = left.querySelector('.live-slow');
+  slow.addEventListener('click', () => {
+    const on = scene.rate !== 0.5;
+    scene.rate = on ? 0.5 : 1;
+    slow.setAttribute('aria-pressed', String(on));
+    slow.classList.toggle('on', on);
+    scene.draw();
+  });
   return { destroy: () => { running = false; scene.destroy(); } };
 }

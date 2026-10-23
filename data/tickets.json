@@ -640,7 +640,8 @@
       "player": "kevin",
       "vmax": 6,
       "ghost": false,
-      "prompt": "Fahre Kevins Tour genau nach Plan. Achtung, am Ende geht es zurück!",
+      "points": true,
+      "prompt": "Fahre Kevins Tour genau nach Plan. Diesmal zeigt der Plan nur die Eckpunkte – die Geraden dazwischen denkst du dir. Achtung, am Ende geht es zurück!",
       "paper": "Berechne vₓ für alle drei Abschnitte. Fällt die Kurve im t-x-Diagramm, ist vₓ negativ."
     },
     "success": [
@@ -1715,7 +1716,8 @@
       "player": "postbote",
       "vmax": 4,
       "ghost": false,
-      "prompt": "Lauf Pauls Runde genau nach dem Plan im t-x-Diagramm. Vier Abschnitte, keine Vorlage!",
+      "points": true,
+      "prompt": "Lauf Pauls Runde genau nach dem Plan. Schwer: Der Plan zeigt nur die Eckpunkte zwischen den Abschnitten, keine Linie. Vier Abschnitte, keine Vorlage!",
       "paper": "Berechne alle vier Geschwindigkeiten vorher: vₓ = Δx / Δt. Ein waagrechtes Stück heißt vₓ = 0, ein fallendes Stück heißt vₓ < 0."
     },
     "success": [
