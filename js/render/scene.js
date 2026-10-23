@@ -103,14 +103,20 @@ export class Scene {
     ctx.fillStyle = '#333c57'; ctx.fillRect(0, GROUND + 6, W, H - GROUND - 6);
 
     // Maßband
-    const step = niceStep(this.xr[1] - this.xr[0], 6);
+    ctx.font = '23px "AmtPixel", monospace'; // 10 px größer, Canvas wird verkleinert angezeigt [W18]
+    // so wenige Teilstriche, dass sich die (großen) Beschriftungen nicht überlappen
+    let step = niceStep(this.xr[1] - this.xr[0], 6);
+    for (let n = 6; n >= 2; n--) {
+      step = niceStep(this.xr[1] - this.xr[0], n);
+      const wide = Math.max(...[this.xr[0], this.xr[1]].map((v) => ctx.measureText(`${fmt(Math.ceil(Math.abs(v) / step) * step)} m`).width));
+      if (step * this.mx > wide + 14) break;
+    }
     ctx.fillStyle = '#ffcd75';
-    ctx.font = '13px "AmtPixel", monospace';
     ctx.textAlign = 'center';
     for (let x = Math.ceil(this.xr[0] / step) * step; x <= this.xr[1] + 1e-9; x += step) {
       const px = Math.round(this.X(x));
       ctx.fillRect(px, GROUND + 6, 2, 8);
-      ctx.fillText(`${fmt(x)} m`, px + 1, GROUND + 28);
+      ctx.fillText(`${fmt(x)} m`, px + 1, H - 4);
     }
 
     // Akteure
@@ -140,15 +146,17 @@ export class Scene {
     }
 
     // Zeitanzeige
-    ctx.fillStyle = 'rgba(26,28,44,0.75)';
-    ctx.fillRect(8, 8, this.rate !== 1 ? 156 : 118, 22);
-    ctx.fillStyle = '#f4f4f4';
+    ctx.font = '23px "AmtPixel", monospace'; // 10 px größer [W18]
     ctx.textAlign = 'left';
-    ctx.font = '15px "AmtPixel", monospace';
-    ctx.fillText(`t = ${fmt(this.t, 1)} s`, 16, 24);
-    if (this.rate !== 1) {
+    const tTxt = `t = ${fmt(this.t, 1)} s`, rTxt = this.rate !== 1 ? `  ×${this.rate}` : '';
+    const tw = ctx.measureText(tTxt).width, rw = ctx.measureText(rTxt).width;
+    ctx.fillStyle = 'rgba(26,28,44,0.75)';
+    ctx.fillRect(8, 8, tw + rw + 18, 30);
+    ctx.fillStyle = '#f4f4f4';
+    ctx.fillText(tTxt, 17, 31);
+    if (rTxt) {
       ctx.fillStyle = '#ffcd75';
-      ctx.fillText(`×${this.rate}`, 126, 24);
+      ctx.fillText(rTxt, 17 + tw, 31);
     }
   }
 }

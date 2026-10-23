@@ -16,3 +16,35 @@
 .g-note.leg { font: 12px var(--pixel); fill: #a3402a; paint-order: stroke; stroke: #fffdf6; stroke-width: 3px; }
 .g-band.sl-seg { fill: rgba(255, 205, 117, .28); pointer-events: none; }
 .sl-info { margin: 4px 0; font-size: 13px; }
+
+/* g.Z.-Polizist: drängt sich groß ins Rätselfenster */
+.police { position: absolute; inset: 0; z-index: 25; display: flex; align-items: flex-end; justify-content: center; gap: 14px; padding: 10px 16px 14px;
+  background: rgba(26, 28, 44, .55); cursor: pointer; animation: pol-dim .3s ease-out both; }
+.police .pol-fig { position: relative; flex: none; animation: pol-in .45s cubic-bezier(.2, 1.4, .4, 1) both; transform-origin: bottom center; }
+.police canvas { display: block; height: min(62vh, 300px); width: auto; image-rendering: pixelated; filter: drop-shadow(4px 4px 0 rgba(0,0,0,.4)); }
+.police.angry .pol-fig { animation: pol-in .45s cubic-bezier(.2, 1.4, .4, 1) both, pol-stomp .32s .45s steps(2) infinite; }
+.police.calm .pol-fig { animation: pol-sway 1.6s ease-in-out infinite; }
+.police.leaving .pol-fig { animation: pol-out .38s ease-in both; }
+.police.leaving { animation: pol-dim .38s ease-in reverse both; }
+.pol-bubble { position: relative; max-width: 460px; margin-bottom: 18%; background: var(--panel); padding: 10px 14px 14px; font-size: 17px; line-height: 1.35;
+  box-shadow: 0 0 0 3px var(--ink), 0 0 0 6px #f4f4f4, 0 0 0 9px var(--ink); animation: pop .3s .35s ease-out both; }
+.police.angry .pol-bubble { box-shadow: 0 0 0 3px var(--ink), 0 0 0 6px #ffb3a7, 0 0 0 9px var(--bad); }
+.pol-name { font-family: var(--title); color: #2a4d8f; font-size: 14px; margin-bottom: 4px; }
+.police.angry .pol-text { font-weight: 600; }
+.pol-more { position: absolute; right: 10px; bottom: 2px; font-size: 12px; animation: blink 1s steps(2) infinite; }
+/* Pixelherz zum Abschied */
+.pol-heart { position: absolute; top: 4%; right: -18%; width: 1px; height: 1px; transform: scale(6); transform-origin: top left; animation: pol-heart 1s ease-in-out infinite;
+  background: conic-gradient(transparent 0 0); box-shadow:
+    1px 0 #e43b44, 2px 0 #e43b44, 4px 0 #e43b44, 5px 0 #e43b44,
+    0 1px #e43b44, 1px 1px #ff8a8a, 2px 1px #e43b44, 3px 1px #e43b44, 4px 1px #e43b44, 5px 1px #e43b44, 6px 1px #e43b44,
+    0 2px #e43b44, 1px 2px #e43b44, 2px 2px #e43b44, 3px 2px #e43b44, 4px 2px #e43b44, 5px 2px #e43b44, 6px 2px #e43b44,
+    1px 3px #e43b44, 2px 3px #e43b44, 3px 3px #e43b44, 4px 3px #e43b44, 5px 3px #e43b44,
+    2px 4px #e43b44, 3px 4px #e43b44, 4px 4px #e43b44, 3px 5px #e43b44; }
+.pol-heart::before { content: ''; }
+@keyframes pol-dim { from { background: rgba(26, 28, 44, 0); } }
+@keyframes pol-in { from { transform: translateX(70vw) rotate(12deg); } 70% { transform: translateX(-12px) rotate(-3deg); } to { transform: none; } }
+@keyframes pol-out { to { transform: translateX(70vw) rotate(10deg); } }
+@keyframes pol-stomp { 0% { transform: translate(-4px, 0) rotate(-2deg); } 100% { transform: translate(4px, -6px) rotate(2deg); } }
+@keyframes pol-sway { 50% { transform: rotate(1.5deg) translateY(-2px); } }
+@keyframes pol-heart { 50% { transform: scale(7) translateY(-1px); } }
+@media (max-height: 500px) { .pol-bubble { font-size: 14px; margin-bottom: 8%; } .police canvas { height: 64vh; } }

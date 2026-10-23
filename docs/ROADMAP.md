@@ -7,7 +7,6 @@ Stand: 23.10.2026 (Sitzung 2). Reihenfolge offen, Herr Messner entscheidet.
 
 ## In Arbeit (Sitzung 2, Branch, noch nicht auf main)
 - Aufgabentyp **D Regie** (Variante a), 3 Aufträge
-- **g.Z.-Polizist** und gültige Ziffern in Florians Zusammenfassungen
 
 ## Wartet auf Playtest-Feedback
 - B Freihand („Brezels Tagebuch“), K Flächen-Puzzle, L Steigungsdreieck, Auftragsbuch, Schrift, Feinraster

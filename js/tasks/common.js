@@ -4,7 +4,11 @@
 import { series } from '../engine/kinematics.js';
 import { drawGraph, KINDS } from '../render/graph.js';
 import { Scene } from '../render/scene.js';
-import { fmt } from '../render/format.js';
+import { fmt as fmtRaw } from '../render/format.js';
+import { atLeast2 } from '../engine/sigfig.js';
+
+// Angaben im Datenblatt nie mit nur 1 g.Z. („4,0 s“, „3,0 m/s“) [W18]
+const fmt = (v) => atLeast2(fmtRaw(v), v);
 
 /**
  * Zeichnet ein Diagramm passend zum Seitenverhältnis seines (bereits eingehängten) Kastens,

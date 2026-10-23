@@ -6,6 +6,7 @@
 import { buildWorld } from '../engine/kinematics.js';
 import { Scene } from '../render/scene.js';
 import { fmt } from '../render/format.js';
+import { atLeast2 } from '../engine/sigfig.js';
 import { frame } from './common.js';
 import { questionBlock } from './questions.js';
 
@@ -32,7 +33,7 @@ export function mount(root, { ticket, onSolved }) {
 
   right.innerHTML = `<p class="prompt"></p>
     <div class="r-data"><b>Deine Fahrt ${task.vehicle ?? 'mit dem Fahrrad'}:</b><br>
-      Geschwindigkeit: ${fmt(vKmh)} km/h · Bremsverzögerung: ${fmt(a)} m/s² · Reaktionszeit: <span class="r-tr">wird gemessen …</span></div>
+      Geschwindigkeit: ${fmt(vKmh)} km/h · Bremsverzögerung: ${atLeast2(fmt(a), a)} m/s² · Reaktionszeit: <span class="r-tr">wird gemessen …</span></div>
     <div class="r-q"></div>`;
   right.querySelector('.prompt').textContent = task.prompt ?? 'Erst messen, dann rechnen: Wie lang ist DEIN Anhalteweg?';
 
@@ -93,7 +94,7 @@ export function mount(root, { ticket, onSolved }) {
       { label: 'Anhalteweg', symbol: 's_A', unit: 'm', truth: sR + sB,
         hints: [{ value: sB, text: 'Das ist nur der Bremsweg. Während der Reaktionszeit fährst du ungebremst weiter!' }] },
     ];
-    questionBlock(right.querySelector('.r-q'), qs, { onSolved: (r) => showRide(tR, r) });
+    questionBlock(right.querySelector('.r-q'), qs, { onSolved: (r) => showRide(tR, r), sig: task.sigCheck !== false });
   }
 
   // Belohnung: die eigene Fahrt als Animation

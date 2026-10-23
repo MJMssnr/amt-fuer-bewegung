@@ -183,11 +183,27 @@ const postbote = {
     [...postTop, '...BB.BB..', '...B....B.', '...B.....B', '..kk....kk'],
   ],
 };
+// g.Z.-Polizist [W16]: blaue Uniform, Mütze mit Stern, Schnurrbart, Trillerpfeife (w). polizist_rot = wütend (roter Kopf)
+const polTop = [
+  '...kkkkkk...', '..kUUUUUUk..', '..kUUyyUUk..', '.kkkkkkkkkk.', '..kssssssk..', '..kskssksk..',
+  '..kssssssk..', '..ksHHHHsk..', '...ksssskww.', '....kkkk....', '..kUUUUUUk..', '.kUUUyUUUUk.',
+  '.kUUUUUUUUk.', '.ksUUUUUUsk.', '..kuuuuuuk..',
+];
+const polizist = {
+  w: 12, h: 18, fps: 4, turns: true, palette: { U: '#2a4d8f', u: '#1c2f5c' },
+  frames: [
+    [...polTop, '..kuuk.kuuk.', '..kuuk.kuuk.', '.kkkk..kkkk.'],
+    [...polTop, '..kuuk.kuuk.', '..kuuk.kkkk.', '.kkkk.......'],
+  ],
+};
+const polizist_rot = { ...polizist, palette: { ...polizist.palette, s: '#e8705f', S: '#c24f45' } };
+
 const sprites = {
   palette,
   sprites: {
     florian, florian_down, florian_up, florian_side, car_red: car, cyclist, cyclist_b, kevin, broesel, dog,
     bus, oetzi, kranz, baecker, filiale, skater, jo, cart, florian_note, florian_photo, oma_rollator, sled, ohm: { ...kranz, palette: { r: '#c2a56b', p: '#257179', y: '#f4f4f4' } }, postbote, ralf: { ...oetzi, palette: { b: '#e43b44', B: '#ffcd75', d: '#3b5dc9' } },
+    polizist, polizist_rot,
   },
 };
 for (const [name, sp] of Object.entries(sprites.sprites))

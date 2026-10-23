@@ -60,7 +60,7 @@
 | L | Steigungsdreieck (slope) | ✓ 3 Aufträge [W17] | Zwei Punkte antippen (rasten aufs Feinraster), Δt und Δx am **eigenen** Dreieck ablesen, Steigung berechnen. Dreieck nach erstem Prüfen fest |
 
 - **Kennbuchstaben** stehen in `js/tasks/types.js` und werden **nie umnummeriert** (Schüler bekommen sie als PDF zum Selbstcheck) [W16]. Anzeige als gelbes Badge im Auftragskopf und im Auftragsbuch; keine Farbcodierung (bei vielen Typen verwirrend).
-- **Schwierigkeit** [W17]: künftig Feld `difficulty` (leicht/mittel/schwer) pro Ticket, steuert Lohn und Toleranz. Einstufung nach Playtests; Herr Messner fragt die Einstufung ab und gibt verbal Rückmeldung.
+- **Schwierigkeit** [W17, W19]: Feld `difficulty` (leicht/mittel/schwer) pro Ticket, eingetragen nach Playtest durch Herrn Messner. Steuert später Lohn und Toleranz (noch ohne Wirkung). Herr Messner fragt die Einstufung ab und gibt verbal Rückmeldung.
 
 Jeder neue Typ: mindestens 3 konkrete Aufträge [W8].
 
@@ -71,7 +71,7 @@ Jeder neue Typ: mindestens 3 konkrete Aufträge [W8].
 - Rechnen/Ablesen (H, C), Live (F), Konstrukteur, Reaktionstest: erster Versuch voll; nach Hinweisen selbst gelöst halb; **„Lösung zeigen“ → 0 €** [W8].
 - Verpatzt → **Nachfrage**: kommt nach 2 weiteren Aufträgen mit **neuer Zufallsvariante** zurück [W10].
 - **Zufallsvarianten** pro Spieler (Seed), damit Schüler nicht abschreiben [W10].
-- **Gültige Ziffern (g.Z.)** [W16, W17]: g.Z. = Ziffern ab der ersten von 0 verschiedenen (00035,4455 → 6; 1,00 → 3; 120 → 3). Standard im Spiel: **2 g.Z.** **Eine g.Z. ist immer zu wenig!** Eingabe mit 1 g.Z. (z. B. „3“ statt „3,0“) → g.Z.-Polizist; **≥ 4 g.Z.** → Polizist („so genau geht das hier nicht“). 2 oder 3 g.Z. sind okay. **0 hat keine g.Z.** → kein Polizist. Naturkonstanten (g = 9,81 m/s², π) gelten als exakt und begrenzen die Genauigkeit nicht. **Kein Geldabzug** für g.Z.-Fehler. Florians Zusammenfassungen nach dem Auftrag nennen Werte mit mindestens 2 g.Z. (z. B. „6,0 m“, nicht „6 m“).
+- **Gültige Ziffern (g.Z.)** [W16, W17]: g.Z. = Ziffern ab der ersten von 0 verschiedenen (00035,4455 → 6; 1,00 → 3; 120 → 3). Standard im Spiel: **2 g.Z.** **Eine g.Z. ist immer zu wenig!** Eingabe mit 1 g.Z. (z. B. „3“ statt „3,0“) → g.Z.-Polizist; **≥ 4 g.Z.** → Polizist („so genau geht das hier nicht“). 2 oder 3 g.Z. sind okay. **0 hat keine g.Z.** → kein Polizist. Naturkonstanten (g = 9,81 m/s², π) gelten als exakt und begrenzen die Genauigkeit nicht. **Kein Geldabzug** für g.Z.-Fehler. Alle Spieltexte (Dialoge, Hinweise, Datenblatt, Beschreibungen, `{Ausdrücke}`) nennen Werte mit mindestens 2 g.Z. (z. B. „6,0 m“, nicht „6 m“); exakte Umrechnungen wie 1 km = 1000 m bleiben [W18, W19]. Typ C (Achsen-Detektiv, Diagrammarbeit) prüft g.Z. nicht (`sigCheck: true` schaltet ein); alle anderen Eingabetypen prüfen (`sigCheck: false` schaltet aus). Polizist zählt Verwarnungen (localStorage), Texte in `data/police.json`, Regeln in `js/engine/sigfig.js`.
 - Balancing [W15]: Einrichtung um **20 %** teurer (gerundet auf 5 €) → 1220 €; Raketenteile bleiben bei 40 € (5 × 40 = 200 €), damit niemand vor der Prüfung hängen bleibt. Gesamt 1420 € von 1730 € verdienbar (≈ 82 %).
 
 ## 6. Bedienung
@@ -80,7 +80,7 @@ Jeder neue Typ: mindestens 3 konkrete Aufträge [W8].
 - Baumhaus: Shop-Menü einklappbar; jeder Gegenstand hat einen **festen Platz**, genug Platz lassen [W8].
 - Bestellungen bringt **Postbote Paul** (gelb) durch die Luke; Gegenstand erscheint erst nach dem Auspacken [W13].
 - Paul behält **immer** seinen vollen Dialog – keine Kurzfassung. Herr Messner mag den Postboten sehr [W15].
-- **Auftragsbuch 📖** im HUD, **immer verfügbar** [W16, W17]: blaues Notizbuch mit Pixel-Aufschrift „Aufträge“, Öffnungs-Animation ca. 1 s (heranzoomen, Deckel klappt auf). Liste in **Reihenfolge der Annahme** (oben zuerst), dann offene Aufträge. Spalten: Nr., Status, Typ-Buchstabe, Auftrag, Auftraggeber, Ort, verdientes Geld. Status: grüner Kreis mit weißem ✓ (voll), gelber Kreis mit ~ (halb), roter Kreis mit weißem ✕ (verpatzt). Spielstand speichert `order` und `earned`.
+- **Auftragsbuch 📖** im HUD, **immer verfügbar** [W16, W17]: blaues Notizbuch mit Pixel-Aufschrift „Aufträge“, Öffnungs-Animation ca. 0,5 s (heranzoomen, Deckel klappt auf; vorher 1 s, war zu lang [W19]). Liste in **Reihenfolge der Annahme** (oben zuerst), dann offene Aufträge. Spalten: Nr., Status, Typ-Buchstabe, Auftrag, Auftraggeber, Ort, verdientes Geld. Status: grüner Kreis mit weißem ✓ (voll), gelber Kreis mit ~ (halb), roter Kreis mit weißem ✕ (verpatzt). Spielstand speichert `order` und `earned`.
 - **Testmodus** [W16, W17]: **20× im Startbildschirm auf Oma Gerda tippen**, am Notebook „amtstest“ tippen oder `?amtstest=1`. Nicht leicht erratbar (Schüler!). Kein Strg+Shift+T (vom Browser belegt). Im Auftragsbuch dann: gesperrte Aufträge sehen, ▶ starten, ✔/◐/✘ setzen, ↺ zurücksetzen, +100 €, alle abhaken.
 - **Freischaltplan**: `docs/QUESTPLAN.md` (Mermaid) und `docs/questplan.png`, erzeugt mit `node tools/questplan.mjs` + `dot`. PNG auf Nachfrage schicken [W16].
 
@@ -105,6 +105,7 @@ Jeder neue Typ: mindestens 3 konkrete Aufträge [W8].
 - Erster `requestAnimationFrame` kann negatives dt liefern → klemmen.
 - graph.js: der Block `// Kurve` wurde einmal versehentlich gelöscht; Regressionstest existiert.
 - Schriften sind lokal; im Cloud-Container sind npm-Registry und CDNs blockiert, Google-Fonts-Dateien kamen per sparse `git clone` von github.com/google/fonts.
+- Animation (Scene): Canvas ist intern 640 px breit und wird verkleinert angezeigt → Schrift dort groß (23 px), Maßband-Teilung passt sich der Beschriftungsbreite an [W19].
 - Diagrammraster: `niceStep` ohne 2,5 (sonst Rasterlinien bei 1,25 usw.); Feinraster über `minorDiv` (1→5, 2→4, 5→5 Kästchen). Achtung, wirkt auf alle Diagramme [W16].
 - `data/tickets.json` beim Ergänzen **nicht** komplett mit `json.dump` neu schreiben (zerstört das kompakte Format, riesiger Diff) – neue Tickets im Repo-Stil anhängen.
 - Lokale Schriften fürs Canvas mit `document.fonts.load(…)` vorladen, sonst Ersatzschrift.

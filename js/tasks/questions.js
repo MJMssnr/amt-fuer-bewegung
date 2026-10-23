@@ -5,10 +5,12 @@
 
 import { isClose, matchHint } from '../engine/answer.js';
 import { fmt, parseNum } from '../render/format.js';
+import { sigPatrol } from '../ui/police.js';
 
 const sym = (s) => (s ? s.replace(/_(\w+)/, '<sub>$1</sub>') : '');
 
-export function questionBlock(container, qs, { onSolved, rule = true }) {
+// sig: g.Z.-Polizist aktiv (Standard ja; pro Frage abschaltbar mit q.sig = false) [W16]
+export function questionBlock(container, qs, { onSolved, rule = true, sig = true }) {
   container.insertAdjacentHTML('beforeend', `
     <form class="calc-list" autocomplete="off"></form>
     <div class="calc-actions">
@@ -30,7 +32,7 @@ export function questionBlock(container, qs, { onSolved, rule = true }) {
   const fb = container.querySelector('.feedback');
   const btnCheck = container.querySelector('.btn-check');
   const btnReveal = container.querySelector('.btn-reveal');
-  let wrongChecks = 0, done = false;
+  let wrongChecks = 0, done = false, patrolling = false;
 
   inputs.forEach((inp, i) => inp.addEventListener('keydown', (e) => {
     if (e.key !== 'Enter') return;
@@ -46,8 +48,10 @@ export function questionBlock(container, qs, { onSolved, rule = true }) {
     setTimeout(() => onSolved({ attempts: wrongChecks + 1, grade }), 1400);
   }
 
-  function check() {
-    if (done) return;
+  async function check() {
+    if (done || patrolling) return;
+    patrolling = true;
+    try { await sigPatrol(qs.map((q, i) => ({ input: inputs[i], sig: q.sig })), { enabled: sig }); } finally { patrolling = false; }
     const msgs = [];
     let allRight = true;
     qs.forEach((q, i) => {

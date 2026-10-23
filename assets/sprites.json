@@ -1148,6 +1148,112 @@
     "B": "#ffcd75",
     "d": "#3b5dc9"
    }
+  },
+  "polizist": {
+   "w": 12,
+   "h": 18,
+   "fps": 4,
+   "turns": true,
+   "palette": {
+    "U": "#2a4d8f",
+    "u": "#1c2f5c"
+   },
+   "frames": [
+    [
+     "...kkkkkk...",
+     "..kUUUUUUk..",
+     "..kUUyyUUk..",
+     ".kkkkkkkkkk.",
+     "..kssssssk..",
+     "..kskssksk..",
+     "..kssssssk..",
+     "..ksHHHHsk..",
+     "...ksssskww.",
+     "....kkkk....",
+     "..kUUUUUUk..",
+     ".kUUUyUUUUk.",
+     ".kUUUUUUUUk.",
+     ".ksUUUUUUsk.",
+     "..kuuuuuuk..",
+     "..kuuk.kuuk.",
+     "..kuuk.kuuk.",
+     ".kkkk..kkkk."
+    ],
+    [
+     "...kkkkkk...",
+     "..kUUUUUUk..",
+     "..kUUyyUUk..",
+     ".kkkkkkkkkk.",
+     "..kssssssk..",
+     "..kskssksk..",
+     "..kssssssk..",
+     "..ksHHHHsk..",
+     "...ksssskww.",
+     "....kkkk....",
+     "..kUUUUUUk..",
+     ".kUUUyUUUUk.",
+     ".kUUUUUUUUk.",
+     ".ksUUUUUUsk.",
+     "..kuuuuuuk..",
+     "..kuuk.kuuk.",
+     "..kuuk.kkkk.",
+     ".kkkk......."
+    ]
+   ]
+  },
+  "polizist_rot": {
+   "w": 12,
+   "h": 18,
+   "fps": 4,
+   "turns": true,
+   "palette": {
+    "U": "#2a4d8f",
+    "u": "#1c2f5c",
+    "s": "#e8705f",
+    "S": "#c24f45"
+   },
+   "frames": [
+    [
+     "...kkkkkk...",
+     "..kUUUUUUk..",
+     "..kUUyyUUk..",
+     ".kkkkkkkkkk.",
+     "..kssssssk..",
+     "..kskssksk..",
+     "..kssssssk..",
+     "..ksHHHHsk..",
+     "...ksssskww.",
+     "....kkkk....",
+     "..kUUUUUUk..",
+     ".kUUUyUUUUk.",
+     ".kUUUUUUUUk.",
+     ".ksUUUUUUsk.",
+     "..kuuuuuuk..",
+     "..kuuk.kuuk.",
+     "..kuuk.kuuk.",
+     ".kkkk..kkkk."
+    ],
+    [
+     "...kkkkkk...",
+     "..kUUUUUUk..",
+     "..kUUyyUUk..",
+     ".kkkkkkkkkk.",
+     "..kssssssk..",
+     "..kskssksk..",
+     "..kssssssk..",
+     "..ksHHHHsk..",
+     "...ksssskww.",
+     "....kkkk....",
+     "..kUUUUUUk..",
+     ".kUUUyUUUUk.",
+     ".kUUUUUUUUk.",
+     ".ksUUUUUUsk.",
+     "..kuuuuuuk..",
+     "..kuuk.kuuk.",
+     "..kuuk.kkkk.",
+     ".kkkk......."
+    ]
+   ]
   }
  }
 }

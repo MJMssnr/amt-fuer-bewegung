@@ -178,3 +178,27 @@ test('Flächen-Puzzle: Zerlegung und Summe = Δx', async () => {
   near(Q.reduce((s, p) => s + p.area, 0), 6 + 4 - 4);
   assert.equal(segmentSlope(buildActor({ id: 'd', segments: [{ dt: 4, v: 3 }, { dt: 3, v: -2 }] }), 'x', 1).slope, -2);
 });
+
+test('Gültige Ziffern nach Herrn Messners Regeln', async () => {
+  const { countSig, sigVerdict, sigSuggest } = await import('../js/engine/sigfig.js');
+  assert.equal(countSig('00035,4455'), 6);
+  assert.equal(countSig('1,00'), 3);
+  assert.equal(countSig('120'), 3);
+  assert.equal(countSig('0,050'), 2);
+  assert.equal(countSig('-6'), 1);
+  assert.equal(countSig('0'), 0);
+  assert.ok(Number.isNaN(countSig('abc')));
+  assert.equal(sigVerdict('3'), 'few');
+  assert.equal(sigVerdict('3,0'), null);
+  assert.equal(sigVerdict('12'), null);
+  assert.equal(sigVerdict('2,45'), null);
+  assert.equal(sigVerdict('1200'), 'many');
+  assert.equal(sigVerdict('13,333'), 'many');
+  assert.equal(sigVerdict('0'), null);
+  assert.equal(sigVerdict('0,0'), null);
+  assert.equal(sigSuggest(3), '3,0');
+  assert.equal(sigSuggest(-6), '−6,0');
+  assert.equal(sigSuggest(0.5), '0,50');
+  assert.equal(sigSuggest(13.333), '13');
+  assert.equal(sigSuggest(1200), '1,2 · 10³');
+});

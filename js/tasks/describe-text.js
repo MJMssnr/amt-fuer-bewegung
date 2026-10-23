@@ -2,7 +2,10 @@
 // Reine Textlogik ohne DOM, damit sie testbar bleibt.
 // Regel: "verzögert" nur, wenn der Betrag der Geschwindigkeit abnimmt (vₓ und aₓ mit entgegengesetztem Vorzeichen).
 
-import { fmt } from '../render/format.js';
+import { fmt as fmtRaw } from '../render/format.js';
+import { atLeast2 } from '../engine/sigfig.js';
+
+const fmt = (v) => atLeast2(fmtRaw(v), v); // nie nur 1 g.Z. [W18]
 
 const EPS = 1e-9;
 const sgn = (x) => (Math.abs(x) < EPS ? 0 : Math.sign(x));

@@ -128,6 +128,23 @@ export function sfx(name) {
   if (name === 'ok') { tone(660, 0, 0.12); tone(990, 0.1, 0.18); }
   else if (name === 'bad') { tone(220, 0, 0.16, 'square', 0.1); tone(160, 0.12, 0.22, 'square', 0.1); }
   else if (name === 'coin') { tone(988, 0, 0.08, 'square', 0.1); tone(1319, 0.07, 0.25, 'square', 0.1); }
+  else if (name === 'whistle') whistle();
+}
+
+/** Trillerpfeife (Sportunterricht) für den g.Z.-Polizisten: hoher Ton mit schnellem Triller */
+function whistle() {
+  const t = ctx.currentTime;
+  const o = ctx.createOscillator(), g = ctx.createGain(), lfo = ctx.createOscillator(), lg = ctx.createGain();
+  o.type = 'sine'; o.frequency.value = 2900;
+  lfo.type = 'square'; lfo.frequency.value = 28; lg.gain.value = 180;
+  lfo.connect(lg).connect(o.frequency);
+  g.gain.setValueAtTime(0, t);
+  g.gain.linearRampToValueAtTime(0.16, t + 0.02);
+  g.gain.setValueAtTime(0.16, t + 0.18); g.gain.linearRampToValueAtTime(0.05, t + 0.24);
+  g.gain.linearRampToValueAtTime(0.18, t + 0.3); g.gain.setValueAtTime(0.18, t + 0.7);
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.85);
+  o.connect(g).connect(buses.sfx);
+  o.start(t); lfo.start(t); o.stop(t + 0.9); lfo.stop(t + 0.9);
 }
 
 // ---------- Natur (Stadtkarte) ----------

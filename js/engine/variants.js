@@ -9,6 +9,7 @@
 // Ein String, der nur aus einem Ausdruck besteht (z. B. "value": "{3000/va}"), wird zur Zahl.
 
 import { fmt } from '../render/format.js';
+import { atLeast2 } from './sigfig.js';
 
 const SAFE = /^[\d\s+\-*/().,a-zA-Z_]*$/;
 const MATH = ['abs', 'sqrt', 'round', 'min', 'max', 'PI'];
@@ -49,7 +50,7 @@ function templ(value, params) {
     if (whole) return evalExpr(whole[1], params);
     return value.replace(/\{([^{}]+)\}/g, (_, e) => {
       const r = evalExpr(e, params);
-      return typeof r === 'number' ? fmt(r) : String(r);
+      return typeof r === 'number' ? atLeast2(fmt(r), r) : String(r); // Florian: nie nur 1 g.Z.
     });
   }
   if (Array.isArray(value)) return value.map((v) => templ(v, params));

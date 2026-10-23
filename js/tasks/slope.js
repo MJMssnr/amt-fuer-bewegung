@@ -88,7 +88,7 @@ export function mount(root, { ticket, world, onSolved }) {
   });
   info.textContent = `Der gelbe Bereich ist der Abschnitt von ${fmt(seg.t0)} s bis ${fmt(seg.t1)} s.`;
 
-  questionBlock(right.querySelector('.sl-q'), qs, { onSolved });
+  questionBlock(right.querySelector('.sl-q'), qs, { onSolved, sig: task.sigCheck !== false });
   right.querySelector('.sl-q .btn-check').addEventListener('click', () => { locked = true; });
   return { destroy: () => L.destroy() };
 }

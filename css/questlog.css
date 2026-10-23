@@ -16,9 +16,9 @@
   transform-origin: left center; backface-visibility: hidden; opacity: 0; pointer-events: none; }
 .ql-cover-title { font-family: var(--title, var(--pixel)); font-size: clamp(28px, 7vw, 56px); text-shadow: 4px 4px 0 #1a1c2c; padding: 8px 20px; border: 4px solid #ffcd75; }
 .ql-cover-sub { font-family: var(--title, var(--pixel)); font-size: 13px; color: #f4f4f4; opacity: .85; }
-#questlog.opening { animation: ql-dim .9s ease-out both; }
-#questlog.opening .ql-book { animation: ql-fly .9s cubic-bezier(.2, .8, .3, 1) both; }
-#questlog.opening .ql-cover { animation: ql-open 1s ease-in both; }
+#questlog.opening { animation: ql-dim .45s ease-out both; }
+#questlog.opening .ql-book { animation: ql-fly .45s cubic-bezier(.2, .8, .3, 1) both; }
+#questlog.opening .ql-cover { animation: ql-open .5s ease-in both; } /* doppelt so schnell [W18] */
 @keyframes ql-dim { from { background: rgba(26, 28, 44, 0); } }
 @keyframes ql-fly { from { transform: translate(34vw, -42vh) scale(.08) rotate(-8deg); } 55% { transform: scale(1.03); } to { transform: none; } }
 @keyframes ql-open { 0%, 50% { opacity: 1; transform: rotateY(0); } 95% { opacity: 1; } 100% { opacity: 0; transform: rotateY(-175deg); } }

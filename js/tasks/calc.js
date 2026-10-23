@@ -27,7 +27,7 @@ export function mount(root, { ticket, world, onSolved }) {
 
   right.innerHTML = '<p class="prompt"></p>';
   right.querySelector('.prompt').textContent = task.prompt ?? 'Rechne auf Papier und trage die Ergebnisse ein.';
-  questionBlock(right, qs, { onSolved });
+  questionBlock(right, qs, { onSolved, sig: task.sigCheck !== false });
 
   return { destroy: () => L.destroy() };
 }

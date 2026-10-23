@@ -40,7 +40,8 @@ export function mount(root, { ticket, world, onSolved }) {
   if (marks.includes('t')) qs.push({ label: 'Wert an der markierten t-Linie', unit: 's', truth: mt * tR.step, hints: task.hints?.t });
   if (marks.includes('y')) qs.push({ label: `Wert an der markierten ${K.axis}-Linie`, unit: K.unit, truth: my * yR.step, hints: task.hints?.y,
     help: 'Suche einen Punkt der Kurve, dessen Wert du aus den Daten kennst. Zähle dann die Kästchen bis zur markierten Linie.' });
-  questionBlock(right, qs, { onSolved, rule: false });
+  // Diagrammarbeit: g.Z. hier nicht so wichtig → Polizist nur, wenn das Ticket sigCheck: true setzt [W18]
+  questionBlock(right, qs, { onSolved, rule: false, sig: task.sigCheck === true });
 
   return { destroy: () => L.destroy() };
 }

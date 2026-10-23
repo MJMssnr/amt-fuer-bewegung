@@ -8,7 +8,10 @@
 import { series } from '../engine/kinematics.js';
 import { areaPieces, centroid } from '../engine/geometry.js';
 import { KINDS } from '../render/graph.js';
-import { fmt } from '../render/format.js';
+import { fmt as fmtRaw } from '../render/format.js';
+import { atLeast2 } from '../engine/sigfig.js';
+
+const fmt = (v) => atLeast2(fmtRaw(v), v); // nie nur 1 g.Z. [W18]
 import { buildLeft, frame, actorOf, graphInto } from './common.js';
 import { questionBlock } from './questions.js';
 
@@ -68,6 +71,6 @@ export function mount(root, { ticket, world, onSolved }) {
     hints: Math.abs(sumAbs - dx) > 1e-6 ? [{ value: dx, text: 'Das ist Δx. Für den Weg zählt jedes Stück positiv, auch das Zurücklaufen.' }] : [],
   });
 
-  questionBlock(right, qs, { onSolved });
+  questionBlock(right, qs, { onSolved, sig: task.sigCheck !== false });
   return { destroy: () => L.destroy() };
 }

@@ -5,6 +5,7 @@
     "from": "broesel",
     "node": "lindenstrasse",
     "reward": 50,
+    "difficulty": "leicht",
     "scenario": "sportwagen-tempo50",
     "intro": [
       ["broesel", "Junger Mann! Sind Sie das neue Amt? Dieser ROTE SPORTWAGEN rast hier jeden Morgen durch! Hier gilt Tempo 50!!!"],
@@ -45,6 +46,7 @@
     "node": "fahrradladen",
     "requires": ["t01-sportwagen"],
     "reward": 60,
+    "difficulty": "leicht",
     "scenario": "kevin-bremsen",
     "intro": [
       ["kevin", "Servus, Amt! Meine Bremsen fühlen sich weich an. Der Radl-Tacho hat mitgeschrieben: erst eine Schrecksekunde, dann Vollbremsung."],
@@ -89,6 +91,7 @@
     "node": "bushof",
     "requires": ["t02-kevin"],
     "reward": 70,
+    "difficulty": "leicht",
     "scenario": "bus-anfahren",
     "intro": [
       ["oetzi", "Griaß di! Die Fahrgäste beschweren sich übers Ruckeln. Ich sag: Ich fahr wie a Feder!"],
@@ -102,7 +105,7 @@
       "paper": "Berechne für jeden Abschnitt die Steigung Δvₓ/Δt im t-vₓ-Diagramm."
     },
     "success": [
-      ["florian", "Anfahren mit 1,5 m/s², dann gleichförmig, dann Bremsen mit −3 m/s². Das Bremsen ist doppelt so heftig wie das Anfahren."],
+      ["florian", "Anfahren mit 1,5 m/s², dann gleichförmig, dann Bremsen mit −3,0 m/s². Das Bremsen ist doppelt so heftig wie das Anfahren."],
       ["oetzi", "Ah geh. Also doch ich. Ab morgen brems ich früher."]
     ]
   },
@@ -113,6 +116,7 @@
     "node": "baeckerei",
     "requires": ["t01-sportwagen"],
     "reward": 60,
+    "difficulty": "leicht",
     "scenario": "hund-brezel",
     "intro": [
       ["baecker", "Herr Amt! Mein Hund Brezel rennt jeden Morgen zum Laternenpfahl, dann ein Stück zurück, und dann bleibt er stehen und schaut blöd. Ist das normal?"],
@@ -125,7 +129,7 @@
       "ask": "xt"
     },
     "success": [
-      ["florian", "4 s mit 3 m/s nach vorn, 3 s mit 2 m/s zurück, dann 2 s Stillstand. Er endet 6 m vom Start, ist aber 18 m gelaufen."],
+      ["florian", "4,0 s mit 3,0 m/s nach vorn, 3,0 s mit 2,0 m/s zurück, dann 2,0 s Stillstand. Er endet 6,0 m vom Start, ist aber 18 m gelaufen."],
       ["baecker", "18 Meter für nix. Wie mein Lehrling."]
     ]
   },
@@ -136,9 +140,10 @@
     "node": "park",
     "requires": ["t01-sportwagen"],
     "reward": 80,
+    "difficulty": "leicht",
     "scenario": "radeln-partnerstadt",
     "intro": [
-      ["kranz", "Herr Doktor Brandl! Morgen ist Partnerschafts-Radeln mit Unterbach. Anna startet bei uns, Bernd gleichzeitig in Unterbach, 3 km entfernt."],
+      ["kranz", "Herr Doktor Brandl! Morgen ist Partnerschafts-Radeln mit Unterbach. Anna startet bei uns, Bernd gleichzeitig in Unterbach, 3,0 km entfernt."],
       ["kranz", "Ich muss wissen, WANN und WO sie sich treffen. Da stelle ich das Rednerpult hin. Und die Blaskapelle."],
       ["florian", "Zwei Bewegungsgleichungen, einmal gleichsetzen. Das krieg ich hin."]
     ],
@@ -146,7 +151,7 @@
       "type": "calc",
       "given": ["anim", "data"],
       "prompt": "Wann und wo treffen sich Anna und Bernd?",
-      "paper": "Stelle für beide x(t) = x₀ + vₓ·t auf, setze die Gleichungen gleich und löse nach t auf. Setze t dann in eine der Gleichungen ein.",
+      "paper": "Stelle für beide x(t) = x₀ + vₓ·t auf, setze die Gleichungen gleich und löse nach t auf. Den Treffzeitpunkt kannst du zur Kontrolle auch in der Animation ablesen – den Ort aber bitte berechnen: t in eine der Gleichungen einsetzen. Achtung: Den Ort gibst du in km an!",
       "questions": [
         {
           "label": "Treffzeitpunkt",
@@ -161,7 +166,7 @@
           "hints": [
             {
               "value": "{3000/va}",
-              "text": "Das wäre die Zeit, die Anna allein für die ganzen 3 km bräuchte. Beide fahren aber gleichzeitig aufeinander zu."
+              "text": "Das wäre die Zeit, die Anna allein für die ganzen 3,0 km bräuchte. Beide fahren aber gleichzeitig aufeinander zu."
             },
             {
               "value": "{3000/vb}",
@@ -177,7 +182,7 @@
         {
           "label": "Treffpunkt (Ort)",
           "symbol": "x_T",
-          "unit": "m",
+          "unit": "km",
           "goal": {
             "type": "meet",
             "a": "anna",
@@ -186,15 +191,20 @@
           },
           "hints": [
             {
-              "value": "{3000*vb/(va+vb)}",
+              "value": "{3*vb/(va+vb)}",
               "text": "Das ist die Strecke, die Bernd gefahren ist. Gefragt ist der Ort x, gemessen von Annas Start."
             },
             {
-              "value": 1500,
+              "value": "{3000*va/(va+vb)}",
+              "text": "Der Wert stimmt – aber in Metern. Gefragt ist der Ort in km: 1 km = 1000 m.",
+              "tol": 50
+            },
+            {
+              "value": 1.5,
               "text": "Die Mitte wäre es nur bei gleichen Geschwindigkeiten."
             }
           ],
-          "help": "Setze t_T in Annas Gleichung x(t) = {va} m/s · t ein."
+          "help": "Setze t_T in Annas Gleichung x(t) = {va} m/s · t ein und rechne das Ergebnis in km um."
         }
       ]
     },
@@ -323,6 +333,7 @@
     "node": "skatepark",
     "requires": ["t04-brezel"],
     "reward": 70,
+    "difficulty": "leicht",
     "scenario": "skater-jo",
     "intro": [
       ["jo", "Ey, Amtsmensch! Der Stadtrat will ein Schild „Langsam fahren“ in den Skatepark stellen. Lächerlich."],
@@ -337,7 +348,7 @@
       "paper": "Notiere für jeden Abschnitt: Wie lange? Ändert sich vₓ? Nimmt der Betrag von vₓ zu oder ab? Berechne die Steigung im t-vₓ-Diagramm."
     },
     "success": [
-      ["florian", "4 s gleichmäßig beschleunigt mit 1 m/s², dann 3 s gleichförmig mit 4 m/s, dann verzögert bis zum Stillstand. 4 m/s sind 14,4 km/h. Kein Grund für ein Schild."],
+      ["florian", "4,0 s gleichmäßig beschleunigt mit 1,0 m/s², dann 3,0 s gleichförmig mit 4,0 m/s, dann verzögert bis zum Stillstand. 4,0 m/s sind 14,4 km/h. Kein Grund für ein Schild."],
       ["jo", "„Gleichmäßig verzögert“. Klingt, als wär ich ne Straßenbahn. Aber passt. Danke!"]
     ]
   },
@@ -373,6 +384,7 @@
     "node": "fahrradladen",
     "requires": ["t02-kevin"],
     "reward": 80,
+    "difficulty": "leicht",
     "scenario": "kevin-lieferung",
     "intro": [
       ["kevin", "Chef! Mein Radl-Tacho hat das Diagramm meiner Lieferfahrt ausgedruckt. Dann ist mein Kaffee drübergekippt."],
@@ -384,25 +396,25 @@
       "actor": "kevin",
       "given": ["anim", "data"],
       "graph": "vt",
-      "prompt": "Welche Werte gehören an die markierten Linien?",
-      "paper": "Berechne, wann Kevin stillsteht (Δt = Δv / a). Suche dann einen Wert, den du kennst (z. B. die konstante Geschwindigkeit), zähle die Kästchen und rechne bis zur markierten Linie hoch.",
+      "prompt": "Welche Werte gehören an die markierten Linien? Schau genau hin, was hier verlangt ist!",
+      "paper": "Schau genau hin, was hier verlangt ist: Gesucht sind die Werte an den markierten Linien, nicht die Werte der Kurve. Berechne, wann Kevin stillsteht (Δt = Δv / a). Suche dann einen Wert, den du kennst (z. B. die konstante Geschwindigkeit), zähle die Kästchen und rechne bis zur markierten Linie hoch.",
       "hints": {
         "t": [
           {
             "value": 4,
-            "text": "Nach 4 s beginnt erst das Bremsen. Wie lange dauert es bis zum Stillstand?"
+            "text": "Nach 4,0 s beginnt erst das Bremsen. Wie lange dauert es bis zum Stillstand?"
           }
         ],
         "y": [
           {
             "value": 9,
-            "text": "9 m/s ist die waagrechte Linie der Kurve. Die markierte Linie liegt etwas höher."
+            "text": "9,0 m/s ist die waagrechte Linie der Kurve. Die markierte Linie liegt etwas höher."
           }
         ]
       }
     },
     "success": [
-      ["florian", "Gebremst wird 9 m/s ÷ 2,25 m/s² = 4 s lang, die Fahrt endet also bei 8 s. Die 9 m/s liegen viereinhalb große Kästchen hoch, ein Kästchen sind also 2 m/s, und die markierte Linie liegt bei 10 m/s."],
+      ["florian", "Gebremst wird 9,0 m/s ÷ 2,25 m/s² = 4,0 s lang, die Fahrt endet also bei 8,0 s. Die 9,0 m/s liegen viereinhalb große Kästchen hoch, ein Kästchen sind also 2,0 m/s, und die markierte Linie liegt bei 10 m/s."],
       ["kevin", "Du bist ein Genie. Die Versicherung zahlt!"]
     ]
   },
@@ -446,6 +458,7 @@
     "node": "rathaus",
     "requires": ["t05-radeln"],
     "reward": 90,
+    "difficulty": "leicht",
     "scenario": "kranz-stadtlauf",
     "intro": [
       ["kranz", "Herr Doktor Brandl, ich bin beim Stadtlauf mitgelaufen! Die Lokalzeitung druckt mein t-x-Diagramm."],
@@ -456,10 +469,10 @@
       "actor": "kranz",
       "given": ["anim", "data"],
       "graph": "xt",
-      "paper": "Rechne die Strecke jedes Abschnitts aus und addiere. Achtung: Beim Bremsen von 3 m/s mit 1 m/s² dauert es 3 s."
+      "paper": "Rechne die Strecke jedes Abschnitts aus und addiere. Achtung: Beim Bremsen von 3,0 m/s mit 1,0 m/s² dauert es 3,0 s."
     },
     "success": [
-      ["florian", "9 m beim Anlaufen, 60 m gleichförmig, 4,5 m beim Auslaufen: 73,5 m nach 29 s. Die markierten Linien liegen bei 80 m und 30 s."],
+      ["florian", "9,0 m beim Anlaufen, 60 m gleichförmig, 4,5 m beim Auslaufen: 73,5 m nach 29 s. Die markierten Linien liegen bei 80 m und 30 s."],
       ["kranz", "Wunderbar! Und ich dachte, ich wäre einen Marathon gelaufen."]
     ]
   },
@@ -485,7 +498,7 @@
         "kind": "sign"
       },
       "paper": "Berechne für jeden Abschnitt Δx = vₓ·Δt und prüfe, ob das Diagramm dazu passt.",
-      "explain": "Im 2. Abschnitt läuft Brezel mit −2 m/s zurück. Ralf hat ihn aber weiter nach vorne laufen lassen."
+      "explain": "Im 2. Abschnitt läuft Brezel mit −2,0 m/s zurück. Ralf hat ihn aber weiter nach vorne laufen lassen."
     },
     "success": [
       ["ralf", "Ach so, das Minus! Ich dachte, Minus heißt nur „langsamer“. Danke!"]
@@ -514,7 +527,7 @@
         "factor": 0.5
       },
       "paper": "Berechne die Steigung jedes Abschnitts im t-vₓ-Diagramm und vergleiche mit der Beschleunigung aus den Daten.",
-      "explain": "Beim Bremsen ist aₓ = −2 m/s². Ralf hat die Steigung nur halb so groß gezeichnet, deshalb steht Kevin am Ende nicht."
+      "explain": "Beim Bremsen ist aₓ = −2,0 m/s². Ralf hat die Steigung nur halb so groß gezeichnet, deshalb steht Kevin am Ende nicht."
     },
     "success": [
       ["ralf", "Oh. Bei meiner Zeichnung wäre Kevin einfach weitergerollt. Gut, dass das nur auf Papier war!"]
@@ -649,7 +662,7 @@
       "paper": "Δx in jedem Abschnitt = Fläche unter der t-vₓ-Kurve. Gleichförmig: Gerade. aₓ < 0: Rechtskurve ⌢, aₓ > 0: Linkskurve ⌣."
     },
     "success": [
-      ["florian", "Erst eine Gerade bis 8 m, dann eine Rechtskurve, die bei 24 m waagrecht ausläuft."],
+      ["florian", "Erst eine Gerade bis 8,0 m, dann eine Rechtskurve, die bei 24 m waagrecht ausläuft."],
       ["ohm", "Sehr ordentlich. Woher kannst du das auf einmal so gut?"],
       ["florian", "Äh … Ferienjob."]
     ]
@@ -800,7 +813,7 @@
       "paper": "Berechne zuerst die Ortswerte an den Knickstellen: Δx = vₓ · Δt in jedem Abschnitt. Trage die Punkte ins Heft ein und verbinde sie – erst dann zeichnen."
     },
     "success": [
-      ["florian", "Gerade hoch bis 12 m bei 4 s, Gerade zurück bis 6,0 m bei 7 s, danach waagrecht bis 9 s."],
+      ["florian", "Gerade hoch bis 12 m bei 4,0 s, Gerade zurück bis 6,0 m bei 7,0 s, danach waagrecht bis 9,0 s."],
       ["baecker", "Das hänge ich in die Backstube. Neben das Meisterbrief-Foto."]
     ]
   },
@@ -889,6 +902,7 @@
     "node": "lindenstrasse",
     "requires": ["t01-sportwagen"],
     "reward": 70,
+    "difficulty": "mittel",
     "scenario": "sportwagen-abend",
     "intro": [
       ["broesel", "Junger Mann! Der rote Sportwagen war gestern Abend WIEDER da! Diesmal kam er mir aber viel schneller vor!"],

@@ -10,6 +10,7 @@ import { sigTolerance, isClose } from '../engine/answer.js';
 import { KINDS, rangeOf } from '../render/graph.js';
 import { fmt, parseNum } from '../render/format.js';
 import { buildLeft, frame, actorOf, graphInto } from './common.js';
+import { sigPatrol } from '../ui/police.js';
 
 const SHAPES = {
   line: { label: 'Gerade', path: 'M3 21 L25 3' },
@@ -118,8 +119,11 @@ export function mount(root, { ticket, world, onSolved }) {
     setTimeout(() => onSolved({ attempts: wrongChecks + 1, grade }), 2200);
   }
 
-  function check() {
-    if (done) return;
+  let patrolling = false;
+  async function check() {
+    if (done || patrolling) return;
+    patrolling = true;
+    try { await sigPatrol(inputs.map((input) => ({ input })), { enabled: task.sigCheck !== false }); } finally { patrolling = false; }
     const msgs = [];
     cols.forEach((col, i) => {
       const val = parseNum(inputs[i].value);
