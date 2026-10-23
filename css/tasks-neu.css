@@ -83,3 +83,6 @@
 .strobe-context { background: #fffdf6; box-shadow: 0 0 0 2px var(--ink); padding: 6px 10px; margin: 6px 0; font-size: 14px; }
 .strobe-photo.vertical { aspect-ratio: 1.25 / 1; }
 .strobe-photo.pendulum, .sb-build .strobe-photo.pendulum { aspect-ratio: 1.5 / 1; }
+
+/* Finale: Dialoge über der Finale-Szene [W24] */
+body.finale-on #dialog { z-index: 80; }

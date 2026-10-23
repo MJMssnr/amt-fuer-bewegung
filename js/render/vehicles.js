@@ -59,7 +59,8 @@ export function motorbike(P, x, y, dist, t = 0) {
 }
 
 /** Rakete (Mittelpunkt cx, Unterkante y), 12×34. thrust 0…1 */
-export function rocket(P, cx, y, t, thrust = 0) {
+export function rocket(P, cx, y, t, thrust = 0, red = false) {
+  const body = red ? '#e43b44' : '#f4f4f4', side = red ? '#a12a35' : '#c2c7cf', stripe = red ? '#f4f4f4' : '#e43b44', fin = red ? '#f4f4f4' : '#e43b44';
   const x = cx - 6;
   if (thrust > 0) {
     const len = Math.round((8 + Math.sin(t * 40) * 3 + Math.sin(t * 23) * 2) * thrust);
@@ -71,18 +72,18 @@ export function rocket(P, cx, y, t, thrust = 0) {
   }
   P.rect(x + 3, y - 2, 6, 2, '#566c86');
   // Flossen
-  P.rect(x - 2, y - 10, 4, 8, ink); P.rect(x - 1, y - 9, 3, 6, '#e43b44');
-  P.rect(x + 10, y - 10, 4, 8, ink); P.rect(x + 10, y - 9, 3, 6, '#e43b44');
+  P.rect(x - 2, y - 10, 4, 8, ink); P.rect(x - 1, y - 9, 3, 6, fin);
+  P.rect(x + 10, y - 10, 4, 8, ink); P.rect(x + 10, y - 9, 3, 6, fin);
   // Rumpf
   P.rect(x + 1, y - 27, 10, 25, ink);
-  P.rect(x + 2, y - 26, 8, 24, '#f4f4f4');
-  P.rect(x + 8, y - 26, 2, 24, '#c2c7cf');
-  P.rect(x + 2, y - 8, 8, 2, '#e43b44');
+  P.rect(x + 2, y - 26, 8, 24, body);
+  P.rect(x + 8, y - 26, 2, 24, side);
+  P.rect(x + 2, y - 8, 8, 2, stripe);
   P.blob(cx, y - 18, 2, ink); P.px(cx - 1, y - 19, '#73eff7'); P.px(cx, y - 18, '#41a6f6');
   // Spitze
   for (let i = 0; i < 7; i++) {
     const w = Math.max(1, 5 - Math.floor(i * 0.75));
-    P.rect(cx - w, y - 28 - i, 2 * w, 1, i === 6 ? ink : '#e43b44');
+    P.rect(cx - w, y - 28 - i, 2 * w, 1, i === 6 ? ink : red ? '#ffcd75' : '#e43b44');
   }
   P.px(cx - 2, y - 30, '#ff8a8a');
 }

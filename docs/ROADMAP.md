@@ -13,7 +13,7 @@ Stand: 23.10.2026 (Sitzung 2). Reihenfolge offen, Herr Messner entscheidet.
 - Danach: Feld `difficulty` (leicht/mittel/schwer) pro Ticket → Lohn und Toleranz
 
 ## Geplant
-- **Herr Messner als Raketenmann** + Raketenteile als Quest-Belohnung (Paket alle ~5 erfolgreiche Aufträge, kryptische Notiz), letzte Lieferung → Endgame-Animation mit Gratulation. Shop-Kauf der Teile entfällt dann (siehe ENTSCHEIDUNGEN § 2) [W18]
+- **Balancing Shop** nach Playtest: 23 Gegenstände für 2265 €, verdienbar 4950 € [W24/W26]
 - **Teil 2 (2D):** waagrechter und schiefer Wurf, grafische Vektoraddition. Engine kann 2D schon (`until: landing`, Vektoren `[x, y]`, Diagrammarten `yt`, `vyt`, `ayt`).
 - **Druck-Arbeitsblatt** (passend zur Papierstütze)
 - Stimme **frau_jung**

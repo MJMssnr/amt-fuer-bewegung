@@ -1,0 +1,39 @@
+{
+  "_info": "Texte der Abschluss-Sequenz [W24]. Reihenfolge der Stadt-Dankesworte = Reihenfolge des Auftritts.",
+  "carry": "Florian trägt die Kisten aus dem Baumhaus zum Bauplatz.",
+  "steps": [
+    "Schritt 1 von 7: Düse aufs Fundament.",
+    "Schritt 2 von 7: Alu-Röhre aufsetzen und verschweißen.",
+    "Schritt 3 von 7: Rote Bleche anbringen.",
+    "Schritt 4 von 7: Drei Flossen – für Stabilität und Stil.",
+    "Schritt 5 von 7: Blinkende Platine anschließen.",
+    "Schritt 6 von 7: Sitz mit Gurt einbauen.",
+    "Schritt 7 von 7: Spitzer Blechhut obendrauf!"
+  ],
+  "reading": ["Moment … Seite 4 … Flosse A an Rumpf B …", "„Schweißnaht sauber ziehen.“ Okay.", "„Bei Unklarheiten: Fragen Sie Ihren Physiklehrer.“ Ha!"],
+  "messner": [
+    ["florian", "Fertig! Eine echte, rote Rakete. Aber wer hat mir die Teile geschickt?"],
+    ["messner", "Das war ich. Hallo Florian, ich bin Herr Messner. Das „M.“ auf den Paketen."],
+    ["messner", "Du hast im Amt für Bewegung aller Art großartige Arbeit geleistet. Jeder Auftrag, jedes Diagramm, jede gültige Ziffer. Danke!"],
+    ["messner", "Der Raketenbausatz ist ein Geschenk. Und du wirst befördert: „Aller Art“ heißt nämlich auch zweidimensionale Bewegungen!"],
+    ["messner", "Würfe, Flugbahnen, Vektoren – das kommt als Nächstes. Aber vorher soll dir die Rakete einen kleinen vertikalen Genussmoment schenken. Als Dankeschön."],
+    ["florian", "Herr Messner … ich weiß gar nicht, was ich sagen soll. Danke!"]
+  ],
+  "town": [
+    ["kranz", "Im Namen der ganzen Stadt: Danke, Herr Doktor Brandl! Das Amt hätte keinen Besseren haben können."],
+    ["post", "Glückwunsch! Und ehrlich gesagt bin ich froh, dass ich erst mal keine Pakete mehr den Baum hochschleppen muss."],
+    ["broesel", "Erst ein roter Sportwagen, jetzt eine rote RAKETE! … Na gut. Für Sie mache ich eine Ausnahme, junger Mann."],
+    ["kevin", "Chef! Die ist schneller als mein Rad. Das muss ich neidlos zugeben."],
+    ["oetzi", "Servus! Die fährt ja ganz ohne Haltestelle. Respekt!"],
+    ["baecker", "Brezel und ich backen eine Raketen-Torte. Gleichmäßig aufgegangen, versprochen!"],
+    ["jo", "Krass, Amtsmensch. Das wird der krasseste Run, den diese Stadt je gesehen hat."],
+    ["filiale", "Und diesmal rollt nichts davon. Hoffe ich."],
+    ["ralf", "Ich zeichne das t-y-Diagramm vom Start! Diesmal ganz bestimmt richtig."],
+    ["gerda", "Passen Sie auf sich auf, junger Mann. Und ziehen Sie sich warm an da oben!"],
+    ["ohm", "Florian, Sie haben das Fach gerockt. Pardon: geraketet."],
+    ["slavi", "Ich habe eine neue Kamera! Diesmal streikt sie nicht. Alle lächeln!"],
+    ["polizist", "Beim Countdown bitte auf die gültigen Ziffern achten! … Ach was. Heute nicht. Viel Glück!"]
+  ],
+  "suit": [["florian", "Raumanzug an. Helm auf. Gurt fest. Ich bin bereit!"]],
+  "countdown": ["3,0", "2,0", "1,0", "ZÜNDUNG!"]
+}

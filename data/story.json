@@ -59,6 +59,16 @@
       "sprite": "ohm",
       "voice": "frau_mittel"
     },
+    "messner": {
+      "name": "Herr Messner",
+      "sprite": "messner",
+      "voice": "mann_kraeftig"
+    },
+    "polizist": {
+      "name": "g.Z.-Polizist",
+      "sprite": "polizist",
+      "voice": "mann_kraeftig"
+    },
     "slavi": {
       "name": "Slavi, Fotograf",
       "sprite": "slavi",

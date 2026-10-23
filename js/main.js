@@ -30,6 +30,7 @@ const getJSON = async (url) => {
 };
 
 let state = loadState();
+let finaleTexts = null;
 let tickets = [], story = {}, shop = {}, map = {}, overworld = null, room = null, busy = false;
 const scenarioCache = new Map();
 
@@ -228,7 +229,7 @@ async function onArrive(nodeId) {
     } else if (nodeId === 'bauplatz') {
       if (state.finaleReady && !state.finaleDone) {
         overworld.stop();
-        await playFinale();
+        await playFinale({ texts: finaleTexts ??= await getJSON('data/finale.json'), baerti: Boolean(state.items.waschbaer) });
         state.finaleDone = true;
         save();
         overworld.start();

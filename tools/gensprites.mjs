@@ -217,6 +217,22 @@ const baerti_sit = {
   frames: [[...bBody, '......kGGGGGGGk.......', '.......kkkkkkk........'], [...bBlink, '......kGGGGGGGk.......', '.......kkkkkkk........']],
 };
 
+// Herr Messner, der Raketenmann [W18/W24]: flache dunkle Cap nach vorn, dunkle Haare, Oberlippen- und Kinnbart
+// mit kleinem Dreieck unter der Unterlippe, weißes T-Shirt, Jeans, unauffällige Sneaker
+const mTop = [
+  '...hhhhh..', '..hhhhhhhh', '..dsssss..', '..dssks...', '..sdddds..', '...ddd....',
+  '...wwww...', '..wwwwww..', '..wwwwww..', '..swwwws..', '...bbbb...', '...bbbb...',
+];
+const messner = {
+  w: 10, h: 16, fps: 6, turns: true, palette: { h: '#3b2a1e', d: '#2a2a33', w: '#f7f7f7', N: '#b0b6c2' },
+  frames: [
+    [...mTop, '...bB.bB..', '...b...b..', '...b...b..', '..NN..NN..'],
+    [...mTop, '...bB.bB..', '..b....b..', '.b.....b..', 'NN....NN..'],
+  ],
+};
+// Florian im weißen Raumanzug (Helm zeichnet das Finale dazu)
+const florian_suit = { ...florian_down, palette: { g: '#f4f4f4', G: '#c2c7cf', l: '#e43b44', b: '#e9eef2', B: '#c2c7cf', w: '#94b0c2' } };
+
 // g.Z.-Polizist [W16]: blaue Uniform, Mütze mit Stern, Schnurrbart, Trillerpfeife (w). polizist_rot = wütend (roter Kopf)
 const polTop = [
   '...kkkkkk...', '..kUUUUUUk..', '..kUUyyUUk..', '.kkkkkkkkkk.', '..kssssssk..', '..kskssksk..',
@@ -237,7 +253,7 @@ const sprites = {
   sprites: {
     florian, florian_down, florian_up, florian_side, car_red: car, cyclist, cyclist_b, kevin, broesel, dog,
     bus, oetzi, kranz, baecker, filiale, skater, jo, cart, florian_note, florian_photo, oma_rollator, sled, ohm: { ...kranz, palette: { r: '#c2a56b', p: '#257179', y: '#f4f4f4' } }, postbote, ralf: { ...oetzi, palette: { b: '#e43b44', B: '#ffcd75', d: '#3b5dc9' } },
-    polizist, polizist_rot, slavi, fallschirm, baerti, baerti_sit,
+    polizist, polizist_rot, slavi, fallschirm, baerti, baerti_sit, messner, florian_suit,
   },
 };
 for (const [name, sp] of Object.entries(sprites.sprites))
