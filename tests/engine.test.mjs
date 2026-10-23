@@ -137,3 +137,13 @@ test('Zufallsvarianten: Ausdrücke, Texte, Szenario', () => {
   const seen = new Set([0, 1, 2, 3, 4, 5, 6, 7].map((s) => pickParams(tk, s).v));
   assert.equal(seen.size, 2);
 });
+
+test('Raster: Schritte ohne 2,5; Feinraster zählbar', async () => {
+  const { niceStep, minorDiv } = await import('../js/render/format.js');
+  assert.equal(niceStep(9, 4), 5);
+  assert.equal(niceStep(19, 5), 5);
+  assert.equal(minorDiv(5), 5);
+  assert.equal(minorDiv(2), 4);
+  assert.equal(minorDiv(10), 5);
+  assert.equal(minorDiv(0.2), 4);
+});

@@ -1,0 +1,31 @@
+/* Auftragsbuch (Questlog), Typ-Buchstaben, Testmodus */
+.type-badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 4px; font-family: var(--pixel); font-size: 15px; line-height: 1; background: var(--gold); color: var(--ink); box-shadow: 0 0 0 2px var(--ink); }
+.task-head .t-type { flex: none; }
+
+#questlog { position: absolute; inset: 0; z-index: 40; display: grid; place-items: center; padding: 10px; background: rgba(26, 28, 44, .72); }
+.ql-card { width: min(980px, 100%); max-height: calc(100dvh - 20px); display: flex; flex-direction: column; background: var(--panel); box-shadow: 0 0 0 3px var(--ink), 0 0 0 6px #f4f4f4, 0 0 0 9px var(--ink); animation: pop .25s ease-out; }
+.ql-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 10px; background: var(--navy); color: #f4f4f4; font-family: var(--pixel); font-size: 18px; }
+.ql-body { overflow: auto; padding: 8px 10px 10px; }
+.ql-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.ql-table th { text-align: left; font-family: var(--pixel); font-weight: 400; color: var(--navy); border-bottom: 2px solid var(--ink); padding: 3px 6px; position: sticky; top: -8px; background: var(--panel); }
+.ql-table td { padding: 4px 6px; border-bottom: 1px dashed var(--grid-major); vertical-align: middle; }
+.ql-table td small { display: block; font-size: 11px; opacity: .7; }
+.ql-table .num { text-align: right; white-space: nowrap; }
+.ql-st { font-size: 17px; text-align: center; width: 26px; }
+.st-perfect .ql-st { color: var(--ok); }
+.st-partial .ql-st { color: #c98a1b; }
+.st-fail .ql-st, .st-retry .ql-st { color: var(--bad); }
+.st-open .ql-st { color: var(--accent); }
+.st-locked { opacity: .55; }
+.ql-sum { margin: 8px 0 4px; }
+.ql-legend summary { cursor: pointer; font-family: var(--pixel); color: var(--navy); }
+.ql-legend ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 4px 12px; list-style: none; padding: 6px 0 0; margin: 0; }
+.ql-test { white-space: nowrap; }
+.ql-test button, .ql-testbar button { font-size: 13px; padding: 2px 6px; margin: 0 1px; background: #fff; border: 2px solid var(--ink); }
+.ql-testbar { margin: 8px 0 0; padding: 6px 8px; background: #fde7b2; border: 2px dashed var(--ink); }
+body.test-mode .hud-log { border-color: var(--gold); color: var(--gold); }
+@media (max-height: 500px) {
+  .ql-table { font-size: 12px; }
+  .ql-table td { padding: 2px 4px; }
+  .ql-head { font-size: 15px; padding: 4px 8px; }
+}

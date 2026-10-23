@@ -21,3 +21,9 @@ Hinweis: Sitzung 1 wurde nachträglich aus einer Zusammenfassung des Chats rekon
 | W13 | Gelb gekleideter Postbote bringt Bestellungen mit Paket ins Baumhaus, freundlicher Dialog, erst dann erscheint der Gegenstand | d2d3fb4 |
 | W14 | Sorge wegen Qualitätsverlust durch Chat-Komprimierung → alles Relevante im Repo ablegen | dieses Dokument, `ENTSCHEIDUNGEN.md`, `ROADMAP.md` |
 | W15 | Shop-Preise um ca. 20 % erhöhen; Postbote behält seinen Flavour-Text (keine Kurzfassung) | siehe Commit „Balancing +20 %“ |
+
+## Sitzung 2 – 23.10.2026
+
+| Nr. | Wunsch / Rückmeldung (sinngemäß) | Umgesetzt in |
+|---|---|---|
+| W16 | Bugs: „Hausaufgabe: Der Bus“ unlesbar skaliert; Sprache zu laut. Aufgabentyp erkennbar machen. Ziffern der Pixelschrift schlecht lesbar (5 wie S, 2 wie ?). Questlog mit Status, Person, Typ-Buchstabe (für Selbstcheck-PDF). Typ D, Fläche/Steigung, B Freihand (1 Quest). Gültige Ziffern + g.Z.-Polizist. Testmodus. Freischaltplan als Datei + PNG | siehe Commits „W16 …“ |

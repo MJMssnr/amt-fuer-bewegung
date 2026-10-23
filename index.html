@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/questlog.css">
 </head>
 <body>
   <main id="game">
@@ -18,6 +19,7 @@
       <div class="hud-right">
         <span class="hud-tickets">Aufträge 0/0</span>
         <span class="hud-money">0 €</span>
+        <button class="hud-btn hud-log" title="Auftragsbuch">📖</button>
         <button class="hud-btn hud-sound" title="Klang">🔊</button>
         <button class="hud-btn hud-full" title="Vollbild">⛶</button>
         <button class="hud-btn hud-reset" title="Spielstand löschen">↺</button>
@@ -30,6 +32,7 @@
     <section id="task" class="hidden" aria-modal="true" role="dialog">
       <header class="task-head">
         <button class="btn t-back">← Karte</button>
+        <span class="type-badge t-type"></span>
         <div class="t-info"><strong class="t-title"></strong><span class="t-from"></span></div>
         <span class="t-reward"></span>
       </header>
@@ -46,6 +49,13 @@
       <div class="room-body">
         <canvas class="room-canvas" aria-label="Zimmer im Baumhaus"></canvas>
         <aside class="shop hidden"><div class="shop-list"></div></aside>
+      </div>
+    </section>
+
+    <section id="questlog" class="hidden" role="dialog" aria-label="Auftragsbuch">
+      <div class="ql-card">
+        <header class="ql-head"><strong>📖 Auftragsbuch</strong><button class="btn ql-close">Schließen ✕</button></header>
+        <div class="ql-body"></div>
       </div>
     </section>
 

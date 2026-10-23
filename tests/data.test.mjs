@@ -81,3 +81,20 @@ test('Konstrukteur: Lösungen der Hausaufgaben', () => {
   const bus = constructTruth(buildWorld(read('data/scenarios/bus-anfahren.json')).actors.get('bus'), 'xt');
   assert.deepEqual(bus.values.map((v) => Math.round(v * 10) / 10), [0, 27, 117, 130.5]);
 });
+
+test('Jeder Aufgabentyp hat einen Kennbuchstaben; Buchstaben eindeutig', async () => {
+  const { TYPES } = await import('../js/tasks/types.js');
+  for (const tk of tickets) assert.ok(TYPES[tk.task.type], `Typ "${tk.task.type}" (${tk.id}) ohne Buchstabe in types.js`);
+  const letters = Object.values(TYPES).map((t) => t.letter);
+  assert.equal(new Set(letters).size, letters.length);
+});
+
+test('Freischaltplan: keine Zyklen, alles erreichbar', () => {
+  const done = new Set();
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const t of tickets) if (!done.has(t.id) && (t.requires || []).every((r) => done.has(r))) { done.add(t.id); changed = true; }
+  }
+  assert.equal(done.size, tickets.length, `unerreichbar: ${tickets.filter((t) => !done.has(t.id)).map((t) => t.id)}`);
+});

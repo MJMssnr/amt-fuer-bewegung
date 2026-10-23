@@ -12,6 +12,9 @@ import { loadTask } from './tasks/index.js';
 import { pickParams, resolveTicket, applyScenario } from './engine/variants.js';
 import { unlockAudio } from './audio/sound.js';
 import { initSoundMenu } from './ui/sound-menu.js';
+import { openQuestlog } from './ui/questlog.js';
+import { typeOf } from './tasks/types.js';
+import { initTestMode, isTestMode, setTestMode } from './ui/testmode.js';
 
 // Browser erlauben Klang erst nach einer Nutzeraktion
 document.addEventListener('pointerdown', unlockAudio, { capture: true });
@@ -24,7 +27,7 @@ const getJSON = async (url) => {
 };
 
 let state = loadState();
-let tickets = [], story = {}, shop = {}, exam = {}, overworld = null, room = null, busy = false;
+let tickets = [], story = {}, shop = {}, exam = {}, map = {}, overworld = null, room = null, busy = false;
 const scenarioCache = new Map();
 
 async function scenarioOf(ref) {
@@ -68,6 +71,10 @@ async function runTaskScreen({ title, fromName, rewardText, ticket, world }) {
   screen.querySelector('.t-from').textContent = fromName ?? '';
   screen.querySelector('.t-reward').textContent = rewardText ?? '';
   screen.querySelector('.t-reward').classList.toggle('hidden', !rewardText);
+  const ty = typeOf(ticket.task.type);
+  const badge = screen.querySelector('.t-type');
+  badge.textContent = ty.letter;
+  badge.title = `Aufgabentyp ${ty.letter}: ${ty.name}`;
   const root = screen.querySelector('.task-root');
   screen.classList.remove('hidden');
   overworld.stop();
@@ -143,6 +150,47 @@ async function runExam() {
   overworld.start();
 }
 
+/** Intro-Dialog + Aufgabe für einen Auftrag (auch aus dem Testmodus im Auftragsbuch) */
+async function playTicket(raw) {
+  const retry = isRetry(raw);
+  const params = pickParams(raw, state.seed, state.retry?.[raw.id]?.n ?? 0);
+  const ticket = resolveTicket(raw, params);
+  await showDialog([...(retry ? withFrom(pick(story.retry, raw.id), raw.from) : []), ...(ticket.intro || [])]);
+  await runTicket(ticket, raw, params);
+}
+
+/** Auftragsbuch öffnen; Testmodus-Aktionen verändern den Spielstand direkt */
+async function showQuestlog() {
+  if (busy) return;
+  busy = true;
+  let toPlay = null;
+  try {
+    await openQuestlog({
+      tickets, state, characters: story.characters, nodes: map.nodes, isOpen, isRetry, test: isTestMode,
+      actions: {
+        play: (t) => { toPlay = t; },
+        money: (n) => { state.money += n; save(); },
+        testOff: () => setTestMode(false),
+        reset: (t) => { delete state.done[t.id]; delete state.grades?.[t.id]; delete state.retry?.[t.id]; save(); },
+        setGrade: (t, g) => {
+          state.done[t.id] = true;
+          state.grades = { ...(state.grades || {}), [t.id]: g };
+          state.retry ??= {};
+          if (g === 'fail') state.retry[t.id] = { after: doneCount() + 2, n: (state.retry[t.id]?.n ?? 0) + 1 };
+          else delete state.retry[t.id];
+          save();
+        },
+      },
+    });
+    if (toPlay) await playTicket(toPlay);
+  } catch (e) {
+    console.error(e);
+    toast(`Fehler: ${e.message}`, 'bad');
+  } finally {
+    busy = false;
+  }
+}
+
 async function onArrive(nodeId) {
   if (busy) return;
   busy = true;
@@ -157,11 +205,7 @@ async function onArrive(nodeId) {
     }
     const raw = tickets.find((t) => t.node === nodeId && isOpen(t));
     if (raw) {
-      const retry = isRetry(raw);
-      const params = pickParams(raw, state.seed, state.retry?.[raw.id]?.n ?? 0);
-      const ticket = resolveTicket(raw, params);
-      await showDialog([...(retry ? withFrom(pick(story.retry, raw.id), raw.from) : []), ...(ticket.intro || [])]);
-      await runTicket(ticket, raw, params);
+      await playTicket(raw);
     } else if (nodeId === 'rathaus') {
       await showDialog(story.office);
     } else {
@@ -176,7 +220,7 @@ async function onArrive(nodeId) {
 }
 
 async function boot() {
-  const [map] = await Promise.all([getJSON('data/map.json'), loadSprites(), document.fonts?.ready]);
+  [map] = await Promise.all([getJSON('data/map.json'), loadSprites(), document.fonts?.ready]);
   [tickets, story, shop, exam] = await Promise.all(['tickets', 'story', 'shop', 'exam'].map((n) => getJSON(`data/${n}.json`)));
   setCharacters(story.characters);
   document.getElementById('loading').classList.add('hidden');
@@ -198,6 +242,8 @@ async function boot() {
     if (confirm('Spielstand wirklich löschen?')) { resetState(); location.reload(); }
   });
   initSoundMenu(document.querySelector('.hud-sound'));
+  document.querySelector('.hud-log').addEventListener('click', showQuestlog);
+  initTestMode(document.querySelector('.hud-title'), (on) => toast(on ? '🧪 Testmodus an – siehe Auftragsbuch 📖' : 'Testmodus aus'));
   document.querySelector('.hud-full').addEventListener('click', () => {
     const d = document.documentElement;
     if (!document.fullscreenElement) d.requestFullscreen?.().catch(() => {});

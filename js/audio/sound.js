@@ -6,8 +6,13 @@
 // Lautstärken werden in localStorage gespeichert.
 
 const KEY = 'amt-fuer-bewegung.sound';
-const settings = { voice: 0.6, nature: 0.35, sfx: 0.6, muted: false };
-try { Object.assign(settings, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch { /* egal */ }
+// Version 2: Sprache startet halb so laut wie vorher [W16]. Alte gespeicherte Werte werden einmal halbiert.
+const settings = { voice: 0.3, nature: 0.35, sfx: 0.6, muted: false, ver: 2 };
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+  if (saved.voice !== undefined && !(saved.ver >= 2)) saved.voice = Math.round(saved.voice * 50) / 100;
+  Object.assign(settings, saved, { ver: 2 });
+} catch { /* egal */ }
 
 let ctx = null, buses = null, noiseBuf = null;
 

@@ -12,13 +12,13 @@ export const parseNum = (s) => {
   return t === '' ? NaN : Number(t);
 };
 
-/** Schöne Schrittweite (1, 2, 2,5, 5 · 10^n) für ca. `count` Teilstriche. */
+/** Schöne Schrittweite (1, 2, 5 · 10^n) für ca. `count` Teilstriche. Ohne 2,5, damit Rasterlinien auf ganzen Werten liegen. */
 export function niceStep(range, count = 5) {
   if (!(range > 0)) return 1;
   const raw = range / count;
   const mag = 10 ** Math.floor(Math.log10(raw));
   const f = raw / mag;
-  const nice = f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10;
+  const nice = f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10;
   return nice * mag;
 }
 
@@ -31,4 +31,11 @@ export function niceRange(min, max, count = 5) {
   lo = Math.floor(lo / step + 1e-9) * step;
   hi = Math.ceil(hi / step - 1e-9) * step;
   return { lo, hi, step };
+}
+
+/** Feinraster: Unterteilungen pro Hauptschritt (1 → 5, 2 → 4, 5 → 5), damit Kästchen zählbar sind. */
+export function minorDiv(step) {
+  const mag = 10 ** Math.floor(Math.log10(step) + 1e-9);
+  const f = Math.round((step / mag) * 100) / 100;
+  return f === 2 ? 4 : 5;
 }

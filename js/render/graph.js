@@ -1,6 +1,6 @@
 // Bewegungsdiagramme als SVG ("Karopapier"-Look). Kein Spielzustand, nur Darstellung.
 
-import { fmt, niceRange } from './format.js';
+import { fmt, niceRange, minorDiv } from './format.js';
 
 export const KINDS = {
   xt: { q: 'x', axis: 'x', unit: 'm', title: 't-x-Diagramm' },
@@ -37,7 +37,7 @@ export function drawGraph(kind, pieces, opts = {}) {
   const M = { l: compact ? 40 : 46, r: 16, t: compact ? 18 : 20, b: compact ? 22 : 26 };
   const tR = niceRange(0, opts.tMax ?? Math.max(...pieces.flat().map((p) => p[0])), compact ? 5 : 6);
   const [ylo, yhi] = opts.yRange ?? rangeOf(pieces);
-  const yR = niceRange(ylo, yhi, compact ? 4 : 5);
+  const yR = niceRange(ylo, yhi, 5);
 
   const X = (t) => M.l + ((t - tR.lo) / (tR.hi - tR.lo)) * (W - M.l - M.r);
   const Y = (y) => H - M.b - ((y - yR.lo) / (yR.hi - yR.lo)) * (H - M.t - M.b);
@@ -45,14 +45,15 @@ export function drawGraph(kind, pieces, opts = {}) {
   const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, class: 'graph', role: 'img', 'aria-label': K.title });
   el('rect', { x: 0, y: 0, width: W, height: H, class: 'g-paper', rx: 6 }, svg);
 
-  // Karoraster: halbe Teilstriche fein, ganze kräftiger
+  // Karoraster: Feinlinien (zählbare Kästchen), Hauptlinien kräftiger
   const grid = el('g', { class: 'g-grid' }, svg);
-  for (let t = tR.lo; t <= tR.hi + 1e-9; t += tR.step / 2) {
-    el('line', { x1: X(t), x2: X(t), y1: Y(yR.lo), y2: Y(yR.hi), class: Math.abs((t / tR.step) % 1) < 1e-6 ? 'major' : 'minor' }, grid);
-  }
-  for (let y = yR.lo; y <= yR.hi + 1e-9; y += yR.step / 2) {
-    el('line', { x1: X(tR.lo), x2: X(tR.hi), y1: Y(y), y2: Y(y), class: Math.abs((y / yR.step) % 1) < 1e-6 ? 'major' : 'minor' }, grid);
-  }
+  const lines = (R, draw) => {
+    const n = minorDiv(R.step), d = R.step / n;
+    const k0 = Math.round(R.lo / d), k1 = Math.round(R.hi / d);
+    for (let k = k0; k <= k1; k++) draw(k * d, k % n === 0 ? 'major' : 'minor');
+  };
+  lines(tR, (t, c) => el('line', { x1: X(t), x2: X(t), y1: Y(yR.lo), y2: Y(yR.hi), class: c }, grid));
+  lines(yR, (y, c) => el('line', { x1: X(tR.lo), x2: X(tR.hi), y1: Y(y), y2: Y(y), class: c }, grid));
 
   // Achsen mit Pfeilen
   const axes = el('g', { class: 'g-axis' }, svg);

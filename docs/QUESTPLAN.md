@@ -1,0 +1,114 @@
+# Freischaltplan der Aufträge
+
+> Automatisch erzeugt mit `node tools/questplan.mjs` aus `data/tickets.json` – **nicht von Hand bearbeiten**.
+> Pfeil X → Y: Y wird frei, sobald X erledigt ist. Hat Y mehrere eingehende Pfeile, müssen **alle** erledigt sein.
+> Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
+
+Startaufträge (sofort frei): Der rote Blitz.
+Anzahl Aufträge: 22, verdienbar: 1730 €.
+
+```mermaid
+flowchart LR
+  t01_sportwagen["<b>A</b> Der rote Blitz<br/><small>Frau Brösel · Lindenstraße · 50 €</small>"]:::tA
+  t02_kevin["<b>A</b> Bremsen durch?<br/><small>Kevin · Radl-Eck · 60 €</small>"]:::tA
+  t03_bus["<b>A</b> Ruckelt der Bus?<br/><small>Busfahrer Ötzi · Busbahnhof · 70 €</small>"]:::tA
+  t04_brezel["<b>A</b> Der Hund, der zurückläuft<br/><small>Bäckermeister Huber · Bäckerei · 60 €</small>"]:::tA
+  t05_radeln["<b>H</b> Partnerschafts-Radeln<br/><small>Bürgermeisterin Kranz · Stadtpark · 80 €</small>"]:::tH
+  t06_broesel_ampel["<b>H</b> Frau Brösels Rache<br/><small>Frau Brösel · Lindenstraße · 90 €</small>"]:::tH
+  t07_skater["<b>G</b> Zu schnell im Skatepark?<br/><small>Jo · Skatepark · 70 €</small>"]:::tG
+  t08_einkaufswagen["<b>G</b> Der Einkaufswagen<br/><small>Filialleiterin Yıldız · Supermarkt · 90 €</small>"]:::tG
+  t09_tacho["<b>C</b> Der verschmierte Ausdruck<br/><small>Kevin · Radl-Eck · 80 €</small>"]:::tC
+  t10_ampelkamera["<b>C</b> Die nasse Ampelkamera<br/><small>Busfahrer Ötzi · Busbahnhof · 80 €</small>"]:::tC
+  t11_stadtlauf["<b>C</b> Der Stadtlauf<br/><small>Bürgermeisterin Kranz · Rathaus · 90 €</small>"]:::tC
+  t12_ralf_brezel["<b>E</b> Ralfs erstes Diagramm<br/><small>Ralf · Rathaus · 70 €</small>"]:::tE
+  t13_ralf_kevin["<b>E</b> Ralf und die Bremse<br/><small>Ralf · Rathaus · 80 €</small>"]:::tE
+  t14_ralf_bus["<b>E</b> Ralfs Busfahrt<br/><small>Ralf · Rathaus · 90 €</small>"]:::tE
+  t15_live_brezel["<b>F</b> Brezels Ersatzrunde<br/><small>Bäckermeister Huber · Bäckerei · 70 €</small>"]:::tF
+  t16_live_gerda["<b>F</b> Oma Gerda am Zebrastreifen<br/><small>Oma Gerda · Lindenstraße · 80 €</small>"]:::tF
+  t17_live_kevin["<b>F</b> Kevins Express-Lieferung<br/><small>Kevin · Radl-Eck · 90 €</small>"]:::tF
+  t18_konstrukt_kevin["<b>I</b> Hausaufgabe: Selbst zeichnen!<br/><small>Frau Dr. Ohm · Schule · 80 €</small>"]:::tI
+  t19_konstrukt_bus["<b>I</b> Hausaufgabe: Der Bus<br/><small>Frau Dr. Ohm · Schule · 90 €</small>"]:::tI
+  t20_konstrukt_wagen["<b>I</b> Hausaufgabe: Die Falle<br/><small>Frau Dr. Ohm · Schule · 100 €</small>"]:::tI
+  t21_reaktion_rad["<b>J</b> Die Schrecksekunde<br/><small>Frau Dr. Ohm · Schule · 70 €</small>"]:::tJ
+  t22_reaktion_auto["<b>J</b> Tempo 30 vor der Schule?<br/><small>Bürgermeisterin Kranz · Rathaus · 90 €</small>"]:::tJ
+  t01_sportwagen --> t02_kevin
+  t02_kevin --> t03_bus
+  t01_sportwagen --> t04_brezel
+  t01_sportwagen --> t05_radeln
+  t03_bus --> t06_broesel_ampel
+  t05_radeln --> t06_broesel_ampel
+  t04_brezel --> t07_skater
+  t07_skater --> t08_einkaufswagen
+  t02_kevin --> t09_tacho
+  t03_bus --> t10_ampelkamera
+  t05_radeln --> t11_stadtlauf
+  t04_brezel --> t12_ralf_brezel
+  t12_ralf_brezel --> t13_ralf_kevin
+  t02_kevin --> t13_ralf_kevin
+  t13_ralf_kevin --> t14_ralf_bus
+  t03_bus --> t14_ralf_bus
+  t04_brezel --> t15_live_brezel
+  t15_live_brezel --> t16_live_gerda
+  t16_live_gerda --> t17_live_kevin
+  t02_kevin --> t18_konstrukt_kevin
+  t18_konstrukt_kevin --> t19_konstrukt_bus
+  t03_bus --> t19_konstrukt_bus
+  t19_konstrukt_bus --> t20_konstrukt_wagen
+  t08_einkaufswagen --> t20_konstrukt_wagen
+  t02_kevin --> t21_reaktion_rad
+  t21_reaktion_rad --> t22_reaktion_auto
+  classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
+  classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
+  classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
+  classDef tD fill:#c7a6ff,stroke:#1a1c2c,color:#1a1c2c
+  classDef tE fill:#ff9f7a,stroke:#1a1c2c,color:#1a1c2c
+  classDef tF fill:#73eff7,stroke:#1a1c2c,color:#1a1c2c
+  classDef tG fill:#ffe8a3,stroke:#1a1c2c,color:#1a1c2c
+  classDef tH fill:#9fc5ff,stroke:#1a1c2c,color:#1a1c2c
+  classDef tI fill:#b6e3b0,stroke:#1a1c2c,color:#1a1c2c
+  classDef tJ fill:#f0b0e0,stroke:#1a1c2c,color:#1a1c2c
+  classDef tK fill:#d9d9a0,stroke:#1a1c2c,color:#1a1c2c
+  classDef tL fill:#a0d9d0,stroke:#1a1c2c,color:#1a1c2c
+```
+
+## Legende
+| Buchstabe | Typ | Aufträge |
+|---|---|---|
+| A | Zuordnen | 4 |
+| B | Freihand zeichnen | 0 |
+| C | Achsen-Detektiv | 3 |
+| D | Regie | 0 |
+| E | Fehlerjagd | 3 |
+| F | Live-Steuerung | 3 |
+| G | Beschreiben | 2 |
+| H | Berechnen | 2 |
+| I | Konstrukteur | 3 |
+| J | Reaktionstest | 2 |
+| K | Flächen-Puzzle | 0 |
+| L | Steigungsdreieck | 0 |
+
+## Liste
+| Auftrag | Typ | von | Ort | Lohn | braucht |
+|---|---|---|---|---|---|
+| Der rote Blitz | A | Frau Brösel | Lindenstraße | 50 € | – |
+| Bremsen durch? | A | Kevin | Radl-Eck | 60 € | Der rote Blitz |
+| Ruckelt der Bus? | A | Busfahrer Ötzi | Busbahnhof | 70 € | Bremsen durch? |
+| Der Hund, der zurückläuft | A | Bäckermeister Huber | Bäckerei | 60 € | Der rote Blitz |
+| Partnerschafts-Radeln | H | Bürgermeisterin Kranz | Stadtpark | 80 € | Der rote Blitz |
+| Frau Brösels Rache | H | Frau Brösel | Lindenstraße | 90 € | Ruckelt der Bus?, Partnerschafts-Radeln |
+| Zu schnell im Skatepark? | G | Jo | Skatepark | 70 € | Der Hund, der zurückläuft |
+| Der Einkaufswagen | G | Filialleiterin Yıldız | Supermarkt | 90 € | Zu schnell im Skatepark? |
+| Der verschmierte Ausdruck | C | Kevin | Radl-Eck | 80 € | Bremsen durch? |
+| Die nasse Ampelkamera | C | Busfahrer Ötzi | Busbahnhof | 80 € | Ruckelt der Bus? |
+| Der Stadtlauf | C | Bürgermeisterin Kranz | Rathaus | 90 € | Partnerschafts-Radeln |
+| Ralfs erstes Diagramm | E | Ralf | Rathaus | 70 € | Der Hund, der zurückläuft |
+| Ralf und die Bremse | E | Ralf | Rathaus | 80 € | Ralfs erstes Diagramm, Bremsen durch? |
+| Ralfs Busfahrt | E | Ralf | Rathaus | 90 € | Ralf und die Bremse, Ruckelt der Bus? |
+| Brezels Ersatzrunde | F | Bäckermeister Huber | Bäckerei | 70 € | Der Hund, der zurückläuft |
+| Oma Gerda am Zebrastreifen | F | Oma Gerda | Lindenstraße | 80 € | Brezels Ersatzrunde |
+| Kevins Express-Lieferung | F | Kevin | Radl-Eck | 90 € | Oma Gerda am Zebrastreifen |
+| Hausaufgabe: Selbst zeichnen! | I | Frau Dr. Ohm | Schule | 80 € | Bremsen durch? |
+| Hausaufgabe: Der Bus | I | Frau Dr. Ohm | Schule | 90 € | Hausaufgabe: Selbst zeichnen!, Ruckelt der Bus? |
+| Hausaufgabe: Die Falle | I | Frau Dr. Ohm | Schule | 100 € | Hausaufgabe: Der Bus, Der Einkaufswagen |
+| Die Schrecksekunde | J | Frau Dr. Ohm | Schule | 70 € | Bremsen durch? |
+| Tempo 30 vor der Schule? | J | Bürgermeisterin Kranz | Rathaus | 90 € | Die Schrecksekunde |
