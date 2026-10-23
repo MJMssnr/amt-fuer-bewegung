@@ -157,7 +157,7 @@ button { font: inherit; cursor: pointer; }
   .calc-label { font-size: 14px; }
   .calc-input input { font-size: 16px; padding: 2px 6px; width: 6.5em; }
   .calc-list { gap: 5px; }
-  .task-body.wide-right { grid-template-columns: minmax(0, .6fr) minmax(0, 1.4fr); }
+  .task-body.wide-right { grid-template-columns: minmax(0, .8fr) minmax(0, 1.3fr); }
   .desc-opt { font-size: 12px; line-height: 1.25; padding: 4px 6px 4px 30px; }
   .desc-opt .letter { left: 5px; top: 4px; font-size: 12px; }
   .describe-list { gap: 6px; }

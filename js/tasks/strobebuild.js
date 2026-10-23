@@ -6,6 +6,7 @@
 // "prompt", "paper".
 
 import { checkStrobe } from '../engine/strobe.js';
+import { drawObj } from '../render/strobe.js';
 import { frame } from './common.js';
 import { strobeData, photo, flashInfo, fmt2 } from './strobe-common.js';
 
@@ -90,9 +91,20 @@ export function mount(root, { ticket, onSolved }) {
     tray.innerHTML = placed.map((x, i) => (i > 0 && x === null ? `<button class="sb-chip" type="button" data-i="${i}">${i + 1}</button>` : '')).join('')
       || '<span class="sb-empty">Alle Abbilder liegen auf der Bahn.</span>';
   };
-  // Ein Abbild: Kreis/Ball mit Nummer
+  // Ein Abbild: Kreis/Ball mit Nummer; Fahrrad, Auto usw. als kleines Bild mit Nummer darüber [W29]
+  const sprite = task.photo?.obj && task.photo.obj !== 'ball' && !D.pendulum && !task.photo.vertical;
   function token(ctx, geo, x, i, dpr, fixed) {
     let [X, Y] = geo.toPx(x);
+    if (sprite) {
+      drawObj(ctx, task.photo.obj, X, Y, dpr, fixed ? 0.95 : 0.85, task.photo.flip);
+      ctx.fillStyle = 'rgba(255,255,255,0.8)'; ctx.fillRect(X - 0.75 * dpr, Y - 2 * dpr, 1.5 * dpr, 6 * dpr); // Mitte markieren
+      const cy = Y - 52 * dpr, r = 8 * dpr;
+      ctx.fillStyle = fixed ? '#94b0c2' : '#ffcd75'; ctx.beginPath(); ctx.arc(X, cy, r, 0, 7); ctx.fill();
+      ctx.lineWidth = 2 * dpr; ctx.strokeStyle = '#1a1c2c'; ctx.stroke();
+      ctx.font = `${12 * dpr}px "AmtPixel", monospace`; ctx.textAlign = 'center'; ctx.fillStyle = '#1a1c2c';
+      ctx.fillText(`${i + 1}`, X, cy + 4 * dpr);
+      return;
+    }
     if (D.pendulum) { ctx.strokeStyle = 'rgba(148,176,194,0.5)'; ctx.lineWidth = 1.5 * dpr; ctx.beginPath(); ctx.moveTo(...geo.pivot); ctx.lineTo(X, Y); ctx.stroke(); }
     const r = 9 * dpr, cy = Y - (D.pendulum ? -2 : 9) * dpr;
     ctx.globalAlpha = fixed ? 0.95 : 0.8;
@@ -138,8 +150,8 @@ export function mount(root, { ticket, onSolved }) {
   build.canvas.addEventListener('pointerdown', (e) => {
     const c = toCanvas(e), g = build.geo();
     let best = -1, bd = Infinity;
-    placed.forEach((x, i) => { if (i === 0 || x === null) return; const [X, Y] = g.toPx(x); const d = Math.hypot(X - c.X, Y - 9 - c.Y); if (d < bd) { bd = d; best = i; } });
-    if (best > 0 && bd < 30 * (build.canvas.width / build.canvas.clientWidth)) startDrag(best, e);
+    placed.forEach((x, i) => { if (i === 0 || x === null) return; const [X, Y] = g.toPx(x); const d = Math.hypot(X - c.X, Y - (sprite ? 24 : 9) * (build.canvas.width / build.canvas.clientWidth) - c.Y); if (d < bd) { bd = d; best = i; } });
+    if (best > 0 && bd < (sprite ? 40 : 30) * (build.canvas.width / build.canvas.clientWidth)) startDrag(best, e);
   });
   build.canvas.style.touchAction = 'none';
 

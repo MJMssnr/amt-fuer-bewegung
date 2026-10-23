@@ -16,7 +16,8 @@ const fmt = (v) => atLeast2(fmtRaw(v), v);
  */
 export function graphInto(card, kind, pieces, opts = {}) {
   const r = card.clientWidth / Math.max(1, card.clientHeight);
-  const H = 200;
+  // Höhe in Einheiten ≈ echte Pixelhöhe (120–200): Beschriftung bleibt auf dem Handy lesbar groß [W29]
+  const H = Math.round(Math.min(200, Math.max(120, card.clientHeight || 200)));
   const W = Number.isFinite(r) && r > 0 ? Math.round(Math.min(600, Math.max(240, H * r))) : 320;
   const g = drawGraph(kind, pieces, { ...opts, width: W, height: H });
   card.appendChild(g.el);

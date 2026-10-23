@@ -49,7 +49,7 @@
 | Typ | Name | Status | Entscheidungen |
 |---|---|---|---|
 | A | Zuordnen (match) | ✓ | Distraktoren aus Fehlvorstellungen, nicht zufällig |
-| B | Freihand (freehand) | ✓ 1 Auftrag, Playtest offen [W16] | Zeichnen in einem Zug, Auto-Begradigung (Ramer-Douglas-Peucker), Toleranz ±tolY senkrecht, ±0,3 s an Knicken. Bleibt bis zum Feedback so (3 Abschnitte inkl. Stillstand) [W17]. **Viel kulanter [W28]:** Toleranz mindestens eine Fingerbreite (≈ 30 px senkrecht, 22 px waagrecht auf dem Bildschirm) |
+| B | Freihand (freehand) | ✓ 1 Auftrag, Playtest offen [W16] | Zeichnen in einem Zug, Auto-Begradigung (Ramer-Douglas-Peucker), Toleranz ±tolY senkrecht, ±0,3 s an Knicken. Bleibt bis zum Feedback so (3 Abschnitte inkl. Stillstand) [W17]. **Viel kulanter [W28, W29]:** Toleranz ±1,5 cm senkrecht (≈ 57 CSS-px), ±1 cm waagrecht, mindestens 20 % der Spannweite; im Hinweis erwähnt |
 | C | Achsen-Detektiv (axes) | ✓ | Diagramm ohne Zahlen, Ablesen an markierten Linien |
 | D | Regie (direct) | ✓ 1 Testauftrag „Der Imagefilm“ [W20] | **Variante a:** Drehbuch mit Ereignissen (Ort zu Zeit, Begegnung); Schüler stellt x₀, t₀ (Wartezeit), vₓ ein, „Klappe – Action!“ spielt die Szene, danach ✅/❌ je Szene. t-x-Plan mit festen Akteuren und Drehbuch-Punkten. Kein Gültige-Ziffern-Polizist (Regie-Werte). Bewertung wie H. 2 weitere Aufträge nach Freigabe |
 | E | Fehlerjagd (errorhunt) | ✓ | Ralfs Diagramm hat genau einen falschen Abschnitt |
@@ -91,6 +91,8 @@ Jeder neue Typ: mindestens 3 konkrete Aufträge [W8]. Jeder Typ hat zusätzlich 
 - Paul behält **immer** seinen vollen Dialog – keine Kurzfassung. Herr Messner mag den Postboten sehr [W15].
 - **Zahlenfelder** [W28]: vor jedem getippten Zahlenfeld ein **±-Knopf** (Handy-Tastatur „decimal“ hat kein Minus), `js/ui/signbtn.js`.
 - **Handy quer** [W28]: Hinweiszettel kleiner, Diagrammbeschriftung größer, Beschriftungen umbrechen; ist eine Spalte scrollbar, erscheinen ▲/▼-Pfeile (`js/ui/scrollhint.js`).
+- **Diagramme links** [W29]: Höhe in SVG-Einheiten = echte Pixelhöhe (120–200), damit die Beschriftung auf dem Handy nicht schrumpft (`graphInto` in common.js).
+- **Stroboskop** [W29]: N zeigt den Zusammenhang („nach OBEN geworfen“) rechts über den Antworten, nie weggescrollt. O mit Fahrrad/Auto: Abbilder werden beim Ziehen zu kleinen Sprites, Mitte markiert. Maßstab `"barRepeat": true` = durchgehende 1-m-Felder; Ablesewerte bei Leisten/Feldern ganzzahlig wählen (sonst unablesbar). Pendel und senkrechte Fotos auf dem Handy niedriger.
 - **Karte** [W28]: Tippt man unterwegs ein anderes Gebäude an, wird der Weg sofort umgelenkt (kürzere Richtung: weiter oder umdrehen).
 - **Auftragsbuch 📖** im HUD, **immer verfügbar** [W16, W17]: blaues Notizbuch mit Pixel-Aufschrift „Aufträge“, Öffnungs-Animation ca. 0,5 s (heranzoomen, Deckel klappt auf; vorher 1 s, war zu lang [W19]). Liste in **Reihenfolge der Annahme** (oben zuerst), dann offene Aufträge. Spalten: Nr., Status, Typ-Buchstabe, Auftrag, Auftraggeber, Ort, verdientes Geld. Status: grüner Kreis mit weißem ✓ (voll), gelber Kreis mit ~ (halb), roter Kreis mit weißem ✕ (verpatzt). Spielstand speichert `order` und `earned`.
 - **Testmodus** [W16, W17]: **20× im Startbildschirm auf Oma Gerda tippen**, am Notebook „amtstest“ tippen oder `?amtstest=1`. Nicht leicht erratbar (Schüler!). Kein Strg+Shift+T (vom Browser belegt). Im Auftragsbuch dann: gesperrte Aufträge sehen, ▶ starten, ✔/◐/✘ setzen, ↺ zurücksetzen, +100 €, alle abhaken.

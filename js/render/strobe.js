@@ -57,7 +57,7 @@ function background(ctx, W, H, bg, dpr) {
 }
 
 let vertSmall = false;
-function drawObj(ctx, obj, X, Y, s, alpha, flip = false) {
+export function drawObj(ctx, obj, X, Y, s, alpha, flip = false) {
   ctx.globalAlpha = alpha;
   if (obj === 'ball' || !obj) {
     const r = 7 * s;
@@ -136,8 +136,22 @@ function ruler(ctx, geo, o, dpr, night) {
       ctx.textAlign = 'left'; ctx.fillText(`${fmt(o.bar)} m`, x + 10 * dpr, (a + b) / 2 + 4 * dpr);
       return;
     }
-    const [a] = geo.toPx(o.range[0]), [b] = geo.toPx(o.range[0] + o.bar);
     const y = geo.ground + 26 * dpr;
+    if (o.barRepeat) { // durchgehender Maßstab: Felder je o.bar Meter, abwechselnd hell/dunkel [W29]
+      const [lo, hi] = o.range;
+      const every = Math.max(1, Math.ceil((40 * dpr) / Math.max(1, geo.toPx(lo + o.bar)[0] - geo.toPx(lo)[0])));
+      for (let k = 0, x = lo; x < hi - 1e-9; k++, x += o.bar) {
+        const [a] = geo.toPx(x), [b] = geo.toPx(Math.min(hi, x + o.bar));
+        ctx.fillStyle = col; ctx.fillRect(a, y - 1 * dpr, b - a, 6 * dpr);
+        if (k % 2) { ctx.fillStyle = night ? '#10122a' : '#f4f4f4'; ctx.fillRect(a + dpr, y, b - a - 2 * dpr, 4 * dpr); }
+        ctx.fillStyle = col; ctx.fillRect(a, y - 4 * dpr, 1.5 * dpr, 12 * dpr);
+        if (k % every === 0) ctx.fillText(`${fmt(x - lo)} m`, a, y + 20 * dpr);
+      }
+      const [e] = geo.toPx(hi); ctx.fillRect(e - 1.5 * dpr, y - 4 * dpr, 1.5 * dpr, 12 * dpr);
+      if (Math.round((hi - lo) / o.bar) % every === 0) ctx.fillText(`${fmt(hi - lo)} m`, e, y + 20 * dpr);
+      return;
+    }
+    const [a] = geo.toPx(o.range[0]), [b] = geo.toPx(o.range[0] + o.bar);
     ctx.fillRect(a, y, b - a, 3 * dpr); ctx.fillRect(a, y - 4 * dpr, 1.5 * dpr, 11 * dpr); ctx.fillRect(b - 1.5 * dpr, y - 4 * dpr, 1.5 * dpr, 11 * dpr);
     ctx.fillText(`${fmt(o.bar)} m`, (a + b) / 2, y + 16 * dpr);
     return;
@@ -167,7 +181,8 @@ function gridLine(ctx, X, Y, vertical, major, dpr, night) {
 function pendulumScale(ctx, geo, o, dpr, night, col) {
   const { L, amp } = o.pendulum, A = (amp * Math.PI) / 180;
   const [px, py] = geo.pivot, y = py + L * geo.sc + 14 * dpr;
-  const lim = L * Math.sin(A * 1.1), step = 0.4, minor = 0.1;
+  const lim = L * Math.sin(A * 1.1), minor = 0.1;
+  const step = 0.4 * geo.sc >= 52 * dpr ? 0.4 : 0.8; // kleine Bilder: nur jede zweite Zahl [W29]
   ctx.fillStyle = col; ctx.font = `${11 * dpr}px "AmtPixel", monospace`; ctx.textAlign = 'center';
   ctx.fillRect(px - lim * geo.sc, y, 2 * lim * geo.sc, 1.5 * dpr);
   for (let x = -Math.floor(lim / minor) * minor; x <= lim + 1e-9; x += minor) {

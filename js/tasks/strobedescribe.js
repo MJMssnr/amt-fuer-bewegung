@@ -16,14 +16,16 @@ export function mount(root, { ticket, onSolved }) {
   const D = strobeData(task);
   const { left, right } = frame(root);
   left.innerHTML = `<div class="sc-photo"></div><p class="sb-info">${flashInfo(task)}</p>
-    <div class="strobe-context"></div><div class="paper-note"><strong>✎ Auf Papier</strong><span></span></div>`;
-  left.querySelector('.strobe-context').textContent = task.context ?? '';
+    <div class="paper-note"><strong>✎ Auf Papier</strong><span></span></div>`;
   left.querySelector('.paper-note span').textContent = task.paper
     ?? 'Miss die Abstände zwischen benachbarten Abbildern. Gleich groß: gleichförmig. Wachsend oder schrumpfend: beschleunigt. In welche Richtung es geht, verrät erst der Zusammenhang.';
   const ph = photo(left.querySelector('.sc-photo'), task, { range: D.range, pendulum: D.pendulum });
   requestAnimationFrame(() => ph.draw({ positions: D.xs }));
 
-  right.innerHTML = '<p class="prompt"></p><div class="describe-list"></div><div class="feedback" aria-live="polite"></div>';
+  // Zusammenhang rechts über den Antworten: Er entscheidet oft über die Lösung und darf nicht weggescrollt sein [W29]
+  right.innerHTML = '<div class="strobe-context"></div><p class="prompt"></p><div class="describe-list"></div><div class="feedback" aria-live="polite"></div>';
+  const ctxEl = right.querySelector('.strobe-context');
+  if (task.context) ctxEl.textContent = task.context; else ctxEl.remove();
   right.querySelector('.prompt').textContent = task.prompt ?? 'Welche Beschreibung passt zum Stroboskopbild?';
   const fb = right.querySelector('.feedback');
   let attempts = 0, solved = false;

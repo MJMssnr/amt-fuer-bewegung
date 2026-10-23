@@ -39,6 +39,7 @@ Hinweis: Sitzung 1 wurde nachträglich aus einer Zusammenfassung des Chats rekon
 | W27 | Freischaltplan aktualisieren; Liste, zu welchen Aufträgen schon Feedback kam → `docs/PLAYTEST.md`. Alles im Repo festhalten, damit die nächste Sitzung (ab ca. 20 Uhr) nahtlos weitermacht | dieser Commit |
 
 | W28 | Sitzung 3, Playtest-Sammelpunkte: ±-Knopf an allen Zahlenfeldern; Aufgaben passen nicht aufs Handy quer (Hinweise kleiner, Diagramme/Beschriftung größer, Scroll-Pfeile); F: Geschwindigkeiten vorher ausrechnen, Knopf „halbe Geschwindigkeit“, späte F nur Eckpunkte; B viel kulanter (Finger 1,5 cm); eine Reaktions-Aufgabe streichen (t21); Karte: Bewegung umlenken; Umbenennung „Gültige-Ziffern-Polizei“; einmaliges Lob nach 2. Verwarnung | c9704c5, 761f5f9, 199ff04, (dieser Commit) |
+| W29 | Playtest-Runde 2 je Auftrag (t10–t53): Hinweise korrigiert (t10, t20, t23, t37, t40, t41, t51, t52), t20 „Letzte Hausaufgabe“ → „Neue“, Diagramme auf dem Handy größer (Einheiten = echte Pixelhöhe), Freihand ±1,5 cm, t35 durchgehender Maßstab mit ganzzahligem Abstand, t37 Abbilder als Fahrräder, Pendel/senkrechte Fotos kleiner, N: Zusammenhang rechts über den Antworten, Einstufungen eingetragen | (dieser Commit) |
 
 **Stand Ende Sitzung 2:** 53 Aufträge (A–O, je ein schwerer), 4950 € verdienbar, Shop 23 Gegenstände für 2265 €. Offen: siehe `ROADMAP.md` und `PLAYTEST.md`.
 

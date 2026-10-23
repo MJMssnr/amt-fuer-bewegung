@@ -431,6 +431,7 @@
     "node": "bushof",
     "requires": ["t03-bus"],
     "reward": 80,
+    "difficulty": "leicht",
     "scenario": "bus-anfahren",
     "intro": [
       ["oetzi", "Servus! Die Ampelkamera am Busbahnhof hat Wasser abbekommen. Das t-x-Diagramm von meiner Linie 3 ist noch da, aber ohne Zahlen."],
@@ -441,7 +442,7 @@
       "actor": "bus",
       "given": ["anim", "data"],
       "graph": "xt",
-      "paper": "Berechne den Weg in jedem Abschnitt (Anfahren: ½·a·t², gleichförmig: v·t, Bremsen: v²/(2a)). Wo endet die Kurve? Vergleiche mit dem Raster.",
+      "paper": "Achtung: Die markierten Linien liegen nicht am Ende der Kurve, sondern auf Rasterlinien! Bestimme zuerst, wann und wo die Fahrt endet (Datenblatt). Dann zähle die Kästchen bis zur Markierung.",
       "hints": {
         "y": [
           {
@@ -518,6 +519,7 @@
     "node": "rathaus",
     "requires": ["t12-ralf-brezel", "t02-kevin"],
     "reward": 80,
+    "difficulty": "leicht",
     "scenario": "kevin-bremsen",
     "intro": [
       ["ralf", "Ich hab Kevins Vollbremsung als t-vₓ-Diagramm gezeichnet. Diesmal bin ich mir ganz sicher!"],
@@ -547,6 +549,7 @@
     "node": "rathaus",
     "requires": ["t13-ralf-kevin", "t03-bus"],
     "reward": 90,
+    "difficulty": "leicht",
     "scenario": "bus-anfahren",
     "intro": [
       ["ralf", "Letzter Versuch für heute: das t-x-Diagramm von Ötzis Bus. Mit Lineal gezeichnet, ganz ordentlich!"],
@@ -656,6 +659,7 @@
     "node": "schule",
     "requires": ["t02-kevin"],
     "reward": 80,
+    "difficulty": "mittel bis schwer",
     "scenario": "kevin-bremsen",
     "intro": [
       ["ohm", "Florian! Schön, dass du dich trotz Ferienjob mal in der Schule blicken lässt."],
@@ -706,9 +710,10 @@
     "node": "schule",
     "requires": ["t19-konstrukt-bus", "t08-einkaufswagen"],
     "reward": 100,
+    "difficulty": "schwer",
     "scenario": "einkaufswagen",
     "intro": [
-      ["ohm", "Letzte Hausaufgabe, und die ist gemein: ein Einkaufswagen, der in negative x-Richtung rollt."],
+      ["ohm", "Neue Hausaufgabe, und die ist gemein: ein Einkaufswagen, der in negative x-Richtung rollt."],
       ["ohm", "Hier verwechseln fast alle Links- und Rechtskurve. Mal sehen, ob du auch."]
     ],
     "task": {
@@ -716,7 +721,7 @@
       "actor": "cart",
       "given": ["anim", "vt"],
       "ask": "xt",
-      "paper": "Die Form im t-x-Diagramm hängt nur vom Vorzeichen von aₓ ab: aₓ > 0 heißt Linkskurve ⌣, aₓ < 0 heißt Rechtskurve ⌢. Egal, in welche Richtung sich der Wagen bewegt!"
+      "paper": "Startwert beachten: Der Wagen startet nicht bei x = 0 (siehe „Start: x(0)“). Δx ist hier negativ! Die Form hängt nur vom Vorzeichen von aₓ ab: aₓ > 0 Linkskurve ⌣, aₓ < 0 Rechtskurve ⌢ – egal, in welche Richtung er rollt."
     },
     "success": [
       ["florian", "Erst Rechtskurve, weil aₓ < 0 ist, dann eine fallende Gerade, am Ende eine Linkskurve, weil aₓ > 0 ist, obwohl der Wagen dabei langsamer wird."],
@@ -730,6 +735,7 @@
     "node": "rathaus",
     "requires": ["t02-kevin"],
     "reward": 90,
+    "difficulty": "mittel",
     "scenario": {
       "actors": [
         {
@@ -781,7 +787,7 @@
       "ask": "xt",
       "tolY": 1,
       "prompt": "Zeichne Brezels t-x-Diagramm in einem Zug von t = 0 s bis zum Ende. Beim Loslassen wird deine Linie automatisch begradigt.",
-      "paper": "Berechne zuerst die Ortswerte an den Knickstellen: Δx = vₓ · Δt in jedem Abschnitt. Trage die Punkte ins Heft ein und verbinde sie – erst dann zeichnen."
+      "paper": "Berechne zuerst die Ortswerte an den Knickstellen: Δx = vₓ · Δt in jedem Abschnitt – erst dann zeichnen. Keine Angst vor Wacklern: Eine Fingerbreite daneben zählt noch als richtig."
     },
     "success": [
       ["florian", "Gerade hoch bis 12 m bei 4,0 s, Gerade zurück bis 6,0 m bei 7,0 s, danach waagrecht bis 9,0 s."],
@@ -847,6 +853,7 @@
     "node": "supermarkt",
     "requires": ["t08-einkaufswagen"],
     "reward": 100,
+    "difficulty": "mittel",
     "scenario": "einkaufswagen",
     "intro": [
       ["filiale", "Herr Brandl, die Versicherung hat noch eine Frage zum Einkaufswagen. Das Auto der Bürgermeisterin parkt genau bei x = 0."],
@@ -901,6 +908,7 @@
     "node": "rathaus",
     "requires": ["t12-ralf-brezel"],
     "reward": 80,
+    "difficulty": "leicht",
     "scenario": "hund-brezel",
     "intro": [
       ["ralf", "Chef, ich hab bei Brezels Rückweg ein Steigungsdreieck gezeichnet. Da kommt bei mir eine positive Geschwindigkeit raus."],
@@ -1030,6 +1038,7 @@
     "node": "fotolabor",
     "requires": ["t01-sportwagen"],
     "reward": 60,
+    "difficulty": "leicht",
     "intro": [
       ["slavi", "Ah, das neue Amt! Ich bin Slavi, Fotograf. Ich mache Stroboskopbilder."],
       ["slavi", "Im dunklen Studio blitzt es immer im gleichen Zeitabstand. Bei jedem Blitz landet die Kugel einmal auf demselben Foto."],
@@ -1148,6 +1157,7 @@
     "node": "fotolabor",
     "requires": ["t32-strobo-kevin"],
     "reward": 70,
+    "difficulty": "leicht",
     "intro": [
       ["slavi", "Beim Stadtfest ist ein Fallschirmspringer über dem Marktplatz gelandet. Ich hab ihn im Blitzlicht erwischt!"],
       ["slavi", "Die Zeitung will eine Bildunterschrift. Aber bitte fachlich richtig, sonst schimpft wieder irgendein Physiklehrer."]
@@ -1208,6 +1218,7 @@
     "node": "fotolabor",
     "requires": ["t33-strobo-fallschirm"],
     "reward": 80,
+    "difficulty": "mittel",
     "intro": [
       ["slavi", "Ein Klassiker für meine Ausstellung: Eine Kugel rollt aus der Ruhe eine schräge Rinne hinunter."],
       ["slavi", "Und – natürlich – die Kamera hat wieder gestreikt. Ich glaube, sie mag mich nicht."],
@@ -1248,19 +1259,20 @@
     "node": "fotolabor",
     "requires": ["t34-strobo-rinne"],
     "reward": 90,
+    "difficulty": "mittel",
     "intro": [
       ["slavi", "Ich habe vor der Schule ein Auto im Blitzlicht erwischt. Da gilt Tempo 30!"],
-      ["slavi", "Diesmal lag kein Maßband am Boden, nur meine Maßstabsleiste. Rechnest du nach, ob der zu schnell war?"]
+      ["slavi", "Diesmal lag kein Maßband am Boden, nur mein Maßstab mit Feldern von je 1,0 m. Rechnest du nach, ob der zu schnell war?"]
     ],
     "task": {
       "type": "strobecalc",
       "motion": {
         "kind": "kin",
-        "x0": 0,
+        "x0": 1,
         "segments": [
           {
             "dt": 0.6,
-            "v": 12.5
+            "v": 15
           }
         ]
       },
@@ -1272,37 +1284,38 @@
         "bg": "city",
         "obj": "car_red",
         "ruler": "bar",
-        "bar": 2,
-        "range": [-1.5, 9]
+        "bar": 1,
+        "barRepeat": true,
+        "range": [0, 12]
       },
-      "context": "Ein Auto fährt gleichförmig durch die 30er-Zone vor der Schule. Die Leiste unten ist 2,0 m lang.",
+      "context": "Ein Auto fährt gleichförmig durch die 30er-Zone vor der Schule. Unten liegt ein Maßstab, jedes Feld ist 1,0 m lang.",
       "prompt": "War das Auto zu schnell?",
-      "paper": "Vergleiche den Abstand zweier Abbilder mit der Maßstabsleiste: Wie oft passt die Leiste dazwischen? Dann vₓ = Δx / Δt und in km/h umrechnen. Miss am besten an der Vorderkante des Autos.",
+      "paper": "Miss an der Vorderkante des Autos: Wie viele 1-m-Felder liegen zwischen zwei Abbildern? Das ist Δx – eine ganze Zahl! Dann vₓ = Δx / Δt und in km/h umrechnen.",
       "questions": [
         {
           "label": "Geschwindigkeit",
           "symbol": "v_x",
           "unit": "m/s",
           "ask": "v",
-          "range": [11, 14],
+          "range": [14, 16],
           "hints": [
             {
-              "value": 2.5,
+              "value": 3,
               "tol": 0.3,
               "text": "Das ist der Weg zwischen zwei Abbildern. Teile ihn noch durch Δt = 0,20 s."
             }
           ],
-          "help": "Zwischen zwei Abbildern passt die 2,0-m-Leiste etwas mehr als einmal. Δt = 0,20 s."
+          "help": "Zwischen zwei Abbildern liegen genau 3 Felder, also 3,0 m. Δt = 0,20 s."
         },
         {
           "label": "Geschwindigkeit in km/h",
           "unit": "km/h",
           "ask": "kmh",
-          "range": [40, 50],
+          "range": [50, 58],
           "hints": [
             {
-              "value": 3.5,
-              "tol": 0.5,
+              "value": 4.2,
+              "tol": 0.4,
               "text": "Von m/s nach km/h wird mit 3,6 multipliziert, nicht geteilt."
             }
           ]
@@ -1310,7 +1323,7 @@
       ]
     },
     "success": [
-      ["florian", "Etwa 2,5 m in 0,20 s, also rund 12,5 m/s. Mal 3,6 sind das ungefähr 45 km/h – viel zu schnell für eine 30er-Zone!"],
+      ["florian", "3,0 m in 0,20 s, also 15 m/s. Mal 3,6 sind das 54 km/h – viel zu schnell für eine 30er-Zone!"],
       ["slavi", "Das Foto geht an die Bürgermeisterin. Kunst kann auch Verkehrssicherheit."]
     ]
   },
@@ -1321,6 +1334,7 @@
     "node": "fotolabor",
     "requires": ["t35-strobo-auto"],
     "reward": 80,
+    "difficulty": "leicht",
     "intro": [
       ["slavi", "Jo, die Skaterin, will ein Poster. Ich hab sie im Park geblitzt."],
       ["slavi", "Aber jetzt streiten wir: Ich sage, sie bremst. Sie sagt, sie wird schneller. Wer hat recht?"],
@@ -1383,6 +1397,7 @@
     "node": "fotolabor",
     "requires": ["t36-strobo-jo"],
     "reward": 90,
+    "difficulty": "mittel",
     "intro": [
       ["slavi", "Kevin will noch ein Foto: eine Vollbremsung vor meinem Laden. Und – du ahnst es – die Kamera …"],
       ["florian", "… hat gestreikt. Slavi, du brauchst eine neue Kamera."],
@@ -1410,7 +1425,7 @@
         "obj": "cyclist"
       },
       "explain": "Beim Bremsen werden die Abstände von Blitz zu Blitz kleiner. Gleichmäßig verzögert: Sie schrumpfen jedes Mal um gleich viel.",
-      "paper": "Beim Bremsen wird der Weg pro Zeitabstand immer kleiner. Wo steht Kevin ganz am Ende?"
+      "paper": "Zieh die Nummern auf die Bahn – sie werden zu kleinen Fahrrädern. Maßgeblich ist die Mitte des Fahrrads (weißer Strich), wie in der Animation. Beim Bremsen wird der Weg pro Zeitabstand immer kleiner."
     },
     "success": [
       ["slavi", "Die Abstände werden immer kleiner, bis er steht. Man sieht die Bremse förmlich quietschen."],
@@ -1424,6 +1439,7 @@
     "node": "fotolabor",
     "requires": ["t37-strobo-bremsen"],
     "reward": 100,
+    "difficulty": "schwer",
     "intro": [
       ["slavi", "Mein Meisterstück für die Ausstellung: ein Pendel, das einmal von links nach rechts durchschwingt."],
       ["slavi", "Dafür braucht es ein Genie. Oder dich. Meine Kamera hat übrigens gekündigt."],
@@ -1499,7 +1515,7 @@
       "type": "calc",
       "given": ["anim", "data"],
       "prompt": "Wann und wo holt Kevin Paul ein – und wie schnell ist Kevin dann?",
-      "paper": "Paul: x(t) = 4,0 m/s · t. Kevin ab t = 6,0 s: x(t) = ½ · 1,0 m/s² · (t − 6,0 s)². Gleichsetzen ergibt eine quadratische Gleichung. Tipp: Rechne mit τ = t − 6,0 s.",
+      "paper": "Erst rechnen, dann prüfen: Die Animation zeigt die Zeit – damit kannst du dein Ergebnis kontrollieren. Paul: x = 4,0 m/s · t. Kevin ab t = 6,0 s: x = ½ · 1,0 m/s² · (t − 6,0 s)². Gleichsetzen, mit τ = t − 6,0 s rechnen.",
       "questions": [
         {
           "label": "Zeitpunkt des Einholens",
@@ -1584,7 +1600,7 @@
       "actor": "jo",
       "given": ["anim", "vt"],
       "prompt": "Welche Beschreibung ist fachlich in allen vier Abschnitten korrekt?",
-      "paper": "Vier Abschnitte! Prüfe in jedem: Vorzeichen von vₓ (Richtung) und ob der Betrag von vₓ zu- oder abnimmt. Achtung im 4. Abschnitt: aₓ ist negativ, aber Jo wird schneller!"
+      "paper": "Je Abschnitt: Vorzeichen von vₓ? Wird |vₓ| größer oder kleiner?"
     },
     "success": [
       ["florian", "Erst beschleunigt, dann gleichförmig, dann verzögert bis zum Stillstand – und danach aus der Ruhe beschleunigt in negative x-Richtung. Das aₓ bleibt dabei negativ."],
@@ -1598,7 +1614,7 @@
     "node": "fahrradladen",
     "requires": ["t11-stadtlauf"],
     "reward": 120,
-    "difficulty": "schwer",
+    "difficulty": "leicht",
     "scenario": "kevin-wende",
     "intro": [
       ["kevin", "Chef, mein neuer GPS-Tacho druckt t-x-Diagramme. Aber wieder ohne Zahlen. Ich glaube, ich kaufe immer die falschen Geräte."],
@@ -1695,7 +1711,7 @@
     "node": "schule",
     "requires": ["t20-konstrukt-wagen"],
     "reward": 130,
-    "difficulty": "schwer",
+    "difficulty": "mittel",
     "scenario": "kevin-wende",
     "intro": [
       ["ohm", "Florian, die schwerste Hausaufgabe des Schuljahres: Kevin wendet, ohne anzuhalten."],
@@ -1720,7 +1736,7 @@
     "node": "schule",
     "requires": ["t22-reaktion-auto", "t45-schwer-konstrukteur"],
     "reward": 120,
-    "difficulty": "schwer",
+    "difficulty": "mittel",
     "scenario": {
       "actors": [
         {
@@ -1759,7 +1775,7 @@
     "node": "fahrradladen",
     "requires": ["t23-freihand-brezel"],
     "reward": 130,
-    "difficulty": "schwer",
+    "difficulty": "mittel",
     "scenario": "kevin-express",
     "intro": [
       ["kevin", "Chef, diesmal hab ich kein Video. Nur das t-vₓ-Diagramm von meiner Express-Tour."],
@@ -1772,7 +1788,7 @@
       "ask": "xt",
       "tolY": 1.5,
       "prompt": "Zeichne Kevins t-x-Diagramm in einem Zug – ganz ohne Animation, nur aus dem t-vₓ-Diagramm.",
-      "paper": "Berechne die Orte an allen Knickstellen: Δx = vₓ · Δt. Bei vₓ = 0 bleibt x gleich (waagrecht). Bei vₓ < 0 fällt die Linie."
+      "paper": "Berechne die Orte an allen Knickstellen: Δx = vₓ · Δt. Bei vₓ = 0 bleibt x gleich (waagrecht), bei vₓ < 0 fällt die Linie. Eine Fingerbreite daneben zählt noch als richtig."
     },
     "success": [
       ["florian", "Hoch bis 20 m bei 4,0 s, waagrecht bis 6,0 s, dann runter auf 11 m bei 9,0 s."],
@@ -1813,7 +1829,7 @@
     "node": "bushof",
     "requires": ["t29-steigung-bus"],
     "reward": 120,
-    "difficulty": "schwer",
+    "difficulty": "mittel",
     "scenario": "kevin-wende",
     "intro": [
       ["oetzi", "Sag mal, Kevin bremst und fährt gleich danach rückwärts weiter. Ist das dann noch Bremsen oder schon Beschleunigen?"],
@@ -1940,7 +1956,8 @@
         "vertical": true,
         "ruler": "none"
       },
-      "context": "Der Ball wurde gerade nach OBEN geworfen. Das kräftigste Abbild (ganz oben) ist das neueste.",
+      "context": "📌 Wichtig: Der Ball wurde gerade nach OBEN geworfen. Das kräftigste Abbild (ganz oben) ist das neueste.",
+      "paper": "Lies den Kasten über den Antworten genau! Das Foto allein sieht aus wie ein fallender Ball. Erst die Angabe „nach oben geworfen“ verrät die Richtung. Werden die Abstände in Bewegungsrichtung größer oder kleiner?",
       "prompt": "Welche Bildunterschrift ist fachlich richtig?",
       "choices": [
         {
@@ -2003,7 +2020,7 @@
       },
       "context": "Die Kugel startet aus der Ruhe und rollt gleichmäßig beschleunigt die Rinne hinunter.",
       "prompt": "Bestimme die Geschwindigkeiten und die Beschleunigung der Kugel.",
-      "paper": "Mittlere Geschwindigkeit zwischen zwei Abbildern: v = Δx / Δt (gilt für die Mitte des Zeitabstands). Beschleunigung: a = Δv / Δt zwischen den Mitten – oder kurz: a = (x₃ − 2x₂ + x₁) / Δt².",
+      "paper": "v zwischen zwei Abbildern = Δx / 0,50 s; sie gilt für die Mitte dieses Zeitabstands. Für a: Von der Mitte 1→2 bis zur Mitte 4→5 vergehen 3 · 0,50 s = 1,5 s. Also a = (v₄₅ − v₁₂) / 1,5 s.",
       "questions": [
         {
           "label": "mittlere Geschwindigkeit zwischen Abbild 1 und 2",
@@ -2022,7 +2039,7 @@
           "range": [3.2, 3.8]
         },
         {
-          "label": "Beschleunigung",
+          "label": "Beschleunigung (aus beiden v-Werten)",
           "symbol": "a_x",
           "unit": "m/s²",
           "ask": "a",

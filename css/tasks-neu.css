@@ -130,3 +130,12 @@ body.finale-on #dialog { z-index: 80; }
 .live-slow { font-size: 13px; }
 .g-dot.live-pt { fill: var(--curve); stroke: var(--ink); stroke-width: 1.5; }
 @media (max-height: 500px) { .live-slow, .live-zero { font-size: 11px; padding: 2px 6px; } }
+
+/* Stroboskop auf dem Handy quer: Pendel und senkrechte Fotos niedriger, damit Leiste und Knöpfe sichtbar bleiben [W29] */
+@media (max-height: 500px) {
+  .strobe-photo.pendulum, .sb-build .strobe-photo.pendulum { max-height: 36vh; }
+  .strobe-photo.vertical { max-height: 44vh; }
+  .sb-tray { padding: 4px; gap: 6px; min-height: 36px; }
+  .sb-chip { width: 30px; height: 30px; font-size: 14px; }
+  .sb-info { font-size: 12px; margin: 2px 0; }
+}
