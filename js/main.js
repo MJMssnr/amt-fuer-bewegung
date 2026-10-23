@@ -17,6 +17,7 @@ import { initSoundMenu } from './ui/sound-menu.js';
 import { openQuestlog } from './ui/questlog.js';
 import { resetPatrol } from './ui/police.js';
 import { addSignButtons } from './ui/signbtn.js';
+import { scrollArrows } from './ui/scrollhint.js';
 import { typeOf } from './tasks/types.js';
 import { initTestMode, isTestMode, setTestMode } from './ui/testmode.js';
 
@@ -99,6 +100,7 @@ async function runTaskScreen({ title, fromName, rewardText, ticket, world }) {
       screen.removeEventListener('click', onTap, true);
       document.removeEventListener('keydown', onKey, true);
       screen.classList.remove('await-tap');
+      unArrows();
       inst.destroy();
       resolve(solved);
     };
@@ -115,7 +117,8 @@ async function runTaskScreen({ title, fromName, rewardText, ticket, world }) {
       }, 250);
     } });
     addSignButtons(root); // „±“ vor jedem Zahlenfeld [W28]
-    screen.querySelector('.t-back').onclick = () => { if (solved) finish(); else { inst.destroy(); resolve(null); } };
+    const unArrows = scrollArrows(root);
+    screen.querySelector('.t-back').onclick = () => { if (solved) finish(); else { unArrows(); inst.destroy(); resolve(null); } };
   });
   screen.classList.add('hidden');
   root.innerHTML = '';
