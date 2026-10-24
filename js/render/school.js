@@ -37,6 +37,13 @@ export function school(P, cx, by, n, t, dpr) {
   P.rect(x - 8, y - 22, 1, h + 22, '#566c86');
   for (let i = 0; i < 7; i++) P.rect(x - 7 + i, y - 22 + Math.round(Math.sin(t * 4 - i * 0.7)), 1, 5, i % 2 ? '#ffcd75' : '#3b5dc9');
   for (const dx of [10, 22]) {
+    if (dx === 10 && n.bikeDown) { // von Bärti umgeworfen [W43]: liegt flach, Räder als Ellipsen
+      const bx = x + w + dx;
+      P.blob(bx - 4, by - 1, 3, ink, 1.5); P.blob(bx - 4, by - 1, 2, '#cfd6de', 0.8);
+      P.blob(bx + 4, by - 1, 3, ink, 1.5); P.blob(bx + 4, by - 1, 2, '#cfd6de', 0.8);
+      P.rect(bx - 4, by - 2, 8, 1, '#e43b44');
+      continue;
+    }
     P.blob(x + w + dx - 4, by - 3, 3, ink); P.blob(x + w + dx - 4, by - 3, 2, '#cfd6de');
     P.blob(x + w + dx + 4, by - 3, 3, ink); P.blob(x + w + dx + 4, by - 3, 2, '#cfd6de');
     P.rect(x + w + dx - 4, by - 6, 8, 1, dx === 10 ? '#e43b44' : '#38b764');

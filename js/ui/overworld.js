@@ -14,6 +14,7 @@ import { natureOn, natureOff, sfx, engineStart, engineSet, engineStop } from '..
 import { bikeRide, motoRide, smoke } from '../render/ride.js';
 import { TownLife } from './townlife.js';
 import { BaertiMap } from './baerti-map.js';
+import { BaertiCam } from './baerti-cam.js';
 import { windmill, solar, cloud, riverFlow, dock } from '../render/townlife-art.js';
 
 BUILDINGS.treehouse = treehouse;
@@ -51,6 +52,7 @@ export class Overworld {
     }
     this.life = new TownLife(); // Radler und Fußgänger [W33]
     this.baerti = new BaertiMap(map, this.life); // läuft nur, wenn freigeschaltet (this.hasBaerti) [W42]
+    this.cam = new BaertiCam(); // Bärti-Cam [W43]
     canvas.addEventListener('pointerup', (e) => this.#tap(e));
     new ResizeObserver(() => this.#resize()).observe(canvas);
     this.#resize();
@@ -93,7 +95,7 @@ export class Overworld {
       if (!this.running) return;
       const dt = Math.min(0.05, Math.max(0, (now - last) / 1000));
       last = now;
-      this.time += dt;
+      this.time += dt; this.dt = dt;
       this.#walk(dt);
       this.life.step(dt);
       if (this.hasBaerti?.()) this.baerti.step(dt);
@@ -127,6 +129,7 @@ export class Overworld {
 
   #tap(e) {
     if (this.locked?.()) return;
+    if (this.cam.on) { this.cam.toggle(false); this.onCam?.(false); return; } // Tippen beendet die Bärti-Cam
     const r = this.c.getBoundingClientRect();
     const x = ((e.clientX - r.left) * this.dpr - this.ox) / this.s;
     const y = ((e.clientY - r.top) * this.dpr - this.oy) / this.s;
@@ -212,8 +215,9 @@ export class Overworld {
     if (!this.ground) return;
     const ctx = this.ctx;
     ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(this.ground, 0, 0);
-    const P = new Painter(ctx, this.s, this.ox, this.oy);
+    const v = this.hasBaerti?.() ? this.cam.view(this, this.baerti.focus(), this.dt ?? 0.016) : null; // Bärti-Cam [W43]
+    ctx.drawImage(v ? this.cam.ground(this, v) : this.ground, 0, 0);
+    const P = new Painter(ctx, v?.s ?? this.s, v?.ox ?? this.ox, v?.oy ?? this.oy);
     const t = this.time;
     const items = [];
     for (const n of Object.values(this.map.nodes)) {
@@ -232,6 +236,11 @@ export class Overworld {
     // zwei fast durchsichtige Wolken ziehen am oberen und unteren Rand entlang [W33]
     cloud(P, ((t * 6) % (this.W + 120)) - 60, 26, 1.2);
     cloud(P, this.W + 60 - ((t * 4 + 300) % (this.W + 120)), this.H - 52, 1);
+    if (v) { // Bildunterschrift statt Ortsnamen
+      const P0 = new Painter(ctx, this.s, this.ox, this.oy);
+      P0.text(`Bärti-Cam · Bärti ${this.baerti.doing}`, this.W / 2, 12, 6, { color: '#ffffff', bg: 'rgba(26,28,44,0.8)', pad: 3, minPx: 12, dpr: this.dpr });
+      return;
+    }
     this.#markers(P);
     this.#labels(P);
   }

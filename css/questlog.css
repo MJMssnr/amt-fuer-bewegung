@@ -52,4 +52,11 @@ body.test-mode .hud-log { border-color: var(--gold); color: var(--gold); }
   .ql-table td { padding: 2px 4px; }
   .ql-head { font-size: 15px; padding: 4px 8px; }
 }
-.hud-ride.on { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.hud-ride.on, .hud-cam.on { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+/* Viele HUD-Knöpfe (Rad, Motorrad, Bärti-Cam) auf schmalen Bildschirmen [W43] */
+.hud-tickets, .hud-money { white-space: nowrap; }
+@media (max-width: 760px) {
+  .hud-title { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: clip; min-width: 0; }
+  .hud-right { gap: 5px; }
+  .hud-btn { width: 26px; }
+}

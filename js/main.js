@@ -78,6 +78,9 @@ function updateHud() {
     b.classList.toggle('hidden', !own[b.dataset.mode]);
     b.classList.toggle('on', state.travel === b.dataset.mode);
   });
+  const cam = document.querySelector('.hud-cam'); // Bärti-Cam [W43]
+  cam.classList.toggle('hidden', !state.items.waschbaer);
+  cam.classList.toggle('on', Boolean(overworld?.cam.on));
 }
 const save = () => { saveState(state); updateHud(); };
 
@@ -296,6 +299,11 @@ async function boot() {
   overworld.tutorial = () => doneCount() === 0;
   overworld.hasBaerti = () => Boolean(state.items.waschbaer);
   overworld.mode = () => state.travel ?? 'walk';
+  overworld.onCam = () => updateHud();
+  document.querySelector('.hud-cam').addEventListener('click', () => {
+    overworld.cam.toggle(); updateHud();
+    if (overworld.cam.on) toast('🦝 Bärti-Cam an – tippen auf die Karte beendet sie');
+  });
   document.querySelectorAll('.hud-ride').forEach((b) => b.addEventListener('click', () => {
     state.travel = state.travel === b.dataset.mode ? 'walk' : b.dataset.mode;
     save();
