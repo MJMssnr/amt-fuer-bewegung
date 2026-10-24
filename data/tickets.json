@@ -2703,7 +2703,7 @@
     "node": "polizei",
     "requires": ["t56-formel-eauto"],
     "reward": 90,
-    "difficulty": "leicht",
+    "difficulty": "mittel",
     "intro": [
       ["polizist", "TRRRILLL! Herr Doktor Brandl, ein Notfall für Ihr Amt! Vollbremsung in der Hauptstraße, niemand verletzt, aber eine lange Bremsspur."],
       ["polizist", "Der Fahrer schwört: „Ich war nicht zu schnell!“ Erlaubt sind 50. Ich brauche ein Gutachten – mit gültigen Ziffern, versteht sich."],
@@ -2870,7 +2870,7 @@
     "node": "polizei",
     "requires": ["t64-gutachten-regen"],
     "reward": 140,
-    "difficulty": "schwer",
+    "difficulty": "mittel",
     "intro": [
       ["polizist", "TRRRILLL! Schnee in der Wohnstraße, Tempo 30. Ein Auto ist gerutscht und in eine Mülltonne gekracht."],
       ["polizist", "Die Werkstatt sagt: Beim Aufprall war es noch 5,0 m/s schnell. Es stand also am Ende der Bremsspur noch nicht!"],
