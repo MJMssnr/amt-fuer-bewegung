@@ -56,6 +56,7 @@ Hinweis: Sitzung 1 wurde nachträglich aus einer Zusammenfassung des Chats rekon
 | W43 | Knopf „Bärti-Cam“: starker Zoom, folgt Bärti durch die Stadt. Neue Aktivitäten: Bäume, Gebäude, Brunnen und Teich im Stadtpark, im Blumenbeet nach Würmern wühlen, ans Polizeirevier pinkeln, Fahrrad an der FOS/BOS umwerfen und wieder aufstellen, Windrad hoch, runterspringen, verwirrt, aufrappeln | (dieser Commit) |
 | W44 | Bug: Nach Bärtis Freischaltung kein Bärti-Cam-Knopf. Ursache: Bärti kam nur direkt nach einem gespielten Auftrag (nicht bei Testmodus-Häkchen, alten Spielständen, Speichercode) → Prüfung jetzt auch nach dem Auftragsbuch und beim Start. Knopf 🦝 von Anfang an sichtbar, ausgegraut, „Hier gibt es noch nichts zu sehen!“; fehlt er (alte index.html im Cache), legt das Spiel ihn selbst an | (dieser Commit) |
 | W45 | Passwortschutz: Startseite mit Hinweis (frühe Version, Bugs, gültige Ziffern), Dienst-E-Mail für Passwort-Anfragen/Bugs, Passwortfeld; nicht umgehbar → Spiel verschlüsselt, Passwort ist der Schlüssel | (dieser Commit) |
+| W46 | Bug: Gültige-Ziffern-Polizei behielt ihren Verwarnungszähler (und das einmalige Lob) bei „Dienst antreten“ (neues Spiel) → wird jetzt mit dem Spielstand zurückgesetzt; Klang- und Testmodus-Einstellungen bleiben | (dieser Commit) |
 
 **Stand Ende Sitzung 2:** 53 Aufträge (A–O, je ein schwerer), 4950 € verdienbar, Shop 23 Gegenstände für 2265 €. Offen: siehe `ROADMAP.md` und `PLAYTEST.md`.
 

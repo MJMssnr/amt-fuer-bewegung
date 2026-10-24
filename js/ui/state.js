@@ -17,6 +17,10 @@ export function saveState(state) {
   try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* privat/blockiert: egal */ }
 }
 
+// Neues Spiel: auch die Verwarnungen und das Lob der Gültige-Ziffern-Polizei zurücksetzen [W46].
+// Klang- und Testmodus-Einstellungen bleiben (gehören zum Gerät, nicht zum Spiel).
+const PER_GAME = ['amt-fuer-bewegung.gz-verwarnungen', 'amt-fuer-bewegung.gz-lob'];
+
 export function resetState() {
-  try { localStorage.removeItem(KEY); } catch { /* egal */ }
+  try { [KEY, ...PER_GAME].forEach((k) => localStorage.removeItem(k)); } catch { /* egal */ }
 }
