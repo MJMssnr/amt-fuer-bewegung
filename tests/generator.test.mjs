@@ -11,6 +11,7 @@ import { makeDistractors } from '../js/tasks/distractors.js';
 import { ACCEPT } from '../js/tasks/train-check.js';
 import { faultySeries } from '../js/tasks/errorhunt.js';
 import { KINDS } from '../js/render/graph.js';
+import { constructTruth } from '../js/tasks/construct.js';
 import { UNIT_FACTOR } from '../js/engine/answer.js';
 
 const N = 400;
@@ -29,6 +30,25 @@ for (const { type } of TRAINING) for (const level of LEVELS) {
         const res = parts.some((p) => p.v == null) ? missingSpeed(parts, t.target * kV, 'time') : avgByTime(parts);
         assert.ok(Number.isFinite(res) && res > 0 && res / kV < 200, `V lösbar (Seed ${seed}: ${res / kV})`);
         seen.add(JSON.stringify(t.parts) + t.target);
+        continue;
+      }
+      if (ticket.task.type === 'formula') { // Q und W: genau eine richtige Umstellung, Ergebnis endlich und positiv
+        const t = ticket.task, params = Object.fromEntries(t.known.map((k) => [k.name, k.value]));
+        const val = evalExpr(t.expr, params);
+        assert.ok(Number.isFinite(val) && val > 0, `${t.label} = ${val} (Seed ${seed})`);
+        assert.equal(t.choices.filter((c) => c.correct).length, 1);
+        assert.equal(new Set(t.choices.map((c) => c.text)).size, t.choices.length, 'Antworten verschieden');
+        if (scenario) assert.ok(buildWorld(scenario).actors.get(t.actor), 'Figur vorhanden');
+        seen.add(JSON.stringify(t.known) + t.expr);
+        continue;
+      }
+      if (type === 'skid') {
+        const t = ticket.task, a = { dry: 8, rain: 5, snow: 2 }[t.weather], dx = t.skid[1] - t.skid[0];
+        const v0 = Math.sqrt(t.v1 * t.v1 + 2 * a * dx) * 3.6;
+        assert.ok(t.skid[0] >= 0 && t.skid[1] <= t.range[1] - 2 && dx >= 5, 'Spur passt ins Bild');
+        assert.ok(v0 > 15 && v0 < 120, `v₀ plausibel (${v0})`);
+        if (level === 'schwer') assert.ok(t.v1 > 0); else assert.equal(t.v1, 0);
+        seen.add(JSON.stringify(t));
         continue;
       }
       if (type === 'pairs') { // R: drei verschiedene Bewegungen, in beiden Diagrammarten unterscheidbar
@@ -76,6 +96,9 @@ for (const { type } of TRAINING) for (const level of LEVELS) {
         assert.ok(Math.abs(v0) <= 8 && Math.abs(v1) <= 8);
         if (type === 'match' || type === 'errorhunt') assert.ok(nice(p.a[0], 0.5), `aₓ im Datenblatt glatt (${p.a[0]}, Seed ${seed})`);
       }
+      if (type === 'construct') { const tr = constructTruth(actor, 'xt'); assert.ok(tr.values.every(Number.isFinite) && tr.shapes.length <= 4); continue; }
+      if (type === 'freehand') { assert.ok(actor.pieces.every((p) => Math.abs(p.a[0]) < 1e-9), 'nur Geraden'); continue; }
+      if (type === 'live') { assert.ok(actor.pieces.every((p) => Math.abs(p.v0[0]) <= ticket.task.vmax - 1), 'Regler reicht'); continue; }
       if (type === 'match') { // A: drei verschiedene Distraktoren aus Fehlvorstellungen
         const d = makeDistractors(ticket.task.ask, actor, 3, []);
         assert.equal(d.distractors.length, 3, `3 Distraktoren (Seed ${seed}, ${ticket.task.given[1]}→${ticket.task.ask})`);

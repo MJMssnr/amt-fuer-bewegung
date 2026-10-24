@@ -104,7 +104,7 @@ async function runTaskScreen({ title, fromName, rewardText, ticket, world }) {
   screen.querySelector('.t-from').textContent = fromName ?? '';
   screen.querySelector('.t-reward').textContent = rewardText ?? '';
   screen.querySelector('.t-reward').classList.toggle('hidden', !rewardText);
-  const ty = typeOf(ticket.task.type);
+  const ty = typeOf(ticket.badgeType ?? ticket.task.type); // Training W nutzt das Formel-Modul, zeigt aber „W“ [W49]
   const badge = screen.querySelector('.t-type');
   badge.textContent = ty.letter;
   badge.title = `Aufgabentyp ${ty.letter}: ${ty.name}`;

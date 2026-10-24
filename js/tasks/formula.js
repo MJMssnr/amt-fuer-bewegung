@@ -9,6 +9,7 @@
 //   "choices":[ { "text":"t = √(2x / a)", "correct":true }, { "text":"…", "feedback":"…" } ],
 //   "expr":"sqrt(2*x/a)", "label":"Fahrzeit", "symbol":"t", "unit":"s", "hints":[…], "help":"…" }
 
+import { drawRiver } from '../render/river.js';
 import { evalExpr } from '../engine/variants.js';
 import { buildLeft, frame, actorOf } from './common.js';
 import { questionBlock } from './questions.js';
@@ -25,6 +26,7 @@ export function mount(root, { ticket, world, onSolved }) {
   if (world) L = buildLeft(left, { ticket, world, actor: actorOf(world, task) });
   else {
     if (task.picture?.kind === 'well') drop = dropScene(left, { t: task.picture.t, label: task.picture.label });
+    if (task.picture?.kind === 'river') drop = riverPicture(left, task.picture); // Fluss-Labor als Rechenaufgabe [W49]
     if (task.paper) {
       left.insertAdjacentHTML('beforeend', '<div class="paper-note"><strong>✎ Auf Papier</strong><span></span></div>');
       left.querySelector('.paper-note span').textContent = task.paper;
@@ -82,4 +84,21 @@ export function mount(root, { ticket, world, onSolved }) {
   }
 
   return { destroy: () => { L?.destroy(); drop?.destroy(); } };
+}
+
+/** Kleines Flussbild (Floß fährt hin und her, Strömung fließt) für Rechenaufgaben ohne Szenario [W49] */
+function riverPicture(left, { L = 60, vb = 4, vf = 1 }) {
+  left.insertAdjacentHTML('beforeend', '<div class="scene-wrap rv-pic"><canvas class="scene"></canvas></div>');
+  const cv = left.querySelector('.rv-pic canvas');
+  let raf = 0, t0 = performance.now();
+  const t1 = L / (vb - vf), t2 = L / (vb + vf), T = t1 + t2, k = Math.max(1, T / 6); // Zeitraffer: Runde in ~6 s
+  const frame = (now) => {
+    const s = (((now - t0) / 1000) * k) % T, up = s < t1, x = up ? (vb - vf) * s : L - (vb + vf) * (s - t1);
+    const d = Math.min(window.devicePixelRatio || 1, 3), r = cv.getBoundingClientRect();
+    if (r.width && cv.width !== Math.round(r.width * d)) { cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); }
+    if (r.width) drawRiver(cv, { L, x, vf, dir: up ? 1 : -1, rope: false, moving: true, t: ((now - t0) / 1000) * k, dpr: d, ff: k, simT: s });
+    raf = requestAnimationFrame(frame);
+  };
+  raf = requestAnimationFrame(frame);
+  return { destroy: () => cancelAnimationFrame(raf) };
 }

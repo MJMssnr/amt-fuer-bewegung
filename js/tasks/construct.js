@@ -23,7 +23,8 @@ const icon = (k) => `<svg viewBox="0 0 28 24" aria-hidden="true"><path d="${SHAP
 export function constructTruth(actor, ask) {
   const q = KINDS[ask].q;
   const times = [...actor.pieces.map((p) => p.t0), actor.tEnd];
-  const values = times.map((t, i) => (i === times.length - 1 ? quantityAt(actor, q, t) : quantityAt(actor, q, t + 1e-9)));
+  const values = times.map((t, i) => (i === times.length - 1 ? quantityAt(actor, q, t) : quantityAt(actor, q, t + 1e-9)))
+    .map((v) => (Math.abs(v) < 1e-6 ? 0 : Math.round(v * 1e6) / 1e6)); // kein „−0 m“ durch das 1e-9-Probieren [W49]
   const comp = q === 'y' ? 1 : 0;
   const shapes = actor.pieces.map((p) => {
     if (q !== 'x' && q !== 'y') return 'line';
