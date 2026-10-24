@@ -9,7 +9,7 @@ Stand: 24.10.2026 (W47, nach Playtest-Runde 3). Reihenfolge mit Herrn Messner ab
 ## Arbeitsplan (W47, in dieser Reihenfolge)
 1. ✅ Bugs, Texte, Hinweise, Einstufungen, Streichungen (W47)
 2. ✅ (W47b) **Mechanik:** T Puppe per Klick greifen (wie B); t74 statt Lösung eine Auswahlfrage „Warum unmöglich?“; O-Aufträge mit Verständnisfrage (gleiche Zeitabstände ≠ gleiche Ortsabstände, was ist konstant/null, Richtung nur aus dem Kontext); W Zeitraffer sichtbar (⏩, schnelle Uhr); t06 Folgefehler-Bewertung (ENTSCHEIDUNGEN § 6)
-3. **Generator-Kern + Endlosmodus** für K, L, H, U, dann A, E, R, V – mit Stufen (ENTSCHEIDUNGEN § 6), Seed-Tests
+3. 🔶 (W48: Durchstich K, L fertig) **Generator-Kern + Endlosmodus** für K, L, H, U, dann A, E, R, V – mit Stufen (ENTSCHEIDUNGEN § 6), Seed-Tests
 4. **Story auf 83–85 Aufträge** (derzeit 74) nach Favoriten, Zahlen aus dem Generator
 5. Endlosmodus erweitern: I, B, F, Q (mehr Formeln umstellen), S, W-Rechenvariante
 6. **Rahmen:** Material-Animation nach dem Demo-Hinweis (Karopapier, Kuli, Taschenrechner, Formelsammlung fliegen ein; „Lege das Material bereit!“, weiter per Tippen/Leertaste); Finale: Slavi „Bitte lächeln“ mit mehreren Blitzen hintereinander; Wiederholungsflug am Bauplatz prüfen (gibt es seit W33)

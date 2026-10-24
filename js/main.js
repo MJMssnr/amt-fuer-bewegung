@@ -22,6 +22,7 @@ import { addSignButtons } from './ui/signbtn.js';
 import { scrollArrows } from './ui/scrollhint.js';
 import { typeOf } from './tasks/types.js';
 import { initTestMode, isTestMode, setTestMode } from './ui/testmode.js';
+import { runTraining } from './ui/training.js';
 
 // Browser erlauben Klang erst nach einer Nutzeraktion
 document.addEventListener('pointerdown', unlockAudio, { capture: true });
@@ -110,7 +111,7 @@ async function runTaskScreen({ title, fromName, rewardText, ticket, world }) {
   const root = screen.querySelector('.task-root');
   resetPatrol();
   screen.classList.remove('hidden');
-  overworld.stop();
+  overworld?.stop(); // im Training (vom Startbildschirm) gibt es noch keine Karte
   const result = await new Promise((resolve) => {
     let solved = null;
     // Nach dem Lösen bleibt der Bildschirm stehen, bis getippt wird: Lösungshinweis in Ruhe lesen und notieren [W20]
@@ -140,7 +141,7 @@ async function runTaskScreen({ title, fromName, rewardText, ticket, world }) {
   });
   screen.classList.add('hidden');
   root.innerHTML = '';
-  overworld.start();
+  overworld?.start();
   return result;
 }
 
@@ -313,7 +314,12 @@ async function boot() {
   let viaTor = false; try { viaTor = sessionStorage.getItem('amt-tor') === '1'; } catch {}
   if (!viaTor) await showNotice();
   const saveCtx = { tickets, items: shop.items, parts: shop.rocketParts, partOrder };
-  const choice = await showTitle(Boolean(state.introSeen), { loadCode: () => askLoadCode((c) => decodeSave(c, saveCtx)) });
+  let choice;
+  for (;;) { // Training [W47]: vom Startbildschirm aus, danach zurück zum Startbildschirm
+    choice = await showTitle(Boolean(state.introSeen), { loadCode: () => askLoadCode((c) => decodeSave(c, saveCtx)) });
+    if (choice !== 'training') break;
+    await runTraining({ runTask: runTaskScreen, buildWorld });
+  }
   if (choice === 'new') { resetState(); state = loadState(); }
   if (choice?.loaded) { resetState(); state = { ...loadState(), ...choice.loaded }; saveState(state); toast('🔑 Spielstand geladen', 'money'); } // Speichercode [W36]
   if (!state.seed) { state.seed = Math.floor(Math.random() * 2 ** 31); saveState(state); }

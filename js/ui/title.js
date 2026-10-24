@@ -46,6 +46,7 @@ export function showTitle(hasSave, { loadCode } = {}) {
   return new Promise((resolve) => {
     const done = (v) => { scene.stop(); el.removeEventListener('pointerdown', onTap); el.classList.add('hidden'); resolve(v); };
     btnCont.onclick = () => done('continue');
+    const tb = el.querySelector('.title-train'); if (tb) tb.onclick = () => done('training'); // Training [W47] (alte index.html im Cache: ohne Knopf)
     el.querySelector('.title-code').onclick = async () => { const r = await loadCode?.(); if (r) done({ loaded: r.state }); };
     btnNew.onclick = () => {
       if (hasSave && !confirm('Wirklich neu beginnen? Der bisherige Spielstand wird gelöscht.')) return;

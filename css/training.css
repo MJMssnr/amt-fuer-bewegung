@@ -1,0 +1,24 @@
+/* Training (Endlosmodus) [W47] */
+.training { position: fixed; inset: 0; z-index: 60; background: rgba(26, 28, 44, 0.92); display: flex; align-items: center; justify-content: center; padding: 12px; }
+.tr-panel { background: var(--panel); box-shadow: 0 0 0 3px var(--ink), 6px 6px 0 rgba(0,0,0,.35); max-width: 980px; width: 100%; max-height: 100%; overflow: auto; padding: 14px 18px; display: flex; flex-direction: column; gap: 10px; }
+.tr-panel h2 { font-family: var(--title); margin: 0; font-size: 22px; }
+.tr-lead { margin: 0; font-size: 14px; }
+.tr-types { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }
+.tr-type { display: grid; grid-template-columns: 26px 1fr; grid-template-rows: auto auto; align-items: center; column-gap: 6px; text-align: left; background: var(--paper); border: 0; box-shadow: 0 0 0 2px var(--ink); padding: 5px 8px; color: var(--ink); }
+.tr-type b { grid-row: span 2; font-family: var(--title); font-size: 20px; text-align: center; background: var(--gold); box-shadow: 0 0 0 2px var(--ink); }
+.tr-type span { font-size: 13px; line-height: 1.15; }
+.tr-type small { font-family: var(--pixel); font-size: 13px; opacity: .7; }
+.tr-type.off { opacity: .38; cursor: default; }
+.tr-type.off b { background: #d6d0c2; }
+.tr-type.on { box-shadow: 0 0 0 4px var(--accent); background: #fff1c4; }
+.tr-levels { display: flex; gap: 8px; }
+.tr-level { flex: 1; font-family: var(--title); font-size: 14px; text-transform: uppercase; padding: 8px; background: var(--paper); border: 0; box-shadow: 0 0 0 2px var(--ink); color: var(--ink); }
+.tr-level.on { background: var(--gold); box-shadow: 0 0 0 4px var(--accent); }
+.tr-actions { display: flex; justify-content: space-between; gap: 8px; }
+@media (max-height: 500px) {
+  .tr-panel { padding: 8px 10px; gap: 6px; }
+  .tr-panel h2 { font-size: 16px; } .tr-lead { font-size: 12px; }
+  .tr-types { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 4px; }
+  .tr-type { padding: 2px 5px; } .tr-type b { font-size: 15px; } .tr-type span { font-size: 11px; } .tr-type small { font-size: 11px; }
+  .tr-level { padding: 5px; font-size: 12px; }
+}
