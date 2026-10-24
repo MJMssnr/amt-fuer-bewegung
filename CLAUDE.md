@@ -98,7 +98,8 @@ js/ui/baerti-cam.js        Bärti-Cam (HUD 🦝): Zoom + Verfolgen, Boden des Au
 js/render/ride.js          Rennrad/Motorrad auf der Karte
 js/render/room-art2.js     Baumhaus-Anbau und neue Gegenstände
 js/render/bauplatz.js      Bauplatz neben dem Baumhaus
-js/engine/gen/              Endlos-Generator: motion.js (Seed-Zufall, Eckpunkte → Szenario), kl.js (K, L), h.js (H), u.js (U), index.js (Katalog TRAINING, generate)
+js/engine/gen/              Endlos-Generator: motion.js (Seed-Zufall, Eckpunkte → Szenario), kl.js (K, L), h.js (H), u.js (U), aerv.js (A, E, R, V), more.js (I, B, F, S), formulas.js (Q, W), index.js (Katalog TRAINING, generate)
+js/tasks/train-check.js    Prüfungen für generierte Aufgaben (z. B. genug Distraktoren) → generate(…, ACCEPT[type])
 js/ui/training.js          Training im Hauptmenü: Typ/Stufe wählen, Aufgabenschleife, Statistik (localStorage …training)
 js/tasks/why.js            Begründungs-/Verständnisfragen nach einer Aufgabe (task.why)
 js/ui/sound-menu.js        Klang-Menü im HUD (Lautstärken, stumm)
