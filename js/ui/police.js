@@ -16,6 +16,20 @@ let shownThisTask = false;
 export const resetPatrol = () => { shownThisTask = false; };
 const loadTexts = async () => (texts ??= await (await fetch('data/police.json', { cache: 'no-cache' })).json());
 
+// vergrößerte, kantenscharfe Einzelbilder des Polizisten als Data-URL (einmal erzeugt, dann aus dem Speicher)
+const FRAMES = new Map();
+function policeFrame(name, f) {
+  const sp = getSprite(name), k = `${name}:${f % sp.frames.length}`;
+  if (!FRAMES.has(k)) {
+    const sc = 8, c = document.createElement('canvas');
+    c.width = sp.w * sc; c.height = sp.h * sc;
+    const cx = c.getContext('2d'); cx.imageSmoothingEnabled = false;
+    cx.drawImage(sp.frames[f % sp.frames.length], 0, 0, c.width, c.height);
+    FRAMES.set(k, c.toDataURL());
+  }
+  return FRAMES.get(k);
+}
+
 function warnings(inc = 0) {
   let n = 0;
   try { n = Number(localStorage.getItem(KEY)) || 0; } catch { /* egal */ }
@@ -73,29 +87,19 @@ export async function showPolice(host, { kind, input, suggest }) {
 
   const el = document.createElement('div');
   el.className = 'police angry';
-  el.innerHTML = `<div class="pol-fig"><canvas></canvas><div class="pol-heart hidden" aria-hidden="true"></div></div>
+  el.innerHTML = `<div class="pol-fig"><img class="pol-img" alt="Gültige-Ziffern-Polizist"><div class="pol-heart hidden" aria-hidden="true"></div></div>
     <div class="pol-bubble"><div class="pol-name"></div><div class="pol-text"></div><div class="pol-more">▼</div></div>`;
   el.querySelector('.pol-name').textContent = T.name;
   host.appendChild(el);
   sfx('whistle');
 
-  // Figur: 12×18-Sprite groß, kantenscharf; wütend = roter Kopf und Stampfen
-  const cv = el.querySelector('canvas'), cx = cv.getContext('2d');
-  const sc = 8;
-  let raf = 0, t0 = performance.now(), mood = 'angry';
-  // Größe nur einmal setzen (ständiges Umsetzen von width leert in Safari das Bild)
-  const sp0 = getSprite('polizist');
-  cv.width = sp0.w * sc; cv.height = sp0.h * sc;
-  cv.style.aspectRatio = `${sp0.w} / ${sp0.h}`;
-  const draw = (now) => {
-    const sp = getSprite(mood === 'angry' ? 'polizist_rot' : 'polizist');
-    cx.clearRect(0, 0, cv.width, cv.height);
-    cx.imageSmoothingEnabled = false;
-    const f = mood === 'angry' ? Math.floor(((now - t0) / 1000) * 6) % sp.frames.length : 0;
-    cx.drawImage(sp.frames[f], 0, 0, cv.width, cv.height);
-    raf = requestAnimationFrame(draw);
-  };
-  raf = requestAnimationFrame(draw);
+  // Figur als <img> statt Canvas [W37]: Safari/iPad zeigte das animierte Canvas manchmal gar nicht an
+  // (Sprechblase da, Polizist fehlt). Bilder werden einmal vergrößert erzeugt und dann nur getauscht.
+  const img = el.querySelector('.pol-img');
+  let mood = 'angry', f = 0;
+  const frame = () => { img.src = policeFrame(mood === 'angry' ? 'polizist_rot' : 'polizist', mood === 'angry' ? f : 0); };
+  frame();
+  const timer = setInterval(() => { f++; frame(); }, 170);
 
   const textEl = el.querySelector('.pol-text');
   return new Promise((resolve) => {
@@ -103,7 +107,7 @@ export async function showPolice(host, { kind, input, suggest }) {
     const show = () => {
       started = true;
       const line = lines[i];
-      mood = line.mood;
+      mood = line.mood; frame();
       el.className = `police ${mood}`;
       el.querySelector('.pol-heart').classList.toggle('hidden', mood !== 'happy');
       let k = 0;
@@ -124,7 +128,7 @@ export async function showPolice(host, { kind, input, suggest }) {
       el.classList.add('leaving');
       el.removeEventListener('pointerup', next);
       document.removeEventListener('keydown', onKey, true);
-      setTimeout(() => { cancelAnimationFrame(raf); el.remove(); resolve(); }, 380);
+      setTimeout(() => { clearInterval(timer); el.remove(); resolve(); }, 380);
     };
     const onKey = (e) => {
       if (e.key === ' ' || e.key === 'Enter') { e.stopPropagation(); next(e); }

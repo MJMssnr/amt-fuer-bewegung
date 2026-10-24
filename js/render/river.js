@@ -6,7 +6,7 @@ const INK = '#1a1c2c';
 /** o: { L, x (m), vf, dir: 1|-1, rope: bool, t (s, Animationszeit), dpr } → geo { toPx } */
 export function drawRiver(c, o) {
   const ctx = c.getContext('2d'), W = c.width, H = c.height, d = o.dpr ?? 1;
-  const top = H * 0.18, bot = H * 0.86, x0 = W * 0.16, x1 = W * 0.86;
+  const top = H * 0.16, bot = H * 0.8, x0 = W * 0.16, x1 = W * 0.86;
   const toPx = (x) => x0 + (x / o.L) * (x1 - x0);
   // Ufer
   ctx.fillStyle = '#6abe30'; ctx.fillRect(0, 0, W, H);
@@ -32,16 +32,17 @@ export function drawRiver(c, o) {
   ctx.fillStyle = '#e43b44'; ctx.beginPath(); ctx.arc(toPx(o.L), by, 5.5 * d, 0, 7); ctx.fill();
   ctx.fillStyle = '#f4f4f4'; ctx.fillRect(toPx(o.L) - 5.5 * d, by - 1.5 * d, 11 * d, 3 * d);
   // Maßstab am unteren Ufer
-  ctx.fillStyle = INK; ctx.font = `${10 * d}px "AmtPixel", monospace`; ctx.textAlign = 'center';
-  ctx.fillText('Steg', toPx(0) - 15 * d, bot + 16 * d); ctx.fillText(`Boje · ${o.L} m`, toPx(o.L), bot + 16 * d);
+  ctx.fillStyle = INK; ctx.font = `${14 * d}px "AmtPixel", monospace`; ctx.textAlign = 'center';
+  ctx.fillText('Steg', toPx(0) - 15 * d, bot + 18 * d); ctx.fillText(`Boje · ${o.L} m`, toPx(o.L), bot + 18 * d);
   // Strömungspfeil
-  ctx.fillStyle = 'rgba(26,28,44,0.65)'; ctx.fillRect(W - 92 * d, top + 4 * d, 86 * d, 15 * d);
-  ctx.fillStyle = '#f4f4f4'; ctx.textAlign = 'left'; ctx.fillText(`◀ Strömung ${o.vf.toFixed(1).replace('.', ',')} m/s`, W - 89 * d, top + 15 * d);
+  const lbl = `◀ Strömung ${o.vf.toFixed(1).replace('.', ',')} m/s`, lw = ctx.measureText(lbl).width + 10 * d;
+  ctx.fillStyle = 'rgba(26,28,44,0.7)'; ctx.fillRect(W - lw - 6 * d, top + 4 * d, lw, 19 * d);
+  ctx.fillStyle = '#f4f4f4'; ctx.textAlign = 'left'; ctx.fillText(lbl, W - lw - 1 * d, top + 18 * d);
   // Seil
   const bx = toPx(o.x), byy = (top + bot) / 2;
   if (o.rope) { ctx.strokeStyle = '#ffcd75'; ctx.lineWidth = 2 * d; ctx.beginPath(); ctx.moveTo(toPx(0) - 4 * d, byy); ctx.quadraticCurveTo((toPx(0) + bx) / 2, byy + 10 * d, bx, byy); ctx.stroke(); }
   // Floß mit Motor und Bugwelle
-  const dir = o.dir ?? 1, fw = 26 * d, fh = 14 * d;
+  const dir = o.dir ?? 1, fw = 32 * d, fh = 17 * d;
   if (o.moving) { ctx.fillStyle = 'rgba(255,255,255,0.6)'; ctx.fillRect(bx - dir * (fw / 2 + 10 * d), byy - fh / 2, 8 * d, 2 * d); ctx.fillRect(bx - dir * (fw / 2 + 10 * d), byy + fh / 2 - 2 * d, 8 * d, 2 * d); }
   ctx.fillStyle = INK; ctx.fillRect(bx - fw / 2 - d, byy - fh / 2 - d, fw + 2 * d, fh + 2 * d);
   for (let k = 0; k < 5; k++) { ctx.fillStyle = k % 2 ? '#c58b5e' : '#a0622d'; ctx.fillRect(bx - fw / 2 + k * (fw / 5), byy - fh / 2, fw / 5 - d, fh); }

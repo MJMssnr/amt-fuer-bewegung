@@ -52,6 +52,7 @@ const isRetry = (t) => Boolean(state.retry?.[t.id])
   && (doneCount() >= state.retry[t.id].after || !tickets.some(isRegularOpen));
 const isOpen = (t) => isRegularOpen(t) || isRetry(t);
 
+const LAB_ID = 't78-fluss-labor';
 function markers() {
   const m = {};
   LOT.phase = state.finaleDone ? 'done' : state.finaleReady ? 'ready' : 'empty';
@@ -61,6 +62,7 @@ function markers() {
   }
   if (state.pkg?.waiting?.length) m.baumhaus = 'open';
   if (state.finaleReady && !state.finaleDone) m.bauplatz = 'open';
+  if (m.fluss !== 'open' && state.done[LAB_ID]) m.fluss = 'free'; // Fluss-Labor zum freien Üben [W37]
   return m;
 }
 
@@ -250,6 +252,9 @@ async function onArrive(nodeId) {
           overworld.start();
         }
       } else await showDialog(shop.packages.lotEmpty);
+    } else if (nodeId === 'fluss' && state.done[LAB_ID]) { // freies Üben, ohne Lohn [W37]
+      const lab = tickets.find((t) => t.id === LAB_ID);
+      await runTaskScreen({ title: 'Fluss-Labor – freies Üben', fromName: story.characters.hilde?.name, rewardText: '', ticket: { ...lab, task: { ...lab.task, free: true } }, world: null });
     } else if (nodeId === 'rathaus') {
       await showDialog(story.office);
     } else {

@@ -164,6 +164,5 @@ digraph Q {
   t75_schnitt_training -> t76_schnitt_umgehung;
   t76_schnitt_umgehung -> t77_schnitt_dienstreise;
   t74_schnitt_unmoeglich -> t77_schnitt_dienstreise;
-  t72_schnitt_huegel -> t78_fluss_labor;
-  t65_puppe_gerda -> t78_fluss_labor;
+  t01_sportwagen -> t78_fluss_labor;
 }

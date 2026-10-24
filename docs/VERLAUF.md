@@ -47,6 +47,7 @@ Hinweis: Sitzung 1 wurde nachträglich aus einer Zusammenfassung des Chats rekon
 | W34 | Neue Typen **U** (Schnitt nach Strecken) und **V** (Schnitt nach Zeiten) mit Variationen (unbekannte Geschwindigkeit für Ziel-Schnitt, unmöglicher Klassiker), je 3 Aufträge t72–t77. **Fluss** neben der Stadt (Karte breiter) und **W Fluss-Labor**: Regler, Zeitraffer, Zeiten live, Seil, Fahrtenbuch, Erkenntnis „gleicht sich nicht aus“, Quiz (Rechnen, Verständnis, 2× Diagramm), t78 | fcb5a2a, da35d4d, f1f820e, (dieser Commit) |
 | W35 | S-Aufträge vorsichtig als getestet, „mittel“ | (W35-Commit) |
 | W36 | Speichermöglichkeit: Passwort-/Codesystem, nicht erratbar, mit Prüfziffer, gut lesbar, sichert Aufträge, Geld, Ausstattung, Pakete; Hinweis, dass der Browser automatisch speichert. Mit Kopieren | (dieser Commit) |
+| W37 | Fluss-Labor ab dem 1. Auftrag, Beschriftung größer, danach freies Üben mit Quiz-Knopf und eigenem Kartensymbol, Hilde weist darauf hin. Polizist kam manchmal ohne Figur → behoben. Druckbare Playtest-Liste (Word), Freischaltplan | (dieser Commit) |
 
 **Stand Ende Sitzung 2:** 53 Aufträge (A–O, je ein schwerer), 4950 € verdienbar, Shop 23 Gegenstände für 2265 €. Offen: siehe `ROADMAP.md` und `PLAYTEST.md`.
 

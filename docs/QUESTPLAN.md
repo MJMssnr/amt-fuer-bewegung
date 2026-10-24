@@ -170,8 +170,7 @@ flowchart LR
   t75_schnitt_training --> t76_schnitt_umgehung
   t76_schnitt_umgehung --> t77_schnitt_dienstreise
   t74_schnitt_unmoeglich --> t77_schnitt_dienstreise
-  t72_schnitt_huegel --> t78_fluss_labor
-  t65_puppe_gerda --> t78_fluss_labor
+  t01_sportwagen --> t78_fluss_labor
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -294,4 +293,4 @@ flowchart LR
 | Jos Trainingsrunde | V | Jo | Skatepark | 80 € | Kevins Hügel |
 | Paul hat es eilig | V | Paul Paket | Bäckerei | 100 € | Jos Trainingsrunde |
 | Die Dienstreise der Bürgermeisterin | V | Bürgermeisterin Kranz | Rathaus | 130 € | Paul hat es eilig, Frau Brösel will den Schnitt retten |
-| Hildes Floß im Fluss-Labor | W | Hilde | Fluss-Labor | 120 € | Kevins Hügel, Die Oma-Gerda-Marionette |
+| Hildes Floß im Fluss-Labor | W | Hilde | Fluss-Labor | 120 € | Der rote Blitz |

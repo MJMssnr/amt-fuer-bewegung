@@ -301,6 +301,10 @@ export class Overworld {
         P.rect(x - 6, y - 7, 13, 15, C_INK); P.rect(x - 5, y - 6, 11, 13, '#ffcd75'); P.rect(x - 5, y - 6, 11, 2, '#fff1c4');
         P.rect(x - 1, y + 8, 3, 2, C_INK); P.rect(x, y + 10, 1, 1, C_INK);
         P.rect(x - 1, y - 4, 3, 6, C_INK); P.rect(x - 1, y + 3, 3, 2, C_INK);
+      } else if (state === 'free') { // offen zum freien Üben, keine Belohnung: blauer Kreis mit Spiel-Dreieck [W37]
+        P.blob(x, y + 2, 7, C_INK); P.blob(x, y + 2, 6, '#3b5dc9');
+        P.rect(x - 2, y - 1, 2, 7, '#f4f4f4'); P.rect(x, y, 2, 5, '#f4f4f4'); P.rect(x + 2, y + 1, 1, 3, '#f4f4f4');
+        P.text('frei', x + 13, y + 2, 3.6, { color: '#ffffff', bg: 'rgba(59,93,201,0.85)', pad: 1, minPx: 8, dpr: this.dpr });
       } else if (state === 'done') {
         P.blob(x, y + 2, 6, C_INK); P.blob(x, y + 2, 5, '#38b764');
         P.rect(x - 3, y + 2, 2, 2, '#f4f4f4'); P.rect(x - 1, y + 3, 2, 2, '#f4f4f4'); P.rect(x + 1, y - 1, 2, 4, '#f4f4f4');

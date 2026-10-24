@@ -91,6 +91,12 @@ export function mount(root, { ticket, onSolved }) {
   function insight() {
     const ok = runs.filter((r) => r.ok);
     const box = right.querySelector('.rv-insight');
+    if (task.free) { // freies Üben nach dem ersten Auftrag: Quiz jederzeit freiwillig, ohne Lohn [W37]
+      box.classList.remove('hidden');
+      box.innerHTML = 'Freies Üben: Probier aus, so viel du willst. <button class="btn rv-quiz" type="button">Quiz zum Üben ▶</button>';
+      box.querySelector('.rv-quiz').onclick = () => { if (run) return; sf.disabled = sb.disabled = go.disabled = true; startQuiz(right, task.quiz ?? {}, () => onSolved({ attempts: 1, grade: 'perfect' }), ticket.id + 'frei'); };
+      return;
+    }
     if (runs.length < 3 || !ok.some((r) => r.vf === 0) || !ok.some((r) => r.vf > 0)) {
       box.classList.remove('hidden');
       box.textContent = `Noch ${Math.max(0, 3 - runs.length)} Fahrt(en)${ok.some((r) => r.vf === 0) ? '' : ', eine davon ohne Strömung'}${ok.some((r) => r.vf > 0) ? '' : ', eine mit Strömung'}. Vergleiche v̄ mit v_Boot!`;

@@ -3444,7 +3444,7 @@
     "title": "Hildes Floß im Fluss-Labor",
     "from": "hilde",
     "node": "fluss",
-    "requires": ["t72-schnitt-huegel", "t65-puppe-gerda"],
+    "requires": ["t01-sportwagen"],
     "reward": 120,
     "difficulty": "mittel",
     "intro": [
@@ -3464,7 +3464,8 @@
     },
     "success": [
       ["florian", "Es gleicht sich nicht aus! Flussauf bin ich viel länger langsam unterwegs. Die Hin-und-zurück-Fahrt wird mit Strömung immer langsamer."],
-      ["hilde", "Das erzähl ich meinem Nachbarn. Und dann nehm ich ihn mit aufs Floß – gegen die Strömung!"]
+      ["hilde", "Das erzähl ich meinem Nachbarn. Und dann nehm ich ihn mit aufs Floß – gegen die Strömung!"],
+      ["hilde", "Und Florian: Das Fluss-Labor bleibt für dich offen! Komm jederzeit vorbei, probier weiter aus – das Quiz kannst du hier auch freiwillig nochmal machen."]
     ]
   }
 ]
