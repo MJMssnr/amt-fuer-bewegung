@@ -109,11 +109,17 @@ export function mount(root, { ticket, onSolved }) {
       <button class="btn r-next">Weiter ▶</button>`;
     scene = new Scene(left.querySelector('.scene'), world, { rate: 1 });
     scene.play();
-    left.querySelector('.r-next').addEventListener('click', () => onSolved(result));
+    left.querySelector('.r-next').addEventListener('click', () => onSolved(result), { once: true });
+    rideAt = performance.now(); // Leertaste/Enter führt auch weiter [W47]
   }
 
   btn.addEventListener('pointerdown', (e) => { e.preventDefault(); press(); });
-  const onKey = (e) => { if (e.code === 'Space' && phase !== 'done') { e.preventDefault(); press(); } };
+  let rideAt = 0;
+  const onKey = (e) => {
+    const next = left.querySelector('.r-next');
+    if (next && (e.code === 'Space' || e.key === 'Enter') && performance.now() - rideAt > 300) { e.preventDefault(); next.click(); return; }
+    if (e.code === 'Space' && phase !== 'done') { e.preventDefault(); press(); }
+  };
   document.addEventListener('keydown', onKey);
 
   return { destroy: () => { clearTimeout(timer); scene?.destroy(); document.removeEventListener('keydown', onKey); } };

@@ -61,7 +61,7 @@ function markers() {
     else if (state.done[t.id] && m[t.node] !== 'open') m[t.node] = 'done';
   }
   if (state.pkg?.waiting?.length) m.baumhaus = 'open';
-  if (state.finaleReady && !state.finaleDone) m.bauplatz = 'open';
+  if (state.finaleReady && !state.finaleDone) m.bauplatz = 'big'; // großes „!“ wie beim ersten Auftrag [W47]
   if (m.fluss !== 'open' && state.done[LAB_ID]) m.fluss = 'free'; // Fluss-Labor zum freien Üben [W37]
   return m;
 }
@@ -178,7 +178,11 @@ async function runTicket(ticket, raw, params) {
     toast(`+${reward} €${grade === 'partial' ? '  (halber Lohn)' : ''}`, 'money');
   }
   // Rätselhafte Pakete [W24]
-  if (deliverDue(state, tickets, shop.rocketParts)) { save(); toast(shop.packages.arrived, 'money'); }
+  if (deliverDue(state, tickets, shop.rocketParts)) {
+    save(); toast(shop.packages.arrived, 'money');
+    // Letztes Paket deutlich ankündigen [W47]
+    if (state.pkg.waiting.some((id) => shop.rocketParts.find((p) => p.id === id)?.last)) await showDialog(shop.packages.arrivedLast);
+  }
   await maybeBaerti();
   if (tickets.every((t) => state.done[t.id]) && !Object.keys(state.retry).length && !state.outroSeen) {
     state.outroSeen = true;

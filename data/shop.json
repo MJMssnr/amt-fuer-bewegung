@@ -101,6 +101,7 @@
   ],
   "packages": {
     "arrived": "📦 Ein rätselhaftes Paket wurde im Baumhaus abgegeben!",
+    "arrivedLast": [["erz", "📦 Ein LETZTES rätselhaftes Paket wurde zugestellt. Es ist größer als alle anderen."], ["florian", "Das letzte Paket! Ich muss sofort ins Baumhaus und nachsehen, was drin ist."]],
     "found": [["florian", "Da steht ein Paket. Ohne Absender. Nur ein großes „M.“ auf dem Klebeband."], ["florian", "Schon wieder ein Paket ohne Absender. Wer schickt mir das bloß?"], ["florian", "Noch ein Geheimpaket! Ich mach's gleich auf."]],
     "note": "Auf einem Zettel steht:",
     "after": [["florian", "Rätselhaft. Ab in die Kiste damit."], ["florian", "Ich verstehe kein Wort. Aber es klingt wichtig. Ab in die Kiste."], ["florian", "Die Kiste füllt sich. Langsam bekomme ich eine Ahnung …"]],

@@ -305,9 +305,9 @@ export class Overworld {
       const n = this.map.nodes[id];
       const [cx, by] = n.at ?? [n.x, n.y - 13];
       const top = by - (n.markerH ?? 46);
-      const bob = state === 'open' ? Math.round(Math.sin(this.time * 4) * 2) : 0;
+      const bob = state === 'open' || state === 'big' ? Math.round(Math.sin(this.time * 4) * 2) : 0;
       const x = cx, y = top + bob;
-      if (state === 'open' && this.tutorial?.()) {
+      if ((state === 'open' && this.tutorial?.()) || state === 'big') {
         this.#tutorialMarker(P, x, y);
       } else if (state === 'open') {
         P.blob(x, y + 8, 7, 'rgba(20,24,40,0.0)');

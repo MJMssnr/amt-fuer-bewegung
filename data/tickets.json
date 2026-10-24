@@ -2073,7 +2073,7 @@
         }
       ],
       "expr": "sqrt(2*x/a)",
-      "label": "Zeit für 100 m",
+      "label": "Fahrzeit",
       "symbol": "t",
       "unit": "s",
       "hints": [

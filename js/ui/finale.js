@@ -106,7 +106,10 @@ export async function playFinale({ texts, baerti = false, mode = 'full' } = {}) 
       const P2 = new Painter(ctx, z * 2, ox + LOT * z * (1 - 2), oy + GROUND * z * (1 - 2)); P2.dpr = dpr;
       const shown = S.stage >= 7 ? 1 : S.stage / 7;
       ctx.save();
-      ctx.beginPath(); ctx.rect(0, P.Y(ry - 76 * shown), c.width, c.height); ctx.clip();
+      // Clip nur nach oben begrenzen: liegt die Spitze über dem Bildrand (Nahaufnahme beim Raumanzug), darf der
+      // Sockel unten nicht abgeschnitten werden [W47]
+      const clipY = P.Y(ry - 76 * shown);
+      ctx.beginPath(); ctx.rect(0, clipY, c.width, Math.max(c.height, c.height - clipY)); ctx.clip();
       rocket(P2, LOT, GROUND + (ry - GROUND) / 2, S.t, S.thrust, true); // die rote Rakete
       ctx.restore();
       if (S.lights) for (let i = 0; i < 3; i++) if (Math.sin(S.t * 9 + i * 2) > 0) P.rect(LOT - 4 + i * 4, ry - 34 + i * 6, 1.5, 1.5, ['#ff5a36', '#73eff7', '#ffcd75'][i]);
@@ -118,7 +121,9 @@ export async function playFinale({ texts, baerti = false, mode = 'full' } = {}) 
     if (S.weld && Math.sin(S.t * 30) > 0.3) P.blob(LOT - 4, GROUND - 10 - S.stage * 5, 5, 'rgba(200,240,255,0.7)');
     if (S.flash > 0) { ctx.fillStyle = `rgba(255,255,255,${(0.7 * S.flash).toFixed(2)})`; ctx.fillRect(0, 0, c.width, c.height); }
     // Untertitel und große Schrift in Bildschirmkoordinaten
-    const PS = new Painter(ctx, s, (c.width - W * s) / 2, (c.height - H * s) / 2); PS.dpr = dpr;
+    // „contain“ statt „cover“: Untertitel liegen immer ganz im Bild, auch bei breiten Fenstern [W47]
+    const sc = Math.min(c.width / W, c.height / H);
+    const PS = new Painter(ctx, sc, (c.width - W * sc) / 2, (c.height - H * sc) / 2); PS.dpr = dpr;
     if (S.caption) PS.text(S.caption, W / 2, 14, 6, { color: '#ffffff', bg: 'rgba(26,28,44,0.7)', pad: 3, minPx: 13, dpr });
     if (S.big) PS.text(S.big, W / 2, 70, 18, { color: '#ffcd75', bold: true, bg: 'rgba(26,28,44,0.6)', pad: 4, minPx: 26, dpr });
     if (S.tap && Math.sin(S.t * 5) > -0.4) PS.text(T.tap ?? '▶ tippen', W - 26, H - 10, 5, { color: '#1a1c2c', bg: '#ffcd75', pad: 2, minPx: 12, dpr });
