@@ -288,15 +288,15 @@
             "actor": "car"
           },
           "range": [28, 34],
+          "follows": { "q": 0, "var": "s", "expr": "s/70*3.6" },
           "hints": [
             {
               "value": 54,
               "text": "Das ist die Höchstgeschwindigkeit. Die Durchschnittsgeschwindigkeit ist Gesamtweg durch Gesamtzeit."
             },
             {
-              "value": 8.46,
-              "text": "Das ist der Wert in m/s. Gefragt ist km/h (mal 3,6).",
-              "tol": 0.1
+              "expr": "s/70",
+              "text": "Das ist der Wert in m/s. Gefragt ist km/h (mal 3,6)."
             },
             {
               "value": 27,

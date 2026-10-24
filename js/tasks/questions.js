@@ -1,10 +1,14 @@
 // Gemeinsamer Frageblock für Rechen- und Ablese-Aufgaben (Typ H und C).
-// qs: [{ label, symbol, unit, truth, tol?, range?: [min, max], hints?, help? }]  range ersetzt tol (z. B. Ablesen aus Diagramm)
+// qs: [{ label, symbol, unit, truth, tol?, range?: [min, max], hints?, help?, follows? }]  range ersetzt tol (z. B. Ablesen aus Diagramm)
+// Folgefehler [W47]: follows = { q: Index der Bezugsfrage, var: "s", expr: "s/70*3.6" }. Ist die Bezugsantwort
+// akzeptiert (z. B. großzügig abgelesen), wird diese Frage mit dem WERT DES SPIELERS nachgerechnet – dann muss sie
+// exakt dazu passen (normale Toleranz, Gültige-Ziffern-Polizei). Hinweise dürfen statt "value" ein "expr" haben.
 // Bewertung: perfect = beim ersten Prüfen alles richtig; partial = nach Hinweisen selbst gelöst;
 //            fail = "Lösung zeigen" benutzt (dann wird nicht bezahlt).
 
 import { isClose, matchHint } from '../engine/answer.js';
 import { fmt, parseNum } from '../render/format.js';
+import { evalExpr } from '../engine/variants.js';
 import { sigPatrol, sigPraise } from '../ui/police.js';
 
 const sym = (s) => (s ? s.replace(/_(\w+)/, '<sub>$1</sub>') : '');
@@ -48,6 +52,18 @@ export function questionBlock(container, qs, { onSolved, rule = true, sig = true
     setTimeout(() => onSolved({ attempts: wrongChecks + 1, grade }), 1400);
   }
 
+  const accepted = (q, val) => Number.isFinite(val) && (q.range ? val >= q.range[0] - 1e-9 && val <= q.range[1] + 1e-9 : isClose(val, q.truth, q.tol));
+  /** Wahrheit und Hinweise einer Frage, bei Folgefragen aus der Antwort des Spielers [W47] */
+  function effective(q) {
+    const f = q.follows;
+    if (!f) return { truth: q.truth, range: q.range, hints: q.hints };
+    const ref = qs[f.q], rv = parseNum(inputs[f.q].value);
+    if (!accepted(ref, rv)) return { truth: q.truth, range: q.range, hints: q.hints };
+    const vars = { [f.var]: rv };
+    return { truth: evalExpr(f.expr, vars), range: null, follow: true,
+      hints: (q.hints ?? []).map((h) => (h.expr ? { ...h, value: evalExpr(h.expr, vars) } : h)).filter((h) => !h.absolute) };
+  }
+
   async function check() {
     if (done || patrolling) return;
     patrolling = true;
@@ -59,12 +75,14 @@ export function questionBlock(container, qs, { onSolved, rule = true, sig = true
       const val = parseNum(inputs[i].value);
       row.classList.remove('ok', 'bad');
       if (!Number.isFinite(val)) { allRight = false; msgs.push(`<b>${q.label}:</b> Hier fehlt noch eine Zahl.`); return; }
-      if (q.range ? val >= q.range[0] - 1e-9 && val <= q.range[1] + 1e-9 : isClose(val, q.truth, q.tol)) { row.classList.add('ok'); inputs[i].disabled = true; return; }
+      const e = effective(q);
+      if (accepted({ ...q, ...e }, val)) { row.classList.add('ok'); inputs[i].disabled = true; return; }
       allRight = false;
       row.classList.add('bad');
-      const hint = matchHint(val, q.hints);
+      const hint = matchHint(val, (e.hints ?? []).filter((h) => h.value !== undefined));
       if (hint) msgs.push(`<b>${q.label}:</b> ${hint.text}`);
-      else if (Math.sign(val) !== Math.sign(q.truth) && isClose(-val, q.truth, q.tol)) msgs.push(`<b>${q.label}:</b> Der Betrag stimmt, aber das Vorzeichen nicht. In welche Richtung zeigt die x-Achse?`);
+      else if (e.follow && wrongChecks === 0) msgs.push(`<b>${q.label}:</b> Rechne mit DEINEM Wert von oben weiter – damit muss es genau passen, auch beim Runden.`);
+      else if (Math.sign(val) !== Math.sign(e.truth) && isClose(-val, e.truth, q.tol)) msgs.push(`<b>${q.label}:</b> Der Betrag stimmt, aber das Vorzeichen nicht. In welche Richtung zeigt die x-Achse?`);
       else if (wrongChecks >= 1 && q.help) msgs.push(`<b>${q.label}:</b> ${q.help}`);
       else msgs.push(`<b>${q.label}:</b> Das stimmt noch nicht. Rechne nochmal nach.`);
     });
@@ -72,7 +90,7 @@ export function questionBlock(container, qs, { onSolved, rule = true, sig = true
       fb.className = 'feedback ok';
       fb.textContent = wrongChecks ? 'Jetzt stimmt alles!' : 'Alles richtig, sauber gerechnet!';
       done = true;
-      sigPraise(qs.map((q, i) => ({ input: inputs[i], truth: q.truth, sig: q.sig })), { enabled: sig })
+      sigPraise(qs.map((q, i) => ({ input: inputs[i], truth: effective(q).truth, sig: q.sig })), { enabled: sig })
         .finally(() => finish(wrongChecks ? 'partial' : 'perfect'));
       return;
     }
@@ -85,7 +103,7 @@ export function questionBlock(container, qs, { onSolved, rule = true, sig = true
   btnCheck.addEventListener('click', check);
   btnReveal.addEventListener('click', () => {
     qs.forEach((q, i) => {
-      inputs[i].value = fmt(q.truth, 2);
+      if (!inputs[i].disabled || !Number.isFinite(parseNum(inputs[i].value))) inputs[i].value = fmt(effective(q).truth, 2);
       inputs[i].closest('.calc-row').classList.remove('bad');
       inputs[i].closest('.calc-row').classList.add('shown');
     });
