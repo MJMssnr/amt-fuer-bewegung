@@ -23,6 +23,7 @@ import { scrollArrows } from './ui/scrollhint.js';
 import { typeOf } from './tasks/types.js';
 import { initTestMode, isTestMode, setTestMode } from './ui/testmode.js';
 import { runTraining } from './ui/training.js';
+import { showMaterial } from './ui/material.js';
 
 // Browser erlauben Klang erst nach einer Nutzeraktion
 document.addEventListener('pointerdown', unlockAudio, { capture: true });
@@ -313,6 +314,7 @@ async function boot() {
   // Hinweis kam schon am Passwort-Tor [W45]
   let viaTor = false; try { viaTor = sessionStorage.getItem('amt-tor') === '1'; } catch {}
   if (!viaTor) await showNotice();
+  await showMaterial(); // Papier, Stift, Taschenrechner, Formelsammlung [W52]
   const saveCtx = { tickets, items: shop.items, parts: shop.rocketParts, partOrder };
   let choice;
   for (;;) { // Training [W47]: vom Startbildschirm aus, danach zurück zum Startbildschirm

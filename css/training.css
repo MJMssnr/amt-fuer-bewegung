@@ -22,3 +22,14 @@
   .tr-type { padding: 2px 5px; } .tr-type b { font-size: 15px; } .tr-type span { font-size: 11px; } .tr-type small { font-size: 11px; }
   .tr-level { padding: 5px; font-size: 12px; }
 }
+
+/* Material-Hinweis [W52] */
+.material { position: fixed; inset: 0; z-index: 70; background: radial-gradient(circle at 50% 40%, #3b4a7a, #1a1c2c 75%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 12px; color: #f4efe3; text-align: center; cursor: pointer; }
+.material canvas { width: min(92vw, 150vh); aspect-ratio: 16 / 9; max-height: 55vh; image-rendering: pixelated; }
+.mat-text { font-family: var(--title); font-size: clamp(14px, 3.2vw, 26px); line-height: 1.35; max-width: 900px; margin: 0; }
+.mat-text b { color: var(--gold); }
+.mat-call { font-family: var(--title); font-size: clamp(18px, 4.5vw, 38px); color: var(--gold); margin: 0; animation: mat-pop .4s ease-out; }
+.mat-tap { font-family: var(--pixel); font-size: 18px; opacity: .8; margin: 0; animation: mat-blink 1.2s infinite; }
+@keyframes mat-pop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes mat-blink { 50% { opacity: .3; } }
+@media (max-height: 500px) { .material canvas { max-height: 48vh; } .mat-text { font-size: 13px; } .mat-call { font-size: 18px; } }

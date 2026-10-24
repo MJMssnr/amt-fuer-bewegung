@@ -129,6 +129,7 @@ export function sfx(name) {
   else if (name === 'bad') { tone(220, 0, 0.16, 'square', 0.1); tone(160, 0.12, 0.22, 'square', 0.1); }
   else if (name === 'coin') { tone(988, 0, 0.08, 'square', 0.1); tone(1319, 0.07, 0.25, 'square', 0.1); }
   else if (name === 'whistle') whistle();
+  else if (name === 'shutter') { tone(1800, 0, 0.025, 'square', 0.07); tone(700, 0.035, 0.05, 'square', 0.05); } // Kamera-Klick [W52]
   else if (name === 'bell') { tone(2100, 0, 0.12, 'sine', 0.12); tone(2100, 0.16, 0.25, 'sine', 0.1); }
 }
 

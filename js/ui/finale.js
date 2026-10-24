@@ -267,7 +267,13 @@ export async function playFinale({ texts, baerti = false, mode = 'full' } = {}) 
     crowd.forEach((a) => S.actors.push(a));
     await Promise.all(crowd.map((a, i) => walk(a, slots[i], 70 + (i % 4) * 12)));
     crowd.forEach((a, i) => (a.flip = slots[i] > LOT));
-    await showDialog(T.town);
+    // Slavi: „Bitte lächeln“ → mehrere Blitze hintereinander, Anspielung auf seine Stroboskopbilder [W52]
+    const k = T.town.findIndex(([id]) => id === 'slavi');
+    if (k >= 0) {
+      await showDialog(T.town.slice(0, k + 1));
+      for (let i = 0; i < 6 && running; i++) { S.flash = 0.9; sfx('shutter'); await wait(i < 5 ? 260 : 600); }
+      await showDialog(T.town.slice(k + 1));
+    } else await showDialog(T.town);
     // 5) Raumanzug, Helm, (Bärti), einsteigen
     camera(2.4, flo.x - 8, GROUND - 6);
     await wait(700);
