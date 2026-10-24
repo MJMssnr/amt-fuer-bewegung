@@ -6,7 +6,11 @@ import { buildWorld, series, quantityAt } from '../js/engine/kinematics.js';
 import { areaPieces, segmentSlope } from '../js/engine/geometry.js';
 import { evaluateGoal } from '../js/engine/goals.js';
 import { evalExpr } from '../js/engine/variants.js';
-import { avgByDistance, missingSpeed, SI } from '../js/engine/average.js';
+import { avgByDistance, avgByTime, missingSpeed, SI } from '../js/engine/average.js';
+import { makeDistractors } from '../js/tasks/distractors.js';
+import { ACCEPT } from '../js/tasks/train-check.js';
+import { faultySeries } from '../js/tasks/errorhunt.js';
+import { KINDS } from '../js/render/graph.js';
 import { UNIT_FACTOR } from '../js/engine/answer.js';
 
 const N = 400;
@@ -16,9 +20,27 @@ for (const { type } of TRAINING) for (const level of LEVELS) {
   test(`Generator ${type} ${level}: ${N} Seeds lösbar und ablesbar`, () => {
     const seen = new Set();
     for (let seed = 1; seed <= N; seed++) {
-      const { ticket, scenario } = generate(type, level, seed);
-      assert.deepEqual(generate(type, level, seed).scenario, scenario, 'gleicher Seed → gleiche Aufgabe');
+      const { ticket, scenario } = generate(type, level, seed, ACCEPT[type]);
+      assert.deepEqual(generate(type, level, seed, ACCEPT[type]).scenario, scenario, 'gleicher Seed → gleiche Aufgabe');
       seen.add(JSON.stringify(scenario));
+      if (type === 'avgtime') { // V: ohne Szenario
+        const t = ticket.task, kV = SI[t.units.speed];
+        const parts = t.parts.map((p) => ({ dt: p.dt * SI[p.tu ?? t.units.time], v: p.v == null ? null : p.v * kV }));
+        const res = parts.some((p) => p.v == null) ? missingSpeed(parts, t.target * kV, 'time') : avgByTime(parts);
+        assert.ok(Number.isFinite(res) && res > 0 && res / kV < 200, `V lösbar (Seed ${seed}: ${res / kV})`);
+        seen.add(JSON.stringify(t.parts) + t.target);
+        continue;
+      }
+      if (type === 'pairs') { // R: drei verschiedene Bewegungen, in beiden Diagrammarten unterscheidbar
+        const t = ticket.task;
+        assert.equal(t.items.length, 3, 'drei Paare');
+        for (const kind of [t.left, t.right]) {
+          const sigs = t.items.map((it) => JSON.stringify(series(buildWorld({ actors: [{ id: 'a', ...it }] }).actors.get('a'), KINDS[kind].q).map((pc) => pc.map(([tt, y]) => [Math.round(tt * 100), Math.round(y * 100)]))));
+          assert.equal(new Set(sigs).size, 3, `${kind} unterscheidbar (Seed ${seed})`);
+        }
+        seen.add(JSON.stringify(t.items));
+        continue;
+      }
       if (type === 'avgdist') { // U: ohne Szenario
         const t = ticket.task, kV = SI[t.units.speed];
         const parts = t.parts.map((p) => ({ dx: p.dx * SI[t.units.dist], v: p.v == null ? null : p.v * kV }));
@@ -52,6 +74,19 @@ for (const { type } of TRAINING) for (const level of LEVELS) {
         const v0 = p.v0[0], v1 = p.v0[0] + p.a[0] * (p.t1 - p.t0);
         assert.ok(nice(v0) && nice(v1), `vₓ halbzahlig (${v0}, ${v1}) Seed ${seed}`);
         assert.ok(Math.abs(v0) <= 8 && Math.abs(v1) <= 8);
+        if (type === 'match' || type === 'errorhunt') assert.ok(nice(p.a[0], 0.5), `aₓ im Datenblatt glatt (${p.a[0]}, Seed ${seed})`);
+      }
+      if (type === 'match') { // A: drei verschiedene Distraktoren aus Fehlvorstellungen
+        const d = makeDistractors(ticket.task.ask, actor, 3, []);
+        assert.equal(d.distractors.length, 3, `3 Distraktoren (Seed ${seed}, ${ticket.task.given[1]}→${ticket.task.ask})`);
+        continue;
+      }
+      if (type === 'errorhunt') { // E: Fehler sichtbar, und zwar im genannten Abschnitt
+        const t = ticket.task, q = KINDS[t.graph].q;
+        const bad = faultySeries(actor, t.graph, t.error), good = series(actor, q);
+        const diff = (i) => bad[i].some(([tt, y], k) => Math.abs(y - (good[i][Math.min(k, good[i].length - 1)]?.[1] ?? y)) > 0.2) || bad[i].length !== good[i].length;
+        assert.ok(diff(t.error.segment), `Fehler im Abschnitt ${t.error.segment} sichtbar (Seed ${seed})`);
+        continue;
       }
       if (type === 'area') {
         const pcs = areaPieces(actor, 'vx', 0, actor.tEnd);

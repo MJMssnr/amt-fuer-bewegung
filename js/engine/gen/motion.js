@@ -17,6 +17,9 @@ export const int = (r, a, b) => a + Math.floor(r() * (b - a + 1));
 export const pick = (r, arr) => arr[Math.floor(r() * arr.length)];
 export const chance = (r, p) => r() < p;
 
+export const C = (dt, v) => ({ dt, v0: v, v1: v });  // gleichförmig
+export const R = (dt, v0, v1) => ({ dt, v0, v1 });    // gleichmäßig beschleunigt
+
 /** Figuren für das Training (langsam genug für Meter-Skalen bis ~8 m/s) */
 export const ACTORS = [
   { id: 'kevin', name: 'Kevin', sprite: 'kevin', dat: 'Kevin' },
@@ -49,4 +52,40 @@ export function areaOf(knots) {
     else { const tc = (v0 / (v0 - v1)) * dt; path += (Math.abs(v0) * tc + Math.abs(v1) * (dt - tc)) / 2; }
   }
   return { dx, path };
+}
+
+/** Rampe von v0 nach v1 mit „schöner“ Beschleunigung (0,5 / 1 / 2 m/s²) und ganzer Dauer [W49] */
+export function ramp(r, v0, v1) {
+  const dv = Math.abs(v1 - v0);
+  const ok = [0.5, 1, 2].filter((a) => Number.isInteger(dv / a) && dv / a >= 1 && dv / a <= 6);
+  return R(ok.length ? dv / pick(r, ok) : dv, v0, v1);
+}
+
+/**
+ * Zufällige Bewegung aus 2–3 Abschnitten [W49], Eckpunkte auf ganzen Sekunden und ganzen m/s, aₓ ∈ {0,5; 1; 2}.
+ * leicht: nur vₓ ≥ 0, 2 Abschnitte · mittel: 3 Abschnitte, gleichförmig und beschleunigt gemischt · schwer: mit Richtungswechsel
+ */
+export function randomKnots(level, r) {
+  const v = () => int(r, 1, 5), d = () => int(r, 2, 4), Rp = (a, b) => ramp(r, a, b);
+  if (level === 'leicht') {
+    const a = v(), b = v();
+    return pick(r, [
+      () => [Rp(0, a), C(d(), a)], () => [C(d(), a), Rp(a, 0)],
+      () => [C(d(), a), C(d(), a === b ? (b % 5) + 1 : b)], () => [C(d(), a), C(d(), 0)],
+    ])();
+  }
+  if (level === 'mittel') {
+    const a = int(r, 2, 5), b = int(r, 1, a - 1);
+    return pick(r, [
+      () => [Rp(0, a), C(d(), a), Rp(a, 0)], () => [C(d(), b), Rp(b, a), C(d(), a)],
+      () => [Rp(0, a), C(d(), a), Rp(a, b)], () => [C(d(), a), Rp(a, 0), C(d(), 0)],
+    ])();
+  }
+  const a = int(r, 2, 4), b = int(r, 1, 3);
+  return pick(r, [
+    () => [C(d(), a), Rp(a, -b), C(d(), -b)], // Wende
+    () => [C(d(), a), C(d(), 0), C(d(), -b)],
+    () => [Rp(0, a), Rp(a, -b)],
+    () => [C(d(), -a), Rp(-a, b), C(d(), b)],
+  ])();
 }

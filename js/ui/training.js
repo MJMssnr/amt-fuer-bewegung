@@ -4,6 +4,7 @@
 import { TYPES } from '../tasks/types.js';
 import { TRAINING, LEVELS, generate } from '../engine/gen/index.js';
 import { askChoice, toast } from './dialog.js';
+import { ACCEPT } from '../tasks/train-check.js';
 
 const KEY = 'amt-fuer-bewegung.training';
 const loadStats = () => { try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch { return {}; } };
@@ -59,7 +60,7 @@ export async function runTraining({ runTask, buildWorld }) {
     const t = TYPES[sel.type];
     let seed = Math.floor(Math.random() * 2 ** 31);
     for (;;) {
-      const { ticket, scenario } = generate(sel.type, sel.level, seed++);
+      const { ticket, scenario } = generate(sel.type, sel.level, seed++, ACCEPT[sel.type]);
       const res = await runTask({ title: `Training ${t.letter}: ${t.name}`, fromName: `Stufe ${sel.level}`, rewardText: '', ticket, world: scenario ? buildWorld(scenario) : null });
       if (!res) break; // „← Karte“ ohne Lösung: zurück zur Auswahl
       const ok = res.grade === 'perfect' || (res.grade == null && res.attempts <= 1);

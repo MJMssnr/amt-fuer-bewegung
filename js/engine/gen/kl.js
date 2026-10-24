@@ -4,10 +4,7 @@
 //   L leicht = gleichförmig, steigend · mittel = fallende Gerade zwischen anderen · schwer = t-vₓ, Dreieck auch durch vₓ = 0
 // Alle Eckpunkte liegen auf ganzen Sekunden und ganzen bzw. halben m/s (gut ablesbar).
 
-import { int, pick, chance, ACTORS, scenarioFrom } from './motion.js';
-
-const C = (dt, v) => ({ dt, v0: v, v1: v });        // gleichförmig
-const R = (dt, v0, v1) => ({ dt, v0, v1 });          // gleichmäßig beschleunigt
+import { int, pick, chance, ACTORS, scenarioFrom, C, R } from './motion.js';
 
 // ---------- K: Flächen-Puzzle ----------
 export function genArea(level, r) {
