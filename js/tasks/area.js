@@ -71,6 +71,19 @@ export function mount(root, { ticket, world, onSolved }) {
     hints: Math.abs(sumAbs - dx) > 1e-6 ? [{ value: dx, text: 'Das ist Δx. Für den Weg zählt jedes Stück positiv, auch das Zurücklaufen.' }] : [],
   });
 
+  // Folgefehler [W49]: Δx = Summe DEINER Teilflächen, Endort = Start + DEIN Δx, Weg = Summe der Beträge deiner Teilflächen
+  const nP = ask.includes('pieces') ? pieces.length : 0;
+  if (nP) {
+    const vars = Object.fromEntries(pieces.map((_, i) => [`p${i}`, i]));
+    const names = pieces.map((_, i) => `p${i}`);
+    const iDx = qs.findIndex((q) => q.label.startsWith('Ortsänderung'));
+    if (iDx >= 0) qs[iDx].follows = { vars, expr: names.join('+') };
+    const iPath = qs.findIndex((q) => q.label === 'zurückgelegter Weg s');
+    if (iPath >= 0) qs[iPath].follows = { vars, expr: names.map((n) => `abs(${n})`).join('+') };
+  }
+  const iX = qs.findIndex((q) => q.label.startsWith('Ort x bei'));
+  const iD = qs.findIndex((q) => q.label.startsWith('Ortsänderung'));
+  if (iX >= 0 && iD >= 0) qs[iX].follows = { vars: { d: iD }, expr: `${Math.round(xAt1 * 1e6) / 1e6}+d` };
   questionBlock(right, qs, { onSolved, sig: task.sigCheck !== false });
   return { destroy: () => L.destroy() };
 }
