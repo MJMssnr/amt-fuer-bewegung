@@ -35,3 +35,32 @@ export function cloud(P, x, y, s = 1) {
   for (const [dx, dy, r] of parts) P.blob(x + dx * s, y + 40 + dy * s, Math.round(r * s), 'rgba(20,24,40,0.035)');
   for (const [dx, dy, r] of parts) P.blob(x + dx * s, y + dy * s, Math.round(r * s), 'rgba(255,255,255,0.13)');
 }
+
+/** Strömung auf dem Fluss: helle Striche treiben nach unten (Fluss fließt von oben nach unten) [W34] */
+export function riverFlow(P, x, y, w, h, t) {
+  for (let i = 0; i < 14; i++) {
+    const yy = y + ((i * 53 + t * 18) % h), off = Math.round(Math.sin(yy / 37) * 4);
+    P.rect(x + off + 6 + ((i * 13) % (w - 14)), yy, 1, 4, 'rgba(168,224,255,0.75)');
+  }
+}
+
+/** Bootssteg „Fluss-Labor“: Steg ins Wasser, Floß mit Motor (schaukelt), Schild am Ufer */
+export function dock(P, cx, by, n, t, dpr) {
+  const bob = Math.round(Math.sin(t * 2.2));
+  for (let i = 0; i < 34; i += 3) { P.rect(cx - 16 + i, by - 6, 3, 8, i % 6 ? '#a0622d' : '#b8763b'); P.rect(cx - 16 + i, by - 6, 1, 8, '#73441d'); }
+  P.rect(cx - 16, by + 2, 34, 1, '#4a2d1a');
+  for (const px of [cx - 14, cx + 2, cx + 16]) P.rect(px, by + 2, 2, 4, '#4a2d1a');
+  // Floß
+  const fx = cx + 6, fy = by + 10 + bob;
+  P.rect(fx - 10, fy - 3, 20, 6, ink);
+  for (let i = 0; i < 18; i += 3) P.rect(fx - 9 + i, fy - 2, 2, 4, '#c58b5e');
+  P.rect(fx + 8, fy - 5, 4, 4, '#e43b44'); P.rect(fx + 11, fy - 1, 1, 3, '#94b0c2');
+  P.rect(fx - 1, fy - 12, 1, 9, '#73441d'); P.rect(fx, fy - 12, 6, 4, '#ffcd75');
+  // Schild
+  const sx = cx - 13;
+  P.rect(sx, by - 22, 1, 18, '#566c86');
+  const label = n.sign ?? 'FLUSS-LABOR';
+  const sw = Math.ceil(P.measure(label, 4.4, { bold: true, minPx: 8, dpr }).w) + 6;
+  P.rect(sx - sw / 2, by - 30, sw, 9, ink); P.rect(sx - sw / 2 + 1, by - 29, sw - 2, 7, '#73eff7');
+  P.text(label, sx, by - 25.4, 4.4, { color: ink, bold: true, minPx: 8, dpr });
+}

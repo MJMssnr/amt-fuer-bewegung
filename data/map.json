@@ -1,5 +1,5 @@
 {
-  "size": [640, 360],
+  "size": [720, 360],
   "start": "rathaus",
   "nodes": {
     "lindenstrasse": {
@@ -142,6 +142,15 @@
       "markerH": 56,
       "label": [48, 238]
     },
+    "fluss": {
+      "x": 652,
+      "y": 220,
+      "name": "Fluss-Labor",
+      "building": "dock",
+      "at": [670, 214],
+      "markerH": 40,
+      "label": [664, 238]
+    },
     "werkstatt": {
       "x": 610,
       "y": 220,
@@ -171,7 +180,8 @@
     ["baeckerei", "schule"],
     ["schule", "js"],
     ["polizei", "jw"],
-    ["je", "werkstatt"]
+    ["je", "werkstatt"],
+    ["werkstatt", "fluss"]
   ],
   "crosswalks": [
     [
@@ -191,6 +201,7 @@
     ]
   ],
   "areas": [
+    { "kind": "river", "x": 672, "y": 0, "w": 40, "h": 360 },
     {
       "kind": "gravel",
       "x": 226,
@@ -272,6 +283,7 @@
     }
   ],
   "decor": [
+    { "type": "riverflow", "x": 672, "y": 0, "w": 40, "h": 360, "z": -1000 },
     { "type": "windmill", "x": 12, "y": 150, "h": 46 },
     { "type": "windmill", "x": 630, "y": 96, "h": 46 },
     { "type": "windmill", "x": 634, "y": 298, "h": 40 },

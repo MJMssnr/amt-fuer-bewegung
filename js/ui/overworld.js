@@ -13,7 +13,7 @@ import { bauplatz } from '../render/bauplatz.js';
 import { natureOn, natureOff, sfx, engineStart, engineSet, engineStop } from '../audio/sound.js';
 import { bikeRide, motoRide, smoke } from '../render/ride.js';
 import { TownLife } from './townlife.js';
-import { windmill, solar, cloud } from '../render/townlife-art.js';
+import { windmill, solar, cloud, riverFlow, dock } from '../render/townlife-art.js';
 
 BUILDINGS.treehouse = treehouse;
 BUILDINGS.school = school;
@@ -21,6 +21,7 @@ BUILDINGS.fotolabor = fotolabor;
 BUILDINGS.bauplatz = bauplatz;
 BUILDINGS.police = police;
 BUILDINGS.workshop = workshop;
+BUILDINGS.dock = dock;
 
 const SPEED = 140; // Welt-Pixel pro Sekunde (zu Fuß)
 // Fahrzeuge [W26]: Höchstgeschwindigkeit und Beschleunigung (Welt-Pixel/s bzw. /s²)
@@ -239,6 +240,7 @@ export class Overworld {
       case 'car': return parkedCar(P, d.x, d.y, d.color);
       case 'windmill': return windmill(P, d.x, d.y, t, d.h, d.x * 0.1);
       case 'solar': return solar(P, d.x, d.y, d.n, t);
+      case 'riverflow': return riverFlow(P, d.x, d.y, d.w, d.h, t);
       default: return decor(P, d, t);
     }
   }

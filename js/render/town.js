@@ -114,6 +114,16 @@ function drawArea(P, a) {
       P.blob(x + w / 2 + 2, y + h / 2 + 2, w / 2 - 4, C.waterD, h / 2 - 4);
       P.rect(x + w / 4, y + h / 3, 6, 1, C.waterL); P.rect(x + w / 2, y + h / 2 + 2, 4, 1, C.waterL);
       break;
+    case 'river': { // Fluss am Kartenrand [W34]: Ufer, Wasser mit leichtem Schwung; Strömungsglitzern zeichnet riverFlow()
+      for (let j = 0; j < h; j++) {
+        const off = Math.round(Math.sin(j / 37) * 4), wx = x + off;
+        P.rect(wx - 4, y + j, w + 8, 1, '#d9c48f');
+        P.rect(wx - 1, y + j, w + 2, 1, '#8a7a5a');
+        P.rect(wx, y + j, w, 1, C.water);
+        P.rect(wx + 4, y + j, w - 8, 1, C.waterD);
+      }
+      break;
+    }
     case 'flowerbed':
       // Beet mit Steinkante, Blattwerk und 2×2-Blüten
       P.rect(x - 1, y - 1, w + 2, h + 2, '#a39a8a'); P.rect(x, y, w, h, '#6b4a2e');
