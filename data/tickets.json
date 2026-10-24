@@ -3289,7 +3289,7 @@
     "node": "skatepark",
     "requires": ["t72-schnitt-huegel"],
     "reward": 80,
-    "difficulty": "leicht",
+    "difficulty": "mittel",
     "intro": [
       ["jo", "Amtsmensch! Mein Training: 10 min Vollgas mit 12 km/h, dann 20 min locker mit 6,0 km/h."],
       ["jo", "Im Schnitt also 9,0 km/h, oder? Meine Fitness-App sagt was anderes."],
@@ -3385,7 +3385,7 @@
     "node": "rathaus",
     "requires": ["t76-schnitt-umgehung", "t74-schnitt-unmoeglich"],
     "reward": 130,
-    "difficulty": "schwer",
+    "difficulty": "mittel",
     "intro": [
       ["kranz", "Herr Doktor Brandl, meine Dienstreise in die Landeshauptstadt: 15 min zu Fuß zum Bahnhof, 1,5 h Zug, 30 min Bus."],
       ["kranz", "Zu Fuß 5,0 km/h, der Zug 120 km/h, der Bus 30 km/h. Die Zeitung will wissen: Wie schnell war ich im Schnitt?"],
@@ -3443,7 +3443,7 @@
     "node": "fluss",
     "requires": ["t01-sportwagen"],
     "reward": 120,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "intro": [
       ["hilde", "Florian! Ich hab ein Floß mit Motor gebaut und am Fluss ein kleines Labor eingerichtet. Mit den Reglern stellst du Strömung und Motor ein."],
       ["hilde", "Mein Nachbar behauptet: Flussauf und zurück dauert genauso lang wie auf einem See, „weil sich die Strömung ausgleicht“. Stimmt das?"],
