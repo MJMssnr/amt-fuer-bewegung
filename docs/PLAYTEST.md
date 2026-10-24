@@ -1,6 +1,8 @@
 # Playtest-Stand (Feedback von Herrn Messner)
 
 > **Neu (W47):** Playtest-Runde 3 = kompletter Durchlauf aller 78 Aufträge mit Zeiten, Einstufungen und Notizen → **`docs/PLAYTEST-RUNDE3.md`**. Alle Einstufungen sind jetzt von Herrn Messner bestätigt (in `tickets.json` eingetragen). Die Tabellen unten sind der ältere Stand.
+>
+> **Neu und noch nie gespielt (W51):** t81 (H, schwer), t82 (H), t83 (L Sekante), t84 (L Tangente, schwer), t85 (A t-aₓ), t86 (E), t87 (K Endort), t88 (U), t89 (I), t90 (Q), t91 (R t-vₓ↔t-aₓ). Außerdem neu: Training mit 14 Typen (Hauptmenü 🏋).
 
 > Stand: 23.10.2026, Sitzung 3 (Playtest-Runde 2 eingearbeitet, W29; Liste für Runde 3: W33). Nach jedem Playtest hier nachtragen (Einstufung → auch `difficulty` im Ticket).
 > „schwer“ bei t41, t43, t44, t48, t50, t51, t53 hat Claude gesetzt – noch zu bestätigen. „mittel schwer“ von Herrn Messner als „mittel“ (= mittelschwer) eingetragen.

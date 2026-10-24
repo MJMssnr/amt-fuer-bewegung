@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 74, verdienbar: 7110 €.
+Anzahl Aufträge: 85, verdienbar: 8310 €.
 
 ```mermaid
 flowchart LR
@@ -83,6 +83,17 @@ flowchart LR
   t78_fluss_labor["<b>W</b> Hildes Floß im Fluss-Labor<br/><small>Hilde · Fluss-Labor · 120 €</small>"]:::tW
   t79_einholen_start["<b>H</b> Das Wettrennen vor der Bäckerei<br/><small>Paul Paket · Bäckerei · 100 €</small>"]:::tH
   t80_einholen_vorsprung["<b>H</b> Zehn Meter Vorsprung<br/><small>Paul Paket · Bäckerei · 110 €</small>"]:::tH
+  t81_begegnung_fluss["<b>H</b> Rendezvous am Flussufer<br/><small>Jo · Skatepark · 130 €</small>"]:::tH
+  t82_anhalteweg_vergleich["<b>H</b> Tempo 30 oder 50?<br/><small>Bürgermeisterin Kranz · Schule · 100 €</small>"]:::tH
+  t83_sekante_kevin["<b>L</b> Kevin rollt aus<br/><small>Kevin · Radl-Eck · 100 €</small>"]:::tL
+  t84_tangente_slavi["<b>L</b> Ein Blitz, eine Geschwindigkeit<br/><small>Slavi · Fotolabor · 140 €</small>"]:::tL
+  t85_zuordnen_beschleunigung["<b>A</b> Ötzis Beschleunigungsprotokoll<br/><small>Busfahrer Ötzi · Busbahnhof · 90 €</small>"]:::tA
+  t86_ralf_skater["<b>E</b> Ralf und die halbe Bremse<br/><small>Ralf · Skatepark · 100 €</small>"]:::tE
+  t87_flaeche_wagen["<b>K</b> Der Wagen auf dem Parkplatz<br/><small>Filialleiterin Yıldız · Supermarkt · 110 €</small>"]:::tK
+  t88_schnitt_radtour["<b>U</b> Die Partnerschafts-Radtour<br/><small>Bürgermeisterin Kranz · Rathaus · 110 €</small>"]:::tU
+  t89_konstrukt_bus["<b>I</b> Hausaufgabe: Kurz-Strecke<br/><small>Frau Dr. Ohm · Schule · 110 €</small>"]:::tI
+  t90_formel_bremse["<b>Q</b> Wie stark hat er gebremst?<br/><small>Gültige-Ziffern-Polizei · Polizeirevier · 110 €</small>"]:::tQ
+  t91_verbinden_beschleunigung["<b>R</b> Übungsblatt: Steigung der Steigung<br/><small>Frau Dr. Ohm · Schule · 100 €</small>"]:::tR
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -167,6 +178,19 @@ flowchart LR
   t01_sportwagen --> t78_fluss_labor
   t06_broesel_ampel --> t79_einholen_start
   t79_einholen_start --> t80_einholen_vorsprung
+  t80_einholen_vorsprung --> t81_begegnung_fluss
+  t22_reaktion_auto --> t82_anhalteweg_vergleich
+  t49_schwer_steigung --> t83_sekante_kevin
+  t83_sekante_kevin --> t84_tangente_slavi
+  t52_schwer_strobo_rechnen --> t84_tangente_slavi
+  t39_schwer_zuordnen --> t85_zuordnen_beschleunigung
+  t43_schwer_fehlerjagd --> t86_ralf_skater
+  t48_schwer_flaeche --> t87_flaeche_wagen
+  t77_schnitt_dienstreise --> t88_schnitt_radtour
+  t45_schwer_konstrukteur --> t89_konstrukt_bus
+  t57_formel_brunnen --> t90_formel_bremse
+  t63_gutachten_trocken --> t90_formel_bremse
+  t62_schwer_verbinden --> t91_verbinden_beschleunigung
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -187,27 +211,27 @@ flowchart LR
 ## Legende
 | Buchstabe | Typ | Aufträge |
 |---|---|---|
-| A | Zuordnen | 5 |
+| A | Zuordnen | 6 |
 | B | Freihand zeichnen | 2 |
 | C | Achsen-Detektiv | 3 |
 | D | Regie | 2 |
-| E | Fehlerjagd | 4 |
+| E | Fehlerjagd | 5 |
 | F | Live-Steuerung | 3 |
 | G | Beschreiben | 3 |
-| H | Berechnen | 5 |
-| I | Konstrukteur | 4 |
+| H | Berechnen | 7 |
+| I | Konstrukteur | 5 |
 | J | Reaktionstest | 2 |
-| K | Flächen-Puzzle | 4 |
-| L | Steigungsdreieck | 4 |
+| K | Flächen-Puzzle | 5 |
+| L | Steigungsdreieck | 6 |
 | M | Stroboskop: rechnen | 3 |
 | N | Stroboskop: beschreiben | 1 |
 | O | Stroboskop: bauen | 4 |
 | P | Fehlerbalken | 3 |
-| Q | Bewegungsformel | 4 |
-| R | Verbinden | 5 |
+| Q | Bewegungsformel | 5 |
+| R | Verbinden | 6 |
 | S | Unfallgutachten | 3 |
 | T | Puppenspieler | 3 |
-| U | Schnitt nach Strecken | 3 |
+| U | Schnitt nach Strecken | 4 |
 | V | Schnitt nach Zeiten | 3 |
 | W | Fluss-Labor | 1 |
 
@@ -288,3 +312,14 @@ flowchart LR
 | Hildes Floß im Fluss-Labor | W | Hilde | Fluss-Labor | 120 € | Der rote Blitz |
 | Das Wettrennen vor der Bäckerei | H | Paul Paket | Bäckerei | 100 € | Frau Brösels Rache |
 | Zehn Meter Vorsprung | H | Paul Paket | Bäckerei | 110 € | Das Wettrennen vor der Bäckerei |
+| Rendezvous am Flussufer | H | Jo | Skatepark | 130 € | Zehn Meter Vorsprung |
+| Tempo 30 oder 50? | H | Bürgermeisterin Kranz | Schule | 100 € | Tempo 30 vor der Schule? |
+| Kevin rollt aus | L | Kevin | Radl-Eck | 100 € | Bremsen durch null |
+| Ein Blitz, eine Geschwindigkeit | L | Slavi | Fotolabor | 140 € | Kevin rollt aus, Die schräge Rinne |
+| Ötzis Beschleunigungsprotokoll | A | Busfahrer Ötzi | Busbahnhof | 90 € | Kevins Wende |
+| Ralf und die halbe Bremse | E | Ralf | Skatepark | 100 € | Ralfs krumme Kurve |
+| Der Wagen auf dem Parkplatz | K | Filialleiterin Yıldız | Supermarkt | 110 € | Hin, um und zurück |
+| Die Partnerschafts-Radtour | U | Bürgermeisterin Kranz | Rathaus | 110 € | Die Dienstreise der Bürgermeisterin |
+| Hausaufgabe: Kurz-Strecke | I | Frau Dr. Ohm | Schule | 110 € | Hausaufgabe: Die Wende |
+| Wie stark hat er gebremst? | Q | Gültige-Ziffern-Polizei | Polizeirevier | 110 € | Wie tief ist der Wunschbrunnen?, „Ich war nicht zu schnell!“ |
+| Übungsblatt: Steigung der Steigung | R | Frau Dr. Ohm | Schule | 100 € | Klausur-Vorbereitung: Umkehrpunkte |

@@ -3548,5 +3548,713 @@
       ["florian", "Nach 10 s, bei 50 m. Der Vorsprung bringt Ihnen genau 2,0 s mehr. Kevin fährt dann 36 km/h."],
       ["post", "Zwei Sekunden für zehn Meter Vorsprung … Nächstes Mal verlange ich, dass er erst mal wartet!"]
     ]
+  },
+  {
+    "id": "t81-begegnung-fluss",
+    "title": "Rendezvous am Flussufer",
+    "from": "jo",
+    "node": "skatepark",
+    "requires": ["t80-einholen-vorsprung"],
+    "reward": 130,
+    "difficulty": "schwer",
+    "scenario": {
+      "actors": [
+        {
+          "id": "jo",
+          "name": "Jo",
+          "sprite": "jo",
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 14,
+              "v": 4
+            }
+          ]
+        },
+        {
+          "id": "kevin",
+          "name": "Kevin",
+          "sprite": "kevin",
+          "x0": 100,
+          "segments": [
+            {
+              "dt": 14,
+              "a": -1
+            }
+          ]
+        }
+      ]
+    },
+    "intro": [
+      ["jo", "Kevin und ich treffen uns am Flussweg. Ich rolle vom Skatepark mit konstant 4,0 m/s los."],
+      ["jo", "Kevin steht 100 m weiter und fährt im selben Moment los, mir entgegen – aus dem Stand, mit 1,0 m/s²."],
+      ["florian", "Einer gleichförmig, einer beschleunigt, aufeinander zu. Kevins vₓ ist negativ – das wird eine quadratische Gleichung."]
+    ],
+    "task": {
+      "type": "calc",
+      "given": ["anim", "data"],
+      "prompt": "Wann und wo begegnen sich Jo und Kevin?",
+      "paper": "Jo: x = 4,0 m/s · t. Kevin: x = 100 m − ½ · 1,0 m/s² · t². Gleichsetzen, ordnen, Mitternachtsformel – nur die positive Lösung ergibt Sinn.",
+      "questions": [
+        {
+          "label": "Zeitpunkt der Begegnung",
+          "symbol": "t_B",
+          "unit": "s",
+          "goal": {
+            "type": "meet",
+            "a": "jo",
+            "b": "kevin",
+            "ask": "t"
+          },
+          "hints": [
+            {
+              "value": 25,
+              "text": "So lange bräuchte Jo allein für die 100 m. Kevin kommt ihr aber entgegen."
+            },
+            {
+              "value": 14.1,
+              "text": "So lange bräuchte Kevin allein. Beide bewegen sich aufeinander zu."
+            }
+          ],
+          "help": "4,0 · t = 100 − 0,5 · t²  →  0,5 · t² + 4,0 · t − 100 = 0."
+        },
+        {
+          "label": "Ort der Begegnung",
+          "symbol": "x_B",
+          "unit": "m",
+          "goal": {
+            "type": "meet",
+            "a": "jo",
+            "b": "kevin",
+            "ask": "x"
+          },
+          "follows": {
+            "vars": {
+              "t": 0
+            },
+            "expr": "4*t"
+          },
+          "help": "Setze t_B in Jos Gleichung x = 4,0 m/s · t ein."
+        }
+      ]
+    },
+    "success": [
+      ["florian", "Nach rund 11 s, bei etwa 43 m. Kevin ist dann schon fast 11 m/s schnell – er sollte bremsen, bevor er Sie umfährt."],
+      ["jo", "Ich weiche aus. Zur Sicherheit. Mit 4,0 m/s."]
+    ]
+  },
+  {
+    "id": "t82-anhalteweg-vergleich",
+    "title": "Tempo 30 oder 50?",
+    "from": "kranz",
+    "node": "schule",
+    "requires": ["t22-reaktion-auto"],
+    "reward": 100,
+    "difficulty": "mittel",
+    "scenario": {
+      "actors": [
+        {
+          "id": "a30",
+          "name": "Auto mit 30 km/h",
+          "sprite": "car_red",
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 1,
+              "v": 8.3333333
+            },
+            {
+              "until": "rest",
+              "a": -6
+            }
+          ]
+        },
+        {
+          "id": "a50",
+          "name": "Auto mit 50 km/h",
+          "sprite": "car_red",
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 1,
+              "v": 13.888889
+            },
+            {
+              "until": "rest",
+              "a": -6
+            }
+          ]
+        }
+      ]
+    },
+    "intro": [
+      ["kranz", "Herr Doktor Brandl, der Stadtrat streitet: Tempo 30 vor der Schule – ja oder nein?"],
+      ["kranz", "Rechnen Sie es vor: Reaktionszeit 1,0 s, danach Vollbremsung mit 6,0 m/s². Einmal bei 30 km/h, einmal bei 50 km/h."],
+      ["florian", "Erst in m/s umrechnen. Dann Reaktionsweg plus Bremsweg – jeweils für beide Autos."]
+    ],
+    "task": {
+      "type": "calc",
+      "given": ["anim"],
+      "prompt": "Berechne beide Anhaltewege und den Unterschied.",
+      "paper": "v in m/s = km/h ÷ 3,6. Reaktionsweg = v · 1,0 s. Bremsweg = v² / (2 · 6,0 m/s²). Anhalteweg = Summe.",
+      "questions": [
+        {
+          "label": "Anhalteweg bei 30 km/h",
+          "symbol": "s_30",
+          "unit": "m",
+          "goal": {
+            "type": "displacement",
+            "actor": "a30"
+          },
+          "hints": [
+            {
+              "value": 5.79,
+              "text": "Das ist nur der Bremsweg. Dazu kommt der Reaktionsweg: 1,0 s fährt das Auto ungebremst weiter."
+            },
+            {
+              "value": 105,
+              "text": "Mit km/h gerechnet? Erst in m/s umrechnen (÷ 3,6)."
+            }
+          ],
+          "help": "8,3 m/s · 1,0 s + (8,3 m/s)² / (2 · 6,0 m/s²)."
+        },
+        {
+          "label": "Anhalteweg bei 50 km/h",
+          "symbol": "s_50",
+          "unit": "m",
+          "goal": {
+            "type": "displacement",
+            "actor": "a50"
+          },
+          "hints": [
+            {
+              "value": 16.1,
+              "text": "Das ist nur der Bremsweg. Der Reaktionsweg fehlt."
+            }
+          ],
+          "help": "13,9 m/s · 1,0 s + (13,9 m/s)² / (2 · 6,0 m/s²)."
+        },
+        {
+          "label": "Unterschied",
+          "symbol": "Δs",
+          "unit": "m",
+          "goal": {
+            "type": "distanceAt",
+            "a": "a30",
+            "b": "a50",
+            "t": 3.5
+          },
+          "follows": {
+            "vars": {
+              "a": 0,
+              "b": 1
+            },
+            "expr": "b-a"
+          },
+          "help": "Anhalteweg bei 50 km/h minus Anhalteweg bei 30 km/h."
+        }
+      ]
+    },
+    "success": [
+      ["florian", "Bei 30 km/h steht das Auto nach etwa 14 m, bei 50 km/h erst nach rund 30 m – mehr als doppelt so weit. Dort, wo das langsame Auto steht, ist das schnelle noch fast 50 km/h schnell!"],
+      ["kranz", "Das trage ich genau so im Stadtrat vor. Tempo 30 vor der Schule ist beschlossene Sache."]
+    ]
+  },
+  {
+    "id": "t83-sekante-kevin",
+    "title": "Kevin rollt aus",
+    "from": "kevin",
+    "node": "fahrradladen",
+    "requires": ["t49-schwer-steigung"],
+    "reward": 100,
+    "difficulty": "mittel",
+    "scenario": {
+      "actors": [
+        {
+          "id": "kevin",
+          "name": "Kevin",
+          "sprite": "kevin",
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 8,
+              "v0": 8,
+              "a": -1
+            }
+          ]
+        }
+      ]
+    },
+    "intro": [
+      ["kevin", "Chef! Mein Tacho ist kaputt, aber das GPS hat mein t-x-Diagramm aufgezeichnet. Ich lasse das Rad ausrollen."],
+      ["kevin", "Die Versicherung will wissen: Wie schnell war ich zwischen 2 und 6 Sekunden im Schnitt?"],
+      ["florian", "Die Kurve ist gebogen – da gibt es kein einfaches Steigungsdreieck. Aber die Sekante zwischen den beiden Punkten liefert den Schnitt."]
+    ],
+    "task": {
+      "type": "slope",
+      "actor": "kevin",
+      "given": ["anim"],
+      "graph": "xt",
+      "secant": [2, 6],
+      "prompt": "Bestimme Kevins mittlere Geschwindigkeit zwischen t = 2 s und t = 6 s.",
+      "paper": "Mittlere Geschwindigkeit = Steigung der Sekante: v̄ₓ = Δx / Δt. Lies x bei 2 s und bei 6 s so genau wie möglich ab."
+    },
+    "success": [
+      ["florian", "Zwischen 2,0 s und 6,0 s kommen Sie 16 m weit – im Schnitt 4,0 m/s. Genau so schnell waren Sie übrigens in der Mitte, bei 4,0 s."],
+      ["kevin", "Die Mitte der Zeit hat die mittlere Geschwindigkeit? Krass. Gilt das immer?"],
+      ["florian", "Nur bei gleichmäßiger Beschleunigung. Aber da gilt es immer."]
+    ]
+  },
+  {
+    "id": "t84-tangente-slavi",
+    "title": "Ein Blitz, eine Geschwindigkeit",
+    "from": "slavi",
+    "node": "fotolabor",
+    "requires": ["t83-sekante-kevin", "t52-schwer-strobo-rechnen"],
+    "reward": 140,
+    "difficulty": "schwer",
+    "scenario": {
+      "actors": [
+        {
+          "id": "kevin",
+          "name": "Kevin",
+          "sprite": "kevin",
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 8,
+              "a": 1
+            }
+          ]
+        }
+      ]
+    },
+    "intro": [
+      ["slavi", "Florian! Meine Kamera hat nur EINMAL geblitzt – bei t = 4 Sekunden. Dann war sie wieder kaputt."],
+      ["slavi", "Kevin fährt aus dem Stand los. Zum Glück hat er sein t-x-Diagramm. Wie schnell war er genau in DEM Moment?"],
+      ["florian", "Momentangeschwindigkeit = Steigung der Tangente. Ich lege eine Gerade an, die die Kurve bei 4 s nur berührt."]
+    ],
+    "task": {
+      "type": "slope",
+      "actor": "kevin",
+      "given": ["anim"],
+      "graph": "xt",
+      "tangent": 4,
+      "prompt": "Wie schnell ist Kevin genau bei t = 4 s? Leg eine Tangente an und bestimme die Momentangeschwindigkeit.",
+      "paper": "Die Tangente berührt die Kurve in P und hat dort dieselbe Steigung. Leg sie möglichst lang an, dann ein großes Steigungsdreieck: vₓ = Δx / Δt."
+    },
+    "success": [
+      ["florian", "Bei t = 4,0 s ist Kevin 4,0 m/s schnell. Kontrolle: Aus dem Stand mit 1,0 m/s² sind das nach 4,0 s genau vₓ = a · t = 4,0 m/s."],
+      ["slavi", "Ein Blitz, eine Tangente, eine Geschwindigkeit. Das kommt in meine Ausstellung."]
+    ]
+  },
+  {
+    "id": "t85-zuordnen-beschleunigung",
+    "title": "Ötzis Beschleunigungsprotokoll",
+    "from": "oetzi",
+    "node": "bushof",
+    "requires": ["t39-schwer-zuordnen"],
+    "reward": 90,
+    "difficulty": "mittel",
+    "scenario": {
+      "actors": [
+        {
+          "id": "bus",
+          "name": "Stadtbus",
+          "sprite": "bus",
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 5,
+              "a": 2
+            },
+            {
+              "dt": 5,
+              "v": 10
+            },
+            {
+              "dt": 4,
+              "a": -2.5
+            }
+          ]
+        }
+      ]
+    },
+    "intro": [
+      ["oetzi", "Servus! Die Verkehrsbetriebe wollen ein Beschleunigungsprotokoll. Ich hab nur mein t-vₓ-Diagramm."],
+      ["florian", "Die Beschleunigung ist die Steigung im t-vₓ-Diagramm. Drei Abschnitte, drei waagrechte Stücke im t-aₓ-Diagramm."]
+    ],
+    "task": {
+      "type": "match",
+      "actor": "bus",
+      "given": ["anim", "vt"],
+      "ask": "at",
+      "paper": "Berechne für jeden Abschnitt die Steigung Δvₓ / Δt. Waagrecht im t-vₓ → aₓ = 0. Fallend → aₓ negativ."
+    },
+    "success": [
+      ["florian", "Anfahren mit 2,0 m/s², dann aₓ = 0, beim Bremsen −2,5 m/s². Ihr Bremsen ist sanfter, als Ihre Fahrgäste behaupten."],
+      ["oetzi", "Des sag i eana scho seit Jahren!"]
+    ]
+  },
+  {
+    "id": "t86-ralf-skater",
+    "title": "Ralf und die halbe Bremse",
+    "from": "ralf",
+    "node": "skatepark",
+    "requires": ["t43-schwer-fehlerjagd"],
+    "reward": 100,
+    "difficulty": "mittel",
+    "scenario": {
+      "actors": [
+        {
+          "id": "jo",
+          "name": "Jo",
+          "sprite": "jo",
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 4,
+              "a": 1
+            },
+            {
+              "dt": 3,
+              "v": 4
+            },
+            {
+              "dt": 2,
+              "a": -2
+            }
+          ]
+        }
+      ]
+    },
+    "intro": [
+      ["ralf", "Herr Brandl! Ich hab Jos Run als t-vₓ-Diagramm gezeichnet. Diesmal ganz sicher fehlerfrei!"],
+      ["jo", "Ich hab am Ende aber ordentlich gebremst. Steht alles im Datenblatt."],
+      ["florian", "Ich vergleiche jede Steigung mit dem Datenblatt."]
+    ],
+    "task": {
+      "type": "errorhunt",
+      "actor": "jo",
+      "given": ["anim", "data"],
+      "graph": "vt",
+      "error": {
+        "segment": 2,
+        "kind": "value",
+        "factor": 0.5
+      },
+      "paper": "Steigung im t-vₓ-Diagramm = aₓ. Vergleiche jeden Abschnitt mit dem Datenblatt.",
+      "explain": "Beim Bremsen ist aₓ = −2,0 m/s²: Jo steht nach 2,0 s. Ralf hat nur die halbe Steigung gezeichnet – dann würde sie noch rollen."
+    },
+    "success": [
+      ["florian", "Im letzten Abschnitt: −2,0 m/s² laut Datenblatt, bei Ralf nur −1,0 m/s². Mit seiner Bremse würde Jo noch 2,0 m/s schnell sein."],
+      ["ralf", "Halbe Bremse … Ich nenn das Sicherheitsabstand!"]
+    ]
+  },
+  {
+    "id": "t87-flaeche-wagen",
+    "title": "Der Wagen auf dem Parkplatz",
+    "from": "filiale",
+    "node": "supermarkt",
+    "requires": ["t48-schwer-flaeche"],
+    "reward": 110,
+    "difficulty": "mittel",
+    "scenario": {
+      "actors": [
+        {
+          "id": "cart",
+          "name": "Einkaufswagen",
+          "sprite": "cart",
+          "x0": 5,
+          "segments": [
+            {
+              "dt": 3,
+              "a": 1
+            },
+            {
+              "dt": 4,
+              "v": 3
+            },
+            {
+              "dt": 2,
+              "a": -1.5
+            }
+          ]
+        }
+      ]
+    },
+    "intro": [
+      ["filiale", "Schon wieder ein Einkaufswagen! Er stand bei 5,0 m, wurde angeschoben, rollte und blieb stehen."],
+      ["filiale", "Der Kunde sagt, er stand am Ende nicht vor meinem Auto. Mein Auto steht bei 24 m. Wer hat recht?"],
+      ["florian", "Fläche unter t-vₓ ist Δx. Dazu der Startort – dann weiß ich, wo der Wagen steht."]
+    ],
+    "task": {
+      "type": "area",
+      "actor": "cart",
+      "given": ["anim", "data"],
+      "graph": "vt",
+      "ask": ["pieces", "dx", "xend"],
+      "paper": "Dreieck, Rechteck, Dreieck. Δx = Summe der Teilflächen, dann x = x₀ + Δx. Vergleiche mit 24 m."
+    },
+    "success": [
+      ["florian", "Δx = 4,5 m + 12 m + 3,0 m = 19,5 m. Vom Start bei 5,0 m aus endet der Wagen bei 24,5 m – genau vor Ihrem Auto."],
+      ["filiale", "Ha! Ich hol die Kamera. Und die Versicherung."]
+    ]
+  },
+  {
+    "id": "t88-schnitt-radtour",
+    "title": "Die Partnerschafts-Radtour",
+    "from": "kranz",
+    "node": "rathaus",
+    "requires": ["t77-schnitt-dienstreise"],
+    "reward": 110,
+    "difficulty": "mittel",
+    "task": {
+      "type": "avgdist",
+      "sprite": "cyclist",
+      "units": {
+        "dist": "km",
+        "time": "min",
+        "speed": "km/h"
+      },
+      "parts": [
+        {
+          "label": "Bergauf",
+          "dx": 6,
+          "v": 12,
+          "hill": 1
+        },
+        {
+          "label": "Flach",
+          "dx": 12,
+          "v": 24
+        },
+        {
+          "label": "Bergab",
+          "dx": 6,
+          "v": 36,
+          "hill": -1
+        }
+      ],
+      "prompt": "Wie groß war die Durchschnittsgeschwindigkeit auf der ganzen Radtour?",
+      "paper": "Zeit je Abschnitt: Δt = Δx / v. Gesamtstrecke 24 km durch Gesamtzeit.",
+      "help": "Bergauf 30 min, flach 30 min, bergab 10 min. 24 km in 70 min."
+    },
+    "intro": [
+      ["kranz", "Die Radtour mit der Partnerstadt! 6 km bergauf mit 12 km/h, 12 km flach mit 24 km/h, 6 km bergab mit 36 km/h."],
+      ["kranz", "Für die Zeitung: Im Schnitt waren wir doch sicher 24 km/h schnell, oder?"],
+      ["florian", "Der Mittelwert der Geschwindigkeiten ist 24 km/h. Aber bergauf waren wir am längsten unterwegs …"]
+    ],
+    "success": [
+      ["florian", "24 km in 70 min – das sind rund 21 km/h. Der langsame Anstieg zählt mehr, weil Sie dort am längsten waren."],
+      ["kranz", "21 km/h. Na gut, das schreiben wir. Mit dem Zusatz: bergauf heldenhaft."]
+    ]
+  },
+  {
+    "id": "t89-konstrukt-bus",
+    "title": "Hausaufgabe: Kurz-Strecke",
+    "from": "ohm",
+    "node": "schule",
+    "requires": ["t45-schwer-konstrukteur"],
+    "reward": 110,
+    "difficulty": "mittel",
+    "scenario": {
+      "actors": [
+        {
+          "id": "bus",
+          "name": "Stadtbus",
+          "sprite": "bus",
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 3,
+              "a": 2
+            },
+            {
+              "dt": 4,
+              "v": 6
+            },
+            {
+              "dt": 2,
+              "a": -3
+            }
+          ]
+        }
+      ]
+    },
+    "intro": [
+      ["ohm", "Neue Hausaufgabe, Florian! Ein Bus zwischen zwei nahen Haltestellen. Gegeben das t-vₓ-Diagramm, gesucht das t-x-Diagramm."],
+      ["florian", "Flächen ausrechnen, aufaddieren, Form je Abschnitt wählen. Anfahren, fahren, bremsen."]
+    ],
+    "task": {
+      "type": "construct",
+      "actor": "bus",
+      "given": ["anim", "vt"],
+      "ask": "xt",
+      "paper": "Δx je Abschnitt = Fläche unter t-vₓ. aₓ > 0: Linkskurve ⌣, aₓ = 0: Gerade, aₓ < 0: Rechtskurve ⌢."
+    },
+    "success": [
+      ["florian", "x = 9,0 m nach 3,0 s, 33 m nach 7,0 s und 39 m am Ende. Linkskurve, Gerade, Rechtskurve."],
+      ["ohm", "Sauber. Und die Haltestellen liegen also nur 39 m auseinander? Da läuft man ja schneller!"]
+    ]
+  },
+  {
+    "id": "t90-formel-bremse",
+    "title": "Wie stark hat er gebremst?",
+    "from": "polizist",
+    "node": "polizei",
+    "requires": ["t57-formel-brunnen", "t63-gutachten-trocken"],
+    "reward": 110,
+    "difficulty": "mittel",
+    "scenario": {
+      "actors": [
+        {
+          "id": "car",
+          "name": "Auto",
+          "sprite": "car_red",
+          "x0": 0,
+          "segments": [
+            {
+              "until": "rest",
+              "v0": 15,
+              "a": -6.25
+            }
+          ]
+        }
+      ]
+    },
+    "intro": [
+      ["polizist", "TRRRILLL! Ein Fahrer behauptet, er habe ganz sanft gebremst. Er fuhr 15 m/s und stand nach 18 m."],
+      ["polizist", "Sanft? Rechnen Sie mir die Bremsverzögerung aus – mit sauberer Formel und gültigen Ziffern!"],
+      ["florian", "v² = 2 · a · x – diesmal nach a umgestellt."]
+    ],
+    "task": {
+      "type": "formula",
+      "actor": "car",
+      "given": ["anim"],
+      "prompt": "Wie groß war die Bremsverzögerung?",
+      "paper": "Erst umstellen: beide Seiten durch 2 · x teilen. Dann einsetzen.",
+      "formula": "v² = 2 · a · x",
+      "solveFor": "|a|",
+      "known": [
+        {
+          "name": "v",
+          "sym": "v",
+          "value": 15,
+          "unit": "m/s",
+          "text": "15 m/s"
+        },
+        {
+          "name": "x",
+          "sym": "x",
+          "value": 18,
+          "unit": "m",
+          "text": "18 m"
+        }
+      ],
+      "choices": [
+        {
+          "text": "a = v² / (2 · x)",
+          "correct": true
+        },
+        {
+          "text": "a = v / (2 · x)",
+          "feedback": "v steht im Quadrat – das bleibt beim Umstellen so."
+        },
+        {
+          "text": "a = 2 · x / v²",
+          "feedback": "Bruch verkehrt. Einheitenprobe: Es muss m/s² herauskommen."
+        },
+        {
+          "text": "a = v² / x",
+          "feedback": "Die 2 fehlt im Nenner."
+        }
+      ],
+      "expr": "v*v/(2*x)",
+      "label": "Bremsverzögerung",
+      "symbol": "|a|",
+      "unit": "m/s²",
+      "hints": [
+        {
+          "value": 12.5,
+          "text": "Die 2 im Nenner fehlt: a = v² / (2 · x)."
+        }
+      ],
+      "help": "a = (15 m/s)² / (2 · 18 m)."
+    },
+    "success": [
+      ["florian", "Rund 6,3 m/s². Das ist eine Vollbremsung auf trockener Straße – von sanft kann keine Rede sein."],
+      ["polizist", "Wusst ich's doch. Und Sie haben brav zwei gültige Ziffern genommen. Ich bin gerührt."]
+    ]
+  },
+  {
+    "id": "t91-verbinden-beschleunigung",
+    "title": "Übungsblatt: Steigung der Steigung",
+    "from": "ohm",
+    "node": "schule",
+    "requires": ["t62-schwer-verbinden"],
+    "reward": 100,
+    "difficulty": "mittel",
+    "intro": [
+      ["ohm", "Florian, letztes Übungsblatt vor der Klausur: Diesmal t-vₓ links und t-aₓ rechts."],
+      ["florian", "Die Steigung im t-vₓ-Diagramm ist aₓ. Und Achtung: Am Umkehrpunkt ist vₓ null, aber aₓ nicht!"]
+    ],
+    "task": {
+      "type": "pairs",
+      "left": "vt",
+      "right": "at",
+      "prompt": "Verbinde jedes t-vₓ-Diagramm (links) mit dem passenden t-aₓ-Diagramm (rechts).",
+      "help": "Steigung im t-vₓ-Diagramm = aₓ. Waagrecht → aₓ = 0. Fällt vₓ gleichmäßig – auch durch null hindurch –, bleibt aₓ konstant negativ.",
+      "paper": "Für jeden Abschnitt die Steigung Δvₓ / Δt bestimmen.",
+      "items": [
+        {
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 3,
+              "a": 2
+            },
+            {
+              "dt": 5,
+              "v": 6
+            }
+          ]
+        },
+        {
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 4,
+              "v": 5
+            },
+            {
+              "dt": 4,
+              "a": -1.25
+            }
+          ]
+        },
+        {
+          "x0": 0,
+          "segments": [
+            {
+              "dt": 2,
+              "v": 3
+            },
+            {
+              "dt": 4,
+              "a": -1.5
+            },
+            {
+              "dt": 2,
+              "v": -3
+            }
+          ]
+        }
+      ]
+    },
+    "success": [
+      ["florian", "Beim dritten Diagramm wechselt vₓ das Vorzeichen – aₓ bleibt trotzdem die ganze Zeit −1,5 m/s². Genau da tappen viele in die Falle."],
+      ["ohm", "Du bist bereit für die Klausur. Ich bin fast ein bisschen stolz."]
+    ]
   }
 ]
