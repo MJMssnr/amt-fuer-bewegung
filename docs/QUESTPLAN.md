@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 78, verdienbar: 7570 €.
+Anzahl Aufträge: 74, verdienbar: 7110 €.
 
 ```mermaid
 flowchart LR
@@ -42,13 +42,11 @@ flowchart LR
   t33_strobo_fallschirm["<b>N</b> Der schwebende Springer<br/><small>Slavi · Lindenstraße · 70 €</small>"]:::tN
   t34_strobo_rinne["<b>O</b> Die Kugel in der Rinne<br/><small>Slavi · Fotolabor · 80 €</small>"]:::tO
   t35_strobo_auto["<b>M</b> Blitz in der 30er-Zone<br/><small>Slavi · Polizeirevier · 90 €</small>"]:::tM
-  t36_strobo_jo["<b>N</b> Jo im Doppelbild<br/><small>Slavi · Skatepark · 80 €</small>"]:::tN
   t37_strobo_bremsen["<b>O</b> Kevin bremst<br/><small>Slavi · Supermarkt · 90 €</small>"]:::tO
   t38_strobo_pendel["<b>O</b> Das Pendel<br/><small>Slavi · Hobbywerkstatt · 100 €</small>"]:::tO
   t39_schwer_zuordnen["<b>A</b> Kevins Wende<br/><small>Busfahrer Ötzi · Busbahnhof · 120 €</small>"]:::tA
   t40_schwer_rechnen["<b>H</b> Die Paket-Jagd<br/><small>Paul Paket · Lindenstraße · 130 €</small>"]:::tH
   t41_schwer_beschreiben["<b>G</b> Jo in der Halfpipe<br/><small>Jo · Skatepark · 120 €</small>"]:::tG
-  t42_schwer_achsen["<b>C</b> Der Wende-Tacho<br/><small>Kevin · Radl-Eck · 120 €</small>"]:::tC
   t43_schwer_fehlerjagd["<b>E</b> Ralfs krumme Kurve<br/><small>Ralf · Hobbywerkstatt · 120 €</small>"]:::tE
   t44_schwer_live["<b>F</b> Pauls Zustellrunde<br/><small>Paul Paket · Bäckerei · 130 €</small>"]:::tF
   t45_schwer_konstrukteur["<b>I</b> Hausaufgabe: Die Wende<br/><small>Frau Dr. Ohm · Schule · 130 €</small>"]:::tI
@@ -57,9 +55,7 @@ flowchart LR
   t48_schwer_flaeche["<b>K</b> Hin, um und zurück<br/><small>Filialleiterin Yıldız · Supermarkt · 130 €</small>"]:::tK
   t49_schwer_steigung["<b>L</b> Bremsen durch null<br/><small>Busfahrer Ötzi · Busbahnhof · 120 €</small>"]:::tL
   t50_schwer_regie["<b>D</b> Die Verfolgungsjagd<br/><small>Bürgermeisterin Kranz · Rathaus · 140 €</small>"]:::tD
-  t51_schwer_strobo_beschreiben["<b>N</b> Der Wurf nach oben<br/><small>Slavi · Fotolabor · 120 €</small>"]:::tN
   t52_schwer_strobo_rechnen["<b>M</b> Die schräge Rinne<br/><small>Slavi · Fotolabor · 130 €</small>"]:::tM
-  t53_schwer_strobo_bauen["<b>O</b> Bergab, flach, bergauf<br/><small>Slavi · Fotolabor · 140 €</small>"]:::tO
   t54_fehler_route["<b>P</b> Wie lang ist meine Route?<br/><small>Kevin · Radl-Eck · 80 €</small>"]:::tP
   t55_fehler_blitz["<b>P</b> Wie genau ist mein Blitz?<br/><small>Slavi · Fotolabor · 100 €</small>"]:::tP
   t56_formel_eauto["<b>Q</b> Das neue E-Auto<br/><small>Bürgermeisterin Kranz · Rathaus · 90 €</small>"]:::tQ
@@ -124,13 +120,11 @@ flowchart LR
   t32_strobo_kevin --> t33_strobo_fallschirm
   t33_strobo_fallschirm --> t34_strobo_rinne
   t34_strobo_rinne --> t35_strobo_auto
-  t35_strobo_auto --> t36_strobo_jo
-  t36_strobo_jo --> t37_strobo_bremsen
+  t35_strobo_auto --> t37_strobo_bremsen
   t37_strobo_bremsen --> t38_strobo_pendel
   t04_brezel --> t39_schwer_zuordnen
   t80_einholen_vorsprung --> t40_schwer_rechnen
   t08_einkaufswagen --> t41_schwer_beschreiben
-  t11_stadtlauf --> t42_schwer_achsen
   t14_ralf_bus --> t43_schwer_fehlerjagd
   t17_live_kevin --> t44_schwer_live
   t20_konstrukt_wagen --> t45_schwer_konstrukteur
@@ -139,9 +133,7 @@ flowchart LR
   t26_flaeche_wagen --> t48_schwer_flaeche
   t29_steigung_bus --> t49_schwer_steigung
   t30_regie_imagefilm --> t50_schwer_regie
-  t38_strobo_pendel --> t51_schwer_strobo_beschreiben
-  t51_schwer_strobo_beschreiben --> t52_schwer_strobo_rechnen
-  t52_schwer_strobo_rechnen --> t53_schwer_strobo_bauen
+  t38_strobo_pendel --> t52_schwer_strobo_rechnen
   t05_radeln --> t54_fehler_route
   t54_fehler_route --> t55_fehler_blitz
   t32_strobo_kevin --> t55_fehler_blitz
@@ -197,7 +189,7 @@ flowchart LR
 |---|---|---|
 | A | Zuordnen | 5 |
 | B | Freihand zeichnen | 2 |
-| C | Achsen-Detektiv | 4 |
+| C | Achsen-Detektiv | 3 |
 | D | Regie | 2 |
 | E | Fehlerjagd | 4 |
 | F | Live-Steuerung | 3 |
@@ -208,8 +200,8 @@ flowchart LR
 | K | Flächen-Puzzle | 4 |
 | L | Steigungsdreieck | 4 |
 | M | Stroboskop: rechnen | 3 |
-| N | Stroboskop: beschreiben | 3 |
-| O | Stroboskop: bauen | 5 |
+| N | Stroboskop: beschreiben | 1 |
+| O | Stroboskop: bauen | 4 |
 | P | Fehlerbalken | 3 |
 | Q | Bewegungsformel | 4 |
 | R | Verbinden | 5 |
@@ -255,13 +247,11 @@ flowchart LR
 | Der schwebende Springer | N | Slavi | Lindenstraße | 70 € | Kevin im Blitzlicht |
 | Die Kugel in der Rinne | O | Slavi | Fotolabor | 80 € | Der schwebende Springer |
 | Blitz in der 30er-Zone | M | Slavi | Polizeirevier | 90 € | Die Kugel in der Rinne |
-| Jo im Doppelbild | N | Slavi | Skatepark | 80 € | Blitz in der 30er-Zone |
-| Kevin bremst | O | Slavi | Supermarkt | 90 € | Jo im Doppelbild |
+| Kevin bremst | O | Slavi | Supermarkt | 90 € | Blitz in der 30er-Zone |
 | Das Pendel | O | Slavi | Hobbywerkstatt | 100 € | Kevin bremst |
 | Kevins Wende | A | Busfahrer Ötzi | Busbahnhof | 120 € | Der Hund, der zurückläuft |
 | Die Paket-Jagd | H | Paul Paket | Lindenstraße | 130 € | Zehn Meter Vorsprung |
 | Jo in der Halfpipe | G | Jo | Skatepark | 120 € | Der Einkaufswagen |
-| Der Wende-Tacho | C | Kevin | Radl-Eck | 120 € | Der Stadtlauf |
 | Ralfs krumme Kurve | E | Ralf | Hobbywerkstatt | 120 € | Ralfs Busfahrt |
 | Pauls Zustellrunde | F | Paul Paket | Bäckerei | 130 € | Kevins Express-Lieferung |
 | Hausaufgabe: Die Wende | I | Frau Dr. Ohm | Schule | 130 € | Hausaufgabe: Die Falle |
@@ -270,9 +260,7 @@ flowchart LR
 | Hin, um und zurück | K | Filialleiterin Yıldız | Supermarkt | 130 € | Wie knapp war's? |
 | Bremsen durch null | L | Busfahrer Ötzi | Busbahnhof | 120 € | Bremst Ötzi zu scharf? |
 | Die Verfolgungsjagd | D | Bürgermeisterin Kranz | Rathaus | 140 € | Der Imagefilm |
-| Der Wurf nach oben | N | Slavi | Fotolabor | 120 € | Das Pendel |
-| Die schräge Rinne | M | Slavi | Fotolabor | 130 € | Der Wurf nach oben |
-| Bergab, flach, bergauf | O | Slavi | Fotolabor | 140 € | Die schräge Rinne |
+| Die schräge Rinne | M | Slavi | Fotolabor | 130 € | Das Pendel |
 | Wie lang ist meine Route? | P | Kevin | Radl-Eck | 80 € | Partnerschafts-Radeln |
 | Wie genau ist mein Blitz? | P | Slavi | Fotolabor | 100 € | Wie lang ist meine Route?, Kevin im Blitzlicht |
 | Das neue E-Auto | Q | Bürgermeisterin Kranz | Rathaus | 90 € | Frau Brösels Rache |

@@ -1,17 +1,20 @@
 # Roadmap – offen, geplant, bekannte Schwächen
 
-Stand: 24.10.2026 (W34). Reihenfolge offen, Herr Messner entscheidet.
+Stand: 24.10.2026 (W47, nach Playtest-Runde 3). Reihenfolge mit Herrn Messner abgestimmt.
 
 ## Offene Entscheidungen (bitte nicht eigenmächtig festlegen)
-- derzeit keine (Playtest-Runde 3 abwarten, Liste in PLAYTEST.md)
+- Gratisversion: Umfang steht (6 Aufträge, Bärti + 1. Paket), Technik/Vertrieb später gemeinsam
+- Musik: Herr Messner komponiert selbst (Titel, letzte Mission) – Format klären
 
-## Nächste Schritte (Sitzung 3)
-- Playtest-Feedback einarbeiten (Liste in `docs/PLAYTEST.md`), Einstufungen als `difficulty` eintragen
-- **D Regie**: 2 weitere Aufträge, sobald „Der Imagefilm“ abgenommen ist
-- **Balancing**: Shop 2265 € vs. verdienbar 7360 € → mehr Gegenstände oder höhere Preise (Herr Messner entscheidet)
-- `difficulty` soll später Lohn und Toleranz steuern (noch ohne Wirkung)
-- Optional: Rennmotorrad sichtbar unter dem Baumhaus parken (bisher nur Helm im Zimmer)
-- Finale-Länge (~1 min) nach Playtest anpassen
+## Arbeitsplan (W47, in dieser Reihenfolge)
+1. ✅ Bugs, Texte, Hinweise, Einstufungen, Streichungen (W47)
+2. **Mechanik:** T Puppe per Klick greifen (wie B); t74 statt Lösung eine Auswahlfrage „Warum unmöglich?“; O-Aufträge mit Verständnisfrage (gleiche Zeitabstände ≠ gleiche Ortsabstände, was ist konstant/null, Richtung nur aus dem Kontext); W Zeitraffer sichtbar (⏩, schnelle Uhr); t06 Folgefehler-Bewertung (ENTSCHEIDUNGEN § 6)
+3. **Generator-Kern + Endlosmodus** für K, L, H, U, dann A, E, R, V – mit Stufen (ENTSCHEIDUNGEN § 6), Seed-Tests
+4. **Story auf 83–85 Aufträge** (derzeit 74) nach Favoriten, Zahlen aus dem Generator
+5. Endlosmodus erweitern: I, B, F, Q (mehr Formeln umstellen), S, W-Rechenvariante
+6. **Rahmen:** Material-Animation nach dem Demo-Hinweis (Karopapier, Kuli, Taschenrechner, Formelsammlung fliegen ein; „Lege das Material bereit!“, weiter per Tippen/Leertaste); Finale: Slavi „Bitte lächeln“ mit mehreren Blitzen hintereinander; Wiederholungsflug am Bauplatz prüfen (gibt es seit W33)
+7. **Bärti:** Aktivitätenwahl nach „lange nicht gemacht“, nie Besuch direkt nach Besuch; Schwimm-Sprite mit Kopf (Maske, Öhrchen, Schwanz aus dem Wasser); neu: Mülltonnen in der Stadt (wühlen), Tanzen/Freudensprung, Einkugeln und Rollen, Schmetterlingssprung, auf dem Rücken mit den Beinen wackeln
+- Später: Raketen-Minispiel (Geld = Treibstoff), Gratisversion, Musik
 
 ## Wartet auf Playtest-Feedback
 - B Freihand („Brezels Tagebuch“), K Flächen-Puzzle, L Steigungsdreieck, Auftragsbuch, Schrift, Feinraster
