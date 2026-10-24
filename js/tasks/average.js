@@ -12,6 +12,7 @@
 //   "parts":[ { "label":"Bergauf", "dx":4, "v":12 }, … ]  (V: "dt" statt "dx"), "target":20,
 //   "allowImpossible":true, "prompt":"…", "paper":"…", "hints":[…], "help":"…" }
 
+import { whyQuestion } from './why.js';
 import { avgByDistance, avgByTime, missingSpeed, fillParts, SI } from '../engine/average.js';
 import { frame } from './common.js';
 import { questionBlock } from './questions.js';
@@ -160,24 +161,3 @@ export function mount(root, { ticket, onSolved }) {
   return { destroy: () => cancelAnimationFrame(raf) };
 }
 
-/** Auswahlfrage „Warum?“ [W47]: why = { question, choices:[{ text, correct?, feedback? }] }; done(firstTry) */
-function whyQuestion(box, why, done) {
-  const wrap = document.createElement('div');
-  wrap.className = 'avg-why';
-  wrap.innerHTML = `<p class="prompt">${why.question}</p><div class="rv-choices"></div><div class="feedback" aria-live="polite"></div>`;
-  box.appendChild(wrap);
-  const fb = wrap.querySelector('.feedback');
-  let first = true;
-  const order = why.choices.map((c, i) => [c, (i * 7 + 3) % 5]).sort((a, b) => a[1] - b[1]).map(([c]) => c); // fest gemischt
-  order.forEach((c) => {
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'rv-choice'; b.textContent = c.text;
-    b.addEventListener('click', () => {
-      if (c.correct) { wrap.querySelectorAll('.rv-choice').forEach((x) => (x.disabled = true)); b.classList.add('right'); fb.textContent = ''; done(first); return; }
-      first = false; b.disabled = true; b.classList.add('wrong');
-      fb.className = 'feedback bad'; fb.textContent = c.feedback ?? 'Nein, das ist nicht der Grund.';
-    });
-    wrap.querySelector('.rv-choices').appendChild(b);
-  });
-  wrap.scrollIntoView?.({ block: 'nearest', behavior: 'smooth' });
-}

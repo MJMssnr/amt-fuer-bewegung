@@ -48,5 +48,22 @@ export function drawRiver(c, o) {
   for (let k = 0; k < 5; k++) { ctx.fillStyle = k % 2 ? '#c58b5e' : '#a0622d'; ctx.fillRect(bx - fw / 2 + k * (fw / 5), byy - fh / 2, fw / 5 - d, fh); }
   ctx.fillStyle = '#e43b44'; ctx.fillRect(bx - dir * (fw / 2 + 4 * d) - 3 * d, byy - 4 * d, 6 * d, 8 * d); // Motor hinten
   ctx.fillStyle = '#ffcd75'; ctx.fillRect(bx - 2 * d, byy - 3 * d, 5 * d, 6 * d); // Florian (von oben)
+  // Zeitraffer sichtbar [W47]: Vorspul-Pfeile (1–3 je nach Faktor) und eine Uhr, deren Zeiger mit der SIMULIERTEN Zeit läuft
+  if (o.ff > 1.05) {
+    const n = o.ff < 4 ? 1 : o.ff < 15 ? 2 : 3, bw = (128 + n * 14) * d, bh = 22 * d, bx = W - bw - 6 * d, by0 = 6 * d;
+    ctx.fillStyle = 'rgba(26,28,44,0.82)'; ctx.fillRect(bx, by0, bw, bh);
+    const cx = bx + 12 * d, cy = by0 + bh / 2, r = 8 * d;
+    ctx.fillStyle = '#f4f4f4'; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.fill();
+    ctx.strokeStyle = INK; ctx.lineWidth = 1.5 * d;
+    const a = ((o.simT ?? 0) / 60) * Math.PI * 2 - Math.PI / 2; // Sekundenzeiger: eine Runde = 60 s Simulation
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a) * r * 0.85, cy + Math.sin(a) * r * 0.85); ctx.stroke();
+    ctx.fillStyle = '#ffcd75';
+    for (let k = 0; k < n; k++) for (let j = 0; j < 2; j++) { // ▶▶ je Stufe
+      const tx = cx + r + 6 * d + k * 14 * d + j * 6 * d;
+      ctx.beginPath(); ctx.moveTo(tx, cy - 5 * d); ctx.lineTo(tx + 6 * d, cy); ctx.lineTo(tx, cy + 5 * d); ctx.fill();
+    }
+    ctx.font = `${13 * d}px "AmtPixel", monospace`; ctx.textAlign = 'right'; ctx.fillStyle = '#f4f4f4';
+    ctx.fillText(`Zeitraffer ×${Math.round(o.ff)}`, bx + bw - 5 * d, cy + 4.5 * d); ctx.textAlign = 'left';
+  }
   return { toPx };
 }

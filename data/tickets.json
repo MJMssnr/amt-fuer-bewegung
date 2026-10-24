@@ -1047,6 +1047,29 @@
         "bg": "night",
         "obj": "ball"
       },
+      "why": [
+        {
+          "question": "Slavi fragt: „Was zeigt so ein Stroboskopbild eigentlich?“",
+          "choices": [
+            {
+              "text": "Wo der Körper ist – immer nach GLEICHEN Zeitabständen. Gleiche Ortsabstände gibt es nur, wenn er gleichförmig fährt.",
+              "correct": true
+            },
+            {
+              "text": "Wo der Körper ist – immer nach gleichen Ortsabständen, z. B. alle 10 cm.",
+              "feedback": "Die Kamera blitzt nach der Uhr, nicht nach dem Maßband. Die Ortsabstände verraten, wie schnell er war."
+            },
+            {
+              "text": "Wo der Körper ist – immer dann, wenn sich seine Geschwindigkeit ändert.",
+              "feedback": "Der Blitz weiß nichts von der Geschwindigkeit. Er blitzt stur im Takt."
+            },
+            {
+              "text": "Einen Film in Zeitlupe, nur ohne Ton.",
+              "feedback": "Alle Abbilder sind auf EINEM Foto. Der Trick: Der Blitz leuchtet in gleichen Zeitabständen."
+            }
+          ]
+        }
+      ],
       "explain": "Gleiche Zeitabstände, gleiche Wege: Die Kugel bewegt sich gleichförmig.",
       "paper": "Spiel das Video ab und achte auf die Blitze. Mit 📸 springst du von Blitz zu Blitz. Sind die Abstände der Kugel immer gleich groß?"
     },
@@ -1227,6 +1250,29 @@
         "bg": "night",
         "obj": "ball"
       },
+      "why": [
+        {
+          "question": "Was ist bei der Kugel in der Rinne konstant?",
+          "choices": [
+            {
+              "text": "Die Beschleunigung aₓ: Die Geschwindigkeit wächst von Blitz zu Blitz um gleich viel.",
+              "correct": true
+            },
+            {
+              "text": "Die Geschwindigkeit vₓ.",
+              "feedback": "Dann wären alle Abstände gleich groß. Hier wachsen sie."
+            },
+            {
+              "text": "Der Abstand zwischen zwei Abbildern.",
+              "feedback": "Die Abstände wachsen (1 : 3 : 5 …). Konstant ist, um wie viel die Geschwindigkeit pro Blitz zunimmt."
+            },
+            {
+              "text": "Gar nichts – sonst wären die Abstände ja gleich.",
+              "feedback": "Gleiche Abstände hieße konstantes vₓ. Hier ist etwas anderes konstant: die Zunahme der Geschwindigkeit."
+            }
+          ]
+        }
+      ],
       "explain": "Die Abstände wachsen von Blitz zu Blitz: Die Kugel wird gleichmäßig schneller. Aus der Ruhe verhalten sich die Abstände wie 1 : 3 : 5 : 7 : 9.",
       "paper": "Startet ein Körper aus der Ruhe gleichmäßig beschleunigt, wachsen die Abstände zwischen zwei Blitzen wie 1 : 3 : 5 : 7 : … Achte darauf, dass der erste Abstand sehr klein ist!"
     },
@@ -1344,6 +1390,50 @@
         "bg": "park",
         "obj": "cyclist"
       },
+      "why": [
+        {
+          "question": "Slavi zeigt das fertige Foto einem Kollegen – ohne Nummern. Kann der allein am Foto erkennen, dass Kevin bremst?",
+          "choices": [
+            {
+              "text": "Nein. Ohne Reihenfolge passt dasselbe Bild auch zu jemandem, der in die Gegenrichtung gleichmäßig schneller wird. Die Richtung kennt man nur aus dem Zusammenhang.",
+              "correct": true
+            },
+            {
+              "text": "Ja, kleiner werdende Abstände bedeuten immer Bremsen.",
+              "feedback": "Von rechts nach links gelesen werden die Abstände GRÖSSER. Welche Richtung stimmt, sagt das Foto allein nicht."
+            },
+            {
+              "text": "Ja, weil das erste Abbild immer links ist.",
+              "feedback": "Auf einem Foto steht keine Nummer. Links oder rechts – das ist Zufall des Bildausschnitts."
+            },
+            {
+              "text": "Nein, auf einem Stroboskopbild kann man gar nichts über die Bewegung erkennen.",
+              "feedback": "Doch: gleichförmig oder beschleunigt sieht man sehr wohl. Nur die Richtung bleibt offen."
+            }
+          ]
+        },
+        {
+          "question": "Und was ist beim letzten Abbild null?",
+          "choices": [
+            {
+              "text": "Die Geschwindigkeit vₓ – Kevin steht.",
+              "correct": true
+            },
+            {
+              "text": "Die Beschleunigung aₓ.",
+              "feedback": "Bis zum Stillstand bremst Kevin gleichmäßig: aₓ bleibt negativ. Null wird die Geschwindigkeit."
+            },
+            {
+              "text": "Der Ort x.",
+              "feedback": "x = 0 ist beim ersten Abbild (Start des Maßbands), nicht beim letzten."
+            },
+            {
+              "text": "Nichts, er rollt noch.",
+              "feedback": "Schau auf die letzten beiden Abbilder: Der Abstand ist dort praktisch null."
+            }
+          ]
+        }
+      ],
       "explain": "Beim Bremsen werden die Abstände von Blitz zu Blitz kleiner. Gleichmäßig verzögert: Sie schrumpfen jedes Mal um gleich viel.",
       "paper": "Zieh die Nummern auf die Bahn – sie werden zu kleinen Fahrrädern. Maßgeblich ist die Mitte des Fahrrads (weißer Strich), wie in der Animation. Beim Bremsen wird der Weg pro Zeitabstand immer kleiner."
     },
@@ -1382,6 +1472,29 @@
         "obj": "ball"
       },
       "prompt": "Bau das Stroboskopbild des Pendels: Zieh die Abbilder 2 bis 9 auf den Bogen. Sie rasten dort ein.",
+      "why": [
+        {
+          "question": "Wo ist die Geschwindigkeit des Pendels null?",
+          "choices": [
+            {
+              "text": "Ganz außen, an den Umkehrpunkten – dort liegen die Abbilder am dichtesten.",
+              "correct": true
+            },
+            {
+              "text": "In der Mitte, am tiefsten Punkt.",
+              "feedback": "Dort sind die Abstände am größten: Das Pendel ist dort am SCHNELLSTEN."
+            },
+            {
+              "text": "Nirgends, das Pendel bewegt sich ständig.",
+              "feedback": "Ganz außen kehrt es um. Für einen Moment steht es dort."
+            },
+            {
+              "text": "Überall gleich, weil die Blitze gleichmäßig kommen.",
+              "feedback": "Gleichmäßig sind die Zeitabstände der Blitze, nicht die Geschwindigkeit."
+            }
+          ]
+        }
+      ],
       "explain": "Außen ist das Pendel langsam, die Abbilder liegen eng. In der Mitte ist es am schnellsten, die Abstände sind am größten.",
       "paper": "Wo ist das Pendel am langsamsten, wo am schnellsten? Dort, wo es langsam ist, liegen die Abbilder dicht beieinander."
     },

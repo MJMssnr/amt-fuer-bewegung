@@ -38,7 +38,7 @@ export function mount(root, { ticket, onSolved }) {
   let run = null, raf = 0, last = performance.now(), anim = 0;
   const runs = [];
   function frameLoop(now) {
-    const dt = Math.min(0.05, (now - last) / 1000); last = now; anim += dt;
+    const dt = Math.min(0.05, (now - last) / 1000); last = now; anim += dt * (run?.k ?? 1); // Strömung im Zeitraffer mit [W47]
     let x = 0, dir = 1, rope = false, moving = false;
     const vf = run ? run.vf : +sf.value;
     if (run) {
@@ -57,7 +57,7 @@ export function mount(root, { ticket, onSolved }) {
     }
     const d = Math.min(window.devicePixelRatio || 1, 3), r = cv.getBoundingClientRect();
     if (r.width && cv.width !== Math.round(r.width * d)) { cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); }
-    if (r.width) drawRiver(cv, { L, x, vf, dir, rope, moving, t: anim, dpr: d });
+    if (r.width) drawRiver(cv, { L, x, vf, dir, rope, moving, t: anim, dpr: d, ff: run?.k ?? 0, simT: run?.t ?? 0 });
     raf = requestAnimationFrame(frameLoop);
   }
   raf = requestAnimationFrame(frameLoop);

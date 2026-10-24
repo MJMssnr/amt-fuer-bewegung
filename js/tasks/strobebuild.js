@@ -5,6 +5,7 @@
 // Ticket-Feld "task": gemeinsame Felder siehe strobe-common.js, dazu "tol" (m, Standard 6 % des Bildausschnitts),
 // "prompt", "paper".
 
+import { whyQuestions } from './why.js';
 import { checkStrobe } from '../engine/strobe.js';
 import { drawObj } from '../render/strobe.js';
 import { frame } from './common.js';
@@ -159,6 +160,10 @@ export function mount(root, { ticket, onSolved }) {
   function finish(grade) {
     done = true; showTruth = true; redraw();
     right.querySelectorAll('.calc-actions .btn').forEach((b) => (b.disabled = true));
+    // Verständnisfrage zum Stroboskop [W47]: falsch getippt → höchstens halber Lohn
+    if (task.why && grade !== 'fail') {
+      return whyQuestions(right, task.why, (ok) => setTimeout(() => onSolved({ attempts: wrong + 1, grade: ok ? grade : 'partial' }), 1200));
+    }
     setTimeout(() => onSolved({ attempts: wrong + 1, grade }), 700);
   }
   right.querySelector('.btn-check').addEventListener('click', () => {
