@@ -56,7 +56,7 @@
 - Kevin im Blitzlicht (M): Polizist nur Text, kein Bild → Cache/Safari-Fix, **erneut prüfen** [W25]
 - Stroboskop bauen (O) allgemein: Skala fehlte → Maßband + Hilfslinien [W25]
 
-## Playtest-Runde 3 (Stand W33)
+## Playtest-Runde 3 (Stand W34)
 **Neu (noch nie gespielt)**
 | Auftrag | Typ | Was prüfen |
 |---|---|---|
@@ -79,6 +79,13 @@
 | t66 Brezel, der Marionetten-Hund | T | Linkskurve mit dem Finger |
 | t68 Jo, die Marionetten-Skaterin | T | schwer |
 | t53 Bergab, flach, bergauf | O | neu gebaut (war zu leicht) |
+| t72 Kevins Hügel | U | Balken Strecke/Zeit, Hinweis Mittelwert |
+| t73 Ötzis neuer Fahrplan | U | unbekannte Geschwindigkeit |
+| t74 Frau Brösel will den Schnitt retten | U | schwer, „🚫 Geht nicht“ |
+| t75 Jos Trainingsrunde | V | |
+| t76 Paul hat es eilig | V | unbekannte Geschwindigkeit |
+| t77 Die Dienstreise der Bürgermeisterin | V | schwer, min und h gemischt |
+| t78 Hildes Floß im Fluss-Labor | W | Regler, Seil, Fahrtenbuch, Quiz; am Fluss (Karte jetzt breiter) |
 
 **Geändert – bitte nochmal**
 | Auftrag | Typ | Was geändert |

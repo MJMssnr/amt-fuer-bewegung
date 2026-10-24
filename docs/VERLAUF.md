@@ -44,7 +44,8 @@ Hinweis: Sitzung 1 wurde nachträglich aus einer Zusammenfassung des Chats rekon
 | W31 | Schwere Abschluss-Aufträge auch für P, Q, R: t60 Kevins Sprint (a = 2s/t², t im Quadrat), t61 Ötzi gibt Gas (x = v₀t + ½at² nach a), t62 Umkehrpunkte (R). Ideen für zwei weitere Typen gewünscht: Rechnen mit der zeitunabhängigen Gleichung + etwas Kreatives | (dieser Commit) |
 | W32 | **S Unfallgutachten** (Bremsspur, v₁² − v₀² = 2·a·Δx; t63 leicht, t64 mittel). **T Puppenspieler** statt eines F-Auftrags (t16 raus; t65 Oma-Gerda-Marionette, t66 Brezel). Neue Schauplätze **Polizeirevier** (weit links, weg von Baumhaus/Rathaus) und **Hobbywerkstatt** (Hilde) | 665f460, 490000c, (dieser Commit) |
 | W33 | Slavi-/Ralf-Aufträge auf andere Orte verteilt, schwere S (t67) und T (t68), Pakete neu verteilt, Karte: Ortsnamen erst in der Nähe, Radler, plaudernde Fußgänger, Wolken, Windräder, Solar. Finale: Bauschritte per Tippen, Bärti fliegt mit, weniger Stadt-Text, Rakete bleibt + Wiederholungsflug. Zwei frühe R-Aufträge (t69, t70), Q-Auftrag im Mittelteil (t71). Playtest-Liste | W33-Commits bis e3fae3d, (dieser Commit) |
+| W34 | Neue Typen **U** (Schnitt nach Strecken) und **V** (Schnitt nach Zeiten) mit Variationen (unbekannte Geschwindigkeit für Ziel-Schnitt, unmöglicher Klassiker), je 3 Aufträge t72–t77. **Fluss** neben der Stadt (Karte breiter) und **W Fluss-Labor**: Regler, Zeitraffer, Zeiten live, Seil, Fahrtenbuch, Erkenntnis „gleicht sich nicht aus“, Quiz (Rechnen, Verständnis, 2× Diagramm), t78 | fcb5a2a, da35d4d, f1f820e, (dieser Commit) |
 
 **Stand Ende Sitzung 2:** 53 Aufträge (A–O, je ein schwerer), 4950 € verdienbar, Shop 23 Gegenstände für 2265 €. Offen: siehe `ROADMAP.md` und `PLAYTEST.md`.
 
-**Stand Sitzung 3 (W33):** 69 Aufträge (A–T), 6620 € verdienbar.
+**Stand (W34):** 76 Aufträge (A–W), 7360 € verdienbar.
