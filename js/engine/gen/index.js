@@ -3,13 +3,17 @@
 
 import { rng } from './motion.js';
 import { genArea, genSlope } from './kl.js';
+import { genCalc } from './h.js';
+import { genAvgDist } from './u.js';
 
 export const LEVELS = ['leicht', 'mittel', 'schwer'];
 
 /** Reihenfolge = Reihenfolge im Trainingsmenü. type = Aufgabentyp (js/tasks/types.js) */
 export const TRAINING = [
+  { type: 'calc', gen: genCalc },
   { type: 'area', gen: genArea },
   { type: 'slope', gen: genSlope },
+  { type: 'avgdist', gen: genAvgDist },
 ];
 
 /** Aufgabe erzeugen: { ticket, scenario }. Gleicher Seed → gleiche Aufgabe. */

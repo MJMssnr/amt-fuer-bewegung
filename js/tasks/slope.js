@@ -18,9 +18,13 @@ export function mount(root, { ticket, world, onSolved }) {
   const actor = actorOf(world, task);
   const kind = task.graph ?? 'xt';
   const K = KINDS[kind];
-  const seg = segmentSlope(actor, K.q, task.segment ?? 0);
+  // Sekante [W48]: "secant": [t1, t2] → mittlere Steigung eines gekrümmten Stücks (Punkte fest vorgegeben, Ablesen mit Nachsicht)
+  const sec = task.secant;
+  const seg = sec
+    ? { t0: sec[0], t1: sec[1], slope: (quantityAt(actor, K.q, sec[1]) - quantityAt(actor, K.q, sec[0])) / (sec[1] - sec[0]) }
+    : segmentSlope(actor, K.q, task.segment ?? 0);
   const isV = K.q === 'x' || K.q === 'y';
-  const slopeName = isV ? 'Geschwindigkeit vₓ' : 'Beschleunigung aₓ';
+  const slopeName = sec ? (isV ? 'mittlere Geschwindigkeit v̄ₓ' : 'mittlere Beschleunigung āₓ') : isV ? 'Geschwindigkeit vₓ' : 'Beschleunigung aₓ';
   const slopeUnit = isV ? 'm/s' : 'm/s²';
   const dName = isV ? 'Δx' : 'Δvₓ';
   const { left, right } = frame(root);
@@ -46,7 +50,8 @@ export function mount(root, { ticket, world, onSolved }) {
     { label: slopeName, unit: slopeUnit, truth: seg.slope,
       hints: [{ value: -seg.slope, text: 'Achte aufs Vorzeichen: Fällt die Linie, ist die Steigung negativ.' },
         ...(Math.abs(seg.slope) > 1e-9 ? [{ value: 1 / seg.slope, text: `Umgekehrt! Steigung = ${dName} / Δt, nicht Δt / ${dName}.` }] : [])],
-      help: `Steigung = ${dName} / Δt.` },
+      help: `Steigung = ${dName} / Δt.`,
+      follows: { vars: { dt: 0, d: 1 }, expr: 'd/dt' } }, // Folgefehler: mit den eigenen Kathetenwerten weiterrechnen [W48]
   ];
   if (task.kmh && isV) qs.push({ label: 'Geschwindigkeit in km/h', unit: 'km/h', truth: seg.slope * 3.6,
     hints: [{ value: seg.slope / 3.6, text: 'Von m/s nach km/h wird mit 3,6 multipliziert, nicht geteilt.' }] });
@@ -60,21 +65,25 @@ export function mount(root, { ticket, world, onSolved }) {
     const [a, b] = [...pts].sort((p, q) => p[0] - q[0]);
     const c = [b[0], a[1]];
     drawn.push(g.shape([a, c, b], 'g-tri'), g.seg([a, c], 'g-seg leg'), g.seg([c, b], 'g-seg leg'));
+    if (sec) drawn.push(g.seg([a, b], 'g-seg sl-secant')); // Sekante sichtbar [W48]
     drawn.push(g.note([(a[0] + c[0]) / 2, c[1]], 'Δt = ?', 'g-note leg', [0, b[1] > a[1] ? 14 : -6]));
     drawn.push(g.note(c, `${dName} = ?`, 'g-note leg', [28, (b[1] > a[1] ? -1 : 1) * 14]));
     pts.forEach((p) => drawn.push(g.dot(p)));
     qs[0].truth = b[0] - a[0];
     qs[0].tol = Math.max(sigTolerance(qs[0].truth), dT / 2);
     qs[1].truth = b[1] - a[1];
-    qs[1].tol = Math.max(sigTolerance(qs[1].truth), dY / 2);
+    qs[1].tol = Math.max(sigTolerance(qs[1].truth), sec ? dY : dY / 2); // Kurve: auf ein Kästchen genau ablesen
     const bad = [a, b].filter(([t, y]) => !onGrid(y, dY)).length;
-    info.textContent = bad
+    info.textContent = sec
+      ? `Die Punkte bei t = ${fmt(sec[0])} s und t = ${fmt(sec[1])} s liegen fest. Lies x an beiden Stellen so genau wie möglich ab – auf ein Kästchen genau reicht.`
+      : bad
       ? 'Tipp: Mindestens ein Punkt liegt nicht auf einer Kästchenecke. Dann wird das Ablesen ungenau – such dir lieber Punkte, wo die Linie genau durch eine Ecke geht.'
       : 'Gut gewählt: Beide Punkte liegen auf Kästchenecken. Tippe erneut, um ein neues Dreieck anzulegen.';
     if (!placed) { placed = true; right.querySelector('.sl-q').classList.remove('hidden'); }
   }
 
   g.el.addEventListener('pointerdown', (e) => {
+    if (sec) return; // Sekante: Punkte liegen fest
     if (locked) { info.textContent = 'Das Dreieck ist nach dem ersten Prüfen fest – du kannst nur noch die Zahlen verbessern.'; return; }
     e.preventDefault();
     let [t] = g.toData(e.clientX, e.clientY);
@@ -87,6 +96,7 @@ export function mount(root, { ticket, world, onSolved }) {
     drawTriangle();
   });
   info.textContent = `Der gelbe Bereich ist der Abschnitt von ${fmt(seg.t0)} s bis ${fmt(seg.t1)} s.`;
+  if (sec) { pts = [[sec[0], at(sec[0])], [sec[1], at(sec[1])]]; drawTriangle(); }
 
   questionBlock(right.querySelector('.sl-q'), qs, { onSolved, sig: task.sigCheck !== false });
   right.querySelector('.sl-q .btn-check').addEventListener('click', () => { locked = true; });

@@ -19,10 +19,10 @@ export const chance = (r, p) => r() < p;
 
 /** Figuren für das Training (langsam genug für Meter-Skalen bis ~8 m/s) */
 export const ACTORS = [
-  { id: 'kevin', name: 'Kevin', sprite: 'kevin' },
-  { id: 'jo', name: 'Jo', sprite: 'jo' },
-  { id: 'dog', name: 'Brezel', sprite: 'dog' },
-  { id: 'cart', name: 'Einkaufswagen', sprite: 'cart' },
+  { id: 'kevin', name: 'Kevin', sprite: 'kevin', dat: 'Kevin' },
+  { id: 'jo', name: 'Jo', sprite: 'jo', dat: 'Jo' },
+  { id: 'dog', name: 'Brezel', sprite: 'dog', dat: 'Brezel' },
+  { id: 'cart', name: 'Einkaufswagen', sprite: 'cart', dat: 'dem Einkaufswagen' },
 ];
 
 /**

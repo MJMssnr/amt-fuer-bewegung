@@ -60,7 +60,7 @@ export async function runTraining({ runTask, buildWorld }) {
     let seed = Math.floor(Math.random() * 2 ** 31);
     for (;;) {
       const { ticket, scenario } = generate(sel.type, sel.level, seed++);
-      const res = await runTask({ title: `Training ${t.letter}: ${t.name}`, fromName: `Stufe ${sel.level}`, rewardText: '', ticket, world: buildWorld(scenario) });
+      const res = await runTask({ title: `Training ${t.letter}: ${t.name}`, fromName: `Stufe ${sel.level}`, rewardText: '', ticket, world: scenario ? buildWorld(scenario) : null });
       if (!res) break; // „← Karte“ ohne Lösung: zurück zur Auswahl
       const ok = res.grade === 'perfect' || (res.grade == null && res.attempts <= 1);
       const stats = loadStats();

@@ -1,6 +1,6 @@
 // Gemeinsamer Frageblock für Rechen- und Ablese-Aufgaben (Typ H und C).
 // qs: [{ label, symbol, unit, truth, tol?, range?: [min, max], hints?, help?, follows? }]  range ersetzt tol (z. B. Ablesen aus Diagramm)
-// Folgefehler [W47]: follows = { q: Index der Bezugsfrage, var: "s", expr: "s/70*3.6" }. Ist die Bezugsantwort
+// Folgefehler [W47]: follows = { q: Index der Bezugsfrage, var: "s", expr: "s/70*3.6" } oder { vars: { s1: 0, s2: 1 }, expr }. Ist die Bezugsantwort
 // akzeptiert (z. B. großzügig abgelesen), wird diese Frage mit dem WERT DES SPIELERS nachgerechnet – dann muss sie
 // exakt dazu passen (normale Toleranz, Gültige-Ziffern-Polizei). Hinweise dürfen statt "value" ein "expr" haben.
 // Bewertung: perfect = beim ersten Prüfen alles richtig; partial = nach Hinweisen selbst gelöst;
@@ -53,13 +53,18 @@ export function questionBlock(container, qs, { onSolved, rule = true, sig = true
   }
 
   const accepted = (q, val) => Number.isFinite(val) && (q.range ? val >= q.range[0] - 1e-9 && val <= q.range[1] + 1e-9 : isClose(val, q.truth, q.tol));
+  const effectiveRef = (k) => ({ ...qs[k], ...effective(qs[k]) }); // Ketten: Bezugsfrage kann selbst Folgefrage sein
   /** Wahrheit und Hinweise einer Frage, bei Folgefragen aus der Antwort des Spielers [W47] */
   function effective(q) {
     const f = q.follows;
     if (!f) return { truth: q.truth, range: q.range, hints: q.hints };
-    const ref = qs[f.q], rv = parseNum(inputs[f.q].value);
-    if (!accepted(ref, rv)) return { truth: q.truth, range: q.range, hints: q.hints };
-    const vars = { [f.var]: rv };
+    const refs = f.vars ?? { [f.var]: f.q }; // mehrere Bezugsfragen: { vars: { s1: 0, s2: 1 }, expr: "s1+s2" }
+    const vars = {};
+    for (const [name, k] of Object.entries(refs)) {
+      const rv = parseNum(inputs[k].value);
+      if (!accepted(effectiveRef(k), rv)) return { truth: q.truth, range: q.range, hints: q.hints };
+      vars[name] = rv;
+    }
     return { truth: evalExpr(f.expr, vars), range: null, follow: true,
       hints: (q.hints ?? []).map((h) => (h.expr ? { ...h, value: evalExpr(h.expr, vars) } : h)).filter((h) => !h.absolute) };
   }
