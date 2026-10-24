@@ -89,7 +89,8 @@ js/ui/room.js              Baumhaus-Zimmer mit Shop und Kiste
 js/ui/delivery.js          Lieferung: Postbote Paul bringt jede Bestellung durch die Luke (Texte: shop.json → delivery)
 js/ui/finale.js            Finale am Bauplatz (Bauen per Tippen, Herr Messner, Stadt, Bärti, Start) und Wiederholungsflug (mode 'flight'), Texte data/finale.json
 js/engine/packages.js      7 rätselhafte Pakete (Schwellen, 80-%-Regel)
-js/ui/baerti.js            Waschbär Bärti im Baumhaus
+js/ui/baerti.js            Waschbär Bärti im Baumhaus (Antippen: Sprung auf Florians Brust)
+js/ui/baerti-map.js        Bärti auf der Stadtkarte (ab 3 Aufträgen): Gehwege, wartet an Straßen, Passanten, Baum, Fluss
 js/render/ride.js          Rennrad/Motorrad auf der Karte
 js/render/room-art2.js     Baumhaus-Anbau und neue Gegenstände
 js/render/bauplatz.js      Bauplatz neben dem Baumhaus

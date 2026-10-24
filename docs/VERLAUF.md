@@ -52,6 +52,7 @@ Hinweis: Sitzung 1 wurde nachträglich aus einer Zusammenfassung des Chats rekon
 | W39 | E, F passen. Paket-Jagd als erstes Einholen zu schwer → Reihe: gleichzeitiger Start (t79, mittel), Wegvorsprung (t80, mittel), Zeitvorsprung (t40, schwer) | (dieser Commit) |
 | W40 | H, I, J passen; I mindestens mittel. J: Polizei kommt bei Reaktionszeit ≥ 1,0 s besorgt (Kaffee, guter Dienst). Lob-Text war falsch (lobte „weniger Ziffern“) → lobt jetzt das Runden auf 2 g.Z.; ≥ 4 g.Z. → Verwarnung | (dieser Commit) |
 | W41 | Einstufungen K–U nach Typ-Playtest. U: Berg in der Animation (Steigung farbig wie die Abschnitte), erster U-Auftrag in m, s, m/s statt km/h und min | (dieser Commit) |
+| W42 | Bärti nicht kaufbar, sondern nach dem 3. Auftrag mit Zwischensequenz (fällt aus der Baumkrone, wird benannt, Keks). Danach streift er über die Karte (Gehwege/Wiesen, wartet an Straßen auf Radler, besucht Passanten, schläft in Baumkronen, schwimmt, angelt). Im Baumhaus: vor Florian Schwung holen und auf die Brust springen, Knuddeln | (W42-Commits) |
 
 **Stand Ende Sitzung 2:** 53 Aufträge (A–O, je ein schwerer), 4950 € verdienbar, Shop 23 Gegenstände für 2265 €. Offen: siehe `ROADMAP.md` und `PLAYTEST.md`.
 

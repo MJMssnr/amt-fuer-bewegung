@@ -114,7 +114,7 @@
 
 **Nur Texte/Ort geändert (kurz drüberschauen)**: t12, t13, t14, t28 (Ralf unterwegs), t32, t33, t36 (Slavi unterwegs).
 
-**Systeme**: Speichercode (Auftragsbuch → 💾, Startbildschirm → 🔑, auf anderem Gerät laden), Karte (Ortsnamen erst in der Nähe, Radler, plaudernde Fußgänger, Wolken, Windräder), Polizei-Lob nach 2 Verwarnungen, Pakete (neue Abstände 4/10/17/26/37/50), Finale (Bauschritte tippen, Bärti, kürzere Stadt), Wiederholungsflug am Bauplatz, ±-Knopf, Scroll-Pfeile.
+**Systeme**: Speichercode (Auftragsbuch → 💾, Startbildschirm → 🔑, auf anderem Gerät laden), Karte (Ortsnamen erst in der Nähe, Radler, plaudernde Fußgänger, Wolken, Windräder), Polizei-Lob nach 2 Verwarnungen, Pakete (neue Abstände 4/10/17/26/37/50), Finale (Bauschritte tippen, Bärti, kürzere Stadt), Bärti-Zwischensequenz nach dem 3. Auftrag, Bärti auf der Karte, Bärti-Sprung im Baumhaus, Wiederholungsflug am Bauplatz, ±-Knopf, Scroll-Pfeile.
 
 ## So testet man schnell
 Testmodus (20× Oma im Startbildschirm, „amtstest“ tippen oder `?amtstest=1`) → 📖: ▶ starten, ✔/◐/✘ setzen, ↺ zurücksetzen, +100 €, „alle abhaken“ (löst alle Pakete aus) → Baumhaus (auspacken) → Bauplatz (Finale).
