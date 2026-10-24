@@ -23,6 +23,9 @@ export const TYPES = {
   pairs:     { letter: 'R', name: 'Verbinden' },
   skid:      { letter: 'S', name: 'Unfallgutachten' },
   puppet:    { letter: 'T', name: 'Puppenspieler' },
+  avgdist:   { letter: 'U', name: 'Schnitt nach Strecken' },
+  avgtime:   { letter: 'V', name: 'Schnitt nach Zeiten' },
+  river:     { letter: 'W', name: 'Fluss-Labor' },
 };
 
 export const typeOf = (type) => TYPES[type] ?? { letter: '?', name: type };

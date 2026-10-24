@@ -3140,5 +3140,303 @@
       ["florian", "a = (12 m/s)² / (2 · 18 m) = 4,0 m/s². Schwächer darf der Motor nicht sein."],
       ["hilde", "Vier Meter pro Sekundenquadrat – der Motor schafft fünf. Dann nichts wie raus auf die Wiese!"]
     ]
+  },
+  {
+    "id": "t72-schnitt-huegel",
+    "title": "Kevins Hügel",
+    "from": "kevin",
+    "node": "lindenstrasse",
+    "requires": ["t05-radeln"],
+    "reward": 80,
+    "difficulty": "leicht",
+    "intro": [
+      ["kevin", "Amtsmensch! Meine Lieferung zur Burg: 3,0 km bergauf mit 12 km/h, dann 3,0 km bergab mit 36 km/h."],
+      ["kevin", "Im Schnitt also 24 km/h, oder? Das schreib ich in meine Bewerbung."],
+      ["florian", "Moment. Bergauf bist du viel länger unterwegs als bergab. Das muss ich nachrechnen."]
+    ],
+    "task": {
+      "type": "avgdist",
+      "sprite": "cyclist",
+      "units": {
+        "dist": "km",
+        "time": "min",
+        "speed": "km/h"
+      },
+      "parts": [
+        {
+          "label": "Bergauf",
+          "dx": 3,
+          "v": 12
+        },
+        {
+          "label": "Bergab",
+          "dx": 3,
+          "v": 36
+        }
+      ],
+      "prompt": "Wie groß ist Kevins Durchschnittsgeschwindigkeit auf der ganzen Strecke?",
+      "help": "Bergauf: Δt = 3,0 km / 12 km/h = 0,25 h. Bergab: 3,0 km / 36 km/h ≈ 0,083 h. v̄ = 6,0 km / Gesamtzeit."
+    },
+    "success": [
+      ["florian", "Bergauf 15 min, bergab 5,0 min: 6,0 km in 20 min, also 18 km/h. Nicht 24!"],
+      ["kevin", "18? Weil ich bergauf so lange brauche … Na gut, dann schreib ich: „Bergab unschlagbar“."]
+    ]
+  },
+  {
+    "id": "t73-schnitt-fahrplan",
+    "title": "Ötzis neuer Fahrplan",
+    "from": "oetzi",
+    "node": "bushof",
+    "requires": ["t72-schnitt-huegel", "t03-bus"],
+    "reward": 100,
+    "difficulty": "mittel",
+    "intro": [
+      ["oetzi", "Servus! Die Linie 7 hat 6,0 km Stadt und 6,0 km Landstraße. In der Stadt schaff ich nur 24 km/h."],
+      ["oetzi", "Der Fahrplan verlangt aber einen Schnitt von 36 km/h. Wie schnell muss ich auf der Landstraße fahren?"],
+      ["florian", "Erst die Gesamtzeit aus dem Ziel-Schnitt, dann schauen, wie viel Zeit für die Landstraße übrig bleibt."]
+    ],
+    "task": {
+      "type": "avgdist",
+      "sprite": "bus",
+      "units": {
+        "dist": "km",
+        "time": "min",
+        "speed": "km/h"
+      },
+      "parts": [
+        {
+          "label": "Stadt",
+          "dx": 6,
+          "v": 24
+        },
+        {
+          "label": "Landstraße",
+          "dx": 6,
+          "v": null
+        }
+      ],
+      "target": 36,
+      "prompt": "Wie schnell muss Ötzi auf der Landstraße fahren, damit der Schnitt 36 km/h beträgt?",
+      "paper": "Gesamtzeit = 12 km / 36 km/h. Davon geht die Zeit für die Stadt ab (6,0 km / 24 km/h). Der Rest bleibt für die Landstraße.",
+      "hints": [
+        {
+          "value": 48,
+          "text": "Das wäre richtig, wenn Ötzi in beiden Abschnitten gleich LANGE fahren würde. Hier sind aber die Strecken gleich: Rechne mit den Zeiten!"
+        }
+      ],
+      "help": "Gesamtzeit 20 min, Stadt 15 min – für 6,0 km Landstraße bleiben nur 5,0 min."
+    },
+    "success": [
+      ["florian", "Gesamtzeit 20 min, die Stadt frisst schon 15 min. Für 6,0 km bleiben 5,0 min: Das sind 72 km/h."],
+      ["oetzi", "72 auf der Landstraße? Erlaubt sind 70. Dann muss der Fahrplan geändert werden, nicht ich!"]
+    ]
+  },
+  {
+    "id": "t74-schnitt-unmoeglich",
+    "title": "Frau Brösel will den Schnitt retten",
+    "from": "broesel",
+    "node": "lindenstrasse",
+    "requires": ["t73-schnitt-fahrplan"],
+    "reward": 130,
+    "difficulty": "schwer",
+    "intro": [
+      ["broesel", "Ich fahre zu meiner Schwester, 20 km. Hin stand ich im Stau: Im Schnitt nur 30 km/h. Eine Schande!"],
+      ["broesel", "Zurück fahre ich so schnell, dass ich insgesamt einen Schnitt von 60 km/h schaffe. Wie schnell muss ich dafür fahren, junger Mann?"],
+      ["florian", "Hm. Das klingt nach 90 km/h … aber ich rechne lieber nach. Mit den Zeiten!"]
+    ],
+    "task": {
+      "type": "avgdist",
+      "sprite": "car_red",
+      "units": {
+        "dist": "km",
+        "time": "min",
+        "speed": "km/h"
+      },
+      "parts": [
+        {
+          "label": "Hinweg",
+          "dx": 20,
+          "v": 30
+        },
+        {
+          "label": "Rückweg",
+          "dx": 20,
+          "v": null
+        }
+      ],
+      "target": 60,
+      "allowImpossible": true,
+      "prompt": "Wie schnell muss Frau Brösel zurückfahren, damit der Schnitt 60 km/h beträgt? (Oder geht das gar nicht?)",
+      "paper": "Wie lange dürfte die ganze Fahrt (40 km) bei 60 km/h dauern? Und wie lange hat der Hinweg schon gedauert?",
+      "hints": [
+        {
+          "value": 90,
+          "text": "Das ist die naheliegende Rechnung (30 + 90) / 2 = 60. Aber auf dem Hinweg war sie viel länger unterwegs! Rechne mit den Zeiten."
+        },
+        {
+          "value": 120,
+          "text": "Auch 120 km/h reichen nicht. Wie viel Zeit bleibt für den Rückweg überhaupt übrig?"
+        }
+      ],
+      "help": "40 km bei 60 km/h dauern 40 min. Der Hinweg hat schon 20 km / 30 km/h = 40 min gedauert."
+    },
+    "success": [
+      ["florian", "Für 40 km mit 60 km/h hat sie insgesamt 40 min. Aber der Hinweg hat schon 40 min gedauert! Für den Rückweg bleibt keine Sekunde. Unmöglich."],
+      ["broesel", "Nicht mal mit meinem Sportwagen? … Das ist das erste Mal, dass mich jemand mit Mathematik ausbremst."]
+    ]
+  },
+  {
+    "id": "t75-schnitt-training",
+    "title": "Jos Trainingsrunde",
+    "from": "jo",
+    "node": "skatepark",
+    "requires": ["t72-schnitt-huegel"],
+    "reward": 80,
+    "difficulty": "leicht",
+    "intro": [
+      ["jo", "Amtsmensch! Mein Training: 10 min Vollgas mit 12 km/h, dann 20 min locker mit 6,0 km/h."],
+      ["jo", "Im Schnitt also 9,0 km/h, oder? Meine Fitness-App sagt was anderes."],
+      ["florian", "Die lockere Phase dauert doppelt so lang. Die zählt mehr. Ich rechne mit den Strecken."]
+    ],
+    "task": {
+      "type": "avgtime",
+      "sprite": "skater",
+      "units": {
+        "dist": "km",
+        "time": "min",
+        "speed": "km/h"
+      },
+      "parts": [
+        {
+          "label": "Vollgas",
+          "dt": 10,
+          "v": 12
+        },
+        {
+          "label": "Locker",
+          "dt": 20,
+          "v": 6
+        }
+      ],
+      "prompt": "Wie groß ist Jos Durchschnittsgeschwindigkeit im ganzen Training?",
+      "hints": [
+        {
+          "value": 9,
+          "text": "Der Mittelwert der Geschwindigkeiten stimmt nur bei gleich langen Zeiten. Hier dauert die lockere Phase doppelt so lang."
+        }
+      ],
+      "help": "Vollgas: 12 km/h · 1/6 h = 2,0 km. Locker: 6,0 km/h · 1/3 h = 2,0 km. v̄ = 4,0 km / 0,50 h."
+    },
+    "success": [
+      ["florian", "2,0 km Vollgas plus 2,0 km locker, also 4,0 km in einer halben Stunde: 8,0 km/h. Die App hat recht."],
+      ["jo", "8,0. Dann wird die lockere Phase eben kürzer. Vollgas ist sowieso lustiger."]
+    ]
+  },
+  {
+    "id": "t76-schnitt-umgehung",
+    "title": "Paul hat es eilig",
+    "from": "post",
+    "node": "baeckerei",
+    "requires": ["t75-schnitt-training"],
+    "reward": 100,
+    "difficulty": "mittel",
+    "intro": [
+      ["post", "Herr Doktor! Paul Paket hier. Meine Tour dauert genau eine Stunde: 40 min Stadt mit 30 km/h, dann 20 min Umgehungsstraße."],
+      ["post", "Die Zentrale will einen Schnitt von 45 km/h. Wie schnell muss ich auf der Umgehung sein?"],
+      ["florian", "Die Zeiten sind fest. Also: Welche Strecke muss insgesamt geschafft werden, und wie viel davon fehlt nach der Stadt?"]
+    ],
+    "task": {
+      "type": "avgtime",
+      "sprite": "postbote",
+      "units": {
+        "dist": "km",
+        "time": "min",
+        "speed": "km/h"
+      },
+      "parts": [
+        {
+          "label": "Stadt",
+          "dt": 40,
+          "v": 30
+        },
+        {
+          "label": "Umgehung",
+          "dt": 20,
+          "v": null
+        }
+      ],
+      "target": 45,
+      "prompt": "Wie schnell muss Paul auf der Umgehungsstraße fahren, damit der Schnitt 45 km/h beträgt?",
+      "paper": "In 1,0 h mit 45 km/h schafft man 45 km. In der Stadt schafft Paul in 40 min nur 20 km. Der Rest muss in 20 min klappen.",
+      "hints": [
+        {
+          "value": 60,
+          "text": "Das wäre richtig bei gleich langen Abschnitten. Die Stadt dauert aber doppelt so lang wie die Umgehung."
+        }
+      ],
+      "help": "Es fehlen 45 km − 20 km = 25 km in 20 min = 1/3 h."
+    },
+    "success": [
+      ["florian", "Insgesamt 45 km, in der Stadt nur 20 km. Für 25 km bleiben 20 min: Das sind 75 km/h."],
+      ["post", "Auf der Umgehung sind 80 erlaubt. Das schaff ich! Und das Paket ist pünktlich."]
+    ]
+  },
+  {
+    "id": "t77-schnitt-dienstreise",
+    "title": "Die Dienstreise der Bürgermeisterin",
+    "from": "kranz",
+    "node": "rathaus",
+    "requires": ["t76-schnitt-umgehung", "t74-schnitt-unmoeglich"],
+    "reward": 130,
+    "difficulty": "schwer",
+    "intro": [
+      ["kranz", "Herr Doktor Brandl, meine Dienstreise in die Landeshauptstadt: 15 min zu Fuß zum Bahnhof, 1,5 h Zug, 30 min Bus."],
+      ["kranz", "Zu Fuß 5,0 km/h, der Zug 120 km/h, der Bus 30 km/h. Die Zeitung will wissen: Wie schnell war ich im Schnitt?"],
+      ["florian", "Drei Abschnitte, und die Zeiten sind mal in Minuten, mal in Stunden. Erst alles in Stunden umrechnen!"]
+    ],
+    "task": {
+      "type": "avgtime",
+      "sprite": "kranz",
+      "units": {
+        "dist": "km",
+        "time": "min",
+        "speed": "km/h"
+      },
+      "parts": [
+        {
+          "label": "Zu Fuß",
+          "dt": 15,
+          "v": 5
+        },
+        {
+          "label": "Zug",
+          "dt": 1.5,
+          "tu": "h",
+          "v": 120
+        },
+        {
+          "label": "Bus",
+          "dt": 30,
+          "v": 30
+        }
+      ],
+      "prompt": "Wie groß war die Durchschnittsgeschwindigkeit der Bürgermeisterin auf der ganzen Reise?",
+      "paper": "Alle Zeiten in Stunden: 15 min = 0,25 h, 30 min = 0,50 h. Strecken: Δx = v · Δt. Dann v̄ = Gesamtstrecke / Gesamtzeit.",
+      "hints": [
+        {
+          "value": 51.7,
+          "text": "Das ist der Mittelwert der drei Geschwindigkeiten. Der Zug fährt aber viel länger als die anderen!"
+        },
+        {
+          "value": 97.3,
+          "text": "Hast du die Minuten mit den Stunden vermischt? 15 min sind 0,25 h, nicht 0,15 h."
+        }
+      ],
+      "help": "1,25 km + 180 km + 15 km = 196,25 km in 2,25 h."
+    },
+    "success": [
+      ["florian", "Zu Fuß 1,3 km, Zug 180 km, Bus 15 km: zusammen rund 196 km in 2,25 h. Das sind etwa 87 km/h."],
+      ["kranz", "87 km/h! Und ich dachte, der Bus macht alles kaputt. Dafür ist er ja zu kurz."]
+    ]
   }
 ]

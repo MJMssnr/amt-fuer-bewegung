@@ -140,5 +140,12 @@ async function checkPlainTask(tk) {
     assert.ok(t.limit > 0);
   } else if (t.type === 'puppet') {
     assert.ok(buildWorld({ actors: [{ id: 'a', x0: t.x0 ?? 0, segments: t.segments }] }).actors.get('a'), `${tk.id}: Soll-Bewegung ungültig`);
+  } else if (t.type === 'avgdist' || t.type === 'avgtime') {
+    const k = t.type === 'avgdist' ? 'dx' : 'dt';
+    assert.ok(t.parts.length >= 2 && t.parts.every((p) => p[k] > 0), `${tk.id}: Abschnitte brauchen ${k}`);
+    const unknown = t.parts.filter((p) => p.v == null).length;
+    assert.ok(unknown <= 1 && (!unknown || t.target > 0), `${tk.id}: höchstens eine unbekannte Geschwindigkeit, dann mit target`);
+  } else if (t.type === 'river') {
+    assert.ok(t.L > 0, `${tk.id}: Flussstrecke L`);
   } else assert.fail(`${tk.id}: Typ ${t.type} ohne Szenario nicht vorgesehen`);
 }

@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 69, verdienbar: 6620 €.
+Anzahl Aufträge: 75, verdienbar: 7240 €.
 
 ```mermaid
 flowchart LR
@@ -78,6 +78,12 @@ flowchart LR
   t69_verbinden_gerade["<b>R</b> Erstes Übungsblatt: Steil, flach, fallend<br/><small>Frau Dr. Ohm · Schule · 60 €</small>"]:::tR
   t70_verbinden_klassisch["<b>R</b> Übungsblatt: Losfahren, fahren, bremsen<br/><small>Frau Dr. Ohm · Schule · 80 €</small>"]:::tR
   t71_formel_modellflieger["<b>Q</b> Hildes Modellflieger<br/><small>Hilde · Hobbywerkstatt · 100 €</small>"]:::tQ
+  t72_schnitt_huegel["<b>U</b> Kevins Hügel<br/><small>Kevin · Lindenstraße · 80 €</small>"]:::tU
+  t73_schnitt_fahrplan["<b>U</b> Ötzis neuer Fahrplan<br/><small>Busfahrer Ötzi · Busbahnhof · 100 €</small>"]:::tU
+  t74_schnitt_unmoeglich["<b>U</b> Frau Brösel will den Schnitt retten<br/><small>Frau Brösel · Lindenstraße · 130 €</small>"]:::tU
+  t75_schnitt_training["<b>V</b> Jos Trainingsrunde<br/><small>Jo · Skatepark · 80 €</small>"]:::tV
+  t76_schnitt_umgehung["<b>V</b> Paul hat es eilig<br/><small>Paul Paket · Bäckerei · 100 €</small>"]:::tV
+  t77_schnitt_dienstreise["<b>V</b> Die Dienstreise der Bürgermeisterin<br/><small>Bürgermeisterin Kranz · Rathaus · 130 €</small>"]:::tV
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -155,6 +161,14 @@ flowchart LR
   t58_verbinden_uebung --> t70_verbinden_klassisch
   t56_formel_eauto --> t71_formel_modellflieger
   t11_stadtlauf --> t71_formel_modellflieger
+  t05_radeln --> t72_schnitt_huegel
+  t72_schnitt_huegel --> t73_schnitt_fahrplan
+  t03_bus --> t73_schnitt_fahrplan
+  t73_schnitt_fahrplan --> t74_schnitt_unmoeglich
+  t72_schnitt_huegel --> t75_schnitt_training
+  t75_schnitt_training --> t76_schnitt_umgehung
+  t76_schnitt_umgehung --> t77_schnitt_dienstreise
+  t74_schnitt_unmoeglich --> t77_schnitt_dienstreise
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -195,6 +209,9 @@ flowchart LR
 | R | Verbinden | 5 |
 | S | Unfallgutachten | 3 |
 | T | Puppenspieler | 3 |
+| U | Schnitt nach Strecken | 3 |
+| V | Schnitt nach Zeiten | 3 |
+| W | Fluss-Labor | 0 |
 
 ## Liste
 | Auftrag | Typ | von | Ort | Lohn | braucht |
@@ -268,3 +285,9 @@ flowchart LR
 | Erstes Übungsblatt: Steil, flach, fallend | R | Frau Dr. Ohm | Schule | 60 € | Ruckelt der Bus?, Der Hund, der zurückläuft |
 | Übungsblatt: Losfahren, fahren, bremsen | R | Frau Dr. Ohm | Schule | 80 € | Übungsblatt: Wer gehört zu wem? |
 | Hildes Modellflieger | Q | Hilde | Hobbywerkstatt | 100 € | Das neue E-Auto, Der Stadtlauf |
+| Kevins Hügel | U | Kevin | Lindenstraße | 80 € | Partnerschafts-Radeln |
+| Ötzis neuer Fahrplan | U | Busfahrer Ötzi | Busbahnhof | 100 € | Kevins Hügel, Ruckelt der Bus? |
+| Frau Brösel will den Schnitt retten | U | Frau Brösel | Lindenstraße | 130 € | Ötzis neuer Fahrplan |
+| Jos Trainingsrunde | V | Jo | Skatepark | 80 € | Kevins Hügel |
+| Paul hat es eilig | V | Paul Paket | Bäckerei | 100 € | Jos Trainingsrunde |
+| Die Dienstreise der Bürgermeisterin | V | Bürgermeisterin Kranz | Rathaus | 130 € | Paul hat es eilig, Frau Brösel will den Schnitt retten |

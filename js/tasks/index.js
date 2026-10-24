@@ -22,6 +22,9 @@ const LOADERS = {
   pairs: () => import('./pairs.js'),           // R: t-x und t-vₓ verbinden
   skid: () => import('./skid.js'),             // S: Unfallgutachten (v₁² − v₀² = 2·a·Δx)
   puppet: () => import('./puppet.js'),         // T: Puppenspieler (x direkt mit dem Finger)
+  avgdist: () => import('./average.js'),       // U: Durchschnitt aus Strecken-Abschnitten
+  avgtime: () => import('./average.js'),       // V: Durchschnitt aus Zeit-Abschnitten
+  river: () => import('./river.js'),           // W: Fluss-Labor (Simulation + Quiz)
 };
 
 export async function loadTask(type) {
