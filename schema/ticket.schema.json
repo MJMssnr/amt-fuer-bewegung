@@ -4,30 +4,176 @@
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["id", "title", "from", "node", "scenario", "task"],
-    "$defs": { "lines": { "type": "array", "items": { "type": "array", "prefixItems": [{ "type": "string", "description": "Figur aus story.json" }, { "type": "string" }] } } },
-    "properties": {
-      "id": { "type": "string" },
-      "title": { "type": "string" },
-      "from": { "type": "string", "description": "Figur aus story.json/characters" },
-      "node": { "type": "string", "description": "Ort aus map.json/nodes" },
-      "requires": { "type": "array", "items": { "type": "string" }, "description": "erst freigeschaltet, wenn diese Tickets erledigt sind" },
-      "reward": { "type": "number", "description": "Euro; halbiert bei Fehlversuchen" },
-      "scenario": { "description": "id aus data/scenarios/ oder Szenario direkt als Objekt" },
-      "intro": { "$ref": "#/items/$defs/lines" },
-      "success": { "$ref": "#/items/$defs/lines" },
-      "task": {
-        "type": "object", "required": ["type"],
-        "properties": {
-          "type": { "enum": ["match"], "description": "weitere Typen folgen (calc, describe, axes, …)" },
-          "actor": { "type": "string" },
-          "given": { "type": "array", "items": { "enum": ["anim", "xt", "vt", "at", "yt", "vyt", "ayt"] } },
-          "ask": { "enum": ["xt", "vt", "at", "yt", "vyt", "ayt"] },
-          "prompt": { "type": "string" },
-          "paper": { "type": "string", "description": "Notizzettel: was auf Papier gerechnet wird" },
-          "prefer": { "type": "array", "items": { "type": "string" }, "description": "bevorzugte Distraktoren aus distractors.js/CATALOG" },
-          "goals": { "type": "array", "description": "für Rechenaufgaben: Goals aus js/engine/goals.js" }
+    "required": [
+      "id",
+      "title",
+      "from",
+      "node",
+      "task"
+    ],
+    "$defs": {
+      "lines": {
+        "type": "array",
+        "items": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "string",
+              "description": "Figur aus story.json"
+            },
+            {
+              "type": "string"
+            }
+          ]
         }
+      }
+    },
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "from": {
+        "type": "string",
+        "description": "Figur aus story.json/characters"
+      },
+      "node": {
+        "type": "string",
+        "description": "Ort aus map.json/nodes"
+      },
+      "requires": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "erst freigeschaltet, wenn diese Tickets erledigt sind"
+      },
+      "reward": {
+        "type": "number",
+        "description": "Euro; voll beim ersten Versuch, halb nach Hinweisen, 0 € bei „Lösung zeigen“ (Regeln je Typ: CLAUDE.md)"
+      },
+      "scenario": {
+        "description": "id aus data/scenarios/, Szenario direkt als Objekt, oder weglassen (U, V, P, S, M–O, R, W und Formel mit Bild brauchen keins)"
+      },
+      "intro": {
+        "$ref": "#/items/$defs/lines"
+      },
+      "success": {
+        "$ref": "#/items/$defs/lines"
+      },
+      "task": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "match",
+              "freehand",
+              "axes",
+              "direct",
+              "errorhunt",
+              "live",
+              "describe",
+              "calc",
+              "construct",
+              "reaction",
+              "area",
+              "slope",
+              "strobecalc",
+              "strobedescribe",
+              "strobebuild",
+              "errorbar",
+              "formula",
+              "pairs",
+              "skid",
+              "puppet",
+              "avgdist",
+              "avgtime",
+              "river"
+            ],
+            "description": "Aufgabentyp; Kennbuchstabe A–W in js/tasks/types.js, Felder je Typ im Kopfkommentar von js/tasks/<typ>.js"
+          },
+          "actor": {
+            "type": "string"
+          },
+          "given": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "anim",
+                "data",
+                "xt",
+                "vt",
+                "at",
+                "yt",
+                "vyt",
+                "ayt"
+              ]
+            }
+          },
+          "ask": {
+            "enum": [
+              "xt",
+              "vt",
+              "at",
+              "yt",
+              "vyt",
+              "ayt"
+            ]
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "paper": {
+            "type": "string",
+            "description": "Notizzettel: was auf Papier gerechnet wird"
+          },
+          "prefer": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "bevorzugte Distraktoren aus distractors.js/CATALOG"
+          },
+          "questions": {
+            "type": "array",
+            "description": "H (calc): [{ label, symbol, unit, goal, hints, help, range?, tol?, follows? }]"
+          },
+          "follows": {
+            "description": "in einer Frage: Folgefehler – { q, var, expr } oder { vars: { name: Index }, expr }: rechnet mit den Antworten des Spielers weiter [W47]"
+          },
+          "why": {
+            "description": "Begründungs-/Verständnisfrage(n) nach der Lösung: { question, choices:[{ text, correct?, feedback? }] } oder Liste (O, U) [W47]"
+          },
+          "secant": {
+            "type": "array",
+            "description": "L: [t1, t2] – mittlere Steigung eines gekrümmten Stücks [W48]"
+          },
+          "tangent": {
+            "type": "number",
+            "description": "L: t* – Tangente selbst anlegen, Momentangeschwindigkeit [W49]"
+          },
+          "picture": {
+            "type": "object",
+            "description": "Q ohne Szenario: { kind: 'well', t } (Brunnen) oder { kind: 'river', L, vb, vf } (Flussbild) [W49]"
+          }
+        }
+      },
+      "difficulty": {
+        "enum": [
+          "leicht",
+          "mittel",
+          "schwer"
+        ],
+        "description": "Einstufung von Herrn Messner (Playtest), im Auftragsbuch sichtbar"
+      },
+      "vary": {
+        "type": "object",
+        "description": "Zufallsvarianten: options (Zahlensätze) + set (Szenario-Pfad → Ausdruck); {Ausdrücke} in Texten"
       }
     }
   }

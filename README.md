@@ -4,7 +4,9 @@ Ein Browser-Lernspiel zu Bewegungsdiagrammen (t-x, t-vₓ, t-aₓ) für die Ober
 Florian bekommt durch eine Namensverwechslung das städtische „Amt für Bewegung aller Art“ und
 löst Bürgeranfragen, indem er Bewegungen analysiert – mit Papier und Bleistift.
 
-**Spielen:** https://mjmssnr.github.io/amt-fuer-bewegung/ (Smartphone bitte quer halten)
+**Spielen:** https://mjmssnr.github.io/amt-fuer-bewegung/ (Smartphone bitte quer halten). Die veröffentlichte Version ist passwortgeschützt (Passwort-Tor, siehe `docs/ENTSCHEIDUNGEN.md` § 2); lokal läuft das Spiel ohne Passwort.
+
+**Umfang:** 85 Story-Aufträge in 23 Aufgabentypen (A–W) und ein **Training** (Endlosmodus) im Hauptmenü: 14 Typen × 3 Stufen, jede Aufgabe neu erzeugt.
 
 ## Lokal starten
 Die Seite lädt JSON-Dateien und muss daher über einen Webserver laufen (Doppelklick auf `index.html` geht nicht):
@@ -14,7 +16,7 @@ python3 -m http.server 8000
 # dann im Browser: http://localhost:8000
 ```
 
-Tests der Physik-Engine: `node --test tests/*.test.mjs`
+Tests (Physik, Daten aller Aufträge, Endlos-Generator mit vielen Seeds, Bärti): `node --test tests/*.test.mjs`
 
 ## Neue Inhalte hinzufügen (ohne Programmieren)
 
@@ -89,9 +91,20 @@ Nach dem Bearbeiten: `node --test tests/*.test.mjs` prüft, ob alle Verweise sti
 - Sprites: `assets/sprites.json`. Eigene PNGs: Datei nach `assets/img/` legen und z. B.
   `"wappen": { "png": "assets/img/wappen.png", "w": 32, "h": 32 }` eintragen.
 
-### 4. Baumhaus-Shop und Prüfung
+### 4. Baumhaus-Shop, Pakete und Finale
 - Gegenstände, Preise und Texte: `data/shop.json` (neue Gegenstände brauchen einen Platz in `js/render/room-art.js`).
-- Abschlussprüfung: `data/exam.json`.
+- Raketenteile kommen als rätselhafte Pakete (`shop.json` → `rocketParts`, Schwellen in `js/engine/packages.js`).
+- Texte des Finales: `data/finale.json`.
+
+### 5. Training (Endlosmodus)
+- Generatoren je Typ in `js/engine/gen/` (Katalog `TRAINING` in `index.js`), Seed-Tests in `tests/generator.test.mjs`.
+- Neuer Trainingstyp: Generator `(level, r) → { scenario, task }` schreiben, in `TRAINING` eintragen, Test läuft automatisch mit.
+
+### Nützliche Felder in Aufgaben
+- `"follows"` in einer Rechenfrage: Folgefehler – weiterrechnen mit der Antwort des Spielers, z. B. `{ "vars": { "s": 0 }, "expr": "s/70*3.6" }`.
+- `"why"`: Begründungsfrage nach der Lösung, z. B. bei Stroboskop-Aufträgen.
+- `"secant": [2, 6]` bzw. `"tangent": 4` im Steigungsdreieck (L): mittlere bzw. Momentangeschwindigkeit an einer Kurve.
+- Weitere Felder je Typ stehen im Kopfkommentar von `js/tasks/<typ>.js`.
 
 Formatbeschreibungen: siehe `schema/`.
 
@@ -99,3 +112,5 @@ Formatbeschreibungen: siehe `schema/`.
 - `docs/ENTSCHEIDUNGEN.md` – Konzept, Didaktik, Regeln und ihre Begründung
 - `docs/ROADMAP.md` – was als Nächstes kommt
 - `docs/VERLAUF.md` – Wünsche und Umsetzung, chronologisch
+- `docs/PLAYTEST.md`, `docs/PLAYTEST-RUNDE3.md` – Rückmeldungen, Einstufungen, Spielzeiten
+- `docs/QUESTPLAN.md` + `docs/questplan.png` – Freischaltplan (automatisch erzeugt)
