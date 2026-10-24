@@ -3438,5 +3438,33 @@
       ["florian", "Zu Fuß 1,3 km, Zug 180 km, Bus 15 km: zusammen rund 196 km in 2,25 h. Das sind etwa 87 km/h."],
       ["kranz", "87 km/h! Und ich dachte, der Bus macht alles kaputt. Dafür ist er ja zu kurz."]
     ]
+  },
+  {
+    "id": "t78-fluss-labor",
+    "title": "Hildes Floß im Fluss-Labor",
+    "from": "hilde",
+    "node": "fluss",
+    "requires": ["t72-schnitt-huegel", "t65-puppe-gerda"],
+    "reward": 120,
+    "difficulty": "mittel",
+    "intro": [
+      ["hilde", "Florian! Ich hab ein Floß mit Motor gebaut und am Fluss ein kleines Labor eingerichtet. Mit den Reglern stellst du Strömung und Motor ein."],
+      ["hilde", "Mein Nachbar behauptet: Flussauf und zurück dauert genauso lang wie auf einem See, „weil sich die Strömung ausgleicht“. Stimmt das?"],
+      ["florian", "Flussauf verliere ich Geschwindigkeit, flussab gewinne ich sie. Klingt nach Ausgleich … aber ich teste das lieber."]
+    ],
+    "task": {
+      "type": "river",
+      "L": 60,
+      "prompt": "Fahr 60 m flussauf zur Boje und zurück. Probiere verschiedene Strömungen aus – gleicht sich die Strömung aus?",
+      "quiz": {
+        "vb": 6,
+        "vf": 2,
+        "L": 80
+      }
+    },
+    "success": [
+      ["florian", "Es gleicht sich nicht aus! Flussauf bin ich viel länger langsam unterwegs. Die Hin-und-zurück-Fahrt wird mit Strömung immer langsamer."],
+      ["hilde", "Das erzähl ich meinem Nachbarn. Und dann nehm ich ihn mit aufs Floß – gegen die Strömung!"]
+    ]
   }
 ]

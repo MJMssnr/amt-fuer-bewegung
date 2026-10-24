@@ -78,6 +78,7 @@ digraph Q {
   t75_schnitt_training [fillcolor="#dddddd" label=<<b>V</b>  Jos Trainingsrunde<br/><font point-size="9">Jo · Skatepark · 80 €</font>>];
   t76_schnitt_umgehung [fillcolor="#dddddd" label=<<b>V</b>  Paul hat es eilig<br/><font point-size="9">Paul Paket · Bäckerei · 100 €</font>>];
   t77_schnitt_dienstreise [fillcolor="#dddddd" label=<<b>V</b>  Die Dienstreise der Bürgermeisterin<br/><font point-size="9">Bürgermeisterin Kranz · Rathaus · 130 €</font>>];
+  t78_fluss_labor [fillcolor="#dddddd" label=<<b>W</b>  Hildes Floß im Fluss-Labor<br/><font point-size="9">Hilde · Fluss-Labor · 120 €</font>>];
   t01_sportwagen -> t02_kevin;
   t02_kevin -> t03_bus;
   t01_sportwagen -> t04_brezel;
@@ -163,4 +164,6 @@ digraph Q {
   t75_schnitt_training -> t76_schnitt_umgehung;
   t76_schnitt_umgehung -> t77_schnitt_dienstreise;
   t74_schnitt_unmoeglich -> t77_schnitt_dienstreise;
+  t72_schnitt_huegel -> t78_fluss_labor;
+  t65_puppe_gerda -> t78_fluss_labor;
 }

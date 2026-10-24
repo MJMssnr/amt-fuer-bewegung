@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 75, verdienbar: 7240 €.
+Anzahl Aufträge: 76, verdienbar: 7360 €.
 
 ```mermaid
 flowchart LR
@@ -84,6 +84,7 @@ flowchart LR
   t75_schnitt_training["<b>V</b> Jos Trainingsrunde<br/><small>Jo · Skatepark · 80 €</small>"]:::tV
   t76_schnitt_umgehung["<b>V</b> Paul hat es eilig<br/><small>Paul Paket · Bäckerei · 100 €</small>"]:::tV
   t77_schnitt_dienstreise["<b>V</b> Die Dienstreise der Bürgermeisterin<br/><small>Bürgermeisterin Kranz · Rathaus · 130 €</small>"]:::tV
+  t78_fluss_labor["<b>W</b> Hildes Floß im Fluss-Labor<br/><small>Hilde · Fluss-Labor · 120 €</small>"]:::tW
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -169,6 +170,8 @@ flowchart LR
   t75_schnitt_training --> t76_schnitt_umgehung
   t76_schnitt_umgehung --> t77_schnitt_dienstreise
   t74_schnitt_unmoeglich --> t77_schnitt_dienstreise
+  t72_schnitt_huegel --> t78_fluss_labor
+  t65_puppe_gerda --> t78_fluss_labor
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -211,7 +214,7 @@ flowchart LR
 | T | Puppenspieler | 3 |
 | U | Schnitt nach Strecken | 3 |
 | V | Schnitt nach Zeiten | 3 |
-| W | Fluss-Labor | 0 |
+| W | Fluss-Labor | 1 |
 
 ## Liste
 | Auftrag | Typ | von | Ort | Lohn | braucht |
@@ -291,3 +294,4 @@ flowchart LR
 | Jos Trainingsrunde | V | Jo | Skatepark | 80 € | Kevins Hügel |
 | Paul hat es eilig | V | Paul Paket | Bäckerei | 100 € | Jos Trainingsrunde |
 | Die Dienstreise der Bürgermeisterin | V | Bürgermeisterin Kranz | Rathaus | 130 € | Paul hat es eilig, Frau Brösel will den Schnitt retten |
+| Hildes Floß im Fluss-Labor | W | Hilde | Fluss-Labor | 120 € | Kevins Hügel, Die Oma-Gerda-Marionette |
