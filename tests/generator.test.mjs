@@ -64,7 +64,14 @@ for (const { type } of TRAINING) for (const level of LEVELS) {
       }
       if (type === 'slope') {
         const K = ticket.task.graph === 'xt' ? 'x' : 'vx';
-        if (level === 'schwer') { // Sekante über ein gekrümmtes t-x-Stück [W48]
+        if (ticket.task.tangent != null) { // Tangente [W49]
+          const t = ticket.task.tangent;
+          assert.ok(t > 0 && t < actor.tEnd, 'Berührpunkt innen');
+          assert.ok(actor.pieces.some((p) => Math.abs(p.a[0]) > 1e-9 && p.t0 < t && p.t1 > t), 'gekrümmt bei t*');
+          assert.ok(nice(quantityAt(actor, 'x', t), 0.25) && nice(quantityAt(actor, 'vx', t), 0.5), 'P und Steigung gut ablesbar');
+          continue;
+        }
+        if (ticket.task.secant) { // Sekante über ein gekrümmtes t-x-Stück [W48]
           const [t1, t2] = ticket.task.secant;
           assert.equal(ticket.task.graph, 'xt');
           assert.ok(t2 - t1 >= 2 && t1 >= 0 && t2 <= actor.tEnd + 1e-9, `Sekante ${t1}–${t2}`);
@@ -75,7 +82,7 @@ for (const { type } of TRAINING) for (const level of LEVELS) {
         const s = segmentSlope(actor, K, ticket.task.segment);
         assert.ok(s.straight && Number.isFinite(s.slope) && s.slope !== 0, `Abschnitt gerade, Steigung ≠ 0 (Seed ${seed})`);
         assert.ok(s.t1 - s.t0 >= 2, 'Abschnitt lang genug für ein Dreieck');
-        if (level === 'mittel') assert.ok(s.slope < 0, 'mittel: fallende Gerade bzw. aₓ < 0');
+        if (ticket.task.segment === 1) assert.ok(s.slope < 0, 'fallende Gerade bzw. aₓ < 0');
       }
     }
     assert.ok(seen.size > N / 4, `genug Abwechslung (${seen.size} verschiedene)`);

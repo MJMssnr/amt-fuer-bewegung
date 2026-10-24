@@ -13,6 +13,7 @@
 .g-tri { fill: rgba(239, 125, 87, .18); stroke: none; }
 .g-seg.leg { stroke: var(--accent); stroke-width: 2.4; }
 .g-seg.sl-secant { stroke: var(--accent); stroke-width: 2.2; stroke-dasharray: 6 4; }
+.g-seg.sl-tangent { stroke: var(--accent); stroke-width: 2.4; }
 .g-dot { fill: var(--accent); stroke: var(--ink); stroke-width: 1.5; }
 .g-note.leg { font: 12px var(--pixel); fill: #a3402a; paint-order: stroke; stroke: #fffdf6; stroke-width: 3px; }
 .g-band.sl-seg { fill: rgba(255, 205, 117, .28); pointer-events: none; }

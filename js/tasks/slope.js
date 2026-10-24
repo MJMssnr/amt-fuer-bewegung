@@ -20,11 +20,15 @@ export function mount(root, { ticket, world, onSolved }) {
   const K = KINDS[kind];
   // Sekante [W48]: "secant": [t1, t2] → mittlere Steigung eines gekrümmten Stücks (Punkte fest vorgegeben, Ablesen mit Nachsicht)
   const sec = task.secant;
-  const seg = sec
+  // Tangente [W49]: "tangent": t* → Momentangeschwindigkeit; Spieler legt die Tangente selbst (zweiter Punkt frei)
+  const tan = task.tangent;
+  const seg = tan != null
+    ? { t0: Math.max(0, tan - 1), t1: tan + 1, slope: quantityAt(actor, K.q === 'x' ? 'vx' : 'ax', tan) }
+    : sec
     ? { t0: sec[0], t1: sec[1], slope: (quantityAt(actor, K.q, sec[1]) - quantityAt(actor, K.q, sec[0])) / (sec[1] - sec[0]) }
     : segmentSlope(actor, K.q, task.segment ?? 0);
   const isV = K.q === 'x' || K.q === 'y';
-  const slopeName = sec ? (isV ? 'mittlere Geschwindigkeit v̄ₓ' : 'mittlere Beschleunigung āₓ') : isV ? 'Geschwindigkeit vₓ' : 'Beschleunigung aₓ';
+  const slopeName = tan != null ? 'Momentangeschwindigkeit vₓ' : sec ? (isV ? 'mittlere Geschwindigkeit v̄ₓ' : 'mittlere Beschleunigung āₓ') : isV ? 'Geschwindigkeit vₓ' : 'Beschleunigung aₓ';
   const slopeUnit = isV ? 'm/s' : 'm/s²';
   const dName = isV ? 'Δx' : 'Δvₓ';
   const { left, right } = frame(root);
@@ -39,6 +43,8 @@ export function mount(root, { ticket, world, onSolved }) {
   L.addCursor(g);
   g.shape([[seg.t0, g.yR.lo], [seg.t1, g.yR.lo], [seg.t1, g.yR.hi], [seg.t0, g.yR.hi]], 'g-band sl-seg');
   g.el.classList.add('sl-draw');
+  const P0 = tan != null ? [tan, quantityAt(actor, K.q, tan)] : null;
+  let tanFails = 0, tanLine = null;
 
   const dT = g.tR.step / minorDiv(g.tR.step), dY = g.yR.step / minorDiv(g.yR.step);
   const onGrid = (v, d) => Math.abs(v / d - Math.round(v / d)) < 1e-6;
@@ -66,15 +72,24 @@ export function mount(root, { ticket, world, onSolved }) {
     const c = [b[0], a[1]];
     drawn.push(g.shape([a, c, b], 'g-tri'), g.seg([a, c], 'g-seg leg'), g.seg([c, b], 'g-seg leg'));
     if (sec) drawn.push(g.seg([a, b], 'g-seg sl-secant')); // Sekante sichtbar [W48]
+    if (tan != null) { // Tangente: Gerade durch beide Punkte über das ganze Diagramm [W49]
+      const m = (b[1] - a[1]) / (b[0] - a[0]), y = (t) => a[1] + m * (t - a[0]);
+      let t1 = g.tR.lo, t2 = g.tR.hi;
+      if (Math.abs(m) > 1e-9) { const ta = a[0] + (g.yR.lo - a[1]) / m, tb = a[0] + (g.yR.hi - a[1]) / m; t1 = Math.max(t1, Math.min(ta, tb)); t2 = Math.min(t2, Math.max(ta, tb)); }
+      drawn.push(g.seg([[t1, y(t1)], [t2, y(t2)]], 'g-seg sl-tangent'));
+      tanLine = m;
+    }
     drawn.push(g.note([(a[0] + c[0]) / 2, c[1]], 'Δt = ?', 'g-note leg', [0, b[1] > a[1] ? 14 : -6]));
     drawn.push(g.note(c, `${dName} = ?`, 'g-note leg', [28, (b[1] > a[1] ? -1 : 1) * 14]));
     pts.forEach((p) => drawn.push(g.dot(p)));
     qs[0].truth = b[0] - a[0];
     qs[0].tol = Math.max(sigTolerance(qs[0].truth), dT / 2);
     qs[1].truth = b[1] - a[1];
-    qs[1].tol = Math.max(sigTolerance(qs[1].truth), sec ? dY : dY / 2); // Kurve: auf ein Kästchen genau ablesen
+    qs[1].tol = Math.max(sigTolerance(qs[1].truth), sec || tan != null ? dY : dY / 2); // Kurve: auf ein Kästchen genau ablesen
     const bad = [a, b].filter(([t, y]) => !onGrid(y, dY)).length;
-    info.textContent = sec
+    info.textContent = tan != null
+      ? 'Berührt deine Gerade die Kurve im Punkt P nur (ohne sie zu schneiden)? Dann lies Δt und Δx am Dreieck ab. Neuer Punkt: einfach woanders tippen.'
+      : sec
       ? `Die Punkte bei t = ${fmt(sec[0])} s und t = ${fmt(sec[1])} s liegen fest. Lies x an beiden Stellen so genau wie möglich ab – auf ein Kästchen genau reicht.`
       : bad
       ? 'Tipp: Mindestens ein Punkt liegt nicht auf einer Kästchenecke. Dann wird das Ablesen ungenau – such dir lieber Punkte, wo die Linie genau durch eine Ecke geht.'
@@ -84,6 +99,15 @@ export function mount(root, { ticket, world, onSolved }) {
 
   g.el.addEventListener('pointerdown', (e) => {
     if (sec) return; // Sekante: Punkte liegen fest
+    if (tan != null) {
+      if (locked) { info.textContent = 'Das Dreieck ist nach dem Prüfen fest – du kannst nur noch die Zahlen verbessern.'; return; }
+      e.preventDefault();
+      let [t, y] = g.toData(e.clientX, e.clientY);
+      t = Math.round(Math.min(g.tR.hi, Math.max(g.tR.lo, t)) / dT) * dT;
+      y = Math.round(Math.min(g.yR.hi, Math.max(g.yR.lo, y)) / dY) * dY;
+      if (Math.abs(t - P0[0]) < 1e-9) return;
+      pts = [P0, [t, y]]; drawTriangle(); return;
+    }
     if (locked) { info.textContent = 'Das Dreieck ist nach dem ersten Prüfen fest – du kannst nur noch die Zahlen verbessern.'; return; }
     e.preventDefault();
     let [t] = g.toData(e.clientX, e.clientY);
@@ -97,8 +121,22 @@ export function mount(root, { ticket, world, onSolved }) {
   });
   info.textContent = `Der gelbe Bereich ist der Abschnitt von ${fmt(seg.t0)} s bis ${fmt(seg.t1)} s.`;
   if (sec) { pts = [[sec[0], at(sec[0])], [sec[1], at(sec[1])]]; drawTriangle(); }
+  if (tan != null) { pts = [P0]; drawn.push(g.dot(P0), g.note(P0, 'P', 'g-note leg', [-10, -10])); info.textContent = `P liegt bei t = ${fmt(tan)} s auf der Kurve. Tippe einen zweiten Punkt an, so dass die Gerade durch P die Kurve dort nur berührt (Tangente).`; }
 
-  questionBlock(right.querySelector('.sl-q'), qs, { onSolved, sig: task.sigCheck !== false });
-  right.querySelector('.sl-q .btn-check').addEventListener('click', () => { locked = true; });
+  const done = (r) => onSolved(tanFails && r.grade === 'perfect' ? { ...r, grade: 'partial' } : r);
+  questionBlock(right.querySelector('.sl-q'), qs, { onSolved: done, sig: task.sigCheck !== false });
+  right.querySelector('.sl-q .btn-check').addEventListener('click', (e) => {
+    if (tan != null && tanLine != null) { // Ist das wirklich eine Tangente? Großzügig: ±15 % bzw. ±0,3 m/s [W49]
+      const v = seg.slope, ok = Math.abs(tanLine - v) <= Math.max(0.15 * Math.abs(v), 0.3);
+      if (!ok) {
+        e.stopImmediatePropagation(); tanFails++;
+        const fb = right.querySelector('.sl-q .feedback');
+        fb.className = 'feedback bad';
+        fb.textContent = `Deine Gerade ist noch keine Tangente – sie ist zu ${tanLine > v ? 'steil' : 'flach'} und schneidet die Kurve. Tippe einen neuen zweiten Punkt an.`;
+        return;
+      }
+    }
+    locked = true;
+  }, true);
   return { destroy: () => L.destroy() };
 }
