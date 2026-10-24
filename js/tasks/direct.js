@@ -76,7 +76,7 @@ export function mount(root, { ticket, world, onSolved }) {
   const showScene = (w, hideControlled = false) => {
     scene?.destroy();
     // Vor der ersten Klappe sind die einstellbaren Akteure noch nicht am Set
-    scene = new Scene(left.querySelector('.scene'), w, { onTime: (t) => g.setCursor(t), ghost: hideControlled ? controlled : undefined });
+    scene = new Scene(left.querySelector('.scene'), w, { onTime: (t) => g.setCursor(t), ghost: hideControlled ? controlled : undefined, landmarks: task.landmarks });
     if (hideControlled) scene.ghostAlpha = 0;
     scene.onEnd = () => (playBtn.textContent = '▶');
     scene.draw();

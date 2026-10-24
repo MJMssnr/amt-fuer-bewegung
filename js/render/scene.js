@@ -8,7 +8,8 @@ import { fmt, niceStep } from './format.js';
 const W = 640, H = 160, SCALE = 3, GROUND = 118;
 
 export class Scene {
-  constructor(canvas, world, { onTime, rate, ghost, extras, xRange, ruler = true } = {}) {
+  constructor(canvas, world, { onTime, rate, ghost, extras, xRange, ruler = true, landmarks } = {}) {
+    this.landmarks = landmarks ?? []; // Orientierungspunkte am Straßenrand [W38]: [{ x, kind: 'brunnen'|'rathaus', label }]
     this.ghost = ghost;
     this.ruler = ruler; // false: kein Maßband (Strecke soll nicht ablesbar sein) [W20]
     this.extras = extras;
@@ -35,6 +36,7 @@ export class Scene {
       if (this.world.is2D) for (const pc of trajectory(a)) for (const [, y] of pc) { ylo = Math.min(ylo, y); yhi = Math.max(yhi, y); }
     }
     if (this.xRangeExtra) { lo = Math.min(lo, this.xRangeExtra[0]); hi = Math.max(hi, this.xRangeExtra[1]); }
+    for (const l of this.landmarks) { lo = Math.min(lo, l.x); hi = Math.max(hi, l.x); }
     if (hi - lo < 1) { lo -= 5; hi += 5; }
     const padPx = 56;
     this.mx = (W - 2 * padPx) / (hi - lo);
@@ -77,6 +79,33 @@ export class Scene {
   }
 
   pause() { this.playing = false; cancelAnimationFrame(this.raf); }
+
+  /** Brunnen oder Rathaus am Straßenrand, mit Namensschild [W38] */
+  #landmark({ x, kind, label }) {
+    const ctx = this.ctx, px = Math.round(this.X(x)), base = GROUND - 22;
+    if (kind === 'rathaus') {
+      ctx.fillStyle = '#1a1c2c'; ctx.fillRect(px - 23, base - 47, 46, 47);
+      ctx.fillStyle = '#f4efe3'; ctx.fillRect(px - 22, base - 46, 44, 46);
+      ctx.fillStyle = '#b13e53'; ctx.fillRect(px - 25, base - 52, 50, 7);
+      ctx.fillStyle = '#f4efe3'; ctx.fillRect(px - 6, base - 66, 12, 14); ctx.fillStyle = '#1a1c2c'; ctx.beginPath(); ctx.arc(px, base - 59, 4, 0, 7); ctx.fill();
+      ctx.fillStyle = '#7fc8f8'; for (const wx of [-17, -7, 3, 13]) ctx.fillRect(px + wx, base - 38, 5, 8);
+      ctx.fillStyle = '#6b4226'; ctx.fillRect(px - 4, base - 14, 8, 14);
+    } else { // Brunnen
+      ctx.fillStyle = '#1a1c2c'; ctx.fillRect(px - 15, base - 9, 30, 9);
+      ctx.fillStyle = '#c2c7cf'; ctx.fillRect(px - 14, base - 8, 28, 8);
+      ctx.fillStyle = '#4fa4d8'; ctx.fillRect(px - 12, base - 8, 24, 3);
+      ctx.fillStyle = '#94b0c2'; ctx.fillRect(px - 2, base - 20, 4, 12);
+      const j = Math.sin((this.wall + this.t) * 6) * 2;
+      ctx.fillStyle = '#a8e0ff'; ctx.fillRect(px - 1, base - 30 - j, 2, 10 + j); ctx.fillRect(px - 6, base - 24, 2, 4); ctx.fillRect(px + 4, base - 24, 2, 4);
+    }
+    if (label) {
+      ctx.font = '21px "AmtPixel", monospace'; ctx.textAlign = 'center'; // groß: die Szene wird auf dem Handy verkleinert
+      const w = ctx.measureText(label).width + 10, y = kind === 'rathaus' ? base - 92 : base - 58;
+      ctx.fillStyle = 'rgba(255,255,255,0.92)'; ctx.fillRect(px - w / 2, y, w, 22);
+      ctx.fillStyle = '#1a1c2c'; ctx.fillText(label, px, y + 17);
+      ctx.fillRect(px, y + 22, 2, kind === 'rathaus' ? 4 : 26);
+    }
+  }
   destroy() { this.pause(); }
 
   draw() {
@@ -102,6 +131,7 @@ export class Scene {
     ctx.fillStyle = '#f4f4f4';
     for (let x = ((-this.x0 * this.mx) % 32) - 32; x < W; x += 32) ctx.fillRect(Math.round(x), GROUND - 6, 16, 2);
     ctx.fillStyle = '#333c57'; ctx.fillRect(0, GROUND + 6, W, H - GROUND - 6);
+    for (const l of this.landmarks) this.#landmark(l);
 
     // Maßband (abschaltbar per Ticket: "ruler": false)
     if (this.ruler) {

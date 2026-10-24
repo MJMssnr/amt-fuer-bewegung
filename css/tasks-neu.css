@@ -282,3 +282,10 @@ body.finale-on #dialog { z-index: 80; }
   .rv-clock { font-size: 13px; padding: 3px 8px; }
   .rv-insight, .rv-choice { font-size: 12px; }
 }
+
+/* B Freihand: Maus-Hinweis und Zoom [W38] */
+.fh-tools { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 13px; }
+.fh-tools .fh-mouse { flex: 1 1 200px; }
+.fh-zoom { padding: 1px 8px; font-size: 13px; }
+.fh-card { transition: width .2s; }
+@media (max-height: 500px) { .fh-tools { font-size: 11px; } }

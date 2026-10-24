@@ -56,6 +56,9 @@
 - Kevin im Blitzlicht (M): Polizist nur Text, kein Bild → Cache/Safari-Fix, **erneut prüfen** [W25]
 - Stroboskop bauen (O) allgemein: Skala fehlte → Maßband + Hilfslinien [W25]
 
+## Feedback nach Typen (24.10.)
+- A, C: funktionieren. B: funktioniert, Toleranz fair; Zoom + Klick-Modus für Notebooks ergänzt [W38]. D: Hinweis präzisiert, Brunnen/Rathaus in der Animation [W38] – t30/t50 bitte nochmal.
+
 ## Playtest-Runde 3 (Stand W34)
 **Neu (noch nie gespielt)**
 | Auftrag | Typ | Was prüfen |

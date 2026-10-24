@@ -942,6 +942,7 @@
     ],
     "task": {
       "type": "direct",
+      "landmarks": [{ "x": 160, "kind": "brunnen", "label": "Brunnen" }, { "x": 120, "kind": "rathaus", "label": "Rathaus" }],
       "tEnd": 25,
       "controls": [
         {
@@ -997,7 +998,7 @@
         ]
       },
       "prompt": "Stell Jos Startort und Geschwindigkeit so ein, dass beide Kameras ihren Moment bekommen.",
-      "paper": "Trage beide Drehbuch-Punkte ins t-x-Diagramm ein und verbinde sie: Das ist Jos Gerade. Steigung vₓ = Δx / Δt. Dann zurück bis t = 0: x₀ = x − vₓ · t."
+      "paper": "Gesucht ist EINE Gerade durch zwei Punkte: Trage beide Drehbuch-Momente (Zeit und Ort) sauber ins t-x-Diagramm ein und verbinde sie – das ist Jos Bewegung. Lies das Diagramm genau ab. Steigung vₓ = Δx / Δt, dann zurück bis t = 0: x₀ = x − vₓ · t."
     },
     "success": [
       ["florian", "Jo startet bei 200 m und fährt mit −4,0 m/s. Bei 10 s ist sie am Brunnen, bei 20 s trifft sie Kevin vor dem Rathaus."],
@@ -1836,6 +1837,7 @@
     ],
     "task": {
       "type": "direct",
+      "landmarks": [{ "x": 30, "kind": "brunnen", "label": "Brunnen" }, { "x": 60, "kind": "rathaus", "label": "Rathaus" }],
       "tEnd": 25,
       "controls": [
         {
@@ -1887,7 +1889,7 @@
           }
         ]
       },
-      "paper": "Kevins Gerade geht durch beide Kamera-Punkte: vₓ = Δx / Δt. Verlängere sie nach links bis x = 0 – dort liegt die Startzeit t₀."
+      "paper": "Gesucht ist EINE Gerade durch zwei Punkte: Trage beide Kamera-Momente sauber ins t-x-Diagramm ein und lies genau ab. vₓ = Δx / Δt. Verlängere die Gerade nach links bis x = 0 – dort liegt die Startzeit t₀."
     },
     "success": [
       ["florian", "Kevin wartet 10 s und fährt dann mit 6,0 m/s. Bei 15 s ist er am Brunnen, bei 20 s hat er Paul."],

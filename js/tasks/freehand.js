@@ -11,6 +11,8 @@ import { KINDS, rangeOf } from '../render/graph.js';
 import { fmt } from '../render/format.js';
 import { buildLeft, frame, actorOf, graphInto } from './common.js';
 
+const e2mouse = () => window.matchMedia?.('(pointer: fine)').matches;
+
 export function mount(root, { ticket, world, onSolved }) {
   const task = ticket.task;
   const actor = actorOf(world, task);
@@ -26,7 +28,10 @@ export function mount(root, { ticket, world, onSolved }) {
   const tEnd = world.tEnd;
   const truthAt = (t) => quantityAt(actor, K.q, Math.min(t, tEnd));
 
-  right.innerHTML = `<p class="prompt"></p><figure class="graph-card axes-card fh-card"></figure>
+  right.innerHTML = `<p class="prompt"></p>
+    <div class="fh-tools"><span class="fh-mouse">🖱️ Maus/Touchpad: <b>einmal klicken</b> = Stift ab, bewegen, <b>nochmal klicken</b> = fertig.</span>
+      <button class="btn fh-zoom" data-z="-1" type="button" title="Diagramm kleiner">🔍−</button><button class="btn fh-zoom" data-z="1" type="button" title="Diagramm größer">🔍+</button></div>
+    <figure class="graph-card axes-card fh-card"></figure>
     <div class="calc-actions">
       <button class="btn fh-clear" type="button">Neu zeichnen</button>
       <button class="btn btn-check" type="button">Prüfen</button>
@@ -36,6 +41,7 @@ export function mount(root, { ticket, world, onSolved }) {
   right.querySelector('.prompt').textContent = task.prompt
     ?? `Zeichne das ${K.title} mit dem Finger (oder der Maus) in einem Zug von t = 0 bis t = ${fmt(tEnd)} s. Beim Loslassen wird begradigt.`;
 
+  if (!e2mouse()) right.querySelector('.fh-mouse').classList.add('hidden');
   const card = right.querySelector('.fh-card');
   const g = graphInto(card, ask, [], { tMax: tEnd, yRange: [lo < 0 ? lo - span * 0.1 : 0, hi + span * 0.25] });
   L.addCursor(g);
@@ -64,9 +70,11 @@ export function mount(root, { ticket, world, onSolved }) {
     raw.push([tc, y]);
     g.trace(raw);
   };
+  // Maus/Touchpad [W38]: Klick startet, zweiter Klick beendet – man muss nicht die ganze Zeit gedrückt halten
   svg.addEventListener('pointerdown', (e) => {
     if (done) return;
     e.preventDefault();
+    if (e.pointerType === 'mouse' && drawing) { up(); return; }
     svg.setPointerCapture?.(e.pointerId);
     drawing = true; raw = []; line = [];
     const [t] = g.toData(e.clientX, e.clientY);
@@ -82,8 +90,15 @@ export function mount(root, { ticket, world, onSolved }) {
     g.trace(line);
     svg.classList.toggle('fh-has', line.length > 1);
   };
-  svg.addEventListener('pointerup', up);
+  svg.addEventListener('pointerup', (e) => { if (e.pointerType !== 'mouse') up(); });
   svg.addEventListener('pointercancel', up);
+  if (e2mouse()) svg.addEventListener('pointerleave', (e) => { if (drawing && e.pointerType === 'mouse' && raw.length && raw[raw.length - 1][0] > tEnd - tolT) up(); });
+  // Zoom für kleine Touchpads [W38]: kleineres Diagramm = kürzere Wege
+  let zoom = 1;
+  right.querySelectorAll('.fh-zoom').forEach((b) => b.addEventListener('click', () => {
+    zoom = Math.max(0.5, Math.min(1, zoom + Number(b.dataset.z) * 0.25));
+    card.style.width = `${zoom * 100}%`; card.style.alignSelf = 'center';
+  }));
 
   function finish(grade) {
     done = true;
