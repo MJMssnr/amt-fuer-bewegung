@@ -12,7 +12,7 @@ Spieler ist Florian, der per Namensverwechslung das „Amt für Bewegung aller A
 - **Pflege:** Neue Wünsche/Entscheidungen am Ende jeder Arbeitsrunde dort eintragen (im selben Commit wie der Code).
 
 ## Regeln für die Arbeit an diesem Repo
-- **Kein Build, kein npm-Framework.** Vanilla JS, ES-Module, läuft direkt auf GitHub Pages.
+- **Kein Build, kein npm-Framework.** Vanilla JS, ES-Module, läuft direkt (lokal ohne Passwort). Einzige Ausnahme: Verschlüsseln fürs Veröffentlichen (tools/encrypt.mjs, ENTSCHEIDUNGEN Passwort-Tor).
 - **Sprache:** UI-Texte und Kommentare auf Deutsch. Zahlen mit Dezimalkomma (`js/render/format.js`).
 - **Dateien klein halten** (< ~300 Zeilen). Gezielt einzelne Dateien ändern, nicht alles neu schreiben.
 - **Physik nur in `js/engine/`** (kein DOM). Darstellung nur in `js/render/`. Spielablauf in `js/ui/` und `js/main.js`.
@@ -32,6 +32,8 @@ Spieler ist Florian, der per Namensverwechslung das „Amt für Bewegung aller A
 index.html, css/style.css (+ fonts.css, questlog.css, tasks-neu.css)
 assets/fonts/              Silkscreen (Titel) und VT323 (Text/Zahlen), OFL
 tools/questplan.mjs        Freischaltplan docs/QUESTPLAN.md + questplan.dot
+tools/encrypt.mjs          Passwort-Tor bauen: AMT_PASSWORT=… → dist/ (spiel.enc + Tor aus tools/tor/); Passwort NIE ins Repo
+.github/workflows/tor.yml  veröffentlicht dist/ auf Pages (aktiv mit Variable AMT_TOR=ja + Secret AMT_PASSWORT)
 js/main.js                 Einstieg: Demo-Hinweis → Startbildschirm → Karte; Aufträge, Geld-Regeln, Prüfung
 js/engine/kinematics.js    2D-Kinematik, stückweise konstantes a, Ereignisse ("until")
 js/engine/goals.js         Auswertbare Fragen, erweiterbar per registerGoal()

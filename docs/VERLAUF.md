@@ -55,6 +55,7 @@ Hinweis: Sitzung 1 wurde nachträglich aus einer Zusammenfassung des Chats rekon
 | W42 | Bärti nicht kaufbar, sondern nach dem 3. Auftrag mit Zwischensequenz (fällt aus der Baumkrone, wird benannt, Keks). Danach streift er über die Karte (Gehwege/Wiesen, wartet an Straßen auf Radler, besucht Passanten, schläft in Baumkronen, schwimmt, angelt). Im Baumhaus: vor Florian Schwung holen und auf die Brust springen, Knuddeln | (W42-Commits) |
 | W43 | Knopf „Bärti-Cam“: starker Zoom, folgt Bärti durch die Stadt. Neue Aktivitäten: Bäume, Gebäude, Brunnen und Teich im Stadtpark, im Blumenbeet nach Würmern wühlen, ans Polizeirevier pinkeln, Fahrrad an der FOS/BOS umwerfen und wieder aufstellen, Windrad hoch, runterspringen, verwirrt, aufrappeln | (dieser Commit) |
 | W44 | Bug: Nach Bärtis Freischaltung kein Bärti-Cam-Knopf. Ursache: Bärti kam nur direkt nach einem gespielten Auftrag (nicht bei Testmodus-Häkchen, alten Spielständen, Speichercode) → Prüfung jetzt auch nach dem Auftragsbuch und beim Start. Knopf 🦝 von Anfang an sichtbar, ausgegraut, „Hier gibt es noch nichts zu sehen!“; fehlt er (alte index.html im Cache), legt das Spiel ihn selbst an | (dieser Commit) |
+| W45 | Passwortschutz: Startseite mit Hinweis (frühe Version, Bugs, gültige Ziffern), Dienst-E-Mail für Passwort-Anfragen/Bugs, Passwortfeld; nicht umgehbar → Spiel verschlüsselt, Passwort ist der Schlüssel | (dieser Commit) |
 
 **Stand Ende Sitzung 2:** 53 Aufträge (A–O, je ein schwerer), 4950 € verdienbar, Shop 23 Gegenstände für 2265 €. Offen: siehe `ROADMAP.md` und `PLAYTEST.md`.
 

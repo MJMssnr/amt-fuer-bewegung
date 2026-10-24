@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a1c2c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="robots" content="noindex">
+  <title>Amt für Bewegung aller Art</title>
+  <link rel="stylesheet" href="css/fonts.css">
+  <!-- Passwort-Tor [W45]: Das Spiel liegt nur verschlüsselt auf dem Server (spiel.enc). Das Passwort ist der Schlüssel. -->
+  <style>
+    :root { --ink: #1a1c2c; --navy: #29366f; --panel: #fbf6e6; --bad: #b13e53; --gold: #ffcd75; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body { background: radial-gradient(circle at 50% 30%, #3b4b8f, #1a1c2c 70%); color: var(--ink); font-family: "AmtPixel", monospace; display: grid; place-items: center; padding: 16px; min-height: 100dvh; }
+    .card { position: relative; max-width: 580px; width: 100%; background: var(--panel); padding: 18px 22px 16px; box-shadow: 0 0 0 3px var(--ink), 0 0 0 6px #f4f4f4, 0 0 0 9px var(--ink), 10px 10px 0 6px rgba(0,0,0,.35); font-size: 19px; line-height: 1.3; max-height: calc(100dvh - 36px); overflow: auto; }
+    h1 { font-family: "AmtTitel", monospace; margin: 0 0 8px; font-size: 24px; color: var(--navy); padding-right: 110px; }
+    p { margin: 0 0 9px; }
+    .stamp { position: absolute; right: 14px; top: 12px; font-family: "AmtTitel", monospace; font-weight: 600; color: var(--bad); border: 3px solid var(--bad); padding: 0 6px; transform: rotate(8deg); font-size: 14px; opacity: .85; text-align: center; line-height: 1.2; }
+    a { color: var(--navy); font-weight: bold; word-break: break-all; }
+    label { display: block; font-weight: bold; margin: 12px 0 6px; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; }
+    input { flex: 1 1 200px; font: inherit; font-size: 20px; padding: 6px 10px; border: 3px solid var(--ink); background: #fff; min-width: 0; }
+    button { font-family: "AmtTitel", monospace; font-size: 15px; padding: 8px 14px; border: 3px solid var(--ink); background: var(--gold); color: var(--ink); cursor: pointer; box-shadow: 3px 3px 0 var(--ink); }
+    button:disabled { opacity: .6; cursor: wait; }
+    .eye { background: #fff; padding: 8px 10px; }
+    .msg { min-height: 1.4em; margin-top: 8px; }
+    .msg.bad { color: var(--bad); font-weight: bold; }
+    .small { font-size: 16px; opacity: .8; }
+    @media (max-height: 420px) { .card { font-size: 17px; padding: 12px 16px; } h1 { font-size: 19px; } }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="stamp">FRÜHE<br>VERSION</div>
+    <h1>Willkommen im Amt!</h1>
+    <p>Das hier ist eine <b>frühe Version</b> vom <i>Amt für Bewegung aller Art</i>. Es können noch Fehler (Bugs) auftauchen, und manches – zum Beispiel <b>gültige Ziffern</b> – wird noch nicht überall ordentlich beachtet. In deinem Heft achtest du natürlich trotzdem darauf.</p>
+    <p>Passwort-Anfrage, Bugs oder sonstige Rückmeldungen bitte an Herrn Messner:<br>
+      <a href="mailto:messner.martin@fosbos-wuerzburg.de?subject=Amt%20f%C3%BCr%20Bewegung">messner.martin@fosbos-wuerzburg.de</a></p>
+    <form id="tor" autocomplete="off">
+      <label for="pw">Du bist Schüler oder Kollege von Herrn Messner? Dann hast du ein Passwort bekommen – gib es hier ein!</label>
+      <div class="row">
+        <input id="pw" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" required>
+        <button type="button" class="eye" title="Passwort zeigen" aria-label="Passwort zeigen">👁</button>
+        <button type="submit" id="go">Ins Amt ▶</button>
+      </div>
+      <div class="msg" id="msg" role="status"></div>
+      <p class="small">Dieses Gerät merkt sich das Passwort – du musst es nur einmal eingeben.</p>
+    </form>
+  </main>
+  <script type="module">
+    import { deriveKey, saltOf, open, exportKey, importKey } from './tor-crypto.js';
+    const KEY = 'amt-tor-key', VER = 'amt-tor-version', CACHE = 'amt-spiel';
+    const $ = (s) => document.querySelector(s), msg = (t, bad) => { $('#msg').textContent = t; $('#msg').className = bad ? 'msg bad' : 'msg'; };
+    const store = { get: (k) => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch {} }, del: (k) => { try { localStorage.removeItem(k); } catch {} } };
+    const TYPES = { js: 'text/javascript', json: 'application/json', css: 'text/css', html: 'text/html; charset=utf-8', svg: 'image/svg+xml', png: 'image/png' };
+
+    async function version() { return (await (await fetch('version.json', { cache: 'no-store' })).json()).v; }
+    async function pack() { return new Uint8Array(await (await fetch('spiel.enc', { cache: 'no-store' })).arrayBuffer()); }
+
+    // Entschlüsselte Dateien in den Cache legen, Service Worker starten, ins Spiel wechseln
+    async function install(files, v) {
+      await caches.delete(CACHE); // alte Version weg
+      const c = await caches.open(CACHE);
+      const base = new URL('./', location.href);
+      await Promise.all(Object.entries(files).map(([p, bytes]) =>
+        c.put(new URL(p, base).href, new Response(bytes, { headers: { 'Content-Type': TYPES[p.split('.').pop()] ?? 'application/octet-stream' } }))));
+      await navigator.serviceWorker.register('sw.js', { scope: './' });
+      await navigator.serviceWorker.ready;
+      store.set(VER, v);
+      try { sessionStorage.setItem('amt-tor', '1'); } catch {}
+      location.replace('spiel.html');
+    }
+
+    async function auto() { // schon einmal freigeschaltet: Schlüssel liegt auf dem Gerät
+      if (!('serviceWorker' in navigator) || !('caches' in window)) { msg('Dieser Browser kann das Spiel leider nicht öffnen (bitte Safari, Chrome, Edge oder Firefox, kein privates Fenster).', true); $('#go').disabled = true; return; }
+      const k = store.get(KEY);
+      if (!k) return;
+      try {
+        msg('Öffne das Amt …');
+        const v = await version();
+        const cached = await (await caches.open(CACHE)).match(new URL('spiel.html', location.href).href);
+        if (cached && store.get(VER) === v && navigator.serviceWorker.controller) { sessionStorage.setItem('amt-tor', '1'); location.replace('spiel.html'); return; }
+        await install(await open(await pack(), await importKey(k)), v); // neue Version oder Cache leer
+      } catch { store.del(KEY); msg('Bitte gib das Passwort (neu) ein.'); }
+    }
+
+    $('.eye').addEventListener('click', () => { const i = $('#pw'); i.type = i.type === 'password' ? 'text' : 'password'; i.focus(); });
+    $('#tor').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const pw = $('#pw').value;
+      if (!pw) return;
+      $('#go').disabled = true; msg('Prüfe das Passwort …');
+      try {
+        const [p, v] = await Promise.all([pack(), version()]);
+        const key = await deriveKey(pw, saltOf(p));
+        let files;
+        try { files = await open(p, key); } catch { msg('Leider falsch. Achte auf Groß- und Kleinschreibung und Satzzeichen.', true); $('#go').disabled = false; return; }
+        store.set(KEY, await exportKey(key));
+        msg('Richtig! Das Amt öffnet …');
+        await install(files, v);
+      } catch (err) { console.error(err); msg('Das hat nicht geklappt (Verbindung?). Bitte nochmal versuchen.', true); $('#go').disabled = false; }
+    });
+    auto();
+  </script>
+</body>
+</html>

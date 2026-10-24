@@ -305,7 +305,9 @@ async function boot() {
   setCharacters(story.characters);
   document.getElementById('loading').classList.add('hidden');
 
-  await showNotice();
+  // Hinweis kam schon am Passwort-Tor [W45]
+  let viaTor = false; try { viaTor = sessionStorage.getItem('amt-tor') === '1'; } catch {}
+  if (!viaTor) await showNotice();
   const saveCtx = { tickets, items: shop.items, parts: shop.rocketParts, partOrder };
   const choice = await showTitle(Boolean(state.introSeen), { loadCode: () => askLoadCode((c) => decodeSave(c, saveCtx)) });
   if (choice === 'new') { resetState(); state = loadState(); }
