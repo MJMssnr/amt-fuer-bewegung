@@ -38,7 +38,7 @@ export function mount(root, { ticket, onSolved }) {
     const d = Math.min(window.devicePixelRatio || 1, 3), r = cv.getBoundingClientRect();
     if (!r.width) return;
     if (cv.width !== Math.round(r.width * d)) { cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); }
-    geo = drawSkid(cv, { range: task.range, skid: task.skid, weather: task.weather, limit: task.limit, obstacle: !!task.v1, marks: step === 1 ? marks : [s0, s1], dpr: d, t: now / 1000 });
+    geo = drawSkid(cv, { range: task.range, skid: task.skid, weather: task.weather, limit: task.limit, obstacle: !!task.v1, v1: task.v1, marks: step === 1 ? marks : [s0, s1], dpr: d, t: now / 1000 });
   };
   const loop = (now) => { draw(now); raf = requestAnimationFrame(loop); };
   raf = requestAnimationFrame(loop);

@@ -28,10 +28,10 @@
           "v": 10
         },
         {
-          "v": 11
+          "v": 15
         },
         {
-          "v": 12.5
+          "v": 20
         }
       ],
       "set": {
@@ -57,7 +57,7 @@
       "actor": "kevin",
       "given": ["anim", "vt"],
       "ask": "xt",
-      "paper": "Berechne Reaktionsweg und Bremsweg als Flächen unter der t-vₓ-Kurve."
+      "paper": "Steigt oder fällt der Graph im t-x-Diagramm? Solange vₓ > 0 ist, steigt x – auch beim Bremsen, nur immer flacher. Berechne Reaktionsweg und Bremsweg als Flächen unter der t-vₓ-Kurve."
     },
     "success": [
       ["florian", "Erst gleichförmig, also eine Gerade. Dann gleichmäßig verzögert, also eine Parabel, die flach ausläuft. Anhalteweg: {v} m Reaktionsweg plus {v*v/(2*a)} m Bremsweg."],
@@ -140,7 +140,7 @@
     "node": "park",
     "requires": ["t01-sportwagen"],
     "reward": 80,
-    "difficulty": "leicht",
+    "difficulty": "mittel",
     "scenario": "radeln-partnerstadt",
     "intro": [
       ["kranz", "Herr Doktor Brandl! Morgen ist Partnerschafts-Radeln mit Unterbach. Anna startet bei uns, Bernd gleichzeitig in Unterbach, 3,0 km entfernt."],
@@ -244,7 +244,7 @@
     "node": "lindenstrasse",
     "requires": ["t03-bus", "t05-radeln"],
     "reward": 90,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "scenario": "sportwagen-ampel",
     "intro": [
       ["broesel", "DA sind Sie ja! Der rote Sportwagen war heute wieder da! Erst hat er an der Ampel gehalten, und dann ist er wieder losgerast!"],
@@ -364,7 +364,7 @@
     "node": "supermarkt",
     "requires": ["t07-skater"],
     "reward": 90,
-    "difficulty": "leicht",
+    "difficulty": "mittel",
     "scenario": "einkaufswagen",
     "intro": [
       ["filiale", "Herr Brandl! Auf dem Parkplatz ist ein Einkaufswagen losgerollt, direkt auf das Auto der Bürgermeisterin zu!"],
@@ -578,6 +578,7 @@
     "node": "baeckerei",
     "requires": ["t04-brezel"],
     "reward": 70,
+    "difficulty": "leicht",
     "scenario": "hund-brezel",
     "intro": [
       ["baecker", "Herr Amt, Brezel hat Schnupfen. Aber die Touristen kommen jeden Morgen, um seine berühmte Runde zu sehen!"],
@@ -605,6 +606,7 @@
     "node": "fahrradladen",
     "requires": ["t15-live-brezel"],
     "reward": 90,
+    "difficulty": "mittel",
     "scenario": "kevin-express",
     "intro": [
       ["kevin", "Chef, ich hab mir den Fuß verknackst. Kannst du meine Express-Tour fahren? Hin, kurz warten, ein Stück zurück. Der Plan ist exakt getaktet!"],
@@ -632,7 +634,7 @@
     "node": "schule",
     "requires": ["t02-kevin"],
     "reward": 80,
-    "difficulty": "mittel bis schwer",
+    "difficulty": "schwer",
     "scenario": "kevin-bremsen",
     "intro": [
       ["ohm", "Florian! Schön, dass du dich trotz Ferienjob mal in der Schule blicken lässt."],
@@ -659,7 +661,7 @@
     "node": "schule",
     "requires": ["t18-konstrukt-kevin", "t03-bus"],
     "reward": 90,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "scenario": "bus-anfahren",
     "intro": [
       ["ohm", "Nächste Hausaufgabe, Florian: der Stadtbus zwischen zwei Haltestellen. Drei Abschnitte, drei Formen."],
@@ -748,6 +750,7 @@
     "node": "baeckerei",
     "requires": ["t15-live-brezel"],
     "reward": 80,
+    "difficulty": "mittel",
     "scenario": "hund-brezel",
     "intro": [
       ["baecker", "Herr Amt, Brezel bekommt ein Hundetagebuch. Für jeden Tag ein Diagramm, sagt meine Frau. Aber der Drucker ist kaputt."],
@@ -802,7 +805,7 @@
     "node": "fahrradladen",
     "requires": ["t09-tacho"],
     "reward": 90,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "scenario": "kevin-express",
     "intro": [
       ["kevin", "Chef, mein Boss zahlt mir nur die Entfernung zwischen Start und Ziel. Dabei bin ich ein Stück zurückgefahren, weil ich das falsche Paket hatte!"],
@@ -829,7 +832,7 @@
     "node": "supermarkt",
     "requires": ["t08-einkaufswagen"],
     "reward": 100,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "scenario": "einkaufswagen",
     "intro": [
       ["filiale", "Herr Brandl, die Versicherung hat noch eine Frage zum Einkaufswagen. Das Auto der Bürgermeisterin parkt genau bei x = 0."],
@@ -870,7 +873,7 @@
       "graph": "xt",
       "segment": 0,
       "kmh": true,
-      "paper": "Zeichne das Steigungsdreieck auch ins Heft, möglichst groß. Wähle Punkte, an denen die Gerade genau durch Kästchenecken geht. Dann vₓ = Δx / Δt."
+      "paper": "Zeichne das Steigungsdreieck möglichst groß. Wähle Punkte, an denen die Gerade genau durch Kästchenecken geht. Dann vₓ = Δx / Δt."
     },
     "success": [
       ["florian", "Δx = 60 m in Δt = 4,0 s, also vₓ = 15 m/s. Mal 3,6 sind das 54 km/h. Tempo 50 überschritten!"],
@@ -938,6 +941,7 @@
     "node": "rathaus",
     "requires": ["t05-radeln"],
     "reward": 90,
+    "difficulty": "schwer",
     "scenario": "regie-imagefilm",
     "intro": [
       ["kranz", "Herr Doktor Brandl! Die Stadt dreht einen Imagefilm. Und Sie – Sie führen Regie!"],
@@ -960,7 +964,7 @@
           "actor": "jo",
           "t": 10,
           "x": 160,
-          "label": "Kamera 1: Jo rollt bei t = 10 s am Brunnen vorbei (x = 160 m)."
+          "label": "Punkt 1 (Brunnen): Jo rollt bei t = 10 s am Brunnen vorbei (x = 160 m)."
         },
         {
           "type": "meet",
@@ -968,7 +972,7 @@
           "b": "jo",
           "t": 20,
           "x": 120,
-          "label": "Kamera 2: Kevin und Jo begegnen sich bei t = 20 s vor dem Rathaus (x = 120 m)."
+          "label": "Punkt 2 (Begegnung): Kevin und Jo begegnen sich bei t = 20 s vor dem Rathaus (x = 120 m)."
         }
       ],
       "tolX": 2,
@@ -993,7 +997,7 @@
         "jo.x0": [
           {
             "value": 160,
-            "text": "160 m ist Jos Ort bei t = 10 s. Rechne zurück bis t = 0: x₀ = x − vₓ · t."
+            "text": "160 m ist Jos Ort bei t = 10 s, nicht bei t = 0. Verlängere die Gerade nach links bis zur x-Achse."
           },
           {
             "value": 120,
@@ -1002,7 +1006,7 @@
         ]
       },
       "prompt": "Stell Jos Startort und Geschwindigkeit so ein, dass beide Kameras ihren Moment bekommen.",
-      "paper": "Gesucht ist EINE Gerade durch zwei Punkte: Trage beide Drehbuch-Momente (Zeit und Ort) sauber ins t-x-Diagramm ein und verbinde sie – das ist Jos Bewegung. Lies das Diagramm genau ab. Steigung vₓ = Δx / Δt, dann zurück bis t = 0: x₀ = x − vₓ · t."
+      "paper": "Jo fährt von rechts nach links, Kevin entgegen. Gesucht ist EINE Gerade durch zwei Punkte: Punkt 1 ist der Brunnen, Punkt 2 die Begegnung. Trag beide (Zeit und Ort) sauber ins t-x-Diagramm ein und verbinde sie – das ist Jos Bewegung. Tipp: wie in Mathe, y = mx + t – die Steigung m ist vₓ, der y-Achsenabschnitt t ist x₀."
     },
     "success": [
       ["florian", "Jo startet bei 200 m und fährt mit −4,0 m/s. Bei 10 s ist sie am Brunnen, bei 20 s trifft sie Kevin vor dem Rathaus."],
@@ -1197,7 +1201,7 @@
     "node": "fotolabor",
     "requires": ["t33-strobo-fallschirm"],
     "reward": 80,
-    "difficulty": "mittel",
+    "difficulty": "leicht",
     "intro": [
       ["slavi", "Ein Klassiker für meine Ausstellung: Eine Kugel rollt aus der Ruhe eine schräge Rinne hinunter."],
       ["slavi", "Und – natürlich – die Kamera hat wieder gestreikt. Ich glaube, sie mag mich nicht."],
@@ -1238,7 +1242,7 @@
     "node": "polizei",
     "requires": ["t34-strobo-rinne"],
     "reward": 90,
-    "difficulty": "mittel",
+    "difficulty": "leicht",
     "intro": [
       ["slavi", "Ich bin hier im Revier, die Polizei will mein Foto sehen: Vor der Schule hab ich ein Auto im Blitzlicht erwischt. Da gilt Tempo 30!"],
       ["slavi", "Diesmal lag kein Maßband am Boden, nur mein Maßstab mit Feldern von je 1,0 m. Rechnest du nach, ob der zu schnell war?"]
@@ -1307,76 +1311,13 @@
     ]
   },
   {
-    "id": "t36-strobo-jo",
-    "title": "Jo im Doppelbild",
-    "from": "slavi",
-    "node": "skatepark",
-    "requires": ["t35-strobo-auto"],
-    "reward": 80,
-    "difficulty": "leicht",
-    "intro": [
-      ["slavi", "Ich prüfe hier am Skatepark, ob meine Kamera schnell genug blitzt. Jo will ein Poster, also hab ich sie gleich geblitzt."],
-      ["slavi", "Aber jetzt streiten wir: Ich sage, sie bremst. Sie sagt, sie wird schneller. Wer hat recht?"],
-      ["florian", "Das Foto allein kann das gar nicht entscheiden. Wir brauchen die Richtung."]
-    ],
-    "task": {
-      "type": "strobedescribe",
-      "motion": {
-        "kind": "kin",
-        "x0": 9,
-        "segments": [
-          {
-            "dt": 3,
-            "a": -2
-          }
-        ]
-      },
-      "flash": {
-        "n": 7,
-        "dt": 0.5
-      },
-      "photo": {
-        "bg": "park",
-        "obj": "jo",
-        "flip": true,
-        "ruler": "none",
-        "range": [-1, 10]
-      },
-      "context": "Jo rollt auf dem Skateboard von rechts nach links, also in negative x-Richtung. Das letzte, kräftigste Abbild ist das neueste.",
-      "prompt": "Wie bewegt sich Jo?",
-      "choices": [
-        {
-          "text": "Jo wird nach links gleichmäßig schneller.",
-          "correct": true
-        },
-        {
-          "text": "Jo bremst nach links gleichmäßig ab.",
-          "feedback": "Schau in Bewegungsrichtung, also von rechts nach links: Die Abstände werden größer, nicht kleiner."
-        },
-        {
-          "text": "Jo bremst nach rechts gleichmäßig ab.",
-          "feedback": "Für eine Bewegung nach rechts würde das passen – das Foto allein sieht genauso aus! Aber laut Zusammenhang fährt Jo nach links."
-        },
-        {
-          "text": "Jo fährt gleichförmig nach links.",
-          "feedback": "Dann wären alle Abstände gleich groß. Sie sind es nicht."
-        }
-      ],
-      "explain": "Das Foto allein ist doppeldeutig: Nach rechts gelesen schrumpfen die Abstände, nach links wachsen sie. Erst der Zusammenhang (Jo fährt nach links) entscheidet: Sie wird schneller."
-    },
-    "success": [
-      ["florian", "Jo hat recht: In ihrer Fahrtrichtung, also nach links, werden die Abstände größer. Sie wird schneller."],
-      ["slavi", "Na gut. Dann heißt das Poster eben „Jo – Vollgas nach links“."]
-    ]
-  },
-  {
     "id": "t37-strobo-bremsen",
     "title": "Kevin bremst",
     "from": "slavi",
     "node": "supermarkt",
-    "requires": ["t36-strobo-jo"],
+    "requires": ["t35-strobo-auto"],
     "reward": 90,
-    "difficulty": "mittel",
+    "difficulty": "leicht",
     "intro": [
       ["slavi", "Kevin wollte noch ein Foto: eine Vollbremsung hier vor dem Supermarkt. Und – du ahnst es – die Kamera …"],
       ["florian", "… hat gestreikt. Slavi, du brauchst eine neue Kamera."],
@@ -1418,7 +1359,7 @@
     "node": "werkstatt",
     "requires": ["t37-strobo-bremsen"],
     "reward": 100,
-    "difficulty": "schwer",
+    "difficulty": "leicht",
     "intro": [
       ["slavi", "Hilde hat mir hier in der Werkstatt ein Pendel gebaut – mein Meisterstück für die Ausstellung! Es schwingt einmal von links nach rechts durch."],
       ["slavi", "Dafür braucht es ein Genie. Oder dich. Meine Kamera hat übrigens gekündigt."],
@@ -1456,7 +1397,7 @@
     "node": "bushof",
     "requires": ["t04-brezel"],
     "reward": 120,
-    "difficulty": "schwer",
+    "difficulty": "leicht",
     "scenario": "kevin-wende",
     "intro": [
       ["oetzi", "Servus! Kevin hat vor meinem Bus mitten auf der Straße gewendet. Ganz ohne Anhalten, einfach so umgedreht!"],
@@ -1587,50 +1528,13 @@
     ]
   },
   {
-    "id": "t42-schwer-achsen",
-    "title": "Der Wende-Tacho",
-    "from": "kevin",
-    "node": "fahrradladen",
-    "requires": ["t11-stadtlauf"],
-    "reward": 120,
-    "difficulty": "leicht",
-    "scenario": "kevin-wende",
-    "intro": [
-      ["kevin", "Chef, mein neuer GPS-Tacho druckt t-x-Diagramme. Aber wieder ohne Zahlen. Ich glaube, ich kaufe immer die falschen Geräte."],
-      ["kevin", "Das war meine Wende-Fahrt. Die Werte im Datenblatt stimmen. Kriegst du die Achsen hin?"]
-    ],
-    "task": {
-      "type": "axes",
-      "actor": "kevin",
-      "given": ["anim", "data"],
-      "graph": "xt",
-      "paper": "Berechne den Ort an jeder Abschnittsgrenze. Achtung: Im 2. Abschnitt kehrt Kevin um – der höchste Punkt der Kurve liegt dort, wo vₓ = 0 ist, nicht am Abschnittsende!",
-      "hints": {
-        "y": [
-          {
-            "value": 8,
-            "text": "8,0 m ist der Ort nach dem ersten Abschnitt. Die Kurve steigt danach aber noch weiter an."
-          },
-          {
-            "value": 12,
-            "text": "12 m ist der höchste Punkt der Kurve. Die markierte Linie liegt darüber."
-          }
-        ]
-      }
-    },
-    "success": [
-      ["florian", "8,0 m nach 2,0 s, dann bis 12 m bei 4,0 s, zurück auf 8,0 m bei 6,0 s und am Ende wieder 0 m bei 8,0 s."],
-      ["kevin", "Ich fahre also im Kreis und lande am Start. Mein Leben in einem Diagramm."]
-    ]
-  },
-  {
     "id": "t43-schwer-fehlerjagd",
     "title": "Ralfs krumme Kurve",
     "from": "ralf",
     "node": "werkstatt",
     "requires": ["t14-ralf-bus"],
     "reward": 120,
-    "difficulty": "schwer",
+    "difficulty": "leicht",
     "scenario": "kevin-wende",
     "intro": [
       ["ralf", "Chef! Mein Meisterwerk, gezeichnet an Hildes Werkbank: Kevins Wende als t-x-Diagramm. Diesmal ist bestimmt alles richtig."],
@@ -1690,7 +1594,7 @@
     "node": "schule",
     "requires": ["t20-konstrukt-wagen"],
     "reward": 130,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "scenario": "kevin-wende",
     "intro": [
       ["ohm", "Florian, die schwerste Hausaufgabe des Schuljahres: Kevin wendet, ohne anzuhalten."],
@@ -1754,7 +1658,7 @@
     "node": "fahrradladen",
     "requires": ["t23-freihand-brezel"],
     "reward": 130,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "scenario": "kevin-express",
     "intro": [
       ["kevin", "Chef, diesmal hab ich kein Video. Nur das t-vₓ-Diagramm von meiner Express-Tour."],
@@ -1902,76 +1806,13 @@
     ]
   },
   {
-    "id": "t51-schwer-strobo-beschreiben",
-    "title": "Der Wurf nach oben",
-    "from": "slavi",
-    "node": "fotolabor",
-    "requires": ["t38-strobo-pendel"],
-    "reward": 120,
-    "difficulty": "leicht",
-    "intro": [
-      ["slavi", "Jo hat einen Ball senkrecht nach oben geworfen. Ich habe direkt nach dem Abwurf geblitzt, bis der Ball oben kurz stillstand."],
-      ["slavi", "Das Foto ist fies: Man könnte meinen, der Ball fällt. Was schreiben wir drunter?"]
-    ],
-    "task": {
-      "type": "strobedescribe",
-      "motion": {
-        "kind": "kin",
-        "x0": 10,
-        "segments": [
-          {
-            "dt": 1,
-            "v0": -10,
-            "a": 10
-          }
-        ]
-      },
-      "flash": {
-        "n": 6,
-        "dt": 0.2
-      },
-      "photo": {
-        "bg": "city",
-        "obj": "ball",
-        "vertical": true,
-        "ruler": "none"
-      },
-      "context": "📌 Wichtig: Der Ball wurde gerade nach OBEN geworfen. Das kräftigste Abbild (ganz oben) ist das neueste.",
-      "paper": "Lies den Kasten über den Antworten genau! Das Foto allein sieht aus wie ein fallender Ball. Erst die Angabe „nach oben geworfen“ verrät die Richtung. Werden die Abstände in Bewegungsrichtung größer oder kleiner?",
-      "prompt": "Welche Bildunterschrift ist fachlich richtig?",
-      "choices": [
-        {
-          "text": "Der Ball wird nach oben gleichmäßig langsamer (verzögert), bis er oben kurz stillsteht.",
-          "correct": true
-        },
-        {
-          "text": "Der Ball fällt gleichmäßig beschleunigt nach unten.",
-          "feedback": "Das Foto sähe genauso aus! Aber laut Zusammenhang wurde der Ball gerade nach oben geworfen, und das neueste Abbild ist oben."
-        },
-        {
-          "text": "Der Ball wird nach oben gleichmäßig schneller.",
-          "feedback": "In Bewegungsrichtung (nach oben) werden die Abstände kleiner, nicht größer."
-        },
-        {
-          "text": "Der Ball bewegt sich gleichförmig nach oben.",
-          "feedback": "Dann wären alle Abstände gleich groß. Miss nach!"
-        }
-      ],
-      "explain": "Nach oben werden die Abstände kleiner: Der Ball wird langsamer. Das Foto allein wäre auch ein fallender Ball – erst der Zusammenhang entscheidet."
-    },
-    "success": [
-      ["florian", "Nach oben werden die Abstände immer kleiner. Der Ball wird verzögert, bis er oben kurz stillsteht."],
-      ["slavi", "„Der Ball auf dem Weg nach oben.“ Fies, aber korrekt. Das kommt in die Ausstellung."]
-    ]
-  },
-  {
     "id": "t52-schwer-strobo-rechnen",
     "title": "Die schräge Rinne",
     "from": "slavi",
     "node": "fotolabor",
-    "requires": ["t51-schwer-strobo-beschreiben"],
+    "requires": ["t38-strobo-pendel"],
     "reward": 130,
-    "difficulty": "schwer",
+    "difficulty": "mittel",
     "intro": [
       ["slavi", "Die Kugel in der Rinne, diesmal mit Maßband. Ein Physiklehrer hat gefragt, ob man daraus die Beschleunigung bestimmen kann."],
       ["florian", "Kann man. Aus den Abständen zweier Bildpaare. Oder noch eleganter."]
@@ -2039,45 +1880,6 @@
     "success": [
       ["florian", "Von 0,50 m/s auf 3,5 m/s in 1,5 s: a = 2,0 m/s². Das Stroboskopbild ist ein Messgerät!"],
       ["slavi", "Mein Foto, ein Messgerät. Ich erhöhe meine Preise."]
-    ]
-  },
-  {
-    "id": "t53-schwer-strobo-bauen",
-    "title": "Bergab, flach, bergauf",
-    "from": "slavi",
-    "node": "fotolabor",
-    "requires": ["t52-schwer-strobo-rechnen"],
-    "reward": 140,
-    "difficulty": "leicht",
-    "intro": [
-      ["slavi", "Mein letztes Projekt: eine Kugel auf einer langen Rinne. Erst geht es bergab, dann ein flaches Stück, dann sanft bergauf – und oben rollt sie einfach weiter."],
-      ["slavi", "Die Kamera … du weißt Bescheid. Ein letztes Mal, Florian. Für die Kunst!"]
-    ],
-    "task": {
-      "type": "strobebuild",
-      "motion": {
-        "kind": "kin",
-        "x0": 0,
-        "segments": [
-          { "dt": 1.5, "a": 2 },
-          { "dt": 1, "v": 3 },
-          { "dt": 2, "a": -1 }
-        ]
-      },
-      "flash": {
-        "n": 10,
-        "dt": 0.5
-      },
-      "photo": {
-        "bg": "city",
-        "obj": "ball"
-      },
-      "explain": "Bergab wachsen die Abstände gleichmäßig, auf dem flachen Stück bleiben sie gleich, bergauf schrumpfen sie – langsamer, als sie vorher gewachsen sind, denn die Steigung ist sanfter. Stehen bleibt die Kugel nicht.",
-      "paper": "Drei Abschnitte! Spring mit 📸 von Blitz zu Blitz und lies jeden Ort am Maßband ab. Wo wachsen die Abstände, wo bleiben sie gleich, wo schrumpfen sie – und wie stark?"
-    },
-    "success": [
-      ["slavi", "Wachsend, gleich, schrumpfend – drei Abschnitte in einem Bild. Florian, du bist ein Künstler."],
-      ["florian", "Und ein Physiker. Das schließt sich zum Glück nicht aus."]
     ]
   },
   {
@@ -2384,7 +2186,7 @@
     "node": "schule",
     "requires": ["t69-verbinden-gerade"],
     "reward": 70,
-    "difficulty": "mittel",
+    "difficulty": "leicht",
     "intro": [
       ["ohm", "Florian, noch ein kleines Übungsblatt für zwischendurch. Drei t-x-Diagramme, drei t-vₓ-Diagramme – leider ist der Kopierer durcheinandergekommen."],
       ["florian", "Ich verbinde einfach, was zusammengehört. Steigung im t-x-Diagramm ist vₓ."]
@@ -3186,7 +2988,7 @@
     "node": "bushof",
     "requires": ["t72-schnitt-huegel", "t03-bus"],
     "reward": 100,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "intro": [
       ["oetzi", "Servus! Die Linie 7 hat 6,0 km Stadt und 6,0 km Landstraße. In der Stadt schaff ich nur 24 km/h."],
       ["oetzi", "Der Fahrplan verlangt aber einen Schnitt von 36 km/h. Wie schnell muss ich auf der Landstraße fahren?"],
@@ -3289,7 +3091,7 @@
     "node": "skatepark",
     "requires": ["t72-schnitt-huegel"],
     "reward": 80,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "intro": [
       ["jo", "Amtsmensch! Mein Training: 10 min Vollgas mit 12 km/h, dann 20 min locker mit 6,0 km/h."],
       ["jo", "Im Schnitt also 9,0 km/h, oder? Meine Fitness-App sagt was anderes."],
@@ -3336,7 +3138,7 @@
     "node": "baeckerei",
     "requires": ["t75-schnitt-training"],
     "reward": 100,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "intro": [
       ["post", "Herr Doktor! Paul Paket hier. Meine Tour dauert genau eine Stunde: 40 min Stadt mit 30 km/h, dann 20 min Umgehungsstraße."],
       ["post", "Die Zentrale will einen Schnitt von 45 km/h. Wie schnell muss ich auf der Umgehung sein?"],
@@ -3472,7 +3274,7 @@
     "node": "baeckerei",
     "requires": ["t06-broesel-ampel"],
     "reward": 100,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "scenario": "einholen-start",
     "intro": [
       ["post", "Herr Doktor! Paul Paket hier. Kevin und ich haben gewettet: Wir starten gleichzeitig vor der Bäckerei."],
@@ -3549,7 +3351,7 @@
     "node": "baeckerei",
     "requires": ["t79-einholen-start"],
     "reward": 110,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "scenario": "einholen-vorsprung",
     "intro": [
       ["post", "Revanche! Diesmal bekomme ich 10 m Vorsprung. Wir starten wieder gleichzeitig, ich mit 4,0 m/s, Kevin aus dem Stand mit 1,0 m/s²."],

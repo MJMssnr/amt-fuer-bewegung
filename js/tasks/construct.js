@@ -33,6 +33,26 @@ export function constructTruth(actor, ask) {
   return { times, values, shapes };
 }
 
+/**
+ * Vorschau-Stück von start nach end in der Dauer T mit gewählter Form [W47].
+ * Rückgabe { v0, a } für x(s) = start + v0·s + ½·a·s².
+ * Passt die Steigung des vorigen Stücks (slope) zur gewählten Krümmung, wird sie übernommen (glatter Übergang,
+ * so entsteht z. B. die Umkehr-Parabel bei t45). Sonst liegt der Scheitel am Anfang bzw. Ende des Stücks
+ * (Losfahren aus der Ruhe, Bremsen bis zum Stillstand) oder – bei gleichem Start- und Endwert – in der Mitte.
+ */
+export function previewPiece(start, end, T, shape, slope = null, span = 1) {
+  const d = end - start;
+  if (shape !== 'up' && shape !== 'down') return { v0: d / T, a: 0 };
+  const sgn = shape === 'up' ? 1 : -1;
+  if (slope !== null && Number.isFinite(slope)) {
+    const a = (2 * (d - slope * T)) / (T * T);
+    if (Math.sign(a) === sgn) return { v0: slope, a };
+  }
+  if (Math.abs(d) < 1e-9 * Math.max(1, span)) { const a = (sgn * 8 * 0.15 * span) / (T * T); return { v0: (-a * T) / 2, a }; }
+  if (Math.sign(d) === sgn) return { v0: 0, a: (2 * d) / (T * T) };   // Scheitel am Anfang
+  return { v0: (2 * d) / T, a: (-2 * d) / (T * T) };                  // Scheitel am Ende
+}
+
 export function mount(root, { ticket, world, onSolved }) {
   const task = ticket.task;
   const actor = actorOf(world, task);
@@ -76,19 +96,21 @@ export function mount(root, { ticket, world, onSolved }) {
   const fb = right.querySelector('.feedback');
   let wrongChecks = 0, done = false;
 
-  // Live-Vorschau der eigenen Kurve
+  // Live-Vorschau der eigenen Kurve: echte Parabelstücke statt einer symmetrischen „Beule“ [W47].
+  // Vorher war die Kurve bei gleichem Start- und Endwert (Umkehr, t45) fast flach.
   function redraw() {
     const pts = [];
-    let start = truth.values[0];
+    let start = truth.values[0], slope = null; // Steigung am Ende des vorigen Stücks (aus den Eingaben des Spielers)
     for (let i = 0; i < n; i++) {
       const end = parseNum(inputs[i].value);
       if (!Number.isFinite(end)) break;
       const t0 = truth.times[i], t1 = truth.times[i + 1], shape = chosen[i] ?? 'line';
-      const bump = (shape === 'up' ? -1 : shape === 'down' ? 1 : 0) * (0.25 * Math.abs(end - start) + 0.03 * span);
-      for (let k = 0; k <= 16; k++) {
-        const u = k / 16;
-        pts.push([t0 + u * (t1 - t0), start + (end - start) * u + bump * 4 * u * (1 - u)]);
+      const { v0, a } = previewPiece(start, end, t1 - t0, shape, slope, span);
+      for (let k = 0; k <= 24; k++) {
+        const s = (k / 24) * (t1 - t0);
+        pts.push([t0 + s, start + v0 * s + 0.5 * a * s * s]);
       }
+      slope = v0 + a * (t1 - t0);
       start = end;
     }
     g.trace(pts.length ? pts : [[0, truth.values[0]]]);

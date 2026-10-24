@@ -339,7 +339,7 @@ async function boot() {
     if (confirm('Spielstand wirklich löschen?')) { resetState(); location.reload(); }
   });
   initSoundMenu(document.querySelector('.hud-sound'));
-  window.amtTest = { arrive: (n) => onArrive(n), state: () => state, room: () => room, ow: () => overworld }; // für automatische Tests
+  window.amtTest = { arrive: (n) => onArrive(n), state: () => state, room: () => room, ow: () => overworld, play: (id) => playTicket(tickets.find((t) => t.id.startsWith(id))) }; // für automatische Tests
   document.querySelector('.hud-log').addEventListener('click', showQuestlog);
   initTestMode((on) => toast(on ? '🧪 Testmodus an – siehe Auftragsbuch 📖' : 'Testmodus aus'));
   document.querySelector('.hud-full').addEventListener('click', () => {

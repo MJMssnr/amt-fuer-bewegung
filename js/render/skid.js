@@ -43,7 +43,11 @@ export function drawSkid(c, o) {
   // Auto: Hinterrad steht am Ende der Spur
   const sp = getSprite('car_red'), k = (H * 0.2) / sp.h, cw = sp.w * k, ch = sp.h * k;
   ctx.imageSmoothingEnabled = false;
-  ctx.drawImage(sp.frames[0], X1 - (5.5 / 24) * cw, road + roadH * 0.55 - ch, cw, ch);
+  // Gespiegelt [W47]: Das Sprite schaut nach links, das Auto fährt hier aber nach rechts (Windschutzscheibe vorn).
+  const cx = X1 - (5.5 / 24) * cw;
+  ctx.save(); ctx.translate(cx + cw, 0); ctx.scale(-1, 1);
+  ctx.drawImage(sp.frames[0], 0, road + roadH * 0.55 - ch, cw, ch);
+  ctx.restore();
   // Hindernis vor dem Auto (Aufprall mit Restgeschwindigkeit) [W33]
   if (o.obstacle) {
     const bx = X1 + (18.5 / 24) * cw + 2 * d, bh = H * 0.17, bw = bh * 0.7, by = road + roadH * 0.55 - bh;
@@ -51,6 +55,14 @@ export function drawSkid(c, o) {
     ctx.fillStyle = '#38b764'; ctx.fillRect(bx + d, by + d, bw - 2 * d, bh - 2 * d);
     ctx.fillStyle = '#257179'; ctx.fillRect(bx - d, by, bw + 2 * d, 3 * d);
     ctx.fillStyle = '#ffcd75'; for (let i = 0; i < 4; i++) ctx.fillRect(bx - 4 * d - i * 2 * d, by + bh * 0.3 + (i % 2) * 4 * d, 2 * d, 2 * d); // Aufprall-Sternchen
+    if (o.v1) { // Restgeschwindigkeit direkt im Bild [W47]
+      const txt = `Aufprall: v₁ = ${o.v1.toFixed(1).replace('.', ',')} m/s`;
+      ctx.font = `bold ${11 * d}px system-ui, sans-serif`; ctx.textAlign = 'right';
+      const tw = ctx.measureText(txt).width + 8 * d, tx = Math.min(W - 4 * d, bx + bw), ty = by - 24 * d;
+      ctx.fillStyle = 'rgba(228,59,68,0.92)'; ctx.fillRect(tx - tw, ty, tw, 16 * d);
+      ctx.fillStyle = '#ffffff'; ctx.fillText(txt, tx - 4 * d, ty + 12 * d);
+      ctx.textAlign = 'left';
+    }
   }
   // Tempo-Schild
   const sx = 10 * d, sy = road - roadH * 0.15 - 44 * d;
