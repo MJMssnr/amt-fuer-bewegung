@@ -52,6 +52,9 @@ export class TownLife {
     }
   }
 
+  /** Positionen der Radler (für Bärti: vor der Straße warten) */
+  riderPositions() { return this.riders.map((r) => { const [x, y] = this.#onLoop(r); return { x, y }; }); }
+
   /** Zeichen-Einträge für die Tiefensortierung der Karte */
   items(P, dpr = 1) {
     const out = [];

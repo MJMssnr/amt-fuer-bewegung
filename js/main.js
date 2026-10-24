@@ -294,6 +294,7 @@ async function boot() {
   overworld = new Overworld(document.getElementById('map'), map, { onArrive, markers });
   overworld.locked = () => busy;
   overworld.tutorial = () => doneCount() === 0;
+  overworld.hasBaerti = () => Boolean(state.items.waschbaer);
   overworld.mode = () => state.travel ?? 'walk';
   document.querySelectorAll('.hud-ride').forEach((b) => b.addEventListener('click', () => {
     state.travel = state.travel === b.dataset.mode ? 'walk' : b.dataset.mode;

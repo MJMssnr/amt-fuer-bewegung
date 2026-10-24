@@ -13,6 +13,7 @@ import { bauplatz } from '../render/bauplatz.js';
 import { natureOn, natureOff, sfx, engineStart, engineSet, engineStop } from '../audio/sound.js';
 import { bikeRide, motoRide, smoke } from '../render/ride.js';
 import { TownLife } from './townlife.js';
+import { BaertiMap } from './baerti-map.js';
 import { windmill, solar, cloud, riverFlow, dock } from '../render/townlife-art.js';
 
 BUILDINGS.treehouse = treehouse;
@@ -49,6 +50,7 @@ export class Overworld {
       (this.adj[b] ??= []).push(a);
     }
     this.life = new TownLife(); // Radler und Fußgänger [W33]
+    this.baerti = new BaertiMap(map, this.life); // läuft nur, wenn freigeschaltet (this.hasBaerti) [W42]
     canvas.addEventListener('pointerup', (e) => this.#tap(e));
     new ResizeObserver(() => this.#resize()).observe(canvas);
     this.#resize();
@@ -94,6 +96,7 @@ export class Overworld {
       this.time += dt;
       this.#walk(dt);
       this.life.step(dt);
+      if (this.hasBaerti?.()) this.baerti.step(dt);
       this.draw();
       requestAnimationFrame(loop);
     };
@@ -224,6 +227,7 @@ export class Overworld {
     }
     items.push({ y: this.pos.y + 0.5, draw: () => this.#florian(P) });
     items.push(...this.life.items(P, this.dpr));
+    if (this.hasBaerti?.()) items.push(...this.baerti.items(P, this.dpr));
     items.sort((a, b) => a.y - b.y).forEach((it) => it.draw());
     // zwei fast durchsichtige Wolken ziehen am oberen und unteren Rand entlang [W33]
     cloud(P, ((t * 6) % (this.W + 120)) - 60, 26, 1.2);
