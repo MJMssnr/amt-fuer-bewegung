@@ -443,16 +443,16 @@
   "car_red": {
    "w": 24,
    "h": 9,
-   "turns": false,
+   "turns": true,
    "frames": [
     [
      "........kkkkkkkk........",
-     ".......kBBBBBBBBrk......",
-     "......kBccBBBBBBrrk.....",
-     "..kkkkrrrrrrrrrrrrrkkk..",
-     ".kRRRRRRRRRRRRRRRRRRRRyk",
+     "......krBBBBBBBBk.......",
+     ".....krrBBBBBBccBk......",
+     "..kkkrrrrrrrrrrrrrkkkk..",
+     "kRRRRRRRRRRRRRRRRRRRRyk.",
      "krrrrrrrrrrrrrrrrrrrrrrk",
-     "krrkkkrrrrrrrrrrrkkkrrrk",
+     "krrrkkkrrrrrrrrrrrkkkrrk",
      ".kkknNnkkkkkkkkkknNnkkk.",
      "....kkk..........kkk...."
     ]

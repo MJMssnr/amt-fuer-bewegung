@@ -89,12 +89,13 @@ const oma_rollator = {
 };
 
 // ---------- weitere Figuren und Fahrzeuge (Seitenansicht) ----------
+// Gespiegelt [W49]: Schnauze (Scheinwerfer) zeigt jetzt nach rechts = Fahrtrichtung +x; fährt es nach −x, dreht es.
 const car = {
-  w: 24, h: 9, turns: false,
+  w: 24, h: 9, turns: true,
   frames: [[
-    '........kkkkkkkk........', '.......kBBBBBBBBrk......', '......kBccBBBBBBrrk.....',
-    '..kkkkrrrrrrrrrrrrrkkk..', '.kRRRRRRRRRRRRRRRRRRRRyk', 'krrrrrrrrrrrrrrrrrrrrrrk',
-    'krrkkkrrrrrrrrrrrkkkrrrk', '.kkknNnkkkkkkkkkknNnkkk.', '....kkk..........kkk....',
+    '........kkkkkkkk........', '......krBBBBBBBBk.......', '.....krrBBBBBBccBk......',
+    '..kkkrrrrrrrrrrrrrkkkk..', 'kRRRRRRRRRRRRRRRRRRRRyk.', 'krrrrrrrrrrrrrrrrrrrrrrk',
+    'krrrkkkrrrrrrrrrrrkkkrrk', '.kkknNnkkkkkkkkkknNnkkk.', '....kkk..........kkk....',
   ]],
 };
 const riderTop = [
