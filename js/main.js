@@ -66,6 +66,16 @@ function markers() {
   return m;
 }
 
+/** Bärti-Cam-Knopf; legt ihn an, falls eine alte index.html aus dem Browser-Cache fehlt [W44] */
+function camButton() {
+  let b = document.querySelector('.hud-cam');
+  if (!b) {
+    b = document.createElement('button'); b.className = 'hud-btn hud-cam'; b.textContent = '🦝';
+    document.querySelector('.hud-log').before(b);
+  }
+  return b;
+}
+
 function updateHud() {
   document.querySelector('.hud-money').textContent = `${state.money} €`;
   const n = tickets.filter((t) => state.done[t.id]).length;
@@ -78,8 +88,9 @@ function updateHud() {
     b.classList.toggle('hidden', !own[b.dataset.mode]);
     b.classList.toggle('on', state.travel === b.dataset.mode);
   });
-  const cam = document.querySelector('.hud-cam'); // Bärti-Cam [W43]
-  cam.classList.toggle('hidden', !state.items.waschbaer);
+  const cam = camButton(); // Bärti-Cam [W43]: immer sichtbar, vor Bärti gesperrt [W44]
+  cam.classList.toggle('locked', !state.items.waschbaer);
+  cam.title = state.items.waschbaer ? 'Bärti-Cam: Bärti verfolgen (an/aus)' : 'Hier gibt es noch nichts zu sehen!';
   cam.classList.toggle('on', Boolean(overworld?.cam.on));
 }
 const save = () => { saveState(state); updateHud(); };
@@ -168,14 +179,7 @@ async function runTicket(ticket, raw, params) {
   }
   // Rätselhafte Pakete [W24]
   if (deliverDue(state, tickets, shop.rocketParts)) { save(); toast(shop.packages.arrived, 'money'); }
-  // Bärti kommt nach dem 3. Auftrag [W42]
-  if (!state.items.waschbaer && doneCount() >= 3) {
-    overworld.stop();
-    await playFinale({ texts: finaleTexts ??= await getJSON('data/finale.json'), mode: 'baerti' });
-    state.items.waschbaer = true; save();
-    overworld.start();
-    toast('🦝 Bärti gehört jetzt zum Amt!', 'money');
-  }
+  await maybeBaerti();
   if (tickets.every((t) => state.done[t.id]) && !Object.keys(state.retry).length && !state.outroSeen) {
     state.outroSeen = true;
     save();
@@ -193,6 +197,19 @@ async function playTicket(raw) {
 }
 
 /** Auftragsbuch öffnen; Testmodus-Aktionen verändern den Spielstand direkt */
+// Bärti kommt nach dem 3. Auftrag [W42]. Zentral geprüft [W44]: nach jedem Auftrag, nach dem Auftragsbuch
+// (Testmodus-Häkchen) und beim Start (alte Spielstände, Speichercode) – sonst blieb Bärti manchmal aus.
+async function maybeBaerti() {
+  if (state.items.waschbaer || doneCount() < 3) return;
+  overworld.stop();
+  try { await playFinale({ texts: finaleTexts ??= await getJSON('data/finale.json'), mode: 'baerti' }); }
+  finally {
+    state.items.waschbaer = true; save();
+    overworld.start();
+  }
+  toast('🦝 Bärti gehört jetzt zum Amt! Oben rechts: Bärti-Cam', 'money');
+}
+
 async function showQuestlog() {
   if (busy) return;
   busy = true;
@@ -224,6 +241,7 @@ async function showQuestlog() {
       },
     });
     if (toPlay) await playTicket(toPlay);
+    else await maybeBaerti();
   } catch (e) {
     console.error(e);
     toast(`Fehler: ${e.message}`, 'bad');
@@ -300,7 +318,8 @@ async function boot() {
   overworld.hasBaerti = () => Boolean(state.items.waschbaer);
   overworld.mode = () => state.travel ?? 'walk';
   overworld.onCam = () => updateHud();
-  document.querySelector('.hud-cam').addEventListener('click', () => {
+  camButton().addEventListener('click', () => {
+    if (!state.items.waschbaer) { toast('🦝 Hier gibt es noch nichts zu sehen!'); return; }
     overworld.cam.toggle(); updateHud();
     if (overworld.cam.on) toast('🦝 Bärti-Cam an – tippen auf die Karte beendet sie');
   });
@@ -334,6 +353,8 @@ async function boot() {
     saveState(state);
     busy = false;
   }
+  busy = true;
+  try { await maybeBaerti(); } finally { busy = false; }
 }
 
 boot().catch((e) => {

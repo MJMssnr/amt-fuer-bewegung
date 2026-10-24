@@ -53,6 +53,8 @@ body.test-mode .hud-log { border-color: var(--gold); color: var(--gold); }
   .ql-head { font-size: 15px; padding: 4px 8px; }
 }
 .hud-ride.on, .hud-cam.on { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+/* Bärti-Cam vor Bärtis Ankunft: ausgegraut [W44] */
+.hud-cam.locked { opacity: .45; filter: grayscale(1); border-style: dashed; }
 /* Viele HUD-Knöpfe (Rad, Motorrad, Bärti-Cam) auf schmalen Bildschirmen [W43] */
 .hud-tickets, .hud-money { white-space: nowrap; }
 @media (max-width: 760px) {
