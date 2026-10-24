@@ -5,8 +5,8 @@
 
 import { getSprite } from '../render/pixel.js';
 import { shadow } from '../render/town.js';
-import { chooseActivity, RIVER } from './baerti-acts.js';
-import { drawFx, drawPuddles } from './baerti-fx.js';
+import { chooseActivity, RIVER, BINS } from './baerti-acts.js';
+import { drawFx, drawPuddles, drawBin } from './baerti-fx.js';
 
 const OFF = 11, SPEED = 24, ROAD = 8.5, K = 0.55; // Gehweg-Versatz, Tempo (Welt-px/s), halbe Fahrbahn, Größe
 const rnd = (a, b) => a + Math.random() * (b - a);
@@ -83,12 +83,20 @@ export class BaertiMap {
       case 'up': this.pose = 'climb'; this.lift = Math.min(ph.to, this.lift + dt * ph.rate); this.walk += dt; if (this.lift >= ph.to) done(); break;
       case 'down': this.pose = 'climbDown'; this.lift = Math.max(0, this.lift - dt * ph.rate); this.walk += dt; if (!this.lift) done(); break;
       case 'wait': if (ph.fx === 'look') this.flip = Math.sin(el * 2.2) > 0; if (el > ph.d) done(); break;
-      case 'call': ph.fn(); done(); break;
+      case 'call': ph.fn(this); done(); break;
+      case 'spin': this.pose = 'stand'; this.flip = Math.floor(el * 8) % 2 === 0; if (el > ph.d) done(); break; // dreht sich im Kreis
+      case 'pounce': { // Sprung im Bogen nach vorn (Schmetterling) [W52]
+        ph.x0 ??= this.pos.x; const u = Math.min(1, el / ph.d);
+        this.pos.x = ph.x0 + ph.dx * u; this.lift = Math.sin(Math.PI * u) * 9; this.pose = 'walk'; this.walk += dt;
+        if (u >= 1) { this.lift = 0; done(); }
+        break;
+      }
       case 'move': {
         const ty = ph.y ?? this.pos.y, dx = ph.x - this.pos.x, dy = ty - this.pos.y, d = Math.hypot(dx, dy), v = ph.rate * dt;
         if (Math.abs(dx) > 0.3) this.flip = dx < 0;
         if (d <= v) { this.pos = { x: ph.x, y: ty }; done(); } else { this.pos.x += (dx / d) * v; this.pos.y += (dy / d) * v; }
-        this.pose = ph.swim && this.#inWater() ? 'swim' : 'walk'; this.walk += dt;
+        this.pose = ph.swim && this.#inWater() ? 'swim' : ph.roll ? 'tumble' : 'walk'; this.walk += dt;
+        if (ph.roll) this.rot += dt * (dx < 0 ? -11 : 11); // eingekugelt rollen [W52]
         break;
       }
       case 'circle': {
@@ -128,6 +136,17 @@ export class BaertiMap {
     this.puddles = this.puddles.filter((p) => this.t - p.t0 < 25);
     const out = [{ y: this.pos.y + (this.lift ? 40 : 0), draw: () => this.#draw(P, dpr) }];
     if (this.puddles.length) out.push({ y: -999, draw: () => drawPuddles(P, this.puddles, this.t) });
+    return [...out, ...this.binItems(P)];
+  }
+
+  /** Mülltonnen in der Stadt [W52] – auch ohne Bärti sichtbar */
+  binItems(P) {
+    const out = [];
+    for (const [id, dx, dy] of BINS) {
+      const n = this.map.nodes[id]; if (!n) continue;
+      const [ax, ay] = n.at ?? [n.x, n.y - 13], bx = ax + dx, by = ay + dy, open = this.binOpen && Math.abs(this.binOpen.x - bx) < 1;
+      out.push({ y: by, draw: () => drawBin(P, bx, by, open, this.t) });
+    }
     return out;
   }
 
@@ -135,10 +154,16 @@ export class BaertiMap {
     const { x } = this.pos, st = this.state, pose = st === 'phase' ? this.pose : st === 'waitRoad' ? 'sit' : 'walk';
     const hop = pose === 'hop' ? Math.abs(Math.sin(this.t * 9)) * 3 : 0;
     const y = this.pos.y - this.lift - hop;
-    if (pose === 'swim') { // nur Kopf und Wellenring
-      P.blob(x, y - 2, 4, 'rgba(255,255,255,0.45)', 2);
-      P.blob(x, y - 3, 3, '#8f93a3'); P.rect(x - 2, y - 4, 4, 1, '#3e4152'); P.px(x - 1, y - 4, '#ffffff'); P.px(x + 1, y - 4, '#ffffff');
-      P.rect(x - 2, y - 7, 1, 2, '#3e4152'); P.rect(x + 2, y - 7, 1, 2, '#3e4152');
+    if (pose === 'swim') { // Kopf mit Maske und Öhrchen, dahinter ragt der geringelte Schwanz aus dem Wasser [W52]
+      const d = this.flip ? -1 : 1, bob = Math.round(Math.sin(this.t * 3) * 0.6);
+      P.blob(x, y - 1, 5, 'rgba(255,255,255,0.4)', 2);                         // Wellenring
+      for (let i = 0; i < 3; i++) { const tx = x - d * (6 + i), ty = y - 2 - i + Math.round(Math.sin(this.t * 5 + i) * 0.6); P.rect(tx, ty, 1.5, 1.2, i % 2 ? '#3e4152' : '#9a9eae'); } // Schwanz wedelt
+      P.blob(x, y - 3 + bob, 3.4, '#8f93a3');                                  // Kopf
+      P.rect(x - 3, y - 7 + bob, 1.5, 2, '#3e4152'); P.rect(x + 1.5, y - 7 + bob, 1.5, 2, '#3e4152'); // Öhrchen
+      P.px(x - 2.5, y - 7 + bob, '#d8dae2'); P.px(x + 2, y - 7 + bob, '#d8dae2');
+      P.rect(x - 3, y - 4 + bob, 6, 1.6, '#2a2c3a');                            // Maske
+      P.px(x - 2, y - 4 + bob, '#ffffff'); P.px(x + 1, y - 4 + bob, '#ffffff'); // Augen
+      P.rect(x - 1, y - 2.4 + bob, 2, 1, '#e9ebf0'); P.px(x + d * 1, y - 2 + bob, '#1a1c2c'); // Schnauze, Nase
       return;
     }
     const sit = ['sit', 'lie'].includes(pose);
@@ -147,11 +172,12 @@ export class BaertiMap {
     const f = sit ? (this.fx !== 'z' && Math.sin(this.t * 1.7) > 0.96 ? 1 : 0) : anim ? Math.floor(this.walk * 8 + (this.fx === 'dig' ? this.t * 6 : 0)) % sp.frames.length : 0;
     const w = sp.w * K, h = sp.h * K;
     if (!this.lift) shadow(P, x, this.pos.y + 1, 9);
-    const rot = pose === 'climb' || pose === 'cling' ? -Math.PI / 2 : pose === 'climbDown' ? Math.PI / 2 : pose === 'lie' ? Math.PI / 2 : pose === 'tumble' ? this.rot : 0;
+    const rot = pose === 'climb' || pose === 'cling' ? -Math.PI / 2 : pose === 'climbDown' ? Math.PI / 2 : pose === 'lie' ? Math.PI / 2 : pose === 'tumble' ? this.rot
+      : pose === 'back' ? Math.PI + Math.sin(this.t * 7) * 0.25 : 0; // auf dem Rücken, wackelt [W52]
     if (rot) { // an der Wand / im Fall / liegend: um die Bildmitte drehen
       const cx = P.X(x), cy = P.Y(y - h / 2), ctx = P.ctx;
       ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot); ctx.translate(-cx, -cy);
-      P.image(sp.frames[f], x - w / 2, y - h, w, h, pose === 'climbDown');
+      P.image(sp.frames[pose === 'back' ? Math.floor(this.t * 10) % sp.frames.length : f], x - w / 2, y - h, w, h, pose === 'climbDown');
       ctx.restore();
     } else P.image(sp.frames[this.fx === 'z' ? 1 : f], x - w / 2, y - h + 1, w, h, this.flip);
     drawFx(P, this, { x, y, w, h, dpr });

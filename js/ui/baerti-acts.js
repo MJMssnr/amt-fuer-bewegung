@@ -19,14 +19,28 @@ const GRASS = [[60, 120], [140, 150], [250, 190], [400, 150], [480, 180], [600, 
 // Gebäude zum Hochklettern: Knoten, Versatz zur Kletterkante, Dachhöhe
 const ROOFS = [['supermarkt', 52, 41], ['schule', -46, 45], ['fotolabor', 22, 37], ['polizei', 18, 39], ['rathaus', 42, 49], ['werkstatt', 16, 35]];
 
+// Mülltonnen in der Stadt [W52]: Knoten + Versatz an der Gebäudekante (gezeichnet in baerti-map.js)
+export const BINS = [['supermarkt', 60, 4], ['baeckerei', 22, 4], ['schule', -54, 4], ['rathaus', 50, 4]];
+
+// Grundgewichte; tatsächliches Gewicht wächst mit der Zeit seit dem letzten Mal (lange nicht gemacht → bevorzugt) [W52]
+const ACTS = { visit: 9, tree: 12, roof: 8, river: 10, pond: 8, fountain: 7, bed: 8, pee: 4, bike: 5, windmill: 5, grass: 4,
+  trash: 8, dance: 6, roll: 5, butterfly: 6, wiggle: 5 };
+const AFTER_VISIT = ['bed', 'tree', 'river', 'pond']; // nach Besuch + Keks: erst Beet, Baum (Schlafen), Schwimmen
+
 /** Liefert { name, text, target, via, seq } oder null (dann nimmt BaertiMap etwas anderes) */
 export function chooseActivity(b) {
-  const r = Math.random() * 100;
-  const acts = [
-    [15, visit], [12, tree], [9, roof], [10, river], [8, pond], [8, fountain], [8, bed], [5, pee], [6, bike], [6, windmill], [6, grass],
-  ];
-  let sum = 0;
-  for (const [w, fn] of acts) { sum += w; if (r < sum) return fn(b); }
+  b.lastDone ??= {};
+  const names = b.lastAct === 'visit' ? AFTER_VISIT : Object.keys(ACTS).filter((n) => n !== b.lastAct);
+  const w = names.map((n) => ACTS[n] * Math.min(4, 0.25 + (b.t - (b.lastDone[n] ?? -240)) / 80));
+  let r = Math.random() * w.reduce((x, y) => x + y, 0);
+  for (let i = 0; i < names.length; i++) {
+    r -= w[i];
+    if (r <= 0) {
+      const a = FN[names[i]](b);
+      if (a) { a.name = names[i]; b.lastAct = names[i]; b.lastDone[names[i]] = b.t; }
+      return a;
+    }
+  }
   return grass(b);
 }
 
@@ -122,3 +136,42 @@ function grass() {
   const g = pick(GRASS);
   return { text: 'macht Pause auf der Wiese', target: { x: g[0] + rnd(-8, 8), y: g[1] + rnd(-6, 6) }, seq: [{ s: 'wait', d: rnd(2, 4), pose: 'sit' }] };
 }
+
+function trash(b) { // in einer Mülltonne wühlen: Deckel hoch, Zeug fliegt, Bananenschale als Beute
+  const [id, dx, dy] = pick(BINS), n = b.map.nodes[id];
+  if (!n) return null;
+  const [cx, by] = n.at ?? [n.x, n.y - 13], bin = { x: cx + dx, y: by + dy };
+  return {
+    text: 'wühlt in einer Mülltonne', target: { x: bin.x - 6, y: bin.y },
+    seq: [{ s: 'call', fn: () => { b.flip = false; b.binOpen = bin; } }, { s: 'wait', d: 0.6, pose: 'stand', fx: 'look' },
+      { s: 'wait', d: rnd(3, 4.5), pose: 'stand', fx: 'trash' }, { s: 'call', fn: () => { b.binOpen = null; } },
+      { s: 'wait', d: 2.2, pose: 'sit', fx: 'banana' }],
+  };
+}
+
+function dance() { // hat seine „5 Minuten“: Freudensprünge und Herzchen/Noten
+  const g = pick(GRASS);
+  return { text: 'tanzt vor Freude', target: { x: g[0] + rnd(-8, 8), y: g[1] + rnd(-6, 6) },
+    seq: [{ s: 'wait', d: rnd(3, 4.5), pose: 'hop', fx: 'joy' }, { s: 'spin', d: 1.2 }, { s: 'wait', d: 1, pose: 'sit', fx: 'proud' }] };
+}
+
+function roll() { // kugelt sich ein und rollt ein Stück
+  const g = pick(GRASS), dir = Math.random() < 0.5 ? -1 : 1, x = g[0] + rnd(-6, 6), y = g[1] + rnd(-4, 4);
+  return { text: 'kugelt sich ein und rollt', target: { x, y },
+    seq: [{ s: 'wait', d: 0.8, pose: 'sit' }, { s: 'move', x: x + dir * 34, y, rate: 26, roll: true }, { s: 'wait', d: 1.4, pose: 'sit', fx: 'dizzy' }] };
+}
+
+function butterfly() { // bleibt stehen, lauert, springt nach einem Schmetterling – und verfehlt ihn
+  const g = pick(GRASS), dir = Math.random() < 0.5 ? -1 : 1, x = g[0] + rnd(-8, 8), y = g[1] + rnd(-4, 4);
+  return { text: 'jagt einen Schmetterling', target: { x, y },
+    seq: [{ s: 'call', fn: (bb) => { bb.flip = dir < 0; } }, { s: 'wait', d: rnd(1.5, 2.5), pose: 'stand', fx: 'butterfly' },
+      { s: 'pounce', dx: dir * 16, d: 0.55 }, { s: 'wait', d: 1.6, pose: 'sit', fx: 'flyaway' }] };
+}
+
+function wiggle() { // wirft sich auf den Rücken und strampelt wie eine glückliche Katze
+  const g = pick(GRASS);
+  return { text: 'strampelt auf dem Rücken', target: { x: g[0] + rnd(-8, 8), y: g[1] + rnd(-6, 6) },
+    seq: [{ s: 'wait', d: 0.5, pose: 'sit' }, { s: 'wait', d: rnd(3, 4.5), pose: 'back', fx: 'hearts' }, { s: 'wait', d: 0.8, pose: 'sit', fx: 'shake' }] };
+}
+
+const FN = { visit, tree, roof, river, pond, fountain, bed, pee, bike, windmill, grass, trash, dance, roll, butterfly, wiggle };

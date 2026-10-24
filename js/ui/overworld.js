@@ -232,6 +232,7 @@ export class Overworld {
     items.push({ y: this.pos.y + 0.5, draw: () => this.#florian(P) });
     items.push(...this.life.items(P, this.dpr));
     if (this.hasBaerti?.()) items.push(...this.baerti.items(P, this.dpr));
+    else items.push(...this.baerti.binItems(P)); // Mülltonnen gehören zur Stadt [W52]
     items.sort((a, b) => a.y - b.y).forEach((it) => it.draw());
     // zwei fast durchsichtige Wolken ziehen am oberen und unteren Rand entlang [W33]
     cloud(P, ((t * 6) % (this.W + 120)) - 60, 26, 1.2);

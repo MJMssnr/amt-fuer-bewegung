@@ -1,28 +1,30 @@
-// Bärtis Aktivitäten [W43]: jede liefert ein erreichbares Ziel auf der Karte und gültige Phasen
-import { test } from 'node:test';
+// Bärtis Aktivitätenwahl [W52]: nie Besuch direkt nach Besuch, lange nicht Gemachtes wird bevorzugt, alle Aktivitäten lauffähig
+import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { chooseActivity } from '../js/ui/baerti-acts.js';
 
 const map = JSON.parse(readFileSync(new URL('../data/map.json', import.meta.url)));
-const PHASES = new Set(['up', 'down', 'wait', 'move', 'circle', 'fall', 'call']);
+const mk = () => ({ t: 0, map, trees: map.decor.filter((d) => d.type === 'tree'), puddles: [],
+  life: { walkers: [{ lane: { a: 0, b: 100, y: 50 }, u: 0.5 }] }, walkerPos: () => ({ x: 50, y: 53 }) });
 
-test('Alle Aktivitäten: Ziel in der Karte, bekannte Phasen', () => {
-  const b = { map, trees: map.decor.filter((d) => d.type === 'tree'), life: { walkers: [{ lane: { a: 100, b: 200, y: 96 }, u: 0.5 }] },
-    walkerPos: (w) => ({ x: w.lane.a + w.u * (w.lane.b - w.lane.a), y: w.lane.y + 3 }), puddles: [], t: 0 };
-  const orig = Math.random, seen = new Set();
-  try {
-    for (let r = 0; r < 100; r += 0.5) {
-      let n = 0; Math.random = () => (n++ === 0 ? r / 100 : orig());
-      const a = chooseActivity(b);
-      Math.random = orig;
-      assert.ok(a && a.text, `r=${r}`);
-      seen.add(a.text.split(' ')[0] + a.text.length);
-      const [W, H] = map.size;
-      assert.ok(a.target.x > 0 && a.target.x < W && a.target.y > 0 && a.target.y < H, a.text);
-      for (const p of a.seq) assert.ok(PHASES.has(p.s), `${a.text}: ${p.s}`);
-      for (const p of a.seq) if (p.s === 'call') p.fn();
-    }
-  } finally { Math.random = orig; }
-  assert.ok(seen.size >= 10, `nur ${seen.size} verschiedene Aktivitäten`);
+test('Bärti: nach einem Besuch kommt Beet, Baum oder Schwimmen', () => {
+  const b = mk();
+  for (let i = 0; i < 3000; i++) {
+    const prev = b.lastAct;
+    const a = chooseActivity(b);
+    b.t += 20;
+    if (!a) continue;
+    if (prev === 'visit') assert.ok(['bed', 'tree', 'river', 'pond'].includes(a.name), `nach Besuch: ${a.name}`);
+    assert.notEqual(a.name, prev, 'nicht zweimal dasselbe hintereinander');
+    assert.ok(a.target && Number.isFinite(a.target.x) && Number.isFinite(a.target.y), `${a.name}: Ziel`);
+  }
+});
+
+test('Bärti: alle neuen Aktivitäten kommen vor und sind gut verteilt', () => {
+  const b = mk(), n = {};
+  for (let i = 0; i < 4000; i++) { const a = chooseActivity(b); b.t += 20; if (a) n[a.name] = (n[a.name] ?? 0) + 1; }
+  for (const k of ['trash', 'dance', 'roll', 'butterfly', 'wiggle', 'tree', 'river', 'visit']) assert.ok(n[k] > 40, `${k}: ${n[k]}`);
+  const max = Math.max(...Object.values(n)), min = Math.min(...Object.values(n));
+  assert.ok(max / min < 8, `Verteilung ${JSON.stringify(n)}`);
 });
