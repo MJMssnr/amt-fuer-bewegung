@@ -57,7 +57,8 @@
 - Stroboskop bauen (O) allgemein: Skala fehlte → Maßband + Hilfslinien [W25]
 
 ## Feedback nach Typen (24.10.)
-- A, C: funktionieren. B: funktioniert, Toleranz fair; Zoom + Klick-Modus für Notebooks ergänzt [W38]. D: Hinweis präzisiert, Brunnen/Rathaus in der Animation [W38] – t30/t50 bitte nochmal.
+- A, C, E, F: funktionieren. B: funktioniert, Toleranz fair; Zoom + Klick-Modus für Notebooks ergänzt [W38]. D: Hinweis präzisiert, Brunnen/Rathaus in der Animation [W38] – t30/t50 bitte nochmal.
+- H „Die Paket-Jagd“ (t40) war als erstes Einholen zu schwer (Zeitvorsprung) → Reihe t79 (gleicher Start, mittel) → t80 (Wegvorsprung, mittel) → t40 (Zeitvorsprung, schwer; nicht lehrplanrelevant, bleibt) [W39].
 
 ## Playtest-Runde 3 (Stand W34)
 **Neu (noch nie gespielt)**

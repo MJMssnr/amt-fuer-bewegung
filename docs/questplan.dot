@@ -79,6 +79,8 @@ digraph Q {
   t76_schnitt_umgehung [fillcolor="#dddddd" label=<<b>V</b>  Paul hat es eilig<br/><font point-size="9">Paul Paket · Bäckerei · 100 €</font>>];
   t77_schnitt_dienstreise [fillcolor="#dddddd" label=<<b>V</b>  Die Dienstreise der Bürgermeisterin<br/><font point-size="9">Bürgermeisterin Kranz · Rathaus · 130 €</font>>];
   t78_fluss_labor [fillcolor="#dddddd" label=<<b>W</b>  Hildes Floß im Fluss-Labor<br/><font point-size="9">Hilde · Fluss-Labor · 120 €</font>>];
+  t79_einholen_start [fillcolor="#9fc5ff" label=<<b>H</b>  Das Wettrennen vor der Bäckerei<br/><font point-size="9">Paul Paket · Bäckerei · 100 €</font>>];
+  t80_einholen_vorsprung [fillcolor="#9fc5ff" label=<<b>H</b>  Zehn Meter Vorsprung<br/><font point-size="9">Paul Paket · Bäckerei · 110 €</font>>];
   t01_sportwagen -> t02_kevin;
   t02_kevin -> t03_bus;
   t01_sportwagen -> t04_brezel;
@@ -120,7 +122,7 @@ digraph Q {
   t36_strobo_jo -> t37_strobo_bremsen;
   t37_strobo_bremsen -> t38_strobo_pendel;
   t04_brezel -> t39_schwer_zuordnen;
-  t06_broesel_ampel -> t40_schwer_rechnen;
+  t80_einholen_vorsprung -> t40_schwer_rechnen;
   t08_einkaufswagen -> t41_schwer_beschreiben;
   t11_stadtlauf -> t42_schwer_achsen;
   t14_ralf_bus -> t43_schwer_fehlerjagd;
@@ -165,4 +167,6 @@ digraph Q {
   t76_schnitt_umgehung -> t77_schnitt_dienstreise;
   t74_schnitt_unmoeglich -> t77_schnitt_dienstreise;
   t01_sportwagen -> t78_fluss_labor;
+  t06_broesel_ampel -> t79_einholen_start;
+  t79_einholen_start -> t80_einholen_vorsprung;
 }

@@ -1475,12 +1475,12 @@
     "title": "Die Paket-Jagd",
     "from": "post",
     "node": "lindenstrasse",
-    "requires": ["t06-broesel-ampel"],
+    "requires": ["t80-einholen-vorsprung"],
     "reward": 130,
     "difficulty": "schwer",
     "scenario": "einholen-paul",
     "intro": [
-      ["post", "Hallo, Herr Doktor! Paul Paket hier. Ich hab eine Frage, die mich nicht schlafen lässt."],
+      ["post", "Herr Doktor, Paul Paket schon wieder! Kevin hat zugestimmt: Diesmal wartet er erst. Die Frage lässt mich nicht schlafen."],
       ["post", "Ich bin mit 4,0 m/s unterwegs. Kevin sieht mich, wartet 6,0 s, dann tritt er aus dem Stand mit 1,0 m/s² in die Pedale. Er will mir ein Paket abnehmen!"],
       ["post", "Wann holt er mich ein? Wo? Und wie schnell ist er dann? Ich will wissen, ob ich wegrennen muss."],
       ["florian", "Einholen mit Vorsprung und Wartezeit. Das ist die Königsdisziplin."]
@@ -3468,6 +3468,166 @@
       ["florian", "Es gleicht sich nicht aus! Flussauf bin ich viel länger langsam unterwegs. Die Hin-und-zurück-Fahrt wird mit Strömung immer langsamer."],
       ["hilde", "Das erzähl ich meinem Nachbarn. Und dann nehm ich ihn mit aufs Floß – gegen die Strömung!"],
       ["hilde", "Und Florian: Das Fluss-Labor bleibt für dich offen! Komm jederzeit vorbei, probier weiter aus – das Quiz kannst du hier auch freiwillig nochmal machen."]
+    ]
+  },
+  {
+    "id": "t79-einholen-start",
+    "title": "Das Wettrennen vor der Bäckerei",
+    "from": "post",
+    "node": "baeckerei",
+    "requires": ["t06-broesel-ampel"],
+    "reward": 100,
+    "difficulty": "mittel",
+    "scenario": "einholen-start",
+    "intro": [
+      ["post", "Herr Doktor! Paul Paket hier. Kevin und ich haben gewettet: Wir starten gleichzeitig vor der Bäckerei."],
+      ["post", "Ich laufe sofort mit 4,0 m/s los. Kevin tritt aus dem Stand mit 1,0 m/s² in die Pedale. Wann holt er mich ein?"],
+      ["florian", "Gleicher Start, gleiche Zeit. Ich setze die beiden Orte gleich: 4,0 m/s · t = ½ · 1,0 m/s² · t²."]
+    ],
+    "task": {
+      "type": "calc",
+      "given": ["anim", "data"],
+      "prompt": "Wann und wo holt Kevin Paul ein – und wie schnell ist Kevin dann?",
+      "paper": "Beide starten bei t = 0 am selben Ort. Paul: x = 4,0 m/s · t. Kevin: x = ½ · 1,0 m/s² · t². Gleichsetzen – t = 0 ist der Start, die andere Lösung ist das Einholen. Die Animation zeigt die Zeit zum Kontrollieren.",
+      "questions": [
+        {
+          "label": "Zeitpunkt des Einholens",
+          "symbol": "t_E",
+          "unit": "s",
+          "goal": {
+            "type": "meet",
+            "a": "paul",
+            "b": "kevin",
+            "ask": "t",
+            "after": 1
+          },
+          "hints": [
+            {
+              "value": 4,
+              "text": "Bei 4,0 s sind beide gleich schnell – eingeholt hat Kevin Paul da aber noch nicht. Setze die ORTE gleich."
+            }
+          ],
+          "help": "4,0 · t = 0,5 · t² → t · (0,5 · t − 4,0) = 0."
+        },
+        {
+          "label": "Ort des Einholens",
+          "symbol": "x_E",
+          "unit": "m",
+          "goal": {
+            "type": "meet",
+            "a": "paul",
+            "b": "kevin",
+            "ask": "x",
+            "after": 1
+          },
+          "help": "Setze t_E in Pauls Gleichung x = 4,0 m/s · t ein."
+        },
+        {
+          "label": "Kevins Geschwindigkeit dabei",
+          "symbol": "v_K",
+          "unit": "km/h",
+          "goal": {
+            "type": "valueAt",
+            "actor": "kevin",
+            "q": "vx",
+            "t": 8
+          },
+          "hints": [
+            {
+              "value": 8,
+              "text": "Das ist der Wert in m/s. Gefragt ist km/h."
+            }
+          ],
+          "help": "v = a · t, dann mal 3,6."
+        }
+      ]
+    },
+    "success": [
+      ["florian", "Nach 8,0 s, bei 32 m. Kevin ist dann 8,0 m/s schnell, also knapp 29 km/h – doppelt so schnell wie Sie."],
+      ["post", "Doppelt so schnell, genau in dem Moment, in dem er mich einholt? Das ist ja fast schon Magie."]
+    ]
+  },
+  {
+    "id": "t80-einholen-vorsprung",
+    "title": "Zehn Meter Vorsprung",
+    "from": "post",
+    "node": "baeckerei",
+    "requires": ["t79-einholen-start"],
+    "reward": 110,
+    "difficulty": "mittel",
+    "scenario": "einholen-vorsprung",
+    "intro": [
+      ["post", "Revanche! Diesmal bekomme ich 10 m Vorsprung. Wir starten wieder gleichzeitig, ich mit 4,0 m/s, Kevin aus dem Stand mit 1,0 m/s²."],
+      ["post", "Jetzt hab ich doch bestimmt länger Ruhe, oder?"],
+      ["florian", "Der Vorsprung kommt in Pauls Gleichung als Startort dazu: x = 10 m + 4,0 m/s · t."]
+    ],
+    "task": {
+      "type": "calc",
+      "given": ["anim", "data"],
+      "prompt": "Wann und wo holt Kevin Paul ein – und wie schnell ist Kevin dann?",
+      "paper": "Paul: x = 10 m + 4,0 m/s · t. Kevin: x = ½ · 1,0 m/s² · t². Gleichsetzen ergibt eine quadratische Gleichung – nur die positive Lösung ergibt Sinn.",
+      "questions": [
+        {
+          "label": "Zeitpunkt des Einholens",
+          "symbol": "t_E",
+          "unit": "s",
+          "goal": {
+            "type": "meet",
+            "a": "paul",
+            "b": "kevin",
+            "ask": "t",
+            "after": 1
+          },
+          "hints": [
+            {
+              "value": 8,
+              "text": "Das wäre ohne Vorsprung richtig. Paul startet aber 10 m weiter vorn."
+            }
+          ],
+          "help": "0,5 · t² = 10 + 4,0 · t → t² − 8,0 · t − 20 = 0, Mitternachtsformel."
+        },
+        {
+          "label": "Ort des Einholens",
+          "symbol": "x_E",
+          "unit": "m",
+          "goal": {
+            "type": "meet",
+            "a": "paul",
+            "b": "kevin",
+            "ask": "x",
+            "after": 1
+          },
+          "hints": [
+            {
+              "value": 40,
+              "text": "Das ist nur Pauls gelaufene Strecke. Sein Startort liegt aber bei 10 m."
+            }
+          ],
+          "help": "Setze t_E in Pauls Gleichung x = 10 m + 4,0 m/s · t ein."
+        },
+        {
+          "label": "Kevins Geschwindigkeit dabei",
+          "symbol": "v_K",
+          "unit": "km/h",
+          "goal": {
+            "type": "valueAt",
+            "actor": "kevin",
+            "q": "vx",
+            "t": 10
+          },
+          "hints": [
+            {
+              "value": 10,
+              "text": "Das ist der Wert in m/s. Gefragt ist km/h."
+            }
+          ],
+          "help": "v = a · t, dann mal 3,6."
+        }
+      ]
+    },
+    "success": [
+      ["florian", "Nach 10 s, bei 50 m. Der Vorsprung bringt Ihnen genau 2,0 s mehr. Kevin fährt dann 36 km/h."],
+      ["post", "Zwei Sekunden für zehn Meter Vorsprung … Nächstes Mal verlange ich, dass er erst mal wartet!"]
     ]
   }
 ]

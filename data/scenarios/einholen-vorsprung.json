@@ -1,0 +1,8 @@
+{
+  "id": "einholen-vorsprung",
+  "title": "Paul mit Wegvorsprung",
+  "actors": [
+    { "id": "paul", "name": "Paul Paket", "sprite": "postbote", "x0": 10, "segments": [ { "dt": 14, "v": 4 } ] },
+    { "id": "kevin", "name": "Kevin", "sprite": "kevin", "x0": 0, "segments": [ { "dt": 14, "a": 1 } ] }
+  ]
+}

@@ -5,7 +5,7 @@
 > Buchstabe = Aufgabentyp (siehe Legende). PNG: `docs/questplan.png`.
 
 Startaufträge (sofort frei): Der rote Blitz.
-Anzahl Aufträge: 76, verdienbar: 7360 €.
+Anzahl Aufträge: 78, verdienbar: 7570 €.
 
 ```mermaid
 flowchart LR
@@ -85,6 +85,8 @@ flowchart LR
   t76_schnitt_umgehung["<b>V</b> Paul hat es eilig<br/><small>Paul Paket · Bäckerei · 100 €</small>"]:::tV
   t77_schnitt_dienstreise["<b>V</b> Die Dienstreise der Bürgermeisterin<br/><small>Bürgermeisterin Kranz · Rathaus · 130 €</small>"]:::tV
   t78_fluss_labor["<b>W</b> Hildes Floß im Fluss-Labor<br/><small>Hilde · Fluss-Labor · 120 €</small>"]:::tW
+  t79_einholen_start["<b>H</b> Das Wettrennen vor der Bäckerei<br/><small>Paul Paket · Bäckerei · 100 €</small>"]:::tH
+  t80_einholen_vorsprung["<b>H</b> Zehn Meter Vorsprung<br/><small>Paul Paket · Bäckerei · 110 €</small>"]:::tH
   t01_sportwagen --> t02_kevin
   t02_kevin --> t03_bus
   t01_sportwagen --> t04_brezel
@@ -126,7 +128,7 @@ flowchart LR
   t36_strobo_jo --> t37_strobo_bremsen
   t37_strobo_bremsen --> t38_strobo_pendel
   t04_brezel --> t39_schwer_zuordnen
-  t06_broesel_ampel --> t40_schwer_rechnen
+  t80_einholen_vorsprung --> t40_schwer_rechnen
   t08_einkaufswagen --> t41_schwer_beschreiben
   t11_stadtlauf --> t42_schwer_achsen
   t14_ralf_bus --> t43_schwer_fehlerjagd
@@ -171,6 +173,8 @@ flowchart LR
   t76_schnitt_umgehung --> t77_schnitt_dienstreise
   t74_schnitt_unmoeglich --> t77_schnitt_dienstreise
   t01_sportwagen --> t78_fluss_labor
+  t06_broesel_ampel --> t79_einholen_start
+  t79_einholen_start --> t80_einholen_vorsprung
   classDef tA fill:#ffcd75,stroke:#1a1c2c,color:#1a1c2c
   classDef tB fill:#f6a6b2,stroke:#1a1c2c,color:#1a1c2c
   classDef tC fill:#a7f070,stroke:#1a1c2c,color:#1a1c2c
@@ -198,7 +202,7 @@ flowchart LR
 | E | Fehlerjagd | 4 |
 | F | Live-Steuerung | 3 |
 | G | Beschreiben | 3 |
-| H | Berechnen | 3 |
+| H | Berechnen | 5 |
 | I | Konstrukteur | 4 |
 | J | Reaktionstest | 2 |
 | K | Flächen-Puzzle | 4 |
@@ -255,7 +259,7 @@ flowchart LR
 | Kevin bremst | O | Slavi | Supermarkt | 90 € | Jo im Doppelbild |
 | Das Pendel | O | Slavi | Hobbywerkstatt | 100 € | Kevin bremst |
 | Kevins Wende | A | Busfahrer Ötzi | Busbahnhof | 120 € | Der Hund, der zurückläuft |
-| Die Paket-Jagd | H | Paul Paket | Lindenstraße | 130 € | Frau Brösels Rache |
+| Die Paket-Jagd | H | Paul Paket | Lindenstraße | 130 € | Zehn Meter Vorsprung |
 | Jo in der Halfpipe | G | Jo | Skatepark | 120 € | Der Einkaufswagen |
 | Der Wende-Tacho | C | Kevin | Radl-Eck | 120 € | Der Stadtlauf |
 | Ralfs krumme Kurve | E | Ralf | Hobbywerkstatt | 120 € | Ralfs Busfahrt |
@@ -294,3 +298,5 @@ flowchart LR
 | Paul hat es eilig | V | Paul Paket | Bäckerei | 100 € | Jos Trainingsrunde |
 | Die Dienstreise der Bürgermeisterin | V | Bürgermeisterin Kranz | Rathaus | 130 € | Paul hat es eilig, Frau Brösel will den Schnitt retten |
 | Hildes Floß im Fluss-Labor | W | Hilde | Fluss-Labor | 120 € | Der rote Blitz |
+| Das Wettrennen vor der Bäckerei | H | Paul Paket | Bäckerei | 100 € | Frau Brösels Rache |
+| Zehn Meter Vorsprung | H | Paul Paket | Bäckerei | 110 € | Das Wettrennen vor der Bäckerei |

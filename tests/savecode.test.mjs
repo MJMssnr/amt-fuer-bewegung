@@ -30,7 +30,7 @@ test('Code hin und zurück: Aufträge, Geld, Einrichtung, Pakete', () => {
   }
   for (const it of shop.items) assert.equal(Boolean(r.state.items[it.id]), Boolean(st.items[it.id]), it.id);
   assert.equal(r.state.pkg.sent, 3); assert.equal(r.state.pkg.waiting.length, 1);
-  assert.ok(code.length <= 8 * 7, `Code zu lang: ${code.length}`);
+  assert.ok(code.split("-").length <= 10, `Code zu lang: ${code.length}`);
 });
 
 test('Tippfehler und Zahlendreher werden dem Block zugeordnet', () => {

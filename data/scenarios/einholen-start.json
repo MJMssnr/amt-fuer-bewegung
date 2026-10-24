@@ -1,0 +1,8 @@
+{
+  "id": "einholen-start",
+  "title": "Kevin und Paul starten gemeinsam",
+  "actors": [
+    { "id": "paul", "name": "Paul Paket", "sprite": "postbote", "x0": 0, "segments": [ { "dt": 12, "v": 4 } ] },
+    { "id": "kevin", "name": "Kevin", "sprite": "kevin", "x0": 0, "segments": [ { "dt": 12, "a": 1 } ] }
+  ]
+}
