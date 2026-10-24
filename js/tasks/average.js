@@ -21,6 +21,7 @@ import { getSprite } from '../render/pixel.js';
 
 const COLORS = ['#3b5dc9', '#e43b44', '#38b764', '#f2b52c'];
 const fmt = (v) => atLeast2(fmtRaw(v, 2), v);
+const fmt2 = (v) => atLeast2(fmtRaw(Number(v.toPrecision(2))), v); // Balken: 2 gültige Ziffern (33,33 s → 33 s)
 
 export function mount(root, { ticket, onSolved }) {
   const task = ticket.task, mode = task.type === 'avgtime' ? 'time' : 'distance';
@@ -60,21 +61,30 @@ export function mount(root, { ticket, onSolved }) {
   function draw(now) {
     const d = Math.min(window.devicePixelRatio || 1, 3), r = cv.getBoundingClientRect();
     if (r.width && cv.width !== Math.round(r.width * d)) { cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); }
-    const W = cv.width, H = cv.height, m = 14 * d, y = H * 0.62;
+    const W = cv.width, H = cv.height, m = 14 * d, base = H * 0.72;
     const X = (x) => m + (x / S) * (W - 2 * m);
+    // Höhenprofil [W41]: "hill": 1 (bergauf) / -1 (bergab) je Abschnitt, sanfte Steigung; Abschnitte farbig wie im Fahrtenbuch
+    const rise = H * 0.32, hills = task.parts.map((p) => p.hill ?? 0);
+    const up = Math.max(1, hills.reduce((a, h) => a + Math.max(0, h), 0));
+    const pts = [[0, 0]]; let hh = 0, xs = 0;
+    full.forEach((p, i) => { xs += p.dx; hh += (hills[i] * rise) / up; pts.push([xs, hh]); });
+    const minH = Math.min(...pts.map((q) => q[1]));
+    const Y = (h) => base - (h - minH);
+    const yAt = (x) => { for (let i = 1; i < pts.length; i++) if (x <= pts[i][0] + 1e-9) { const [x0, h0] = pts[i - 1], [x1, h1] = pts[i]; return Y(h0 + ((x - x0) / Math.max(1e-9, x1 - x0)) * (h1 - h0)); } return Y(pts.at(-1)[1]); };
     ctx.fillStyle = '#cfeeff'; ctx.fillRect(0, 0, W, H);
-    ctx.fillStyle = '#86d043'; ctx.fillRect(0, y + 6 * d, W, H);
-    let x = 0;
+    ctx.fillStyle = '#86d043'; ctx.beginPath(); ctx.moveTo(0, H); ctx.lineTo(0, Y(pts[0][1]));
+    pts.forEach(([x, h]) => ctx.lineTo(X(x), Y(h))); ctx.lineTo(W, Y(pts.at(-1)[1])); ctx.lineTo(W, H); ctx.fill();
+    ctx.lineWidth = 6 * d; ctx.lineCap = 'butt';
     full.forEach((p, i) => {
-      ctx.fillStyle = COLORS[i % 4]; ctx.fillRect(X(x), y, X(x + p.dx) - X(x), 6 * d);
-      ctx.fillStyle = '#1a1c2c'; ctx.font = `${11 * d}px system-ui, sans-serif`; ctx.textAlign = 'center';
-      ctx.fillText(task.parts[i].label, (X(x) + X(x + p.dx)) / 2, y + 22 * d);
-      x += p.dx;
+      const [x0, h0] = pts[i], [x1, h1] = pts[i + 1];
+      ctx.strokeStyle = COLORS[i % 4]; ctx.beginPath(); ctx.moveTo(X(x0), Y(h0)); ctx.lineTo(X(x1), Y(h1)); ctx.stroke();
+      ctx.fillStyle = '#1a1c2c'; ctx.font = `${12 * d}px system-ui, sans-serif`; ctx.textAlign = 'center';
+      ctx.fillText(task.parts[i].label, (X(x0) + X(x1)) / 2, Math.max(Y(h0), Y(h1)) + 18 * d);
     });
     const tt = Math.min(tStop, (((now - t0) / 1000) % (playLen + 1.5)) / playLen * T);
-    const px = X(posAt(tt)), k = (H * 0.42) / sp.h;
+    const xNow = posAt(tt), px = X(xNow), k = (H * 0.36) / sp.h;
     ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(sp.frames[Math.floor(now / 120) % sp.frames.length], px - (sp.w * k) / 2, y - sp.h * k + 2 * d, sp.w * k, sp.h * k);
+    ctx.drawImage(sp.frames[Math.floor(now / 120) % sp.frames.length], px - (sp.w * k) / 2, yAt(xNow) - sp.h * k - 1 * d, sp.w * k, sp.h * k);
     ctx.fillStyle = 'rgba(26,28,44,0.8)'; ctx.fillRect(4 * d, 4 * d, 110 * d, 17 * d);
     ctx.fillStyle = '#f4f4f4'; ctx.textAlign = 'left'; ctx.font = `${12 * d}px "AmtPixel", monospace`;
     ctx.fillText(`t = ${fmtRaw(tt / kT, 1)} ${U.time}`, 9 * d, 16 * d);
@@ -98,7 +108,7 @@ export function mount(root, { ticket, onSolved }) {
       box.innerHTML = full.map((p, i) => {
         const gone = impossible && k === 'dt' && show; // unmöglich: für den letzten Abschnitt bleibt keine Zeit
         const w = !show ? 100 / full.length : gone ? (i === unknown ? 14 : (86 * p[k]) / (tot - full[unknown].dt)) : (100 * p[k]) / tot;
-        const val = k === 'dx' ? `${fmt(p.dx / kD)} ${U.dist}` : `${fmt(p.dt / kT)} ${U.time}`;
+        const val = k === 'dx' ? `${fmt2(p.dx / kD)} ${U.dist}` : `${fmt2(p.dt / kT)} ${U.time}`;
         const txt = !show ? '?' : impossible && i === unknown ? (k === 'dt' ? '0!' : val) : val;
         return `<i style="width:${w}%;background:${COLORS[i % 4]}${show ? '' : ';opacity:.35'}">${txt}</i>`;
       }).join('');

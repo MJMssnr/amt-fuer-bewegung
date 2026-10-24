@@ -57,7 +57,8 @@
 - Stroboskop bauen (O) allgemein: Skala fehlte → Maßband + Hilfslinien [W25]
 
 ## Feedback nach Typen (24.10.)
-- A, C, E, F, H, I, J: funktionieren (I mindestens mittel). B: funktioniert, Toleranz fair; Zoom + Klick-Modus für Notebooks ergänzt [W38]. D: Hinweis präzisiert, Brunnen/Rathaus in der Animation [W38] – t30/t50 bitte nochmal.
+- A, C, E, F, H, I, J, K, L, M, N, O, P, Q, R, S, T: funktionieren. Einstufung je Typ [W41]: I, K, L, Q, R mittel (mind.); M, N, O, T leicht (frühere Einzel-Einstufungen t35 mittel, t34/t37 mittel, t38/t52 schwer bleiben); P: t54 leicht, t55 mittel; S schwer.
+- U: Hügel in der Animation, erster U-Auftrag in m, s, m/s; U mittel [W41]. B: funktioniert, Toleranz fair; Zoom + Klick-Modus für Notebooks ergänzt [W38]. D: Hinweis präzisiert, Brunnen/Rathaus in der Animation [W38] – t30/t50 bitte nochmal.
 - H „Die Paket-Jagd“ (t40) war als erstes Einholen zu schwer (Zeitvorsprung) → Reihe t79 (gleicher Start, mittel) → t80 (Wegvorsprung, mittel) → t40 (Zeitvorsprung, schwer; nicht lehrplanrelevant, bleibt) [W39].
 
 ## Playtest-Runde 3 (Stand W34)

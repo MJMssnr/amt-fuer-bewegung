@@ -51,6 +51,7 @@ Hinweis: Sitzung 1 wurde nachträglich aus einer Zusammenfassung des Chats rekon
 | W38 | Feedback nach Typen: A, B, C funktionieren. B: Zoom-Knöpfe für Notebook (Touchpad geht „aus“) → Zoom + Klick-Modus für Maus. D: Hinweis „Gerade durch zwei Punkte, Diagramm genau lesen“, Brunnen (und Rathaus) in der Animation | (dieser Commit) |
 | W39 | E, F passen. Paket-Jagd als erstes Einholen zu schwer → Reihe: gleichzeitiger Start (t79, mittel), Wegvorsprung (t80, mittel), Zeitvorsprung (t40, schwer) | (dieser Commit) |
 | W40 | H, I, J passen; I mindestens mittel. J: Polizei kommt bei Reaktionszeit ≥ 1,0 s besorgt (Kaffee, guter Dienst). Lob-Text war falsch (lobte „weniger Ziffern“) → lobt jetzt das Runden auf 2 g.Z.; ≥ 4 g.Z. → Verwarnung | (dieser Commit) |
+| W41 | Einstufungen K–U nach Typ-Playtest. U: Berg in der Animation (Steigung farbig wie die Abschnitte), erster U-Auftrag in m, s, m/s statt km/h und min | (dieser Commit) |
 
 **Stand Ende Sitzung 2:** 53 Aufträge (A–O, je ein schwerer), 4950 € verdienbar, Shop 23 Gegenstände für 2265 €. Offen: siehe `ROADMAP.md` und `PLAYTEST.md`.
 

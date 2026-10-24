@@ -775,6 +775,7 @@
     "node": "skatepark",
     "requires": ["t07-skater"],
     "reward": 80,
+    "difficulty": "mittel",
     "scenario": "skater-jo",
     "intro": [
       ["jo", "Okay, Amtsmensch, dein Bericht hat den Stadtrat beruhigt. Jetzt wollen die mir sogar eine neue Bahn bauen!"],
@@ -801,6 +802,7 @@
     "node": "fahrradladen",
     "requires": ["t09-tacho"],
     "reward": 90,
+    "difficulty": "mittel",
     "scenario": "kevin-express",
     "intro": [
       ["kevin", "Chef, mein Boss zahlt mir nur die Entfernung zwischen Start und Ziel. Dabei bin ich ein Stück zurückgefahren, weil ich das falsche Paket hatte!"],
@@ -882,7 +884,7 @@
     "node": "park",
     "requires": ["t12-ralf-brezel"],
     "reward": 80,
-    "difficulty": "leicht",
+    "difficulty": "mittel",
     "scenario": "hund-brezel",
     "intro": [
       ["ralf", "Chef, ich sitz hier im Park und hab bei Brezels Rückweg ein Steigungsdreieck gezeichnet. Da kommt bei mir eine positive Geschwindigkeit raus."],
@@ -909,6 +911,7 @@
     "node": "bushof",
     "requires": ["t10-ampelkamera"],
     "reward": 90,
+    "difficulty": "mittel",
     "scenario": "bus-anfahren",
     "intro": [
       ["oetzi", "Servus! Ein Fahrgast hat sich beschwert, ich bremse zu scharf. Sein Kaffee ist übergeschwappt."],
@@ -1055,6 +1058,7 @@
     "node": "park",
     "requires": ["t31-strobo-erstes"],
     "reward": 70,
+    "difficulty": "leicht",
     "intro": [
       ["slavi", "Ich teste hier im Park meine neue Blitzlampe. Und wer radelt mir genau vors Objektiv? Kevin, der Fahrradkurier!"],
       ["slavi", "Er will wissen, wie schnell er war. Auf dem Boden lag ein Maßband – du musst nur noch rechnen."]
@@ -1904,7 +1908,7 @@
     "node": "fotolabor",
     "requires": ["t38-strobo-pendel"],
     "reward": 120,
-    "difficulty": "schwer",
+    "difficulty": "leicht",
     "intro": [
       ["slavi", "Jo hat einen Ball senkrecht nach oben geworfen. Ich habe direkt nach dem Abwurf geblitzt, bis der Ball oben kurz stillstand."],
       ["slavi", "Das Foto ist fies: Man könnte meinen, der Ball fällt. Was schreiben wir drunter?"]
@@ -2044,7 +2048,7 @@
     "node": "fotolabor",
     "requires": ["t52-schwer-strobo-rechnen"],
     "reward": 140,
-    "difficulty": "schwer",
+    "difficulty": "leicht",
     "intro": [
       ["slavi", "Mein letztes Projekt: eine Kugel auf einer langen Rinne. Erst geht es bergab, dann ein flaches Stück, dann sanft bergauf – und oben rollt sie einfach weiter."],
       ["slavi", "Die Kamera … du weißt Bescheid. Ein letztes Mal, Florian. Für die Kunst!"]
@@ -2200,6 +2204,7 @@
     "node": "rathaus",
     "requires": ["t06-broesel-ampel"],
     "reward": 90,
+    "difficulty": "mittel",
     "scenario": {
       "actors": [
         {
@@ -2293,6 +2298,7 @@
     "node": "park",
     "requires": ["t71-formel-modellflieger"],
     "reward": 110,
+    "difficulty": "mittel",
     "intro": [
       ["gerda", "Junger Mann! Im Park steht doch der alte Wunschbrunnen. Seit siebzig Jahren frage ich mich, wie tief der ist."],
       ["gerda", "Ich hab einen Kiesel reinfallen lassen und mitgezählt: nach 2,4 Sekunden hat es geplatscht."],
@@ -2378,6 +2384,7 @@
     "node": "schule",
     "requires": ["t69-verbinden-gerade"],
     "reward": 70,
+    "difficulty": "mittel",
     "intro": [
       ["ohm", "Florian, noch ein kleines Übungsblatt für zwischendurch. Drei t-x-Diagramme, drei t-vₓ-Diagramme – leider ist der Kopierer durcheinandergekommen."],
       ["florian", "Ich verbinde einfach, was zusammengehört. Steigung im t-x-Diagramm ist vₓ."]
@@ -2438,6 +2445,7 @@
     "node": "schule",
     "requires": ["t70-verbinden-klassisch", "t08-einkaufswagen"],
     "reward": 90,
+    "difficulty": "mittel",
     "intro": [
       ["ohm", "Neues Übungsblatt. Diesmal sind alle drei Bewegungen beschleunigt, und die Kurven sehen sich ziemlich ähnlich."],
       ["florian", "Dann schau ich genau hin: Wird die Kurve steiler oder flacher? Steigt sie oder fällt sie?"]
@@ -2549,7 +2557,7 @@
     "node": "bushof",
     "requires": ["t57-formel-brunnen"],
     "reward": 130,
-    "difficulty": "schwer",
+    "difficulty": "mittel",
     "scenario": {
       "actors": [
         {
@@ -2649,7 +2657,7 @@
     "node": "schule",
     "requires": ["t59-verbinden-kurven"],
     "reward": 120,
-    "difficulty": "schwer",
+    "difficulty": "mittel",
     "intro": [
       ["ohm", "Letztes Übungsblatt vor der Klausur. Zwei der drei Bewegungen kehren um, eine nicht. Und alle Kurven sind gekrümmt."],
       ["florian", "Am Umkehrpunkt ist die t-x-Kurve waagrecht, also vₓ = 0. Da schau ich zuerst hin."]
@@ -2706,7 +2714,7 @@
     "node": "polizei",
     "requires": ["t56-formel-eauto"],
     "reward": 90,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "intro": [
       ["polizist", "TRRRILLL! Herr Doktor Brandl, ein Notfall für Ihr Amt! Vollbremsung in der Hauptstraße, niemand verletzt, aber eine lange Bremsspur."],
       ["polizist", "Der Fahrer schwört: „Ich war nicht zu schnell!“ Erlaubt sind 50. Ich brauche ein Gutachten – mit gültigen Ziffern, versteht sich."],
@@ -2748,7 +2756,7 @@
     "node": "polizei",
     "requires": ["t63-gutachten-trocken"],
     "reward": 110,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "intro": [
       ["polizist", "Schon wieder eine Bremsspur, diesmal vor der Schule. Tempo 30! Und es hat geregnet wie verrückt."],
       ["polizist", "Die Fahrerin sagt, sie sei höchstens 30 gefahren. Die Bremsspur sagt vielleicht etwas anderes."],
@@ -2831,7 +2839,7 @@
     "node": "werkstatt",
     "requires": ["t65-puppe-gerda"],
     "reward": 100,
-    "difficulty": "mittel",
+    "difficulty": "leicht",
     "intro": [
       ["hilde", "Zweite Szene: Brezel, der Bäckershund, sieht eine Wurst. Er wird immer schneller, schnappt sie – und rennt zurück!"],
       ["hilde", "Die Kurve am Anfang ist der schwierige Teil. Der Regisseur sagt: gleichmäßig beschleunigt!"],
@@ -2873,7 +2881,7 @@
     "node": "polizei",
     "requires": ["t64-gutachten-regen"],
     "reward": 140,
-    "difficulty": "mittel",
+    "difficulty": "schwer",
     "intro": [
       ["polizist", "TRRRILLL! Schnee in der Wohnstraße, Tempo 30. Ein Auto ist gerutscht und in eine Mülltonne gekracht."],
       ["polizist", "Die Werkstatt sagt: Beim Aufprall war es noch 5,0 m/s schnell. Es stand also am Ende der Bremsspur noch nicht!"],
@@ -2917,7 +2925,7 @@
     "node": "werkstatt",
     "requires": ["t66-puppe-brezel"],
     "reward": 140,
-    "difficulty": "schwer",
+    "difficulty": "leicht",
     "intro": [
       ["hilde", "Das große Finale fürs Stadtfest: Jo auf dem Skateboard! Anrollen, sausen, abbremsen, kurz posieren – und rückwärts zurück."],
       ["hilde", "Fünf Abschnitte, zwei Kurven. Der Regisseur sagt, nur ein Meister schafft das."],
@@ -2968,7 +2976,7 @@
     "node": "schule",
     "requires": ["t03-bus", "t04-brezel"],
     "reward": 60,
-    "difficulty": "leicht",
+    "difficulty": "mittel",
     "intro": [
       ["ohm", "Florian, Frau Dr. Ohm hier, Physik an der FOS. Wer ein Amt für Bewegung leitet, braucht ordentliches Handwerkszeug!"],
       ["ohm", "Dann brauchst du das Handwerkszeug. Erstes Übungsblatt: drei t-x-Diagramme, drei t-vₓ-Diagramme. Verbinde, was zusammengehört."],
@@ -3022,7 +3030,7 @@
     "node": "schule",
     "requires": ["t58-verbinden-uebung"],
     "reward": 80,
-    "difficulty": "leicht",
+    "difficulty": "mittel",
     "intro": [
       ["ohm", "Der Klassiker, der in jeder Schulaufgabe drankommt: Anfahren, gleichförmig fahren, Bremsen."],
       ["florian", "Gerade im t-x heißt konstante Geschwindigkeit. Und die Kurven? Linkskurve schneller, Rechtskurve langsamer."]
@@ -3078,6 +3086,7 @@
     "node": "werkstatt",
     "requires": ["t56-formel-eauto", "t11-stadtlauf"],
     "reward": 100,
+    "difficulty": "mittel",
     "intro": [
       ["hilde", "Florian, schau! Mein neuer Modellflieger. Er hebt ab, sobald er 12 m/s schnell ist."],
       ["hilde", "Meine Startbahn auf der Wiese ist aber nur 18 m lang. Wie stark muss der Motor ihn mindestens beschleunigen?"],
@@ -3151,38 +3160,23 @@
     "node": "lindenstrasse",
     "requires": ["t05-radeln"],
     "reward": 80,
-    "difficulty": "leicht",
+    "difficulty": "mittel",
     "intro": [
-      ["kevin", "Amtsmensch! Meine Lieferung zur Burg: 3,0 km bergauf mit 12 km/h, dann 3,0 km bergab mit 36 km/h."],
-      ["kevin", "Im Schnitt also 24 km/h, oder? Das schreib ich in meine Bewerbung."],
+      ["kevin", "Amtsmensch! Meine Lieferung über den Burgberg: 300 m bergauf mit 3,0 m/s, dann 300 m bergab mit 9,0 m/s."],
+      ["kevin", "Im Schnitt also 6,0 m/s, oder? Das schreib ich in meine Bewerbung."],
       ["florian", "Moment. Bergauf bist du viel länger unterwegs als bergab. Das muss ich nachrechnen."]
     ],
     "task": {
       "type": "avgdist",
       "sprite": "cyclist",
-      "units": {
-        "dist": "km",
-        "time": "min",
-        "speed": "km/h"
-      },
-      "parts": [
-        {
-          "label": "Bergauf",
-          "dx": 3,
-          "v": 12
-        },
-        {
-          "label": "Bergab",
-          "dx": 3,
-          "v": 36
-        }
-      ],
+      "units": { "dist": "m", "time": "s", "speed": "m/s" },
+      "parts": [{ "label": "Bergauf", "dx": 300, "v": 3, "hill": 1 }, { "label": "Bergab", "dx": 300, "v": 9, "hill": -1 }],
       "prompt": "Wie groß ist Kevins Durchschnittsgeschwindigkeit auf der ganzen Strecke?",
-      "help": "Bergauf: Δt = 3,0 km / 12 km/h = 0,25 h. Bergab: 3,0 km / 36 km/h ≈ 0,083 h. v̄ = 6,0 km / Gesamtzeit."
+      "help": "Bergauf: Δt = 300 m / 3,0 m/s = 100 s. Bergab: 300 m / 9,0 m/s ≈ 33 s. v̄ = 600 m / Gesamtzeit."
     },
     "success": [
-      ["florian", "Bergauf 15 min, bergab 5,0 min: 6,0 km in 20 min, also 18 km/h. Nicht 24!"],
-      ["kevin", "18? Weil ich bergauf so lange brauche … Na gut, dann schreib ich: „Bergab unschlagbar“."]
+      ["florian", "Bergauf 100 s, bergab rund 33 s: 600 m in 133 s, also 4,5 m/s. Nicht 6,0!"],
+      ["kevin", "4,5? Weil ich bergauf so lange brauche … Na gut, dann schreib ich: „Bergab unschlagbar“."]
     ]
   },
   {
@@ -3241,7 +3235,7 @@
     "node": "lindenstrasse",
     "requires": ["t73-schnitt-fahrplan"],
     "reward": 130,
-    "difficulty": "schwer",
+    "difficulty": "mittel",
     "intro": [
       ["broesel", "Ich fahre zu meiner Schwester, 20 km. Hin stand ich im Stau: Im Schnitt nur 30 km/h. Eine Schande!"],
       ["broesel", "Zurück fahre ich so schnell, dass ich insgesamt einen Schnitt von 60 km/h schaffe. Wie schnell muss ich dafür fahren, junger Mann?"],
