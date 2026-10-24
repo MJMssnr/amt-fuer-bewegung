@@ -659,6 +659,7 @@
     "node": "schule",
     "requires": ["t18-konstrukt-kevin", "t03-bus"],
     "reward": 90,
+    "difficulty": "mittel",
     "scenario": "bus-anfahren",
     "intro": [
       ["ohm", "Nächste Hausaufgabe, Florian: der Stadtbus zwischen zwei Haltestellen. Drei Abschnitte, drei Formen."],

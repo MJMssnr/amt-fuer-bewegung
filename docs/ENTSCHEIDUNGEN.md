@@ -56,7 +56,7 @@
 | F | Live-Steuerung (live) | ✓ | vₓ per Regler, Spur gegen Soll. Hinweis „Geschwindigkeiten vorher ausrechnen“, Knopf „🐢 halbe Zeit“; späte F-Aufträge (t17, t44) mit `"points": true` zeigen nur die Eckpunkte statt der Soll-Linie [W28] |
 | G | Beschreiben (describe) | ✓ [W3] | **Fachsprache**, gute Distraktoren; „verzögert/bremst“ nur, wenn \|v\| abnimmt |
 | H | Berechnen (calc) | ✓ [W3] | **Prüfungsrelevant**; Hinweise für typische Fehlwerte. Einholen in Stufen [W39]: gleicher Start (t79) → Wegvorsprung (t80) → Zeitvorsprung (t40, schwer, über den Lehrplan hinaus) |
-| I | Konstrukteur (construct) | ✓ [W10] | Diagramm selbst bauen: Endwerte + Form je Abschnitt |
+| I | Konstrukteur (construct) | ✓ [W10]; alle Aufträge mindestens „mittel“ [W40] | Diagramm selbst bauen: Endwerte + Form je Abschnitt |
 | J | Reaktionstest (reaction) | ✓ [W10] | Eigene Reaktionszeit → eigener Anhalteweg. Achtung: Touch-Latenz verfälscht. Nur noch **ein** Auftrag (t22); t21 „Die Schrecksekunde“ gestrichen, weil doppelt [W28] |
 | K | Flächen-Puzzle (area) | ✓ 3 Aufträge [W17] | Fläche unter t-vₓ automatisch in Rechtecke/Dreiecke zerlegt; Teilflächen mit Vorzeichen, Δx, ggf. Endort oder Weg. Hinweise für Vorzeichen, ½ vergessen, Weg statt Δx |
 | M | Stroboskop: rechnen (strobecalc) | ✓ 2 Aufträge [W22] | Foto mit Abbildern; Maßband (1. Auftrag) bzw. nur Maßstabsleiste (2. Auftrag, Antwortbereich), vₓ = Δx/Δt, km/h. Polizist ja |

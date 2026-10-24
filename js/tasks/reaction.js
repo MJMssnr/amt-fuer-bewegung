@@ -9,6 +9,7 @@ import { fmt } from '../render/format.js';
 import { atLeast2 } from '../engine/sigfig.js';
 import { frame } from './common.js';
 import { questionBlock } from './questions.js';
+import { showPolice } from '../ui/police.js';
 
 const TRIALS = 3;
 
@@ -85,6 +86,7 @@ export function mount(root, { ticket, onSolved }) {
     btn.textContent = 'Gemessen ✓';
     status.innerHTML = `Deine Reaktionszeit (Median): <b>${fmt(tR, 2)} s</b>.${tR > 1 ? ' Etwas verschlafen? Egal, wir rechnen damit.' : ''}`;
     right.querySelector('.r-tr').innerHTML = `<b>${fmt(tR, 2)} s</b>`;
+    if (tR >= 1) showPolice(document.getElementById('task'), { kind: 'tired', input: `${fmt(tR, 2)} s` }); // macht sich Sorgen [W40]
     const sR = v * tR, sB = (v * v) / (2 * a);
     const qs = [
       { label: 'Reaktionsweg', symbol: 's_R', unit: 'm', truth: sR,

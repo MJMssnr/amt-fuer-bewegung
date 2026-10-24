@@ -68,20 +68,25 @@ export async function sigPraise(fields, { enabled = true, host } = {}) {
   for (const f of fields) {
     const v = f.truth;
     if (f.sig === false || !Number.isFinite(v) || v === 0) continue;
-    if (Number(v.toPrecision(1)) !== Number(v.toPrecision(2))) continue; // hat „natürlich“ 2 Ziffern
-    if (Math.abs(v) >= 10 && Number.isInteger(v)) continue;            // 80 → schon 2 g.Z. ohne Komma
-    if (countSig(f.input.value) < 2) continue;
+    const n = countSig(f.input.value);
+    if (n < 2 || n > 3) continue;
+    const r2 = Number(v.toPrecision(2));
+    // „8,0“ statt „8“: Ergebnis hat eigentlich eine Ziffer, geschrieben mit Null hinten (nur unter 10 sinnvoll) [W40]
+    const zero = Number(v.toPrecision(1)) === r2 && Math.abs(r2) < 10;
+    // sauber gerundet: der Taschenrechner hätte mehr als 3 Ziffern gezeigt (z. B. 31,25 → 31)
+    const rounded = Math.abs(v - Number(v.toPrecision(3))) > 1e-9 * Math.abs(v);
+    if (!zero && !rounded) continue;
     shownThisTask = true;
     try { localStorage.setItem(KEY_PRAISE, '1'); } catch { /* egal */ }
-    await showPolice(host ?? document.getElementById('task'), { kind: 'praise', input: f.input.value.trim(), suggest: '' });
+    await showPolice(host ?? document.getElementById('task'), { kind: zero ? 'praise0' : 'praise', input: f.input.value.trim(), suggest: '' });
     return true;
   }
   return false;
 }
 
-export async function showPolice(host, { kind, input, suggest }) {
+export async function showPolice(host, { kind, input, suggest = '' }) {
   const T = await loadTexts();
-  const n = kind === 'praise' ? warnings() : warnings(1);
+  const n = ['few', 'many'].includes(kind) ? warnings(1) : warnings(); // Lob und Sorge zählen nicht als Verwarnung
   const lines = T[kind].map((l) => ({ mood: l.mood, text: l.text[(n - 1) % l.text.length]
     .replace('{input}', input).replace('{suggest}', suggest).replace('{n}', n) }));
 
