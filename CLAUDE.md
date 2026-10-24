@@ -81,6 +81,7 @@ js/tasks/questions.js      Gemeinsamer Eingabe-/Prüfblock für H, C und Reaktio
 js/tasks/distractors.js    Distraktoren aus Fehlvorstellungen (CATALOG)
 js/ui/overworld.js         Stadtkarte (data/map.json)
 js/ui/dialog.js, state.js  Dialoge, Spielstand (localStorage; order/earned fürs Auftragsbuch)
+js/engine/savecode.js      Speichercode (Backup/Gerätewechsel), Oberfläche js/ui/savecode-ui.js
 js/ui/questlog.js          Auftragsbuch 📖 (Notizbuch-Animation, Status, Testmodus-Knöpfe)
 js/ui/testmode.js          Testmodus: 20× Oma im Startbildschirm, „amtstest“ tippen, ?amtstest=1
 js/ui/title.js, title-scene.js  Demo-Hinweis, animierter Startbildschirm

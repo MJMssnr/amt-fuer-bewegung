@@ -69,6 +69,7 @@ export function openQuestlog(ctx) {
       </table>
       ${rows.length ? '' : '<p class="ql-empty">Noch keine Aufträge. Tippe auf der Karte auf das Ausrufezeichen!</p>'}
       <p class="ql-sum">Verdient insgesamt: <b>${sum} €</b> &nbsp;·&nbsp; <span class="st-perfect"><span class="st-ico">✓</span></span> voll &nbsp; <span class="st-partial"><span class="st-ico">~</span></span> halb &nbsp; <span class="st-fail"><span class="st-ico">✕</span></span> verpatzt</p>
+      <p class="ql-save"><button data-a="save" class="btn">💾 Speichercode</button> <small>Backup oder Gerätewechsel – gespeichert wird ohnehin automatisch.</small></p>
       <details class="ql-legend"><summary>Aufgabentypen (Buchstaben)</summary>
         <ul>${Object.values(TYPES).map((x) => `<li><span class="type-badge">${x.letter}</span> ${x.name}</li>`).join('')}</ul>
       </details>
@@ -81,6 +82,7 @@ export function openQuestlog(ctx) {
       if (!b) return;
       const a = b.dataset.a, id = b.closest('tr')?.dataset.id;
       const t = ctx.tickets.find((x) => x.id === id);
+      if (a === 'save') { await ctx.actions.saveCode?.(); return; }
       if (a === 'money') ctx.actions.money(100);
       else if (a === 'off') ctx.actions.testOff();
       else if (a === 'all') ctx.tickets.filter((x) => !ctx.state.done[x.id]).forEach((x) => ctx.actions.setGrade(x, 'perfect'));

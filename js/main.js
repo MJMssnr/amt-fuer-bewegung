@@ -8,13 +8,15 @@ import { loadState, saveState, resetState } from './ui/state.js';
 import { showNotice, showTitle } from './ui/title.js';
 import { Room } from './ui/room.js';
 import { playFinale } from './ui/finale.js';
-import { deliverDue } from './engine/packages.js';
+import { deliverDue, partOrder } from './engine/packages.js';
 import { LOT } from './render/bauplatz.js';
 import { loadTask } from './tasks/index.js';
 import { pickParams, resolveTicket, applyScenario } from './engine/variants.js';
 import { unlockAudio } from './audio/sound.js';
 import { initSoundMenu } from './ui/sound-menu.js';
 import { openQuestlog } from './ui/questlog.js';
+import { encodeSave, decodeSave } from './engine/savecode.js';
+import { showSaveCode, askLoadCode } from './ui/savecode-ui.js';
 import { resetPatrol } from './ui/police.js';
 import { addSignButtons } from './ui/signbtn.js';
 import { scrollArrows } from './ui/scrollhint.js';
@@ -188,6 +190,7 @@ async function showQuestlog() {
       actions: {
         play: (t) => { toPlay = t; },
         money: (n) => { state.money += n; save(); },
+        saveCode: () => showSaveCode(encodeSave(state, { tickets, items: shop.items, parts: shop.rocketParts })),
         testOff: () => setTestMode(false),
         reset: (t) => {
           delete state.done[t.id]; delete state.grades?.[t.id]; delete state.retry?.[t.id]; delete state.earned?.[t.id];
@@ -269,8 +272,10 @@ async function boot() {
   document.getElementById('loading').classList.add('hidden');
 
   await showNotice();
-  const choice = await showTitle(Boolean(state.introSeen));
+  const saveCtx = { tickets, items: shop.items, parts: shop.rocketParts, partOrder };
+  const choice = await showTitle(Boolean(state.introSeen), { loadCode: () => askLoadCode((c) => decodeSave(c, saveCtx)) });
   if (choice === 'new') { resetState(); state = loadState(); }
+  if (choice?.loaded) { resetState(); state = { ...loadState(), ...choice.loaded }; saveState(state); toast('🔑 Spielstand geladen', 'money'); } // Speichercode [W36]
   if (!state.seed) { state.seed = Math.floor(Math.random() * 2 ** 31); saveState(state); }
 
   overworld = new Overworld(document.getElementById('map'), map, { onArrive, markers });

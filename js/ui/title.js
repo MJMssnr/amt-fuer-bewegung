@@ -14,7 +14,7 @@ export function showNotice() {
 }
 
 /** Startbildschirm. Rückgabe: 'new' | 'continue' */
-export function showTitle(hasSave) {
+export function showTitle(hasSave, { loadCode } = {}) {
   const el = document.getElementById('title');
   el.classList.remove('hidden');
   // Logo-Buchstaben einzeln, damit sie wellenförmig hüpfen
@@ -46,6 +46,7 @@ export function showTitle(hasSave) {
   return new Promise((resolve) => {
     const done = (v) => { scene.stop(); el.removeEventListener('pointerdown', onTap); el.classList.add('hidden'); resolve(v); };
     btnCont.onclick = () => done('continue');
+    el.querySelector('.title-code').onclick = async () => { const r = await loadCode?.(); if (r) done({ loaded: r.state }); };
     btnNew.onclick = () => {
       if (hasSave && !confirm('Wirklich neu beginnen? Der bisherige Spielstand wird gelöscht.')) return;
       done('new');
