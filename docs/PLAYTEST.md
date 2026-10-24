@@ -73,7 +73,7 @@
 | t57 Wie tief ist der Wunschbrunnen? | Q | Fall-Animation |
 | t61 Ötzi gibt Gas | Q | schwer |
 | t63 „Ich war nicht zu schnell!“ | S | ✅ getestet (vorsichtig), mittel [W35] |
-| t64 Regen vor der Schule | S | Straßenzustand erkennbar? |
+| t64 Regen vor der Schule | S | ✅ getestet (vorsichtig), mittel [W35] |
 | t67 Glatteis in der Wohnstraße | S | ✅ getestet (vorsichtig), mittel [W35] |
 | t65 Die Oma-Gerda-Marionette | T | Korridor 90 % fair? Hobbywerkstatt |
 | t66 Brezel, der Marionetten-Hund | T | Linkskurve mit dem Finger |
