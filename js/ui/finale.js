@@ -129,6 +129,14 @@ export async function playFinale({ texts, baerti = false, mode = 'full' } = {}) 
     const f = a.moving ? Math.floor(S.t * sp.fps) % sp.frames.length : 0;
     const hop = a.hop && a.moving ? Math.abs(Math.sin(S.t * 10)) * 4 : 0;
     const k = a.scale ?? 1, w = sp.w * k, h = sp.h * k, y = (a.y ?? GROUND + 2) - h - hop;
+    if (a.rot) { // drehen (Bärti purzelt / liegt) um die Bildmitte
+      const cx = P.X(a.x), cy = P.Y(y + h / 2);
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(a.rot); ctx.translate(-cx, -cy);
+      P.image(sp.frames[0], a.x - w / 2, y, w, h, a.flip);
+      ctx.restore();
+      if (a.dizzy) for (let i = 0; i < 3; i++) { const an = S.t * 4 + i * 2.1; P.rect(a.x + Math.cos(an) * 6, y - 2 + Math.sin(an) * 2, 1.5, 1.5, '#ffcd75'); }
+      return;
+    }
     P.blob(a.x, (a.y ?? GROUND + 2), w * 0.4, 'rgba(20,24,40,0.25)', 1);
     P.image(sp.frames[f], a.x - w / 2, y, w, h, a.flip && sp.turns !== false);
     if (a.boxes) for (let i = 0; i < 3; i++) { P.rect(a.x - 5, y - 6 - i * 5, 10, 5, '#1a1c2c'); P.rect(a.x - 4, y - 5 - i * 5, 8, 3, '#a0622d'); }
@@ -182,6 +190,32 @@ export async function playFinale({ texts, baerti = false, mode = 'full' } = {}) 
   }
 
   try {
+    if (mode === 'baerti') { // Bärti fällt aus der Baumkrone und bekommt seinen Namen [W42]
+      const B = T.baertiIntro;
+      S.stage = 0; camera(2.2, HOUSE + 24, GROUND - 26); flo.x = HOUSE + 46; flo.flip = true;
+      await wait(600);
+      await showDialog(B.rustle);
+      const b = { sprite: 'baerti_sit', raccoon: true, scale: 0.7, x: HOUSE + 14, y: GROUND - 56, show: true };
+      S.actors.push(b);
+      for (let i = 0; i < 6; i++) { b.x += i % 2 ? 1 : -1; await wait(90); } // zappelt im Laub
+      let v = 0; b.sprite = 'baerti'; b.rot = 0;
+      while (b.y < GROUND + 2 && running) { v += 0.45; b.y = Math.min(GROUND + 2, b.y + v); b.rot += 0.35; await wait(16); }
+      sfx('bad'); b.rot = Math.PI / 2; b.dizzy = true; S.flash = 0.2;
+      await wait(1600);
+      await showDialog(B.hello);
+      b.rot = 0; b.dizzy = false; b.sprite = 'baerti_sit'; await wait(500);
+      b.sprite = 'baerti'; b.hop = true; await walk(b, flo.x - 14, 70); b.hop = false;
+      b.sprite = 'baerti_sit'; await wait(500);
+      b.sprite = 'baerti'; await arc(b, flo.x, GROUND - 6, 420, 12); b.carried = flo; b.sprite = 'baerti_sit';
+      for (let i = 0; i < 8; i++) S.hearts.push({ x: flo.x + (Math.random() - 0.5) * 10, y: GROUND - 14, t0: S.t + i * 0.12 });
+      await showDialog(B.name);
+      await showDialog(B.cookie);
+      b.cookie = true; await wait(2200); b.cookie = false;
+      for (let i = 0; i < 5; i++) S.hearts.push({ x: flo.x + (Math.random() - 0.5) * 8, y: GROUND - 14, t0: S.t + i * 0.15 });
+      await wait(900);
+      await showDialog(B.end);
+      return;
+    }
     if (mode === 'flight') {
       // Kurzer Wiederholungsflug: Rakete steht schon
       S.stage = 7; camera(1.6, (HOUSE + LOT) / 2, GROUND - 14);

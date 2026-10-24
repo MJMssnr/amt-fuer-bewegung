@@ -165,6 +165,14 @@ async function runTicket(ticket, raw, params) {
   }
   // Rätselhafte Pakete [W24]
   if (deliverDue(state, tickets, shop.rocketParts)) { save(); toast(shop.packages.arrived, 'money'); }
+  // Bärti kommt nach dem 3. Auftrag [W42]
+  if (!state.items.waschbaer && doneCount() >= 3) {
+    overworld.stop();
+    await playFinale({ texts: finaleTexts ??= await getJSON('data/finale.json'), mode: 'baerti' });
+    state.items.waschbaer = true; save();
+    overworld.start();
+    toast('🦝 Bärti gehört jetzt zum Amt!', 'money');
+  }
   if (tickets.every((t) => state.done[t.id]) && !Object.keys(state.retry).length && !state.outroSeen) {
     state.outroSeen = true;
     save();

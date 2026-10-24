@@ -185,7 +185,7 @@ export class Room {
         <button class="btn shop-buy" data-id="${it.id}" ${owned || needs || poor ? 'disabled' : ''}>${label}</button>
       </div>`;
     };
-    list.innerHTML = `<h4>Einrichtung</h4>${this.shop.items.map((i) => row(i, false)).join('')}`;
+    list.innerHTML = `<h4>Einrichtung</h4>${this.shop.items.filter((i) => !i.unlock).map((i) => row(i, false)).join('')}`; // Bärti kann man nicht kaufen [W42]
     list.querySelectorAll('.shop-buy').forEach((b) => b.addEventListener('click', () => this.#buy(b.dataset.id)));
   }
 
@@ -193,7 +193,7 @@ export class Room {
     if (this.busy) return;
     const item = this.shop.items.find((i) => i.id === id);
     const it = item;
-    if (!it || this.state.items[id] || this.state.money < it.price) return;
+    if (!it || it.unlock || this.state.items[id] || this.state.money < it.price) return;
     this.busy = true;
     this.state.money -= it.price;
     this.state.items[id] = true;

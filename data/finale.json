@@ -36,6 +36,16 @@
     ["florian", "Bärti! Natürlich kommst du mit. Helm auf, Kleiner – wir fliegen zusammen!"]
   ],
   "tap": "▶ tippen",
+  "baertiIntro": {
+    "rustle": [["erz", "Plötzlich raschelt es in der Baumkrone über dem Baumhaus …"]],
+    "hello": [["florian", "Hoppla! Hey, kleiner Kerl – alles in Ordnung?"]],
+    "name": [
+      ["florian", "Du bist ja ein Waschbär! Mit deiner Maske siehst du aus wie ein … Bärti. Ja: Du heißt ab jetzt Bärti!"],
+      ["erz", "Bärti schnuppert an Florians Jacke und kuschelt sich an ihn. Die beiden mögen sich sofort."]
+    ],
+    "cookie": [["florian", "Hier, ein Keks für dich. Willkommen im Amt, Bärti!"]],
+    "end": [["erz", "Ab jetzt streift Bärti durch die Stadt. Und im Baumhaus kannst du ihn antippen – dann springt er dir in die Arme."]]
+  },
   "again": {
     "ask": [["erz", "Neben dem Baumhaus steht wieder eine rote Rakete. Ein Zettel klebt dran: „Für das Amt – Nachschub folgt regelmäßig. M.“"]],
     "question": "Florian wird für sein Amt nun regelmäßig mit Raketen versorgt. Willst du eine Runde fliegen?",

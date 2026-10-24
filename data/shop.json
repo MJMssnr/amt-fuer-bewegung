@@ -87,7 +87,7 @@
     {"id": "pflanze2", "name": "Große Bananenstaude", "price": 90, "text": "Riesige Blätter, fast bis zur Decke. Bananen gibt es keine, aber Dschungel-Gefühl gratis."},
     {"id": "discokugel", "name": "Discokugel mit Licht", "price": 95, "text": "Hunderte kleine Spiegel. Und jeder Lichtpunkt bewegt sich auf einer Kreisbahn. Herrlich."},
     {"id": "couch", "name": "Bequeme Schlafcouch", "price": 140, "text": "Hier wird nach einem langen Amtstag geschlafen. Oder gerechnet. Meistens geschlafen."},
-    {"id": "waschbaer", "name": "Bärti, ein zahmer Waschbär", "price": 160, "text": "Bärti! Er wohnt jetzt hier. Tipp ihn an – dann kommt er kuscheln."},
+    {"id": "waschbaer", "name": "Bärti, ein zahmer Waschbär", "price": 0, "unlock": true, "text": "Bärti! Er wohnt jetzt hier. Tipp ihn an – dann kommt er kuscheln."},
     {"id": "motorrad", "name": "Rotes Rennmotorrad", "price": 260, "requires": "rennrad", "text": "Mein Helm. Das Rennmotorrad steht unten am Baum. Auf der Karte kann ich jetzt damit zu den Aufträgen fahren!"}
   ],
   "rocketParts": [
