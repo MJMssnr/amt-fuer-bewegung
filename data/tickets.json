@@ -3065,6 +3065,15 @@
       ],
       "target": 60,
       "allowImpossible": true,
+      "why": {
+        "question": "Warum ist das unmöglich?",
+        "choices": [
+          { "text": "Für 40 km mit 60 km/h hat sie insgesamt nur 40 min – und die hat der Hinweg schon komplett verbraucht.", "correct": true },
+          { "text": "Weil der Mittelwert (30 km/h + v) / 2 nie 60 km/h ergeben kann.", "feedback": "Doch: Mit v = 90 km/h ergibt der Mittelwert 60 km/h. Aber der Mittelwert der Geschwindigkeiten ist hier gar nicht der Schnitt – sie ist ja verschieden LANGE unterwegs." },
+          { "text": "Weil sie dafür über 120 km/h fahren müsste, und so schnell ist ihr Auto nicht.", "feedback": "Auch mit 200 km/h oder 1000 km/h klappt es nicht. Es geht nicht ums Auto, sondern um die Zeit, die noch übrig ist." },
+          { "text": "Weil auf der Landstraße höchstens 100 km/h erlaubt sind.", "feedback": "Erlaubt oder nicht – es klappt mit KEINER Geschwindigkeit. Wie viel Zeit bleibt für den Rückweg?" }
+        ]
+      },
       "prompt": "Wie schnell muss Frau Brösel zurückfahren, damit der Schnitt 60 km/h beträgt? (Oder geht das gar nicht?)",
       "paper": "Wie lange dürfte die ganze Fahrt (40 km) bei 60 km/h dauern? Und wie lange hat der Hinweg schon gedauert?",
       "hints": [

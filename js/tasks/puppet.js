@@ -29,6 +29,8 @@ export function mount(root, { ticket, onSolved }) {
       <div class="feedback pp-fb" aria-live="polite"></div></div>
   </div>`;
   root.querySelector('.pp-prompt').textContent = task.prompt ?? 'Schieb die Figur mit dem Finger so, dass deine t-x-Kurve im Korridor bleibt.';
+  if (window.matchMedia?.('(pointer: fine)').matches) root.querySelector('.pp-side').insertAdjacentHTML('beforeend',
+    '<p class="pp-mouse">🖱️ Maus/Touchpad: <b>einmal klicken</b> = Figur greifen, bewegen, <b>nochmal klicken</b> = loslassen.</p>');
   root.querySelector('.paper-note span').textContent = task.paper
     ?? 'Lies vorher ab: Wo steht die Figur wann? Steil heißt schnell schieben, waagrecht heißt festhalten, fallend heißt zurück.';
 
@@ -91,9 +93,19 @@ export function mount(root, { ticket, onSolved }) {
     if (Math.abs(nx - x) > 1e-3) flip = nx < x;
     x = nx;
   };
-  cv.addEventListener('pointerdown', (e) => { if (done || auto) return; dragging = true; cv.setPointerCapture(e.pointerId); setX(e); });
+  // Maus/Touchpad [W47, wie B]: einmal klicken = Figur greifen, bewegen ohne gedrückt zu halten, nochmal klicken = loslassen.
+  // Finger: wie bisher ziehen.
+  let grabbed = false;
+  const grab = (on) => { grabbed = on; cv.classList.toggle('pp-grabbed', on); };
+  cv.addEventListener('pointerdown', (e) => {
+    if (done || auto) return;
+    if (e.pointerType === 'mouse') { grab(!grabbed); if (grabbed) setX(e); return; }
+    dragging = true; cv.setPointerCapture(e.pointerId); setX(e);
+  });
   cv.addEventListener('pointermove', (e) => { if (dragging) setX(e); });
-  cv.addEventListener('pointerup', () => (dragging = false));
+  const onWinMove = (e) => { if (grabbed && e.pointerType === 'mouse') setX(e); };
+  window.addEventListener('pointermove', onWinMove);
+  cv.addEventListener('pointerup', (e) => { if (e.pointerType !== 'mouse') dragging = false; });
   cv.style.touchAction = 'none';
 
   // ---------- Lauf ----------
@@ -124,7 +136,7 @@ export function mount(root, { ticket, onSolved }) {
     }, 700);
   }
   function end(inside) {
-    running = false; runs++; startBtn.disabled = false;
+    running = false; runs++; grab(false); startBtn.disabled = false;
     if (auto) { fb.className = 'feedback pp-fb'; fb.textContent = 'So läuft es nach Plan. Bezahlt wird diesmal nicht.'; return finish('fail'); }
     if (inside >= need) {
       fb.className = 'feedback pp-fb ok';
@@ -148,5 +160,5 @@ export function mount(root, { ticket, onSolved }) {
   const ro = new ResizeObserver(() => drawGraph());
   ro.observe(card);
   raf = requestAnimationFrame((now) => { last = now; frame(now); });
-  return { destroy: () => { cancelAnimationFrame(raf); ro.disconnect(); } };
+  return { destroy: () => { cancelAnimationFrame(raf); ro.disconnect(); window.removeEventListener("pointermove", onWinMove); } };
 }

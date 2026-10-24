@@ -237,6 +237,8 @@ body.finale-on #dialog { z-index: 80; }
 .pp-ctrl { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .pp-ctrl .feedback { flex: 1 1 200px; margin: 0; min-height: 0; }
 .pp-score { font-family: var(--pixel); font-size: 15px; }
+.pp-mouse { font-size: 13px; margin: 4px 0 0; opacity: .85; }
+.pp-cv.pp-grabbed { cursor: grabbing; outline: 3px solid #ffcd75; outline-offset: -3px; }
 @media (max-height: 500px) {
   .puppet { padding: 4px 8px; gap: 4px; }
   .pp-cv { height: 74px; }

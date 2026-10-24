@@ -143,14 +143,41 @@ export function mount(root, { ticket, onSolved }) {
     b.addEventListener('click', () => {
       if (done) return;
       if (impossible) {
-        fb.className = 'feedback ok';
-        fb.textContent = task.impossibleText ?? 'Richtig: Unmöglich! Für den Ziel-Schnitt bräuchte man die ganze Zeit schon für den ersten Abschnitt auf – für den Rest bliebe keine Sekunde übrig.';
         qbox.querySelectorAll('input, .btn').forEach((x) => (x.disabled = true));
-        setTimeout(() => finish(wrong ? 'partial' : 'perfect', wrong + 1), 1600);
+        const explain = task.impossibleText ?? 'Richtig: Unmöglich! Für den Ziel-Schnitt bräuchte man die ganze Zeit schon für den ersten Abschnitt auf – für den Rest bliebe keine Sekunde übrig.';
+        if (!task.why) { fb.className = 'feedback ok'; fb.textContent = explain; setTimeout(() => finish(wrong ? 'partial' : 'perfect', wrong + 1), 1600); return; }
+        // Erst begründen lassen, dann erklären [W47]: Die Lösung steht nicht schon beim Antippen von „Geht nicht“ da.
+        fb.className = 'feedback ok'; fb.textContent = 'Stimmt, das geht nicht! Aber warum?';
+        whyQuestion(qbox, task.why, (firstTry) => {
+          fb.className = 'feedback ok'; fb.textContent = explain;
+          setTimeout(() => finish(wrong || !firstTry ? 'partial' : 'perfect', wrong + 1), 2200);
+        });
       } else {
         wrong++; fb.className = 'feedback bad'; fb.textContent = 'Doch, das geht! Rechne aus, wie viel Zeit für den letzten Abschnitt übrig bleibt.';
       }
     });
   }
   return { destroy: () => cancelAnimationFrame(raf) };
+}
+
+/** Auswahlfrage „Warum?“ [W47]: why = { question, choices:[{ text, correct?, feedback? }] }; done(firstTry) */
+function whyQuestion(box, why, done) {
+  const wrap = document.createElement('div');
+  wrap.className = 'avg-why';
+  wrap.innerHTML = `<p class="prompt">${why.question}</p><div class="rv-choices"></div><div class="feedback" aria-live="polite"></div>`;
+  box.appendChild(wrap);
+  const fb = wrap.querySelector('.feedback');
+  let first = true;
+  const order = why.choices.map((c, i) => [c, (i * 7 + 3) % 5]).sort((a, b) => a[1] - b[1]).map(([c]) => c); // fest gemischt
+  order.forEach((c) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'rv-choice'; b.textContent = c.text;
+    b.addEventListener('click', () => {
+      if (c.correct) { wrap.querySelectorAll('.rv-choice').forEach((x) => (x.disabled = true)); b.classList.add('right'); fb.textContent = ''; done(first); return; }
+      first = false; b.disabled = true; b.classList.add('wrong');
+      fb.className = 'feedback bad'; fb.textContent = c.feedback ?? 'Nein, das ist nicht der Grund.';
+    });
+    wrap.querySelector('.rv-choices').appendChild(b);
+  });
+  wrap.scrollIntoView?.({ block: 'nearest', behavior: 'smooth' });
 }
